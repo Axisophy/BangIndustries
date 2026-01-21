@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+/* 
+  BANG INDUSTRIES
+  Brand Colors:
+  - Electric Blue: #0055FF
+  - Hot Pink: #FF0055
+  - Acid Lime: #CCFF00
+  - Black: #000000
+  - White: #FFFFFF
+  
+  Typography: DJR Forma (Micro, Mono, Display)
+  Add font files to /public/fonts/ and update @font-face below
+*/
+
+/* Font Face Declarations - Update paths when font files are added */
+@font-face {
+  font-family: 'Forma';
+  src: url('/fonts/Forma-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Forma';
+  src: url('/fonts/Forma-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Forma';
+  src: url('/fonts/Forma-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Forma Micro';
+  src: url('/fonts/FormaMicro-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Forma Mono';
+  src: url('/fonts/FormaMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Forma Display';
+  src: url('/fonts/FormaDisplay-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Brand Colors */
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-blue: #0055FF;
+  --color-pink: #FF0055;
+  --color-lime: #CCFF00;
+  
+  /* Semantic Colors */
+  --background: var(--color-white);
+  --foreground: var(--color-black);
+  --accent-primary: var(--color-blue);
+  --accent-secondary: var(--color-pink);
+  --accent-tertiary: var(--color-lime);
+  
+  /* Typography */
+  --font-sans: 'Forma', system-ui, -apple-system, sans-serif;
+  --font-micro: 'Forma Micro', 'Forma', system-ui, sans-serif;
+  --font-mono: 'Forma Mono', 'SF Mono', 'Monaco', monospace;
+  --font-display: 'Forma Display', 'Forma', system-ui, sans-serif;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 8rem;
+  
+  /* Grid */
+  --container-max: 1400px;
+  --container-padding: 1.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-blue: var(--color-blue);
+  --color-pink: var(--color-pink);
+  --color-lime: var(--color-lime);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography Scale */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 0;
+}
+
+h1 { font-size: clamp(2.5rem, 8vw, 6rem); }
+h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+
+p {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+/* Link Styles */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-primary);
+}
+
+/* Utility Classes */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-micro {
+  font-family: var(--font-micro);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Accent Colors */
+.text-blue { color: var(--color-blue); }
+.text-pink { color: var(--color-pink); }
+.text-lime { color: var(--color-lime); }
+
+.bg-blue { background-color: var(--color-blue); }
+.bg-pink { background-color: var(--color-pink); }
+.bg-lime { background-color: var(--color-lime); }
+
+/* Hover States */
+.hover-blue:hover { color: var(--color-blue); }
+.hover-pink:hover { color: var(--color-pink); }
+.hover-lime:hover { color: var(--color-lime); }
+
+/* Selection */
+::selection {
+  background: var(--color-lime);
+  color: var(--color-black);
+}
+
+/* Smooth Scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Focus States */
+:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
+}
