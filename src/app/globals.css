@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* 
+/*
   BANG INDUSTRIES
   Brand Colors:
   - Electric Blue: #0055FF
@@ -8,59 +8,15 @@
   - Acid Lime: #CCFF00
   - Black: #000000
   - White: #FFFFFF
-  
+
   Typography: DJR Forma (Micro, Mono, Display)
   Add font files to /public/fonts/ and update @font-face below
 */
 
-/* Font Face Declarations - Update paths when font files are added */
-@font-face {
-  font-family: 'Forma';
-  src: url('/fonts/Forma-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Forma';
-  src: url('/fonts/Forma-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Forma';
-  src: url('/fonts/Forma-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Forma Micro';
-  src: url('/fonts/FormaMicro-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Forma Mono';
-  src: url('/fonts/FormaMono-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Forma Display';
-  src: url('/fonts/FormaDisplay-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+/*
+  Typography: DJR Forma via Adobe Typekit
+  Typekit link in layout.tsx: https://use.typekit.net/qka5zju.css
+*/
 
 :root {
   /* Brand Colors */
@@ -69,20 +25,20 @@
   --color-blue: #0055FF;
   --color-pink: #FF0055;
   --color-lime: #CCFF00;
-  
+
   /* Semantic Colors */
   --background: var(--color-white);
   --foreground: var(--color-black);
   --accent-primary: var(--color-blue);
   --accent-secondary: var(--color-pink);
   --accent-tertiary: var(--color-lime);
-  
-  /* Typography */
-  --font-sans: 'Forma', system-ui, -apple-system, sans-serif;
-  --font-micro: 'Forma Micro', 'Forma', system-ui, sans-serif;
-  --font-mono: 'Forma Mono', 'SF Mono', 'Monaco', monospace;
-  --font-display: 'Forma Display', 'Forma', system-ui, sans-serif;
-  
+
+  /* Typography - Typekit DJR Forma */
+  --font-sans: forma-djr-micro, system-ui, -apple-system, sans-serif;
+  --font-micro: forma-djr-micro, system-ui, sans-serif;
+  --font-mono: forma-djr-mono, 'SF Mono', 'Monaco', monospace;
+  --font-display: forma-djr-display, system-ui, sans-serif;
+
   /* Spacing */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -90,7 +46,7 @@
   --space-lg: 2rem;
   --space-xl: 4rem;
   --space-2xl: 8rem;
-  
+
   /* Grid */
   --container-max: 1400px;
   --container-padding: 1.5rem;

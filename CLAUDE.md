@@ -33,11 +33,11 @@ Use CSS variables: `var(--color-blue)`, `var(--color-pink)`, `var(--color-lime)`
 
 ### Typography
 
-**Font Family:** DJR Forma
-- `var(--font-sans)` — Forma (body text)
-- `var(--font-mono)` — Forma Mono (labels, meta)
-- `var(--font-micro)` — Forma Micro (small text)
-- `var(--font-display)` — Forma Display (hero headlines)
+**Font Family:** DJR Forma via Adobe Typekit
+- Typekit link: `https://use.typekit.net/qka5zju.css`
+- `var(--font-sans)` / `forma-djr-micro` — body text, UI
+- `var(--font-mono)` / `forma-djr-mono` — labels, meta, code
+- `var(--font-display)` / `forma-djr-display` — hero headlines only
 
 **Font Sizes (immutable):**
 ```
@@ -190,6 +190,6 @@ public/
 3. **Don't change font sizes** — they're set in globals.css
 4. **Don't add shadows** — the design is flat
 5. **Don't add border-radius to cards** — keep them sharp (except hero viz)
-6. **Don't use Inter, Roboto, or system fonts** — wait for Forma, or it falls back automatically
+6. **Don't use Inter, Roboto, or other fonts** — only use forma-djr-micro, forma-djr-mono, forma-djr-display
 7. **Don't add animations beyond hover states** — keep it restrained
 8. **Don't use emoji** — ever
