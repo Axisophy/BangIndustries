@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/*
+/* 
   BANG INDUSTRIES
   Brand Colors:
   - Electric Blue: #0055FF
@@ -8,14 +8,9 @@
   - Acid Lime: #CCFF00
   - Black: #000000
   - White: #FFFFFF
-
-  Typography: DJR Forma (Micro, Mono, Display)
-  Add font files to /public/fonts/ and update @font-face below
-*/
-
-/*
-  Typography: DJR Forma via Adobe Typekit
-  Typekit link in layout.tsx: https://use.typekit.net/qka5zju.css
+  
+  Typography: Neue Haas Grotesk (Display, Text) + Input Mono
+  Via Adobe Typekit: https://use.typekit.net/qka5zju.css
 */
 
 :root {
@@ -25,31 +20,26 @@
   --color-blue: #0055FF;
   --color-pink: #FF0055;
   --color-lime: #CCFF00;
-
+  
   /* Semantic Colors */
   --background: var(--color-white);
   --foreground: var(--color-black);
   --accent-primary: var(--color-blue);
   --accent-secondary: var(--color-pink);
   --accent-tertiary: var(--color-lime);
-
-  /* Typography - Typekit DJR Forma */
-  --font-sans: forma-djr-micro, system-ui, -apple-system, sans-serif;
-  --font-micro: forma-djr-micro, system-ui, sans-serif;
-  --font-mono: forma-djr-mono, 'SF Mono', 'Monaco', monospace;
-  --font-display: forma-djr-display, system-ui, sans-serif;
-
-  /* Spacing */
+  
+  /* Typography */
+  --font-display: "neue-haas-grotesk-display", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-text: "neue-haas-grotesk-text", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "input-mono", "SF Mono", Monaco, monospace;
+  
+  /* Spacing - matches Simon Tyler site */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 2rem;
   --space-xl: 4rem;
   --space-2xl: 8rem;
-
-  /* Grid */
-  --container-max: 1400px;
-  --container-padding: 1.5rem;
 }
 
 @theme inline {
@@ -58,7 +48,7 @@
   --color-blue: var(--color-blue);
   --color-pink: var(--color-pink);
   --color-lime: var(--color-lime);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-text);
   --font-mono: var(--font-mono);
 }
 
@@ -75,8 +65,9 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-text);
   font-weight: 400;
+  letter-spacing: -0.01em;
   line-height: 1.5;
   margin: 0;
   padding: 0;
@@ -84,19 +75,42 @@ body {
 
 /* Typography Scale */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
   line-height: 1.1;
   margin: 0;
 }
 
-h1 { font-size: clamp(2.5rem, 8vw, 6rem); }
-h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
-h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
-h4 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+/* Responsive type scale matching Simon Tyler site */
+h1 { 
+  font-size: 1.875rem; /* text-3xl mobile */
+}
+@media (min-width: 768px) {
+  h1 { font-size: 3rem; } /* text-5xl */
+}
+@media (min-width: 1024px) {
+  h1 { font-size: 3.75rem; } /* text-6xl */
+}
+@media (min-width: 1280px) {
+  h1 { font-size: 4.5rem; } /* text-7xl */
+}
+
+h2 { font-size: 1.5rem; }
+@media (min-width: 768px) {
+  h2 { font-size: 1.875rem; }
+}
+
+h3 { font-size: 1.25rem; }
+@media (min-width: 768px) {
+  h3 { font-size: 1.5rem; }
+}
+
+h4 { font-size: 1.125rem; }
 
 p {
   margin: 0;
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1.6;
 }
 
@@ -104,31 +118,26 @@ p {
 a {
   color: inherit;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.15s ease;
 }
 
 a:hover {
   color: var(--accent-primary);
 }
 
-/* Utility Classes */
-.container {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding-left: var(--container-padding);
-  padding-right: var(--container-padding);
+/* Font utility classes */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.font-text {
+  font-family: var(--font-text);
 }
 
 .font-mono {
   font-family: var(--font-mono);
-}
-
-.font-micro {
-  font-family: var(--font-micro);
-}
-
-.font-display {
-  font-family: var(--font-display);
 }
 
 /* Accent Colors */
