@@ -1,173 +1,191 @@
-import Link from 'next/link';
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'About — Bang Industries',
-  description: 'Bang Industries is a design studio founded by Simon Tyler, specialising in data visualisation and explanation design.',
-};
-
-const experience = [
-  {
-    title: 'Author & Illustrator',
-    description: 'Multiple published books combining illustration with explanation of complex topics.',
-  },
-  {
-    title: 'Atomic Printworks',
-    description: 'Scientific poster designs including periodic table and solar system visualisations.',
-  },
-  {
-    title: 'Maxwell Energy',
-    description: 'Interactive dashboard design and custom pictogram system development.',
-  },
-  {
-    title: 'Network Rail',
-    description: 'Wayfinding pictogram system design (via Space Agency).',
-  },
-];
-
 export default function AboutPage() {
   return (
-    <div className="pt-16 md:pt-20">
-      {/* Header */}
-      <section className="py-16 md:py-24">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
-            {/* Photo Placeholder */}
-            <div className="md:col-span-5">
-              <div className="aspect-[4/5] bg-black/5 flex items-center justify-center">
-                <span className="text-black/40 font-mono text-sm">
-                  [Photo]
-                </span>
-              </div>
-            </div>
-            
-            {/* Bio */}
-            <div className="md:col-span-7">
-              <h1 className="text-4xl md:text-5xl mb-6">About</h1>
-              <div className="space-y-6 text-lg text-black/70">
-                <p>
-                  Bang Industries is a design studio founded by <strong className="text-black">Simon Tyler</strong>, 
-                  specialising in data visualisation, explanation design, and scientific illustration.
-                </p>
-                <p>
-                  We come from art and branding, not spreadsheets. In a world where data visualisation 
-                  has become homogenised — where every dashboard looks the same and every infographic 
-                  uses the same templates — we offer something different.
-                </p>
-                <p>
-                  Our work combines technical capability with genuine visual ambition. We understand 
-                  the science, the data, and the complexity — but we also understand that the best 
-                  explanation is one that people actually want to look at.
-                </p>
-                <p>
-                  Based in St Leonards-on-Sea, UK, we work with clients worldwide on projects 
-                  ranging from editorial infographics to interactive data experiences.
-                </p>
-              </div>
-            </div>
+    <>
+      {/* White space below header */}
+      <div className="h-16 md:h-24" />
+
+      {/* Intro Section */}
+      <section className="px-4 md:px-6 pb-16 md:pb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+          <div>
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl">
+              Making complex ideas clear
+            </h1>
+          </div>
+          <div>
+            <p className="text-lg md:text-xl text-black/80 mb-6">
+              Bang Industries is a design practice specialising in explanation design
+              for complex systems. We work with research institutions, publishers,
+              museums, and organisations who need to communicate difficult ideas
+              with clarity and precision.
+            </p>
+            <p className="text-black/60">
+              Founded by Simon Tyler, the practice combines deep subject understanding
+              with illustration, data visualisation, and interactive design. We don&apos;t
+              just make things look good — we make them make sense.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Philosophy */}
-      <section className="py-16 md:py-24 bg-black text-white">
-        <div className="container">
-          <div className="max-w-3xl">
-            <h2 className="text-2xl md:text-3xl mb-8">Our Philosophy</h2>
-            <div className="space-y-6 text-lg text-white/70">
-              <p>
-                <strong className="text-white">We believe complexity deserves beauty.</strong> The more 
-                difficult the subject matter, the more important it is to present it with visual clarity 
-                and craft.
-              </p>
-              <p>
-                <strong className="text-white">We believe in understanding first.</strong> We don&apos;t just 
-                make data look nice — we understand what it means, why it matters, and how to communicate 
-                that effectively.
-              </p>
-              <p>
-                <strong className="text-white">We believe in standing out.</strong> AI and templates are 
-                commoditising basic design. We offer the craft, expertise, and visual ambition that 
-                makes your work genuinely distinctive.
-              </p>
-            </div>
+      {/* Background Section */}
+      <section className="px-4 md:px-6 pb-16 md:pb-24 border-t border-black/10 pt-16 md:pt-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+          <div>
+            <h2 className="font-display text-2xl md:text-3xl">
+              Background
+            </h2>
+          </div>
+          <div>
+            <p className="text-black/80 mb-6">
+              Before founding Bang Industries, Simon led projects including the
+              Network Rail wayfinding pictogram system at{' '}
+              <a
+                href="https://www.spaceagency-design.com/#/networkrail/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--color-blue)] hover:text-black transition-colors"
+              >
+                Spaceagency
+              </a>
+              , developing systematic visual languages for complex operational environments.
+            </p>
+            <p className="text-black/80 mb-6">
+              His work spans scientific illustration, data visualisation, and explanation
+              design — including multiple published books and the Atomic Printworks series
+              of scientific visualisation posters.
+            </p>
+            <p className="text-black/60">
+              <a
+                href="https://simontyler.co.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--color-blue)] hover:text-black transition-colors inline-flex items-center gap-2"
+              >
+                View illustration and publishing work <span aria-hidden="true">→</span>
+              </a>
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Experience */}
-      <section className="py-16 md:py-24">
-        <div className="container">
-          <h2 className="text-2xl md:text-3xl mb-12">Experience</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {experience.map((item, index) => (
-              <div key={index} className="border-l-2 border-black/10 pl-6">
-                <h3 className="text-xl mb-2">{item.title}</h3>
-                <p className="text-black/60">{item.description}</p>
-              </div>
-            ))}
+      {/* How I Work Section */}
+      <section className="px-4 md:px-6 pb-16 md:pb-24 border-t border-black/10 pt-16 md:pt-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+          <div>
+            <h2 className="font-display text-2xl md:text-3xl">
+              How I work
+            </h2>
+          </div>
+          <div>
+            <ol className="space-y-6">
+              <li className="flex gap-4">
+                <span className="text-xs font-mono text-black/40 pt-1">01</span>
+                <div>
+                  <h3 className="font-display text-lg mb-1">Discovery</h3>
+                  <p className="text-black/60">
+                    Understanding the subject, audience, and constraints.
+                    What are we explaining? To whom? What do they need to understand or do?
+                  </p>
+                </div>
+              </li>
+              <li className="flex gap-4">
+                <span className="text-xs font-mono text-black/40 pt-1">02</span>
+                <div>
+                  <h3 className="font-display text-lg mb-1">Concept sketches</h3>
+                  <p className="text-black/60">
+                    Rapid exploration of visual approaches. Finding the right metaphor,
+                    structure, and hierarchy before committing to execution.
+                  </p>
+                </div>
+              </li>
+              <li className="flex gap-4">
+                <span className="text-xs font-mono text-black/40 pt-1">03</span>
+                <div>
+                  <h3 className="font-display text-lg mb-1">System definition</h3>
+                  <p className="text-black/60">
+                    Establishing the visual language, rules, and components.
+                    Ensuring consistency and scalability across outputs.
+                  </p>
+                </div>
+              </li>
+              <li className="flex gap-4">
+                <span className="text-xs font-mono text-black/40 pt-1">04</span>
+                <div>
+                  <h3 className="font-display text-lg mb-1">Production</h3>
+                  <p className="text-black/60">
+                    Building the final outputs — whether static graphics,
+                    interactive visualisations, or complete design systems.
+                  </p>
+                </div>
+              </li>
+              <li className="flex gap-4">
+                <span className="text-xs font-mono text-black/40 pt-1">05</span>
+                <div>
+                  <h3 className="font-display text-lg mb-1">Handover</h3>
+                  <p className="text-black/60">
+                    Delivering files, documentation, and guidelines.
+                    Ensuring you can maintain and extend the work.
+                  </p>
+                </div>
+              </li>
+            </ol>
           </div>
         </div>
       </section>
 
-      {/* Technical Skills */}
-      <section className="py-16 md:py-24 border-t border-black/10">
-        <div className="container">
-          <h2 className="text-2xl md:text-3xl mb-12">Technical Capabilities</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      {/* Principles Section */}
+      <section className="px-4 md:px-6 pb-16 md:pb-24 border-t border-black/10 pt-16 md:pt-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+          <div>
+            <h2 className="font-display text-2xl md:text-3xl">
+              Principles
+            </h2>
+          </div>
+          <div className="space-y-6">
             <div>
-              <h3 className="text-xs font-mono uppercase tracking-wider text-black/40 mb-4">
-                Design
-              </h3>
-              <ul className="space-y-2 text-black/70">
-                <li>Adobe Illustrator</li>
-                <li>Figma</li>
-                <li>Adobe After Effects</li>
-                <li>Blender</li>
-              </ul>
+              <h3 className="font-display text-lg mb-1">Accuracy matters</h3>
+              <p className="text-black/60">
+                Sources, assumptions, and uncertainty are handled explicitly.
+                Beautiful visualisation means nothing if the underlying information is wrong.
+              </p>
             </div>
             <div>
-              <h3 className="text-xs font-mono uppercase tracking-wider text-black/40 mb-4">
-                Development
-              </h3>
-              <ul className="space-y-2 text-black/70">
-                <li>D3.js</li>
-                <li>Observable</li>
-                <li>React / Next.js</li>
-                <li>Python (Matplotlib, Plotly)</li>
-              </ul>
+              <h3 className="font-display text-lg mb-1">Clarity over decoration</h3>
+              <p className="text-black/60">
+                Every element should earn its place. If it doesn&apos;t help understanding,
+                it&apos;s noise.
+              </p>
             </div>
             <div>
-              <h3 className="text-xs font-mono uppercase tracking-wider text-black/40 mb-4">
-                Specialisms
-              </h3>
-              <ul className="space-y-2 text-black/70">
-                <li>Scientific subjects</li>
-                <li>Complex systems</li>
-                <li>Pictogram design</li>
-                <li>Wayfinding</li>
-              </ul>
+              <h3 className="font-display text-lg mb-1">Systems thinking</h3>
+              <p className="text-black/60">
+                One-off graphics are fine, but the real value is in visual systems
+                that scale across multiple outputs and contexts.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-[var(--color-lime)]">
-        <div className="container text-center">
-          <h2 className="text-2xl md:text-3xl mb-4">Let&apos;s work together</h2>
-          <p className="text-lg text-black/70 mb-8 max-w-xl mx-auto">
-            Have a project that needs visual clarity and creative ambition? We&apos;d love to hear from you.
+      <section className="px-4 md:px-6 pb-16 md:pb-24 border-t border-black/10 pt-16 md:pt-24">
+        <div className="max-w-xl">
+          <h2 className="font-display text-2xl md:text-3xl mb-4">
+            Have a project in mind?
+          </h2>
+          <p className="text-black/60 mb-6">
+            I work with research institutions, publishers, museums, and organisations
+            who need to communicate complex information clearly.
           </p>
-          <Link 
-            href="/contact" 
-            className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white hover:bg-[var(--color-blue)] transition-colors"
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white text-sm font-display hover:bg-[var(--color-blue)] transition-colors"
           >
-            Get in Touch
-            <span aria-hidden="true">→</span>
-          </Link>
+            Get in touch <span aria-hidden="true">→</span>
+          </a>
         </div>
       </section>
-    </div>
+    </>
   );
 }
