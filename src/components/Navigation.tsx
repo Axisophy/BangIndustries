@@ -11,7 +11,7 @@ export default function Navigation() {
   return (
     <header className="bg-black text-white">
       {/* 4-column grid: Logo | Studio text | (empty) | Nav */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4 py-4 md:px-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4 py-8 md:px-6">
         {/* Col 1: Logo */}
         <Link href="/" className="block">
           <svg
@@ -89,7 +89,7 @@ export default function Navigation() {
       </div>
 
       {/* Mobile-only: Studio text below logo row */}
-      <div className="md:hidden px-4 pb-6">
+      <div className="md:hidden px-4 pb-12">
         <p className="text-base font-display-medium text-white/90">
           Data visualisation and explanation design studio
         </p>
