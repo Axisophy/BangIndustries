@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* 
+/*
   BANG INDUSTRIES
   Brand Colors:
   - Electric Blue: #0055FF
@@ -8,7 +8,7 @@
   - Acid Lime: #CCFF00
   - Black: #000000
   - White: #FFFFFF
-  
+
   Typography: Neue Haas Grotesk (Display, Text) + Input Mono
   Via Adobe Typekit: https://use.typekit.net/qka5zju.css
 */
@@ -20,20 +20,20 @@
   --color-blue: #0055FF;
   --color-pink: #FF0055;
   --color-lime: #CCFF00;
-  
+
   /* Semantic Colors */
   --background: var(--color-white);
   --foreground: var(--color-black);
   --accent-primary: var(--color-blue);
   --accent-secondary: var(--color-pink);
   --accent-tertiary: var(--color-lime);
-  
+
   /* Typography */
   --font-display: "neue-haas-grotesk-display", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-text: "neue-haas-grotesk-text", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: "input-mono", "SF Mono", Monaco, monospace;
-  
-  /* Spacing - matches Simon Tyler site */
+
+  /* Spacing */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -82,8 +82,8 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-/* Responsive type scale matching Simon Tyler site */
-h1 { 
+/* Responsive type scale */
+h1 {
   font-size: 1.875rem; /* text-3xl mobile */
 }
 @media (min-width: 768px) {
@@ -99,6 +99,9 @@ h1 {
 h2 { font-size: 1.5rem; }
 @media (min-width: 768px) {
   h2 { font-size: 1.875rem; }
+}
+@media (min-width: 1024px) {
+  h2 { font-size: 2.25rem; }
 }
 
 h3 { font-size: 1.25rem; }
@@ -129,6 +132,12 @@ a:hover {
 .font-display {
   font-family: var(--font-display);
   font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.font-display-medium {
+  font-family: var(--font-display);
+  font-weight: 500;
   letter-spacing: -0.03em;
 }
 

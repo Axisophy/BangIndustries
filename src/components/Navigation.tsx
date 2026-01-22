@@ -5,17 +5,18 @@ import { usePathname } from 'next/navigation';
 
 export default function Navigation() {
   const pathname = usePathname();
-  
+
   const isActive = (path: string) => pathname === path;
-  
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white">
-      <nav className="flex items-center justify-between px-4 py-4 md:px-6">
-        {/* Logo */}
+    <header className="bg-black text-white">
+      {/* Top bar: Logo + Nav */}
+      <div className="flex items-center justify-between px-4 py-4 md:px-6">
+        {/* Logo - substantially bigger */}
         <Link href="/" className="block">
-          <svg 
-            viewBox="0 0 842.8 150.29" 
-            className="h-6 md:h-8 w-auto fill-current"
+          <svg
+            viewBox="0 0 842.8 150.29"
+            className="h-10 md:h-14 w-auto fill-current"
             aria-label="Bang Industries"
           >
             <path d="M0,2.64h124.8c14.45,0,25.6,1.29,33.45,3.86,7.84,2.57,13.36,6.61,16.55,12.11,3.19,5.5,4.79,13.07,4.79,22.71v1.56c0,8.79-1.82,15.79-5.47,21-3.65,5.21-8.53,8.69-14.65,10.45,7.75,1.76,13.49,5.27,17.24,10.55,3.74,5.27,5.62,13.09,5.62,23.44v1.66c0,9.31-1.56,16.68-4.69,22.12-3.12,5.44-8.24,9.39-15.33,11.87-7.1,2.48-16.8,3.71-29.1,3.71H0V2.64ZM117.09,58.69c4.17,0,7.16-.76,8.98-2.29,1.82-1.53,2.73-4.31,2.73-8.35v-.88c0-3.91-.94-6.61-2.83-8.11-1.89-1.5-5.11-2.25-9.67-2.25H48.14v21.88h68.95ZM120.41,112.21c4.17,0,7.14-.76,8.94-2.29,1.79-1.53,2.69-4.28,2.69-8.25v-.98c0-3.97-.98-6.7-2.93-8.2-1.95-1.5-5.11-2.25-9.47-2.25H48.14v21.97h72.27Z"/>
@@ -24,51 +25,65 @@ export default function Navigation() {
             <path d="M674.54,144.53c-14.26-3.84-24.43-10.84-30.52-21-6.09-10.16-9.13-25.26-9.13-45.31v-5.66c0-19.92,3.21-35.04,9.62-45.36,6.41-10.32,16.85-17.43,31.3-21.34s35.16-5.86,62.11-5.86,48.76,1.61,63.48,4.83c14.71,3.22,25.02,8.2,30.91,14.94,5.89,6.74,9.26,16.06,10.11,27.98l.2,2.93h-51.07l-.2-1.66c-.46-3.91-1.94-6.82-4.44-8.74-2.51-1.92-7.32-3.29-14.45-4.1-7.13-.81-18.15-1.22-33.06-1.22-15.69,0-27.07.81-34.13,2.44-7.06,1.63-11.85,4.72-14.36,9.28-2.51,4.56-3.76,11.91-3.76,22.07v11.82c0,10.68,1.22,18.36,3.66,23.05s7.14,7.83,14.11,9.42c6.97,1.6,18.39,2.39,34.28,2.39s27.51-.65,34.86-1.95c7.36-1.3,12.14-3.4,14.36-6.3,2.21-2.9,3.32-7.28,3.32-13.13v-2.05h-58.3v-30.76h109.38v18.26c0,20.51-2.87,35.66-8.59,45.46-5.73,9.8-15.84,16.47-30.32,20.02-14.49,3.55-36.74,5.32-66.75,5.32-27.48,0-48.34-1.92-62.6-5.76Z"/>
           </svg>
         </Link>
-        
-        {/* Nav Links */}
-        <ul className="flex items-center gap-6 md:gap-8">
-          <li>
-            <Link 
-              href="/work" 
-              className={`text-sm transition-colors ${
-                isActive('/work') ? 'text-[var(--color-blue)]' : 'text-black/60 hover:text-black'
-              }`}
-            >
-              Work
-            </Link>
-          </li>
-          <li>
-            <Link 
-              href="/services" 
-              className={`text-sm transition-colors ${
-                isActive('/services') ? 'text-[var(--color-blue)]' : 'text-black/60 hover:text-black'
-              }`}
-            >
-              Services
-            </Link>
-          </li>
-          <li>
-            <Link 
-              href="/about" 
-              className={`text-sm transition-colors ${
-                isActive('/about') ? 'text-[var(--color-blue)]' : 'text-black/60 hover:text-black'
-              }`}
-            >
-              About
-            </Link>
-          </li>
-          <li>
-            <Link 
-              href="/contact" 
-              className={`text-sm transition-colors ${
-                isActive('/contact') ? 'text-[var(--color-blue)]' : 'text-black/60 hover:text-black'
-              }`}
-            >
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </nav>
+
+        {/* Nav Links - one size up (base instead of sm) */}
+        <nav>
+          <ul className="flex items-center gap-6 md:gap-8">
+            <li>
+              <Link
+                href="/work"
+                className={`text-base transition-colors ${
+                  isActive('/work') ? 'text-[var(--color-pink)]' : 'text-white/60 hover:text-white'
+                }`}
+              >
+                Work
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/services"
+                className={`text-base transition-colors ${
+                  isActive('/services') ? 'text-[var(--color-pink)]' : 'text-white/60 hover:text-white'
+                }`}
+              >
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/about"
+                className={`text-base transition-colors ${
+                  isActive('/about') ? 'text-[var(--color-pink)]' : 'text-white/60 hover:text-white'
+                }`}
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className={`text-base transition-colors ${
+                  isActive('/contact') ? 'text-[var(--color-pink)]' : 'text-white/60 hover:text-white'
+                }`}
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      {/* Intro text row - same level concept as over-stimulated.com */}
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 px-4 md:px-6 pb-6 md:pb-8">
+        <p className="text-base text-white/90 max-w-md font-display-medium">
+          Data visualisation and explanation design studio
+        </p>
+        <p className="text-base text-white/60 max-w-md md:text-right">
+          We make complex ideas clear. Scientific visualisation, illustrated explanation,
+          and interactive data design for publishers, institutions, and organisations
+          who need to communicate with precision and craft.
+        </p>
+      </div>
     </header>
   );
 }
