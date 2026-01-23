@@ -1,7 +1,7 @@
 import NuclideChart from './NuclideChart';
 
 export const metadata = {
-  title: 'The Nuclear Landscape — Bang Industries',
+  title: 'Mapping Instability — Bang Industries',
   description: 'An interactive exploration of all 3,300+ known isotopes, mapped by protons and neutrons.',
 };
 
@@ -11,10 +11,13 @@ export default function NuclideChartPage() {
       {/* Hero */}
       <section className="px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16">
         <div className="max-w-[75%]">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-8">
-            The Nuclear Landscape
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+            Mapping Instability
           </h1>
-          <p className="text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl mb-8">
+          <p className="text-2xl md:text-3xl lg:text-4xl font-normal text-black/70 mt-2">
+            Charting 3,300 atomic species
+          </p>
+          <p className="text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl mt-12 mb-8">
             The periodic table shows 118 elements - but that is only part of the story. Each element can exist in multiple forms, with different numbers of neutrons creating different isotopes. Some are stable. Most are not. This interactive chart maps all 3,300+ known nuclear species, revealing the narrow ridge of stability that runs through a vast terrain of radioactive decay.
           </p>
           {/* Tags */}
@@ -30,7 +33,7 @@ export default function NuclideChartPage() {
       {/* Chart */}
       <section className="px-4 md:px-6 pb-16 md:pb-20">
         <div className="border border-black/10 bg-white overflow-hidden">
-          <div className="h-[600px] lg:h-[700px]">
+          <div className="h-[750px] lg:h-[875px]">
             <NuclideChart className="h-full" />
           </div>
         </div>
@@ -45,7 +48,7 @@ export default function NuclideChartPage() {
 
             {/* The Challenge */}
             <div>
-              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-4">
+              <h2 className="text-sm font-bold tracking-tight mb-6">
                 The Challenge
               </h2>
               <p className="text-black/70 leading-relaxed">
@@ -55,7 +58,7 @@ export default function NuclideChartPage() {
 
             {/* Background */}
             <div>
-              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-4">
+              <h2 className="text-sm font-bold tracking-tight mb-6">
                 Background
               </h2>
               <div className="space-y-4 text-black/70 leading-relaxed">
@@ -73,7 +76,7 @@ export default function NuclideChartPage() {
 
             {/* Approach */}
             <div>
-              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-4">
+              <h2 className="text-sm font-bold tracking-tight mb-6">
                 Approach
               </h2>
               <div className="space-y-4 text-black/70 leading-relaxed">
@@ -89,47 +92,22 @@ export default function NuclideChartPage() {
               </div>
             </div>
 
-          </div>
-
-          {/* Right column - metadata */}
-          <div className="space-y-8">
-
-            {/* Technology */}
-            <div>
-              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-3">
-                Technology
-              </h2>
-              <p className="text-sm text-black/70 leading-relaxed">
-                React, TypeScript, HTML Canvas. Custom rendering for precise control over visual encoding and interaction. No external charting libraries.
-              </p>
-            </div>
-
-            {/* Data */}
-            <div>
-              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-3">
-                Data
-              </h2>
-              <p className="text-sm text-black/70 leading-relaxed">
-                IAEA Nuclear Data Services, National Nuclear Data Center (NNDC), Atomic Mass Evaluation (AME2020).
-              </p>
-            </div>
-
             {/* Adaptability */}
             <div>
-              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-3">
+              <h2 className="text-sm font-bold tracking-tight mb-6">
                 Adaptability
               </h2>
-              <p className="text-sm text-black/70 leading-relaxed">
+              <p className="text-black/70 leading-relaxed">
                 The same pattern - canvas-based rendering with progressive disclosure panels - could apply to any dense categorical dataset: gene expression matrices, materials databases, taxonomic classifications, or historical event timelines.
               </p>
             </div>
 
-            {/* Related */}
+            {/* Related Projects */}
             <div>
-              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-3">
+              <h2 className="text-sm font-bold tracking-tight mb-6">
                 Related Projects
               </h2>
-              <ul className="space-y-2 text-sm">
+              <ul className="space-y-2">
                 <li>
                   <a href="/work/periodic-table" className="text-black/70 hover:text-[var(--color-pink)] transition-colors">
                     Periodic Table →
@@ -146,6 +124,31 @@ export default function NuclideChartPage() {
                   </a>
                 </li>
               </ul>
+            </div>
+
+          </div>
+
+          {/* Right column - metadata */}
+          <div className="space-y-8">
+
+            {/* Technology */}
+            <div>
+              <h2 className="text-sm font-bold tracking-tight mb-6">
+                Technology
+              </h2>
+              <p className="text-sm text-black/70 leading-relaxed">
+                React, TypeScript, HTML Canvas. Custom rendering for precise control over visual encoding and interaction. No external charting libraries.
+              </p>
+            </div>
+
+            {/* Data */}
+            <div>
+              <h2 className="text-sm font-bold tracking-tight mb-6">
+                Data
+              </h2>
+              <p className="text-sm text-black/70 leading-relaxed">
+                IAEA Nuclear Data Services, National Nuclear Data Center (NNDC), Atomic Mass Evaluation (AME2020).
+              </p>
             </div>
 
           </div>
