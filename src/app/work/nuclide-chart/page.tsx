@@ -1,7 +1,7 @@
 import NuclideChart from './NuclideChart';
 
 export const metadata = {
-  title: 'Chart of Nuclides — Bang Industries',
+  title: 'The Nuclear Landscape — Bang Industries',
   description: 'An interactive exploration of all 3,300+ known isotopes, mapped by protons and neutrons.',
 };
 
@@ -9,103 +9,145 @@ export default function NuclideChartPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-8 md:pb-12">
+      <section className="px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16">
         <div className="max-w-[75%]">
-          <p className="text-xs font-mono text-black/40 uppercase tracking-wider mb-4">
-            Interactive Visualisation
-          </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-            Chart of Nuclides
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-8">
+            The Nuclear Landscape
           </h1>
-          <p className="text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl">
-            The periodic table shows 118 elements. This chart shows over 3,300 distinct nuclei — every known isotope of every element, mapped by protons and neutrons.
+          <p className="text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl mb-8">
+            The periodic table shows 118 elements - but that is only part of the story. Each element can exist in multiple forms, with different numbers of neutrons creating different isotopes. Some are stable. Most are not. This interactive chart maps all 3,300+ known nuclear species, revealing the narrow ridge of stability that runs through a vast terrain of radioactive decay.
           </p>
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            <span className="px-3 py-1 text-xs font-mono bg-black/5 text-black/60">Interactive</span>
+            <span className="px-3 py-1 text-xs font-mono bg-black/5 text-black/60">Science</span>
+            <span className="px-3 py-1 text-xs font-mono bg-black/5 text-black/60">Data visualisation</span>
+            <span className="px-3 py-1 text-xs font-mono bg-black/5 text-black/60">Mxwll</span>
+          </div>
         </div>
       </section>
 
       {/* Chart */}
-      <section className="px-4 md:px-6 pb-12 md:pb-16">
+      <section className="px-4 md:px-6 pb-16 md:pb-20">
         <div className="border border-black/10 bg-white overflow-hidden">
-          <div className="h-[500px] md:h-[600px] lg:h-[700px]">
+          <div className="h-[600px] lg:h-[700px]">
             <NuclideChart className="h-full" />
           </div>
         </div>
       </section>
 
-      {/* Context */}
-      <section className="px-4 md:px-6 pb-12 md:pb-16 lg:pb-20">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-          <div>
-            <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-4">
-              What is a nuclide?
-            </h2>
-            <p className="text-black/70 mb-4">
-              A nuclide is a specific combination of protons and neutrons in an atomic nucleus. While the periodic table groups atoms by proton count alone (elements), nuclides distinguish between isotopes — atoms with the same proton count but different neutron counts.
-            </p>
-            <p className="text-black/70">
-              Carbon-12 and Carbon-14 are both carbon (6 protons), but they&apos;re different nuclides because C-12 has 6 neutrons while C-14 has 8.
-            </p>
-          </div>
-          <div>
-            <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-4">
-              The valley of stability
-            </h2>
-            <p className="text-black/70 mb-4">
-              Stable nuclides cluster along a diagonal &quot;valley&quot; where the balance of protons and neutrons creates a stable nuclear configuration. Light elements prefer equal numbers (N ≈ Z), while heavy elements need more neutrons to remain stable.
-            </p>
-            <p className="text-black/70">
-              Nuclides outside this valley are unstable and decay toward it — neutron-rich nuclei via β⁻ decay, proton-rich nuclei via β⁺ decay or electron capture.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Content sections */}
+      <section className="px-4 md:px-6 pb-16 md:pb-20">
+        <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
 
-      {/* Stats */}
-      <section className="px-4 md:px-6 pb-12 md:pb-16 lg:pb-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-black p-4 md:p-6">
-            <p className="text-xs font-mono text-white/50 uppercase tracking-wider mb-2">Known Nuclides</p>
-            <p className="text-3xl md:text-4xl font-bold text-white">~3,300</p>
-            <p className="text-sm text-white/40 mt-1">Observed to date</p>
-          </div>
-          <div className="bg-black p-4 md:p-6">
-            <p className="text-xs font-mono text-white/50 uppercase tracking-wider mb-2">Stable Nuclides</p>
-            <p className="text-3xl md:text-4xl font-bold text-white">252</p>
-            <p className="text-sm text-white/40 mt-1">No observed decay</p>
-          </div>
-          <div className="bg-black p-4 md:p-6">
-            <p className="text-xs font-mono text-white/50 uppercase tracking-wider mb-2">Elements</p>
-            <p className="text-3xl md:text-4xl font-bold text-white">118</p>
-            <p className="text-sm text-white/40 mt-1">Confirmed</p>
-          </div>
-          <div className="bg-black p-4 md:p-6">
-            <p className="text-xs font-mono text-white/50 uppercase tracking-wider mb-2">Magic Numbers</p>
-            <p className="text-3xl md:text-4xl font-bold text-white">7</p>
-            <p className="text-sm text-white/40 mt-1">2, 8, 20, 28, 50, 82, 126</p>
-          </div>
-        </div>
-      </section>
+          {/* Left column - main content */}
+          <div className="lg:col-span-2 space-y-12">
 
-      {/* Technical details */}
-      <section className="px-4 md:px-6 pb-12 md:pb-16 lg:pb-20 border-t border-black/10 pt-12 md:pt-16">
-        <div className="grid md:grid-cols-3 gap-8">
-          <div>
-            <p className="text-xs font-mono text-black/40 uppercase tracking-wider mb-2">Approach</p>
-            <p className="text-black/70">
-              Canvas-based rendering for performance with 3,000+ data points. Pan, zoom, and touch gestures for exploration. Detail panel reveals isotope-specific information on selection.
-            </p>
+            {/* The Challenge */}
+            <div>
+              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-4">
+                The Challenge
+              </h2>
+              <p className="text-black/70 leading-relaxed">
+                Mxwll needed an interactive map of all known nuclides - something that could work equally well on mobile and desktop, handle 3,300+ data points without performance issues, and make the underlying physics accessible to non-specialists. The standard chart of nuclides is a dense wall of coloured squares. The challenge was to preserve the scientific accuracy while creating something explorable and engaging.
+              </p>
+            </div>
+
+            {/* Background */}
+            <div>
+              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-4">
+                Background
+              </h2>
+              <div className="space-y-4 text-black/70 leading-relaxed">
+                <p>
+                  A nuclide is a specific combination of protons and neutrons in an atomic nucleus. While the periodic table groups atoms by proton count alone - defining the elements - nuclides distinguish between isotopes: atoms with the same number of protons but different numbers of neutrons. Carbon-12 and Carbon-14 are both carbon, but they are different nuclides.
+                </p>
+                <p>
+                  Stable nuclides cluster along a diagonal path called the valley of stability, where the balance of protons and neutrons creates a lasting nuclear configuration. Light elements prefer roughly equal numbers of protons and neutrons. Heavier elements need progressively more neutrons to remain stable. Step outside this valley and the nucleus becomes unstable - it will decay, emitting radiation until it reaches a stable configuration.
+                </p>
+                <p>
+                  The chart also reveals the magic numbers - 2, 8, 20, 28, 50, 82, and 126 - where nuclei with these counts of protons or neutrons are exceptionally stable. These correspond to filled nuclear shells, analogous to the electron shells that determine chemical behaviour. Lead-208, with 82 protons and 126 neutrons, is doubly magic.
+                </p>
+              </div>
+            </div>
+
+            {/* Approach */}
+            <div>
+              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-4">
+                Approach
+              </h2>
+              <div className="space-y-4 text-black/70 leading-relaxed">
+                <p>
+                  The interface needed to support multiple ways of exploring the data. Pan and zoom allow navigation across the full chart. Hover reveals individual nuclide details without interrupting flow. Click opens a detailed panel with decay mode, half-life, natural abundance, and related isotopes.
+                </p>
+                <p>
+                  Two colour modes - by decay type and by half-life - let users see different patterns in the same data. The element filter isolates individual rows for focused study. Magic number guidelines can be toggled to highlight the structural physics.
+                </p>
+                <p>
+                  The legend adapts to the active colour mode, and the detail panel provides progressive disclosure - basic facts visible immediately, with deeper information available for those who want it.
+                </p>
+              </div>
+            </div>
+
           </div>
-          <div>
-            <p className="text-xs font-mono text-black/40 uppercase tracking-wider mb-2">Technology</p>
-            <p className="text-black/70">
-              React, TypeScript, HTML Canvas. No external charting libraries — custom rendering for precise control over visual encoding and interaction.
-            </p>
-          </div>
-          <div>
-            <p className="text-xs font-mono text-black/40 uppercase tracking-wider mb-2">Data</p>
-            <p className="text-black/70">
-              IAEA Nuclear Data Services, National Nuclear Data Center (NNDC), Atomic Mass Evaluation (AME2020).
-            </p>
+
+          {/* Right column - metadata */}
+          <div className="space-y-8">
+
+            {/* Technology */}
+            <div>
+              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-3">
+                Technology
+              </h2>
+              <p className="text-sm text-black/70 leading-relaxed">
+                React, TypeScript, HTML Canvas. Custom rendering for precise control over visual encoding and interaction. No external charting libraries.
+              </p>
+            </div>
+
+            {/* Data */}
+            <div>
+              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-3">
+                Data
+              </h2>
+              <p className="text-sm text-black/70 leading-relaxed">
+                IAEA Nuclear Data Services, National Nuclear Data Center (NNDC), Atomic Mass Evaluation (AME2020).
+              </p>
+            </div>
+
+            {/* Adaptability */}
+            <div>
+              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-3">
+                Adaptability
+              </h2>
+              <p className="text-sm text-black/70 leading-relaxed">
+                The same pattern - canvas-based rendering with progressive disclosure panels - could apply to any dense categorical dataset: gene expression matrices, materials databases, taxonomic classifications, or historical event timelines.
+              </p>
+            </div>
+
+            {/* Related */}
+            <div>
+              <h2 className="text-xs font-mono text-black/40 uppercase tracking-wider mb-3">
+                Related Projects
+              </h2>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="/work/periodic-table" className="text-black/70 hover:text-[var(--color-pink)] transition-colors">
+                    Periodic Table →
+                  </a>
+                </li>
+                <li>
+                  <a href="/work/stellar-evolution" className="text-black/70 hover:text-[var(--color-pink)] transition-colors">
+                    Stellar Evolution →
+                  </a>
+                </li>
+                <li>
+                  <a href="/work/particle-physics" className="text-black/70 hover:text-[var(--color-pink)] transition-colors">
+                    Standard Model →
+                  </a>
+                </li>
+              </ul>
+            </div>
+
           </div>
         </div>
       </section>
