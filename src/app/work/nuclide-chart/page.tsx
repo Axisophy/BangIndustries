@@ -22,10 +22,10 @@ export default function NuclideChartPage() {
           </p>
           {/* Tags */}
           <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1 text-xs font-mono bg-black/5 text-black/60">Interactive</span>
-            <span className="px-3 py-1 text-xs font-mono bg-black/5 text-black/60">Science</span>
-            <span className="px-3 py-1 text-xs font-mono bg-black/5 text-black/60">Data visualisation</span>
-            <span className="px-3 py-1 text-xs font-mono bg-black/5 text-black/60">Mxwll</span>
+            <span className="px-3 py-1 text-xs bg-black/5 text-black/60">Interactive</span>
+            <span className="px-3 py-1 text-xs bg-black/5 text-black/60">Science</span>
+            <span className="px-3 py-1 text-xs bg-black/5 text-black/60">Data visualisation</span>
+            <span className="px-3 py-1 text-xs bg-black/5 text-black/60">Mxwll</span>
           </div>
         </div>
       </section>
@@ -41,7 +41,7 @@ export default function NuclideChartPage() {
 
       {/* Content sections */}
       <section className="px-4 md:px-6 pb-16 md:pb-20">
-        <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
+        <div className="grid lg:grid-cols-3 gap-24 lg:gap-32">
 
           {/* Left column - main content */}
           <div className="lg:col-span-2 space-y-12">
