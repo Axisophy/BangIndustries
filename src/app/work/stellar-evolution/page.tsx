@@ -14,10 +14,10 @@ export default function StellarEvolutionPage() {
           <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]'>
             The Main Sequence and Beyond
           </h1>
-          <p className='text-2xl md:text-3xl lg:text-4xl font-normal text-black/70 mt-2'>
+          <p className='text-3xl md:text-4xl lg:text-5xl font-normal text-black/70 mt-4'>
             Mapping stellar evolution with GAIA data
           </p>
-          <p className='text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl mt-12 mb-8'>
+          <p className='text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl mt-12 mb-12'>
             The Hertzsprung-Russell diagram is astronomy&apos;s most powerful classification tool - a simple plot of temperature against brightness that reveals the life cycles of stars. Using data from the European Space Agency&apos;s GAIA mission, we explored different approaches to visualising five million stars, from raw point clouds to density maps to interactive explainers.
           </p>
           {/* Tags */}
