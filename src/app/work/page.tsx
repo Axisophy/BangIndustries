@@ -80,6 +80,15 @@ const projects = [
     color: 'bg-[var(--color-blue)]',
     featured: false,
   },
+  {
+    id: 9,
+    title: 'From Gates to Gradients',
+    category: 'Interactive Design',
+    description: 'How logic circuits become learning machines.',
+    slug: 'logic-systems',
+    color: 'bg-[var(--color-pink)]',
+    featured: false,
+  },
 ];
 
 const categories = ['All', 'Data Visualisation', 'Explanation Design', 'Scientific Illustration', 'Interactive Design'];
