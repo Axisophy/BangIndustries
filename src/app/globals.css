@@ -52,80 +52,82 @@
   --font-mono: var(--font-mono);
 }
 
-* {
-  box-sizing: border-box;
-}
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 
-html {
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-text);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
-}
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-text);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
 
-/* Typography Scale */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  margin: 0;
-}
+  /* Typography Scale */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0;
+  }
 
-/* Responsive type scale */
-h1 {
-  font-size: 1.875rem; /* text-3xl mobile */
-}
-@media (min-width: 768px) {
-  h1 { font-size: 3rem; } /* text-5xl */
-}
-@media (min-width: 1024px) {
-  h1 { font-size: 3.75rem; } /* text-6xl */
-}
-@media (min-width: 1280px) {
-  h1 { font-size: 4.5rem; } /* text-7xl */
-}
+  /* Responsive type scale */
+  h1 {
+    font-size: 1.875rem; /* text-3xl mobile */
+  }
+  @media (min-width: 768px) {
+    h1 { font-size: 3rem; } /* text-5xl */
+  }
+  @media (min-width: 1024px) {
+    h1 { font-size: 3.75rem; } /* text-6xl */
+  }
+  @media (min-width: 1280px) {
+    h1 { font-size: 4.5rem; } /* text-7xl */
+  }
 
-h2 { font-size: 1.5rem; }
-@media (min-width: 768px) {
-  h2 { font-size: 1.875rem; }
-}
-@media (min-width: 1024px) {
-  h2 { font-size: 2.25rem; }
-}
+  h2 { font-size: 1.5rem; }
+  @media (min-width: 768px) {
+    h2 { font-size: 1.875rem; }
+  }
+  @media (min-width: 1024px) {
+    h2 { font-size: 2.25rem; }
+  }
 
-h3 { font-size: 1.25rem; }
-@media (min-width: 768px) {
-  h3 { font-size: 1.5rem; }
-}
+  h3 { font-size: 1.25rem; }
+  @media (min-width: 768px) {
+    h3 { font-size: 1.5rem; }
+  }
 
-h4 { font-size: 1.125rem; }
+  h4 { font-size: 1.125rem; }
 
-p {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.6;
-}
+  p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
 
-/* Link Styles */
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
+  /* Link Styles */
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
 
-a:hover {
-  color: var(--accent-primary);
+  a:hover {
+    color: var(--accent-primary);
+  }
 }
 
 /* Font utility classes */
