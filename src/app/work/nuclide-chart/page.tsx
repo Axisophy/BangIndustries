@@ -48,7 +48,7 @@ export default function NuclideChartPage() {
 
             {/* The Challenge */}
             <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-6">
                 The Challenge
               </h2>
               <p className="text-black/70 leading-relaxed">
@@ -58,7 +58,7 @@ export default function NuclideChartPage() {
 
             {/* Background */}
             <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-6">
                 Background
               </h2>
               <div className="space-y-4 text-black/70 leading-relaxed">
@@ -76,7 +76,7 @@ export default function NuclideChartPage() {
 
             {/* Approach */}
             <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-6">
                 Approach
               </h2>
               <div className="space-y-4 text-black/70 leading-relaxed">
@@ -94,7 +94,7 @@ export default function NuclideChartPage() {
 
             {/* Adaptability */}
             <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-6">
                 Adaptability
               </h2>
               <p className="text-black/70 leading-relaxed">
@@ -104,7 +104,7 @@ export default function NuclideChartPage() {
 
             {/* Related Projects */}
             <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-6">
                 Related Projects
               </h2>
               <ul className="space-y-2">
@@ -133,7 +133,7 @@ export default function NuclideChartPage() {
 
             {/* Technology */}
             <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-6">
                 Technology
               </h2>
               <p className="text-sm text-black/70 leading-relaxed">
@@ -143,7 +143,7 @@ export default function NuclideChartPage() {
 
             {/* Data */}
             <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-6">
                 Data
               </h2>
               <p className="text-sm text-black/70 leading-relaxed">

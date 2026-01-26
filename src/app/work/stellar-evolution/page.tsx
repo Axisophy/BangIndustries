@@ -71,7 +71,7 @@ export default function StellarEvolutionPage() {
 
       {/* Interactive: Famous Stars */}
       <section className='px-4 md:px-6 pb-16 md:pb-20'>
-        <h2 className='text-4xl font-bold tracking-tight mb-12'>Interactive: Well-Known Stars</h2>
+        <h2 className='text-4xl font-bold tracking-tight mb-6'>Interactive: Well-Known Stars</h2>
         <div className='border border-black/10 bg-white overflow-hidden'>
           <div className='h-[600px] lg:h-[700px]'>
             <HRDiagram className='w-full h-full' showEvolution={true} />
@@ -91,7 +91,7 @@ export default function StellarEvolutionPage() {
 
             {/* The Challenge */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 The Challenge
               </h2>
               <p className='text-black/70 leading-relaxed'>
@@ -101,7 +101,7 @@ export default function StellarEvolutionPage() {
 
             {/* Background */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Background
               </h2>
               <div className='space-y-4 text-black/70 leading-relaxed'>
@@ -119,7 +119,7 @@ export default function StellarEvolutionPage() {
 
             {/* Approach */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Approach
               </h2>
               <div className='space-y-4 text-black/70 leading-relaxed'>
@@ -143,7 +143,7 @@ export default function StellarEvolutionPage() {
 
             {/* Adaptability */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Adaptability
               </h2>
               <p className='text-black/70 leading-relaxed'>
@@ -153,7 +153,7 @@ export default function StellarEvolutionPage() {
 
             {/* Related Projects */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Related Projects
               </h2>
               <ul className='space-y-2 text-sm'>
@@ -182,7 +182,7 @@ export default function StellarEvolutionPage() {
 
             {/* Technology */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Technology
               </h2>
               <p className='text-sm text-black/70 leading-relaxed'>
@@ -192,7 +192,7 @@ export default function StellarEvolutionPage() {
 
             {/* Data */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Data
               </h2>
               <p className='text-sm text-black/70 leading-relaxed'>
@@ -202,7 +202,7 @@ export default function StellarEvolutionPage() {
 
             {/* Status */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Status
               </h2>
               <p className='text-sm text-black/70 leading-relaxed'>

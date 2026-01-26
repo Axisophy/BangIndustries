@@ -248,7 +248,7 @@ section: px-4 md:px-6 pb-16 md:pb-20
 **Right column** (`space-y-8`):
 - Technology, Data
 
-**Section headings (h2):** `text-4xl font-bold tracking-tight mb-12`
+**Section headings (h2):** `text-4xl font-bold tracking-tight mb-6`
 
 **Body text:**
 - Left column: `text-black/70 leading-relaxed` (16px)

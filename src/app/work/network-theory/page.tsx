@@ -41,7 +41,7 @@ export default function NetworkTheoryPage() {
 
       {/* Interactive: Network Topologies */}
       <section className='px-4 md:px-6 pb-16 md:pb-20'>
-        <h2 className='text-4xl font-bold tracking-tight mb-12'>Interactive: Network Topologies</h2>
+        <h2 className='text-4xl font-bold tracking-tight mb-6'>Interactive: Network Topologies</h2>
         <div className='border border-black/10 bg-white p-6'>
           <NetworkComparison nodeCount={80} />
         </div>
@@ -49,7 +49,7 @@ export default function NetworkTheoryPage() {
 
       {/* Experiment: Attack vs Random Failure */}
       <section className='px-4 md:px-6 pb-16 md:pb-20'>
-        <h2 className='text-4xl font-bold tracking-tight mb-12'>Experiment: Attack vs Random Failure</h2>
+        <h2 className='text-4xl font-bold tracking-tight mb-6'>Experiment: Attack vs Random Failure</h2>
         <div className='border border-black/10 bg-white p-6'>
           <AttackSimulation />
         </div>
@@ -57,7 +57,7 @@ export default function NetworkTheoryPage() {
 
       {/* Experiment: Epidemic Spread */}
       <section className='px-4 md:px-6 pb-16 md:pb-20'>
-        <h2 className='text-4xl font-bold tracking-tight mb-12'>Experiment: Epidemic Spread</h2>
+        <h2 className='text-4xl font-bold tracking-tight mb-6'>Experiment: Epidemic Spread</h2>
         <div className='border border-black/10 bg-white p-6'>
           <EpidemicSimulation />
         </div>
@@ -72,7 +72,7 @@ export default function NetworkTheoryPage() {
 
             {/* The Challenge */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 The Challenge
               </h2>
               <p className='text-black/70 leading-relaxed'>
@@ -82,7 +82,7 @@ export default function NetworkTheoryPage() {
 
             {/* Background */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Background
               </h2>
               <div className='space-y-4 text-black/70 leading-relaxed'>
@@ -103,7 +103,7 @@ export default function NetworkTheoryPage() {
 
             {/* Approach */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Approach
               </h2>
               <div className='space-y-4 text-black/70 leading-relaxed'>
@@ -124,7 +124,7 @@ export default function NetworkTheoryPage() {
 
             {/* Adaptability */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Adaptability
               </h2>
               <p className='text-black/70 leading-relaxed'>
@@ -134,7 +134,7 @@ export default function NetworkTheoryPage() {
 
             {/* Related Projects */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Related Projects
               </h2>
               <ul className='space-y-2 text-sm'>
@@ -163,7 +163,7 @@ export default function NetworkTheoryPage() {
 
             {/* Technology */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Technology
               </h2>
               <p className='text-sm text-black/70 leading-relaxed'>
@@ -173,7 +173,7 @@ export default function NetworkTheoryPage() {
 
             {/* Data */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Data
               </h2>
               <p className='text-sm text-black/70 leading-relaxed'>
@@ -183,7 +183,7 @@ export default function NetworkTheoryPage() {
 
             {/* Status */}
             <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-12'>
+              <h2 className='text-4xl font-bold tracking-tight mb-6'>
                 Status
               </h2>
               <p className='text-sm text-black/70 leading-relaxed'>
