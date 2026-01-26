@@ -209,6 +209,54 @@ public/
 
 **Number formatting:** Two digits with leading zero: `01`, `02`, etc.
 
+## Work Page Template
+
+Canonical template for all work/case study pages. Reference `/work/nuclide-chart/page.tsx` as the implementation.
+
+### Hero Section
+
+```
+section: px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16
+  div: max-w-[75%]
+```
+
+- **Title (h1):** `text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]`
+- **Subtitle:** `text-2xl md:text-3xl lg:text-4xl font-normal text-black/70 mt-2`
+- **Description:** `text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl mt-12 mb-8`
+- **Tags:** `flex flex-wrap gap-2` with individual tags as `px-3 py-1 text-xs bg-black/5 text-black/60` (NHG Text, not mono)
+
+### Chart/Visual Section
+
+```
+section: px-4 md:px-6 pb-16 md:pb-20
+  div: border border-black/10 bg-white overflow-hidden
+    div: h-[750px] lg:h-[875px]
+```
+
+Standard frame for interactive visualisations. Additional images go between this and the content section.
+
+### Content Section
+
+```
+section: px-4 md:px-6 pb-16 md:pb-20
+  div: grid lg:grid-cols-3 gap-24 lg:gap-32
+```
+
+**Left column** (`lg:col-span-2 space-y-12`):
+- The Challenge, Background, Approach, Adaptability, Related Projects
+
+**Right column** (`space-y-8`):
+- Technology, Data
+
+**Section headings (h2):** `text-sm font-bold tracking-tight mb-9`
+
+**Body text:**
+- Left column: `text-black/70 leading-relaxed` (16px)
+- Right column: `text-sm text-black/70 leading-relaxed` (14px)
+- Multi-paragraph: wrap in `div: space-y-4`
+
+**Related links:** `ul: space-y-2 text-sm` with `a: text-black/70 hover:text-[var(--color-pink)] transition-colors`
+
 ## Code Style
 
 - Use `'` not `"` for JSX strings

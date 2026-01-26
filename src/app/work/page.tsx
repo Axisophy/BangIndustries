@@ -62,6 +62,15 @@ const projects = [
     color: 'bg-[var(--color-pink)]',
     featured: false,
   },
+  {
+    id: 7,
+    title: 'The Main Sequence and Beyond',
+    category: 'Data Visualisation',
+    description: 'Mapping stellar evolution with GAIA data across the Hertzsprung-Russell diagram.',
+    slug: 'stellar-evolution',
+    color: 'bg-black',
+    featured: false,
+  },
 ];
 
 const categories = ['All', 'Data Visualisation', 'Explanation Design', 'Scientific Illustration', 'Interactive Design'];
