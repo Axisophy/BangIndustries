@@ -14,10 +14,10 @@ export default function NuclideChartPage() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
             Mapping Instability
           </h1>
-          <p className="text-2xl md:text-3xl lg:text-4xl font-normal text-black/70 mt-2">
+          <p className="text-2xl font-normal text-black/70 mt-4">
             Charting 3,300 atomic species
           </p>
-          <p className="text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl mt-12 mb-8">
+          <p className="text-base text-black/70 max-w-3xl mt-12 mb-12">
             The periodic table shows 118 elements - but that is only part of the story. Each element can exist in multiple forms, with different numbers of neutrons creating different isotopes. Some are stable. Most are not. This interactive chart maps all 3,300+ known nuclear species, revealing the narrow ridge of stability that runs through a vast terrain of radioactive decay.
           </p>
           {/* Tags */}
@@ -48,7 +48,7 @@ export default function NuclideChartPage() {
 
             {/* The Challenge */}
             <div>
-              <h2 className="text-sm font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-12">
                 The Challenge
               </h2>
               <p className="text-black/70 leading-relaxed">
@@ -58,7 +58,7 @@ export default function NuclideChartPage() {
 
             {/* Background */}
             <div>
-              <h2 className="text-sm font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-12">
                 Background
               </h2>
               <div className="space-y-4 text-black/70 leading-relaxed">
@@ -76,7 +76,7 @@ export default function NuclideChartPage() {
 
             {/* Approach */}
             <div>
-              <h2 className="text-sm font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-12">
                 Approach
               </h2>
               <div className="space-y-4 text-black/70 leading-relaxed">
@@ -94,7 +94,7 @@ export default function NuclideChartPage() {
 
             {/* Adaptability */}
             <div>
-              <h2 className="text-sm font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-12">
                 Adaptability
               </h2>
               <p className="text-black/70 leading-relaxed">
@@ -104,7 +104,7 @@ export default function NuclideChartPage() {
 
             {/* Related Projects */}
             <div>
-              <h2 className="text-sm font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-12">
                 Related Projects
               </h2>
               <ul className="space-y-2">
@@ -133,7 +133,7 @@ export default function NuclideChartPage() {
 
             {/* Technology */}
             <div>
-              <h2 className="text-sm font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-12">
                 Technology
               </h2>
               <p className="text-sm text-black/70 leading-relaxed">
@@ -143,7 +143,7 @@ export default function NuclideChartPage() {
 
             {/* Data */}
             <div>
-              <h2 className="text-sm font-bold tracking-tight mb-12">
+              <h2 className="text-4xl font-bold tracking-tight mb-12">
                 Data
               </h2>
               <p className="text-sm text-black/70 leading-relaxed">

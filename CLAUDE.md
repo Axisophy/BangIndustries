@@ -221,8 +221,8 @@ section: px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16
 ```
 
 - **Title (h1):** `text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]`
-- **Subtitle:** `text-2xl md:text-3xl lg:text-4xl font-normal text-black/70 mt-2`
-- **Description:** `text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl mt-12 mb-8`
+- **Subtitle:** `text-2xl font-normal text-black/70 mt-4`
+- **Description:** `text-base text-black/70 max-w-3xl mt-12 mb-12`
 - **Tags:** `flex flex-wrap gap-2` with individual tags as `px-3 py-1 text-xs bg-black/5 text-black/60` (NHG Text, not mono)
 
 ### Chart/Visual Section
@@ -248,7 +248,7 @@ section: px-4 md:px-6 pb-16 md:pb-20
 **Right column** (`space-y-8`):
 - Technology, Data
 
-**Section headings (h2):** `text-sm font-bold tracking-tight mb-9`
+**Section headings (h2):** `text-4xl font-bold tracking-tight mb-12`
 
 **Body text:**
 - Left column: `text-black/70 leading-relaxed` (16px)
