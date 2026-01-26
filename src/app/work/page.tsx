@@ -71,6 +71,15 @@ const projects = [
     color: 'bg-black',
     featured: false,
   },
+  {
+    id: 8,
+    title: 'Fragile by Design',
+    category: 'Interactive Design',
+    description: 'How topology shapes resilience, epidemics, and information flow in networks.',
+    slug: 'network-theory',
+    color: 'bg-[var(--color-blue)]',
+    featured: false,
+  },
 ];
 
 const categories = ['All', 'Data Visualisation', 'Explanation Design', 'Scientific Illustration', 'Interactive Design'];
