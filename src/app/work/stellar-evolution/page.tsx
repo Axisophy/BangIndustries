@@ -35,24 +35,32 @@ export default function StellarEvolutionPage() {
       <section className='px-4 md:px-6 pb-16 md:pb-20'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           {/* Image 1: Full range point cloud */}
-          <div className='border border-black/10 bg-black/5 aspect-[3/2] flex items-center justify-center'>
-            <span className='text-black/30 text-sm font-mono'>hr_full_scatter.png</span>
-          </div>
+          <img
+            src='/images/work/stellar-evolution/hr_full_scatter.png'
+            alt='HR diagram - full range point cloud'
+            className='w-full h-auto'
+          />
 
           {/* Image 2: Full range density */}
-          <div className='border border-black/10 bg-black/5 aspect-[3/2] flex items-center justify-center'>
-            <span className='text-black/30 text-sm font-mono'>hr_full_hexbin.png</span>
-          </div>
+          <img
+            src='/images/work/stellar-evolution/hr_full_hexbin.png'
+            alt='HR diagram - full range density map'
+            className='w-full h-auto'
+          />
 
           {/* Image 3: Main sequence point cloud */}
-          <div className='border border-black/10 bg-black/5 aspect-[3/2] flex items-center justify-center'>
-            <span className='text-black/30 text-sm font-mono'>hr_mainseq_scatter.png</span>
-          </div>
+          <img
+            src='/images/work/stellar-evolution/hr_mainseq_scatter.png'
+            alt='HR diagram - main sequence point cloud'
+            className='w-full h-auto'
+          />
 
           {/* Image 4: Main sequence density */}
-          <div className='border border-black/10 bg-black/5 aspect-[3/2] flex items-center justify-center'>
-            <span className='text-black/30 text-sm font-mono'>hr_mainseq_hexbin.png</span>
-          </div>
+          <img
+            src='/images/work/stellar-evolution/hr_mainseq_hexbin.png'
+            alt='HR diagram - main sequence density map'
+            className='w-full h-auto'
+          />
         </div>
 
         {/* Caption */}
