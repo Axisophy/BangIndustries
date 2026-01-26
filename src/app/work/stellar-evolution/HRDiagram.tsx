@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 
 type StarCategory = 'main-sequence' | 'giant' | 'supergiant' | 'white-dwarf';
 
@@ -75,24 +75,12 @@ const SUN_EVOLUTION: EvolutionPoint[] = [
 
 // --- Layout ---
 const MARGIN = { top: 40, right: 20, bottom: 50, left: 65 };
-const VW = 800;
-const VH = 600;
-const PW = VW - MARGIN.left - MARGIN.right;
-const PH = VH - MARGIN.top - MARGIN.bottom;
 
 // Log-scale axis ranges
 const LT_MIN = 3.4;   // ~2,500 K
 const LT_MAX = 4.72;  // ~52,000 K
 const LL_MIN = -4.2;
 const LL_MAX = 5.8;
-
-function tX(temp: number): number {
-  return MARGIN.left + ((LT_MAX - Math.log10(temp)) / (LT_MAX - LT_MIN)) * PW;
-}
-
-function lY(lum: number): number {
-  return MARGIN.top + ((LL_MAX - Math.log10(lum)) / (LL_MAX - LL_MIN)) * PH;
-}
 
 // Spectral class labels
 const SPECTRAL_CLASSES = [
@@ -127,12 +115,38 @@ interface HRDiagramProps {
 }
 
 export default function HRDiagram({ className = '', showEvolution = false }: HRDiagramProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [dims, setDims] = useState<{ width: number; height: number } | null>(null);
   const [activeCategories, setActiveCategories] = useState<Set<StarCategory>>(
     new Set<StarCategory>(['main-sequence', 'giant', 'supergiant', 'white-dwarf'])
   );
   const [showPath, setShowPath] = useState(showEvolution);
   const [selected, setSelected] = useState<Star | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(entries => {
+      const { width, height } = entries[0].contentRect;
+      if (width > 0 && height > 0) setDims({ width, height });
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const vw = dims?.width ?? 800;
+  const vh = dims?.height ?? 600;
+  const pw = vw - MARGIN.left - MARGIN.right;
+  const ph = vh - MARGIN.top - MARGIN.bottom;
+
+  const toX = useCallback((temp: number) =>
+    MARGIN.left + ((LT_MAX - Math.log10(temp)) / (LT_MAX - LT_MIN)) * pw
+  , [pw]);
+
+  const toY = useCallback((lum: number) =>
+    MARGIN.top + ((LL_MAX - Math.log10(lum)) / (LL_MAX - LL_MIN)) * ph
+  , [ph]);
 
   const toggleCategory = useCallback((cat: StarCategory) => {
     setActiveCategories(prev => {
@@ -149,14 +163,21 @@ export default function HRDiagram({ className = '', showEvolution = false }: HRD
   );
 
   const evolutionPoints = useMemo(
-    () => SUN_EVOLUTION.map(pt => ({ ...pt, x: tX(pt.temperature), y: lY(pt.luminosity) })),
-    []
+    () => SUN_EVOLUTION.map(pt => ({ ...pt, x: toX(pt.temperature), y: toY(pt.luminosity) })),
+    [toX, toY]
   );
 
   const evolutionPathD = useMemo(
     () => evolutionPoints.map((pt, i) => `${i === 0 ? 'M' : 'L'}${pt.x.toFixed(1)},${pt.y.toFixed(1)}`).join(' '),
     [evolutionPoints]
   );
+
+  // Region label positions derived from plot area
+  const msAngle = useMemo(() => {
+    const x1 = toX(25300), y1 = toY(12100);
+    const x2 = toX(3042), y2 = toY(0.0017);
+    return Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+  }, [toX, toY]);
 
   return (
     <div className={`${className} flex flex-col`}>
@@ -190,237 +211,238 @@ export default function HRDiagram({ className = '', showEvolution = false }: HRD
       </div>
 
       {/* Chart */}
-      <div className='flex-1 relative min-h-0'>
-        <svg
-          viewBox={`0 0 ${VW} ${VH}`}
-          className='w-full h-full'
-          preserveAspectRatio='xMidYMid meet'
-          onClick={() => setSelected(null)}
-        >
-          {/* Grid lines */}
-          {TEMP_TICKS.map(t => {
-            const x = tX(t);
-            return (
-              <line
-                key={`gt-${t}`}
-                x1={x} y1={MARGIN.top}
-                x2={x} y2={VH - MARGIN.bottom}
-                stroke='black' strokeOpacity={0.05} strokeWidth={1}
-              />
-            );
-          })}
-          {LUM_TICKS.map(l => {
-            const y = lY(l);
-            return (
-              <line
-                key={`gl-${l}`}
-                x1={MARGIN.left} y1={y}
-                x2={VW - MARGIN.right} y2={y}
-                stroke='black' strokeOpacity={0.05} strokeWidth={1}
-              />
-            );
-          })}
-
-          {/* Region labels */}
-          <text
-            x={486} y={310}
-            transform='rotate(35, 486, 310)'
-            style={{ fontSize: '28px', fontFamily: 'neue-haas-grotesk-display, sans-serif', fontWeight: 700, letterSpacing: '0.08em' }}
-            fill='black' fillOpacity={0.04}
-            textAnchor='middle'
+      <div ref={containerRef} className='flex-1 relative min-h-0'>
+        {dims && (
+          <svg
+            viewBox={`0 0 ${vw} ${vh}`}
+            className='w-full h-full'
+            onClick={() => setSelected(null)}
           >
-            MAIN SEQUENCE
-          </text>
-          <text
-            x={540} y={96}
-            style={{ fontSize: '18px', fontFamily: 'neue-haas-grotesk-display, sans-serif', fontWeight: 700, letterSpacing: '0.08em' }}
-            fill='black' fillOpacity={0.04}
-            textAnchor='middle'
-          >
-            SUPERGIANTS
-          </text>
-          <text
-            x={643} y={234}
-            style={{ fontSize: '16px', fontFamily: 'neue-haas-grotesk-display, sans-serif', fontWeight: 700, letterSpacing: '0.08em' }}
-            fill='black' fillOpacity={0.04}
-            textAnchor='middle'
-          >
-            GIANTS
-          </text>
-          <text
-            x={300} y={480}
-            style={{ fontSize: '14px', fontFamily: 'neue-haas-grotesk-display, sans-serif', fontWeight: 700, letterSpacing: '0.08em' }}
-            fill='black' fillOpacity={0.04}
-            textAnchor='middle'
-          >
-            WHITE DWARFS
-          </text>
-
-          {/* Evolution path */}
-          {showPath && (
-            <g>
-              <path
-                d={evolutionPathD}
-                fill='none'
-                stroke='black'
-                strokeOpacity={0.15}
-                strokeWidth={1.5}
-                strokeDasharray='6 4'
-              />
-              {evolutionPoints.map((pt, i) => (
-                <g key={`evo-${i}`}>
-                  <circle
-                    cx={pt.x} cy={pt.y}
-                    r={pt.label === 'Present Sun' ? 4 : 2.5}
-                    fill={pt.label === 'Present Sun' ? '#0055FF' : 'black'}
-                    fillOpacity={pt.label === 'Present Sun' ? 1 : 0.2}
-                  />
-                  <title>{`${pt.label} (${pt.age})`}</title>
-                </g>
-              ))}
-            </g>
-          )}
-
-          {/* Stars */}
-          {visibleStars.map(star => {
-            const cx = tX(star.temperature);
-            const cy = lY(star.luminosity);
-            const config = CATEGORY_CONFIG[star.category];
-            const isHovered = hovered === star.name;
-            const isSelected = selected?.name === star.name;
-            const r = config.radius + (isHovered ? 1 : 0) + (isSelected ? 2 : 0);
-            const dx = star.labelDx ?? 8;
-            const dy = star.labelDy ?? 4;
-            const anchor = star.labelAnchor ?? 'start';
-
-            return (
-              <g
-                key={star.name}
-                style={{ cursor: 'pointer' }}
-                onMouseEnter={() => setHovered(star.name)}
-                onMouseLeave={() => setHovered(null)}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelected(prev => prev?.name === star.name ? null : star);
-                }}
-              >
-                {isSelected && (
-                  <circle
-                    cx={cx} cy={cy}
-                    r={r + 4}
-                    fill='none'
-                    stroke={config.color}
-                    strokeOpacity={0.3}
-                    strokeWidth={1.5}
-                  />
-                )}
-                <circle
-                  cx={cx} cy={cy}
-                  r={r}
-                  fill={config.color}
+            {/* Grid lines */}
+            {TEMP_TICKS.map(t => {
+              const x = toX(t);
+              return (
+                <line
+                  key={`gt-${t}`}
+                  x1={x} y1={MARGIN.top}
+                  x2={x} y2={vh - MARGIN.bottom}
+                  stroke='black' strokeOpacity={0.05} strokeWidth={1}
                 />
-                <text
-                  x={cx + dx}
-                  y={cy + dy}
-                  textAnchor={anchor}
-                  style={{
-                    fontSize: '10px',
-                    fontFamily: 'neue-haas-grotesk-text, sans-serif',
-                    fill: 'rgba(0,0,0,0.5)',
+              );
+            })}
+            {LUM_TICKS.map(l => {
+              const y = toY(l);
+              return (
+                <line
+                  key={`gl-${l}`}
+                  x1={MARGIN.left} y1={y}
+                  x2={vw - MARGIN.right} y2={y}
+                  stroke='black' strokeOpacity={0.05} strokeWidth={1}
+                />
+              );
+            })}
+
+            {/* Region labels */}
+            <text
+              x={MARGIN.left + pw * 0.59} y={MARGIN.top + ph * 0.53}
+              transform={`rotate(${msAngle.toFixed(1)}, ${MARGIN.left + pw * 0.59}, ${MARGIN.top + ph * 0.53})`}
+              style={{ fontSize: '28px', fontFamily: 'neue-haas-grotesk-display, sans-serif', fontWeight: 700, letterSpacing: '0.08em' }}
+              fill='black' fillOpacity={0.04}
+              textAnchor='middle'
+            >
+              MAIN SEQUENCE
+            </text>
+            <text
+              x={MARGIN.left + pw * 0.66} y={MARGIN.top + ph * 0.08}
+              style={{ fontSize: '18px', fontFamily: 'neue-haas-grotesk-display, sans-serif', fontWeight: 700, letterSpacing: '0.08em' }}
+              fill='black' fillOpacity={0.04}
+              textAnchor='middle'
+            >
+              SUPERGIANTS
+            </text>
+            <text
+              x={MARGIN.left + pw * 0.81} y={MARGIN.top + ph * 0.3}
+              style={{ fontSize: '16px', fontFamily: 'neue-haas-grotesk-display, sans-serif', fontWeight: 700, letterSpacing: '0.08em' }}
+              fill='black' fillOpacity={0.04}
+              textAnchor='middle'
+            >
+              GIANTS
+            </text>
+            <text
+              x={MARGIN.left + pw * 0.33} y={MARGIN.top + ph * 0.84}
+              style={{ fontSize: '14px', fontFamily: 'neue-haas-grotesk-display, sans-serif', fontWeight: 700, letterSpacing: '0.08em' }}
+              fill='black' fillOpacity={0.04}
+              textAnchor='middle'
+            >
+              WHITE DWARFS
+            </text>
+
+            {/* Evolution path */}
+            {showPath && (
+              <g>
+                <path
+                  d={evolutionPathD}
+                  fill='none'
+                  stroke='black'
+                  strokeOpacity={0.15}
+                  strokeWidth={1.5}
+                  strokeDasharray='6 4'
+                />
+                {evolutionPoints.map((pt, i) => (
+                  <g key={`evo-${i}`}>
+                    <circle
+                      cx={pt.x} cy={pt.y}
+                      r={pt.label === 'Present Sun' ? 4 : 2.5}
+                      fill={pt.label === 'Present Sun' ? '#0055FF' : 'black'}
+                      fillOpacity={pt.label === 'Present Sun' ? 1 : 0.2}
+                    />
+                    <title>{`${pt.label} (${pt.age})`}</title>
+                  </g>
+                ))}
+              </g>
+            )}
+
+            {/* Stars */}
+            {visibleStars.map(star => {
+              const cx = toX(star.temperature);
+              const cy = toY(star.luminosity);
+              const config = CATEGORY_CONFIG[star.category];
+              const isHovered = hovered === star.name;
+              const isSelected = selected?.name === star.name;
+              const r = config.radius + (isHovered ? 1 : 0) + (isSelected ? 2 : 0);
+              const dx = star.labelDx ?? 8;
+              const dy = star.labelDy ?? 4;
+              const anchor = star.labelAnchor ?? 'start';
+
+              return (
+                <g
+                  key={star.name}
+                  style={{ cursor: 'pointer' }}
+                  onMouseEnter={() => setHovered(star.name)}
+                  onMouseLeave={() => setHovered(null)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelected(prev => prev?.name === star.name ? null : star);
                   }}
                 >
-                  {star.name}
-                </text>
-              </g>
-            );
-          })}
+                  {isSelected && (
+                    <circle
+                      cx={cx} cy={cy}
+                      r={r + 4}
+                      fill='none'
+                      stroke={config.color}
+                      strokeOpacity={0.3}
+                      strokeWidth={1.5}
+                    />
+                  )}
+                  <circle
+                    cx={cx} cy={cy}
+                    r={r}
+                    fill={config.color}
+                  />
+                  <text
+                    x={cx + dx}
+                    y={cy + dy}
+                    textAnchor={anchor}
+                    style={{
+                      fontSize: '10px',
+                      fontFamily: 'neue-haas-grotesk-text, sans-serif',
+                      fill: 'rgba(0,0,0,0.5)',
+                    }}
+                  >
+                    {star.name}
+                  </text>
+                </g>
+              );
+            })}
 
-          {/* Axes */}
-          <line
-            x1={MARGIN.left} y1={MARGIN.top}
-            x2={MARGIN.left} y2={VH - MARGIN.bottom}
-            stroke='black' strokeOpacity={0.2} strokeWidth={1}
-          />
-          <line
-            x1={MARGIN.left} y1={VH - MARGIN.bottom}
-            x2={VW - MARGIN.right} y2={VH - MARGIN.bottom}
-            stroke='black' strokeOpacity={0.2} strokeWidth={1}
-          />
+            {/* Axes */}
+            <line
+              x1={MARGIN.left} y1={MARGIN.top}
+              x2={MARGIN.left} y2={vh - MARGIN.bottom}
+              stroke='black' strokeOpacity={0.2} strokeWidth={1}
+            />
+            <line
+              x1={MARGIN.left} y1={vh - MARGIN.bottom}
+              x2={vw - MARGIN.right} y2={vh - MARGIN.bottom}
+              stroke='black' strokeOpacity={0.2} strokeWidth={1}
+            />
 
-          {/* Temperature ticks + labels */}
-          {TEMP_TICKS.map(t => {
-            const x = tX(t);
-            return (
-              <g key={`tt-${t}`}>
-                <line
-                  x1={x} y1={VH - MARGIN.bottom}
-                  x2={x} y2={VH - MARGIN.bottom + 5}
-                  stroke='black' strokeOpacity={0.3} strokeWidth={1}
-                />
+            {/* Temperature ticks + labels */}
+            {TEMP_TICKS.map(t => {
+              const x = toX(t);
+              return (
+                <g key={`tt-${t}`}>
+                  <line
+                    x1={x} y1={vh - MARGIN.bottom}
+                    x2={x} y2={vh - MARGIN.bottom + 5}
+                    stroke='black' strokeOpacity={0.3} strokeWidth={1}
+                  />
+                  <text
+                    x={x} y={vh - MARGIN.bottom + 18}
+                    textAnchor='middle'
+                    style={{ fontSize: '10px', fontFamily: 'input-mono, monospace', fill: 'rgba(0,0,0,0.35)' }}
+                  >
+                    {formatTemp(t)}
+                  </text>
+                </g>
+              );
+            })}
+            <text
+              x={MARGIN.left + pw / 2}
+              y={vh - 4}
+              textAnchor='middle'
+              style={{ fontSize: '10px', fontFamily: 'input-mono, monospace', fill: 'rgba(0,0,0,0.3)' }}
+            >
+              Surface Temperature (K)
+            </text>
+
+            {/* Luminosity ticks + labels */}
+            {LUM_TICKS.map(l => {
+              const y = toY(l);
+              return (
+                <g key={`lt-${l}`}>
+                  <line
+                    x1={MARGIN.left - 5} y1={y}
+                    x2={MARGIN.left} y2={y}
+                    stroke='black' strokeOpacity={0.3} strokeWidth={1}
+                  />
+                  <text
+                    x={MARGIN.left - 8} y={y + 3}
+                    textAnchor='end'
+                    style={{ fontSize: '10px', fontFamily: 'input-mono, monospace', fill: 'rgba(0,0,0,0.35)' }}
+                  >
+                    {formatLum(l)}
+                  </text>
+                </g>
+              );
+            })}
+            <text
+              x={14}
+              y={MARGIN.top + ph / 2}
+              textAnchor='middle'
+              transform={`rotate(-90, 14, ${MARGIN.top + ph / 2})`}
+              style={{ fontSize: '10px', fontFamily: 'input-mono, monospace', fill: 'rgba(0,0,0,0.3)' }}
+            >
+              {'Luminosity (L\u2609)'}
+            </text>
+
+            {/* Spectral class labels */}
+            {SPECTRAL_CLASSES.map(sc => {
+              const x = toX(sc.temp);
+              return (
                 <text
-                  x={x} y={VH - MARGIN.bottom + 18}
+                  key={sc.label}
+                  x={x} y={MARGIN.top - 10}
                   textAnchor='middle'
-                  style={{ fontSize: '10px', fontFamily: 'input-mono, monospace', fill: 'rgba(0,0,0,0.35)' }}
+                  style={{ fontSize: '11px', fontFamily: 'neue-haas-grotesk-display, sans-serif', fontWeight: 700, fill: 'rgba(0,0,0,0.25)' }}
                 >
-                  {formatTemp(t)}
+                  {sc.label}
                 </text>
-              </g>
-            );
-          })}
-          <text
-            x={MARGIN.left + PW / 2}
-            y={VH - 4}
-            textAnchor='middle'
-            style={{ fontSize: '10px', fontFamily: 'input-mono, monospace', fill: 'rgba(0,0,0,0.3)' }}
-          >
-            Surface Temperature (K)
-          </text>
-
-          {/* Luminosity ticks + labels */}
-          {LUM_TICKS.map(l => {
-            const y = lY(l);
-            return (
-              <g key={`lt-${l}`}>
-                <line
-                  x1={MARGIN.left - 5} y1={y}
-                  x2={MARGIN.left} y2={y}
-                  stroke='black' strokeOpacity={0.3} strokeWidth={1}
-                />
-                <text
-                  x={MARGIN.left - 8} y={y + 3}
-                  textAnchor='end'
-                  style={{ fontSize: '10px', fontFamily: 'input-mono, monospace', fill: 'rgba(0,0,0,0.35)' }}
-                >
-                  {formatLum(l)}
-                </text>
-              </g>
-            );
-          })}
-          <text
-            x={14}
-            y={MARGIN.top + PH / 2}
-            textAnchor='middle'
-            transform={`rotate(-90, 14, ${MARGIN.top + PH / 2})`}
-            style={{ fontSize: '10px', fontFamily: 'input-mono, monospace', fill: 'rgba(0,0,0,0.3)' }}
-          >
-            {'Luminosity (L\u2609)'}
-          </text>
-
-          {/* Spectral class labels */}
-          {SPECTRAL_CLASSES.map(sc => {
-            const x = tX(sc.temp);
-            return (
-              <text
-                key={sc.label}
-                x={x} y={MARGIN.top - 10}
-                textAnchor='middle'
-                style={{ fontSize: '11px', fontFamily: 'neue-haas-grotesk-display, sans-serif', fontWeight: 700, fill: 'rgba(0,0,0,0.25)' }}
-              >
-                {sc.label}
-              </text>
-            );
-          })}
-        </svg>
+              );
+            })}
+          </svg>
+        )}
       </div>
 
       {/* Detail panel */}
