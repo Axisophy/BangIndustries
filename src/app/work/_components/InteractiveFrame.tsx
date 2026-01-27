@@ -30,7 +30,7 @@ export function InteractiveFrame({
       <div className="space-y-4">
         <div className={`border border-black/10 overflow-hidden ${className}`}>
           <div
-            className="flex flex-col lg:grid lg:grid-cols-[1fr,280px] xl:grid-cols-[1fr,320px]"
+            className="flex flex-col lg:grid lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_320px]"
             style={heightStyle}
           >
             {/* Visualization area */}
