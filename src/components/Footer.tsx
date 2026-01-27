@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Logo } from './Logo';
 
 const WORK_LINKS = [
   { href: '/work/nuclide-chart', label: 'Chart of Nuclides' },
@@ -31,12 +32,7 @@ export default function Footer() {
           {/* Logo & tagline */}
           <div className="lg:max-w-sm">
             <Link href="/" className="block">
-              <span className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
-                Bang
-              </span>
-              <span className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white/40">
-                Industries
-              </span>
+              <Logo color="white" className="h-8 md:h-10 lg:h-12 w-auto" />
             </Link>
             <p className="mt-4 md:mt-6 text-sm md:text-base text-white/50 leading-relaxed">
               Scientific visualisation and explanation design.
