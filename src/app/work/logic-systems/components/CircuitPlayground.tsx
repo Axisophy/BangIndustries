@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { GateSymbol } from './GateSymbol';
 import { evaluateCircuit, generateTruthTable, PRESET_CIRCUITS } from '../lib/logic';
 import { InteractiveFrame } from '../../_components/InteractiveFrame';
-import { Button } from '../../_components/Controls';
+import { ControlGroup, Button, InfoPanel } from '../../_components/Controls';
 
 export function CircuitPlayground() {
   const [selectedPreset, setSelectedPreset] = useState<string>('and-gate');
@@ -42,27 +42,85 @@ export function CircuitPlayground() {
     }
   }, [selectedPreset, inputGates.length]);
 
-  const controlsContent = (
-    <div className='flex gap-2'>
-      {Object.keys(PRESET_CIRCUITS).map(key => (
-        <Button
-          key={key}
-          onClick={() => setSelectedPreset(key)}
-          variant='secondary'
-          size='sm'
-          active={selectedPreset === key}
-        >
-          {key.replace(/-/g, ' ')}
-        </Button>
-      ))}
-    </div>
+  const sidebarContent = (
+    <>
+      <ControlGroup title='Circuit'>
+        <div className='flex flex-col gap-2'>
+          {Object.keys(PRESET_CIRCUITS).map(key => (
+            <Button
+              key={key}
+              onClick={() => setSelectedPreset(key)}
+              variant='secondary'
+              size='sm'
+              active={selectedPreset === key}
+              className='w-full text-left'
+            >
+              {key.replace(/-/g, ' ')}
+            </Button>
+          ))}
+        </div>
+      </ControlGroup>
+
+      <ControlGroup title='Instructions'>
+        <InfoPanel>
+          Click the input nodes (circles) to toggle between 0 and 1.
+          Watch how signals propagate through the circuit.
+        </InfoPanel>
+      </ControlGroup>
+
+      <ControlGroup title='Truth Table'>
+        <div className='overflow-x-auto'>
+          <table className='w-full text-xs font-mono'>
+            <thead>
+              <tr className='border-b border-black/10'>
+                {inputGates.map((_, i) => (
+                  <th key={`in-${i}`} className='px-4 py-2 text-left text-black/50'>
+                    {String.fromCharCode(65 + i)}
+                  </th>
+                ))}
+                <th className='px-4 py-2 text-left border-l border-black/10'>
+                  {outputGates.length > 1 ? 'Sum' : 'Out'}
+                </th>
+                {outputGates.length > 1 && (
+                  <th className='px-4 py-2 text-left'>Carry</th>
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {truthTable.inputs.map((row, i) => {
+                const isCurrentRow = row.every((v, j) => v === inputValues[j]);
+                return (
+                  <tr
+                    key={i}
+                    className={`border-b border-black/5 ${isCurrentRow ? 'bg-[var(--color-blue)]/10' : ''}`}
+                  >
+                    {row.map((v, j) => (
+                      <td key={j} className='px-4 py-2'>{v ? '1' : '0'}</td>
+                    ))}
+                    <td className={`px-4 py-2 border-l border-black/10 font-bold ${
+                      truthTable.outputs[i] ? 'text-[var(--color-blue)]' : ''
+                    }`}>
+                      {truthTable.outputs[i] ? '1' : '0'}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </ControlGroup>
+    </>
   );
 
   return (
-    <InteractiveFrame layout='compact' controls={controlsContent}>
+    <InteractiveFrame
+      layout='sidebar'
+      sidebar={sidebarContent}
+      caption='Logic gates are the atoms of computation. AND outputs 1 only when both inputs are 1. OR outputs 1 if either input is 1. From these primitives, you can build any computable function — including the computer you&apos;re using right now.'
+    >
       {/* Circuit diagram */}
-      <div className='bg-white p-4'>
-        <svg viewBox='0 0 500 280' className='w-full h-auto'>
+      <div className='bg-white p-4 flex items-center justify-center min-h-[300px]'>
+        <svg viewBox='0 0 500 280' className='w-full h-auto max-w-[500px]'>
           {/* Connections */}
           {circuit.connections.map((conn, i) => {
             const fromGate = circuit.gates.find(g => g.id === conn.from);
@@ -81,7 +139,7 @@ export function CircuitPlayground() {
                 key={i}
                 d={`M ${fromX} ${fromY} C ${fromX + 30} ${fromY}, ${toX - 30} ${toY}, ${toX} ${toY}`}
                 fill='none'
-                stroke={value ? '#0055FF' : '#ccc'}
+                stroke={value ? 'var(--color-blue)' : '#ccc'}
                 strokeWidth={value ? 2 : 1.5}
               />
             );
@@ -132,54 +190,6 @@ export function CircuitPlayground() {
             </text>
           ))}
         </svg>
-
-        <p className='text-xs text-black/50 mt-4 text-center'>
-          Click the input nodes (circles) to toggle between 0 and 1
-        </p>
-      </div>
-
-      {/* Truth table */}
-      <div className='bg-white p-4'>
-        <h3 className='text-sm font-bold mb-4'>Truth Table</h3>
-        <div className='overflow-x-auto'>
-          <table className='w-full text-xs font-mono'>
-            <thead>
-              <tr className='border-b border-black/10'>
-                {inputGates.map((_, i) => (
-                  <th key={`in-${i}`} className='px-4 py-2 text-left text-black/50'>
-                    {String.fromCharCode(65 + i)}
-                  </th>
-                ))}
-                <th className='px-4 py-2 text-left border-l border-black/10'>
-                  {outputGates.length > 1 ? 'Sum' : 'Out'}
-                </th>
-                {outputGates.length > 1 && (
-                  <th className='px-4 py-2 text-left'>Carry</th>
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {truthTable.inputs.map((row, i) => {
-                const isCurrentRow = row.every((v, j) => v === inputValues[j]);
-                return (
-                  <tr
-                    key={i}
-                    className={`border-b border-black/5 ${isCurrentRow ? 'bg-[#0055FF]/10' : ''}`}
-                  >
-                    {row.map((v, j) => (
-                      <td key={j} className='px-4 py-2'>{v ? '1' : '0'}</td>
-                    ))}
-                    <td className={`px-4 py-2 border-l border-black/10 font-bold ${
-                      truthTable.outputs[i] ? 'text-[#0055FF]' : ''
-                    }`}>
-                      {truthTable.outputs[i] ? '1' : '0'}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
       </div>
     </InteractiveFrame>
   );

@@ -17,7 +17,11 @@ export default function LogicSystemsPage() {
             How logic circuits become learning machines
           </p>
           <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
-            Machine learning can seem like magic - black boxes that somehow learn to recognise faces, translate languages, or play games. But the foundations are surprisingly concrete. This interactive explainer builds from Boolean logic gates (AND, OR, NOT) through decision boundaries to neural networks, showing how simple rules compose into learning systems.
+            Machine learning can feel like magic — or like impenetrable mathematics.
+            Neither is true. This interactive guide builds from something concrete
+            (logic gates, the AND/OR/NOT you might remember from school) to something
+            powerful (neural networks that can learn almost any pattern). The key
+            insight: they&apos;re all doing the same thing — dividing space into regions.
           </p>
           {/* Tags */}
           <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
@@ -34,33 +38,44 @@ export default function LogicSystemsPage() {
         <div className='border border-black/10 bg-black/5 aspect-[2/1] flex items-center justify-center'>
           <span className='text-black/30 text-sm font-mono'>logic_to_ml_progression.png</span>
         </div>
+        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
+          The same classification problem solved three ways: Boolean logic (sharp quadrants),
+          decision tree (axis-aligned rectangles), neural network (smooth curves).
+        </p>
       </section>
 
       {/* Part A: Boolean Logic */}
       <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
-        <h2 className='text-4xl font-bold tracking-tight mb-6'>Part A: Boolean Logic</h2>
-        <CircuitPlayground />
-        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
-          Logic gates are the atoms of computation. Click the inputs to toggle between 0 and 1, and watch how signals propagate through the circuit. The truth table shows all possible input combinations and their outputs.
+        <h2 className='text-4xl font-bold tracking-tight mb-4'>Part A: Boolean Logic</h2>
+        <p className='text-black/70 leading-relaxed max-w-3xl mb-8'>
+          Start here. Logic gates are simple: AND outputs 1 only if both inputs are 1.
+          OR outputs 1 if either is 1. NOT flips the value. Click the inputs below
+          to see how signals flow through a circuit.
         </p>
+        <CircuitPlayground />
       </section>
 
       {/* Part B: Decision Boundaries */}
       <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
-        <h2 className='text-4xl font-bold tracking-tight mb-6'>Part B: Decision Boundaries</h2>
-        <DecisionBoundary />
-        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
-          Classifiers divide feature space into regions. Try different datasets and models to see how the decision boundary changes shape. Notice how some models struggle with certain patterns - linear classifiers cannot solve XOR.
+        <h2 className='text-4xl font-bold tracking-tight mb-4'>Part B: Decision Boundaries</h2>
+        <p className='text-black/70 leading-relaxed max-w-3xl mb-8'>
+          Now forget the rules. Instead of telling a computer exactly what to do,
+          we show it examples and let it figure out the pattern. The coloured regions
+          show what the model has learned — where it would classify new data points.
         </p>
+        <DecisionBoundary />
       </section>
 
       {/* The Bridge */}
       <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
-        <h2 className='text-4xl font-bold tracking-tight mb-6'>The Bridge: From Logic to Learning</h2>
-        <LogicToMLBridge />
-        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
-          The progression from Boolean logic to neural networks is one of increasing flexibility. Logic gates implement fixed rules. Decision trees learn axis-aligned splits. Neural networks learn smooth, arbitrary boundaries - but the core operation (combining inputs to produce outputs) remains the same.
+        <h2 className='text-4xl font-bold tracking-tight mb-4'>The Bridge: From Logic to Learning</h2>
+        <p className='text-black/70 leading-relaxed max-w-3xl mb-8'>
+          Here&apos;s the connection: logic gates create sharp, hand-coded boundaries.
+          Decision trees learn chunky, axis-aligned splits. Neural networks learn
+          smooth curves. Each step adds flexibility — and the ability to learn
+          from data rather than being programmed by hand.
         </p>
+        <LogicToMLBridge />
       </section>
 
       {/* Content sections */}
@@ -87,13 +102,13 @@ export default function LogicSystemsPage() {
               </h2>
               <div className='space-y-4 text-black/70 leading-relaxed'>
                 <p>
-                  Boolean logic is the foundation of all digital computation. AND gates output 1 only if both inputs are 1. OR gates output 1 if either input is 1. NOT gates flip the input. From these primitives, you can build any computable function - including arithmetic, memory, and entire computers.
+                  Boolean logic is the foundation of all digital computation. AND gates output 1 only if both inputs are 1. OR gates output 1 if either input is 1. NOT gates flip the input. From these primitives, you can build any computable function — including arithmetic, memory, and entire computers.
                 </p>
                 <p>
-                  The key insight connecting logic to machine learning is the concept of a decision boundary. A Boolean function divides its input space into regions that map to 0 or 1. A machine learning classifier does the same thing - but instead of the boundary being hand-designed, it is learned from examples.
+                  The key insight connecting logic to machine learning is the concept of a decision boundary. A Boolean function divides its input space into regions that map to 0 or 1. A machine learning classifier does the same thing — but instead of the boundary being hand-designed, it is learned from examples.
                 </p>
                 <p>
-                  The simplest ML classifier (logistic regression) learns a single straight line to separate classes. More complex models (polynomial features, neural networks) learn curved or wiggly boundaries. The tradeoff is always between flexibility and the risk of overfitting - memorising the training data rather than learning the underlying pattern.
+                  The simplest ML classifier (logistic regression) learns a single straight line to separate classes. More complex models (polynomial features, neural networks) learn curved or wiggly boundaries. The tradeoff is always between flexibility and the risk of overfitting — memorising the training data rather than learning the underlying pattern.
                 </p>
               </div>
             </div>
@@ -114,7 +129,7 @@ export default function LogicSystemsPage() {
                   The decision boundary visualiser plots training points in 2D and shows how different classifiers carve up the space. Sliders let users adjust regularisation (for linear models), k (for k-NN), or kernel width (for RBF) to see underfitting and overfitting in action.
                 </p>
                 <p>
-                  The bridge diagram shows the conceptual progression from fixed logic to learned rules to smooth approximations, emphasising that neural networks are not magic - they are compositions of simple functions, just like logic circuits.
+                  The bridge diagram shows the conceptual progression from fixed logic to learned rules to smooth approximations, emphasising that neural networks are not magic — they are compositions of simple functions, just like logic circuits.
                 </p>
               </div>
             </div>
@@ -125,7 +140,7 @@ export default function LogicSystemsPage() {
                 Adaptability
               </h2>
               <p className='text-black/70 leading-relaxed'>
-                The pedagogical pattern here - start concrete, build to abstract, show the connections - applies to any complex system. We have used similar approaches to explain cryptography (from XOR to public key), compression (from run-length to neural codecs), and optimisation (from gradient descent to modern optimisers).
+                The pedagogical pattern here — start concrete, build to abstract, show the connections — applies to any complex system. We have used similar approaches to explain cryptography (from XOR to public key), compression (from run-length to neural codecs), and optimisation (from gradient descent to modern optimisers).
               </p>
             </div>
 

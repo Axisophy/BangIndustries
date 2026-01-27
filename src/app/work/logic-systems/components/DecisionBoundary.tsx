@@ -11,7 +11,7 @@ import {
   ClassifierResult
 } from '../lib/classifiers';
 import { InteractiveFrame } from '../../_components/InteractiveFrame';
-import { Select, Slider, Button, Readout } from '../../_components/Controls';
+import { ControlGroup, Select, Slider, Button, Readout, InfoPanel } from '../../_components/Controls';
 
 export function DecisionBoundary() {
   const [datasetType, setDatasetType] = useState<'linear' | 'circular' | 'xor' | 'moons'>('linear');
@@ -69,72 +69,96 @@ export function DecisionBoundary() {
     switch (modelType) {
       case 'linear':
       case 'polynomial':
-        return `Regularization: ${(parameter * 0.1).toFixed(2)}`;
+        return 'Regularization';
       case 'knn':
-        return `k = ${Math.max(1, Math.round(parameter * 20))}`;
+        return 'k (neighbors)';
       case 'rbf':
-        return `\u03B3 = ${(parameter * 5).toFixed(1)}`;
+        return 'Gamma';
+    }
+  };
+
+  const getParameterDisplay = () => {
+    switch (modelType) {
+      case 'linear':
+      case 'polynomial':
+        return (parameter * 0.1).toFixed(2);
+      case 'knn':
+        return String(Math.max(1, Math.round(parameter * 20)));
+      case 'rbf':
+        return (parameter * 5).toFixed(1);
     }
   };
 
   const sidebarContent = (
     <>
-      <Select
-        label='Dataset'
-        value={datasetType}
-        options={[
-          { value: 'linear', label: 'Linearly separable' },
-          { value: 'circular', label: 'Circular' },
-          { value: 'xor', label: 'XOR pattern' },
-          { value: 'moons', label: 'Two moons' },
-        ]}
-        onChange={setDatasetType}
-      />
+      <ControlGroup title='Dataset'>
+        <Select
+          value={datasetType}
+          options={[
+            { value: 'linear', label: 'Linearly separable' },
+            { value: 'circular', label: 'Circular (inner/outer)' },
+            { value: 'xor', label: 'XOR pattern' },
+            { value: 'moons', label: 'Two moons' },
+          ]}
+          onChange={setDatasetType}
+        />
+      </ControlGroup>
 
-      <Select
-        label='Model'
-        value={modelType}
-        options={[
-          { value: 'linear', label: 'Linear (Logistic)' },
-          { value: 'polynomial', label: 'Polynomial' },
-          { value: 'knn', label: 'k-Nearest Neighbors' },
-          { value: 'rbf', label: 'RBF Kernel' },
-        ]}
-        onChange={(v) => setModelType(v as ModelType)}
-      />
+      <ControlGroup title='Model'>
+        <Select
+          value={modelType}
+          options={[
+            { value: 'linear', label: 'Linear (straight line)' },
+            { value: 'polynomial', label: 'Polynomial (curves)' },
+            { value: 'knn', label: 'k-Nearest Neighbors' },
+            { value: 'rbf', label: 'RBF Kernel (smooth blobs)' },
+          ]}
+          onChange={(v) => setModelType(v as ModelType)}
+        />
+      </ControlGroup>
 
-      <Slider
-        label={getParameterLabel()}
-        value={parameter}
-        onChange={setParameter}
-        min={0.05}
-        max={1}
-        step={0.05}
-      />
+      <ControlGroup>
+        <Slider
+          label={getParameterLabel()}
+          value={parameter}
+          onChange={setParameter}
+          min={0.05}
+          max={1}
+          step={0.05}
+          formatValue={() => getParameterDisplay()}
+        />
+      </ControlGroup>
 
       <Button variant='secondary' onClick={() => setSeed(s => s + 1)}>
         New data
       </Button>
+
+      <ControlGroup title='What you&apos;re seeing'>
+        <InfoPanel>
+          The background colour shows what the model would predict for any
+          new point in that region. Blue regions predict blue class.
+          Pink regions predict pink class.
+        </InfoPanel>
+      </ControlGroup>
 
       <Readout
         label='Accuracy'
         value={`${(classifier.accuracy * 100).toFixed(0)}%`}
       />
 
-      <div className='text-xs text-black/60 space-y-2'>
-        <p><strong>Linear:</strong> Single straight boundary. Fast but limited.</p>
-        <p><strong>Polynomial:</strong> Curved boundary. Can overfit with high degree.</p>
-        <p><strong>k-NN:</strong> Local voting. Wiggly boundaries. Slow at prediction.</p>
-        <p><strong>RBF:</strong> Smooth local regions. Controls locality.</p>
-      </div>
+      <InfoPanel title='Try this'>
+        Switch to <strong>XOR pattern</strong> with a <strong>Linear</strong> model.
+        The accuracy drops to ~50% — no straight line can separate the classes.
+        Now try <strong>Polynomial</strong> or <strong>k-NN</strong>.
+      </InfoPanel>
 
-      <div className='flex gap-2'>
-        <div className='flex items-center gap-1'>
-          <div className='w-4 h-4 bg-[#0055FF]' />
+      <div className='flex gap-4'>
+        <div className='flex items-center gap-2'>
+          <div className='w-4 h-4 bg-[var(--color-blue)]' />
           <span className='text-xs'>Class 1</span>
         </div>
-        <div className='flex items-center gap-1'>
-          <div className='w-4 h-4 bg-[#FF0055]' />
+        <div className='flex items-center gap-2'>
+          <div className='w-4 h-4 bg-[var(--color-pink)]' />
           <span className='text-xs'>Class 0</span>
         </div>
       </div>
@@ -142,8 +166,12 @@ export function DecisionBoundary() {
   );
 
   return (
-    <InteractiveFrame layout='sidebar' sidebar={sidebarContent}>
-      <div className='bg-white'>
+    <InteractiveFrame
+      layout='sidebar'
+      sidebar={sidebarContent}
+      caption='Classifiers divide feature space into regions. A linear model can only draw straight boundaries. Some patterns need curves — and some need the flexibility of neural networks.'
+    >
+      <div className='bg-white p-4'>
         <svg viewBox={`0 0 ${width} ${height}`} className='w-full h-auto'>
           {/* Decision boundary as colored grid */}
           {boundaryGrid.map((row, i) =>
@@ -182,7 +210,7 @@ export function DecisionBoundary() {
               cx={scaleX(point.x)}
               cy={scaleY(point.y)}
               r={5}
-              fill={point.label === 1 ? '#0055FF' : '#FF0055'}
+              fill={point.label === 1 ? 'var(--color-blue)' : 'var(--color-pink)'}
               stroke='white'
               strokeWidth={1.5}
             />
