@@ -6,6 +6,15 @@ import {
   formatTime, formatVelocity, formatDistance,
   EARTH, SUN
 } from '../lib/physics';
+import { InteractiveFrame } from '../../_components/InteractiveFrame';
+import {
+  Button,
+  Slider,
+  Select,
+  Toggle,
+  ReadoutGrid,
+  ControlGroup,
+} from '../../_components/Controls';
 
 type CentralBody = 'earth' | 'sun';
 
@@ -50,87 +59,80 @@ export function TransferDesigner() {
   const vcx = viewSize / 2;
   const vcy = viewSize / 2;
 
-  return (
-    <div className="space-y-6">
+  const sidebarContent = (
+    <div className='space-y-4'>
       {/* Presets */}
-      <div className="flex flex-wrap gap-2">
-        {Object.entries(PRESETS).map(([key, preset]) => (
-          <button
-            key={key}
-            onClick={() => applyPreset(key as keyof typeof PRESETS)}
-            className="px-3 py-1 text-xs font-mono bg-black/5 hover:bg-black/10 transition-colors"
-          >
-            {preset.name}
-          </button>
-        ))}
-      </div>
-
-      {/* Controls */}
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div>
-            <label className="text-xs font-mono text-black/50 block mb-1">
-              Departure orbit: {formatDistance(r1)} ({formatDistance(r1 - bodyRadius)} altitude)
-            </label>
-            <input
-              type="range"
-              min={bodyRadius + 200}
-              max={centralBody === 'earth' ? 100000 : 300000000}
-              step={centralBody === 'earth' ? 100 : 1000000}
-              value={r1}
-              onChange={e => setR1(parseFloat(e.target.value))}
-              className="w-full"
-            />
-          </div>
-
-          <div>
-            <label className="text-xs font-mono text-black/50 block mb-1">
-              Arrival orbit: {formatDistance(r2)}
-            </label>
-            <input
-              type="range"
-              min={r1 * 1.1}
-              max={centralBody === 'earth' ? 500000 : 800000000}
-              step={centralBody === 'earth' ? 1000 : 10000000}
-              value={r2}
-              onChange={e => setR2(parseFloat(e.target.value))}
-              className="w-full"
-            />
-          </div>
-
-          <div className="flex items-center gap-4">
-            <label className="text-xs font-mono text-black/50">Central body:</label>
-            <select
-              value={centralBody}
-              onChange={e => setCentralBody(e.target.value as CentralBody)}
-              className="px-2 py-1 text-sm border border-black/10"
+      <ControlGroup title='Presets'>
+        <div className='flex flex-wrap gap-2'>
+          {Object.entries(PRESETS).map(([key, preset]) => (
+            <Button
+              key={key}
+              variant='secondary'
+              size='sm'
+              onClick={() => applyPreset(key as keyof typeof PRESETS)}
             >
-              <option value="earth">Earth</option>
-              <option value="sun">Sun</option>
-            </select>
-          </div>
-
-          <label className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={showBielliptic}
-              onChange={e => setShowBielliptic(e.target.checked)}
-            />
-            <span>Compare bi-elliptic transfer</span>
-            {biellipticBetter && <span className="text-xs text-green-600">(more efficient!)</span>}
-          </label>
+              {preset.name}
+            </Button>
+          ))}
         </div>
+      </ControlGroup>
 
-        {/* Visualization */}
-        <div className="border border-black/10 bg-[#0a0a0a] aspect-square">
-          <svg viewBox={`0 0 ${viewSize} ${viewSize}`} className="w-full h-full">
+      {/* Orbits */}
+      <ControlGroup title='Orbits'>
+        <Slider
+          label='Departure orbit'
+          value={r1}
+          onChange={setR1}
+          min={bodyRadius + 200}
+          max={centralBody === 'earth' ? 100000 : 300000000}
+          step={centralBody === 'earth' ? 100 : 1000000}
+          formatValue={(v) => `${formatDistance(v)} (${formatDistance(v - bodyRadius)} alt)`}
+        />
+        <Slider
+          label='Arrival orbit'
+          value={r2}
+          onChange={setR2}
+          min={r1 * 1.1}
+          max={centralBody === 'earth' ? 500000 : 800000000}
+          step={centralBody === 'earth' ? 1000 : 10000000}
+          formatValue={(v) => formatDistance(v)}
+        />
+      </ControlGroup>
+
+      {/* Central body */}
+      <Select
+        label='Central body'
+        value={centralBody}
+        onChange={setCentralBody}
+        options={[
+          { value: 'earth', label: 'Earth' },
+          { value: 'sun', label: 'Sun' },
+        ]}
+      />
+
+      {/* Bi-elliptic toggle */}
+      <Toggle
+        label='Compare bi-elliptic transfer'
+        checked={showBielliptic}
+        onChange={setShowBielliptic}
+        description={biellipticBetter ? 'More efficient for this orbit ratio' : undefined}
+      />
+    </div>
+  );
+
+  return (
+    <div className='space-y-8'>
+      <InteractiveFrame layout='sidebar' sidebar={sidebarContent}>
+        {/* SVG visualization */}
+        <div className='bg-[#0a0a0a] aspect-square'>
+          <svg viewBox={`0 0 ${viewSize} ${viewSize}`} className='w-full h-full'>
             {/* Departure orbit */}
             <circle
               cx={vcx}
               cy={vcy}
               r={r1 * scale}
-              fill="none"
-              stroke="#4A90D9"
+              fill='none'
+              stroke='#4A90D9'
               strokeWidth={1.5}
             />
 
@@ -139,8 +141,8 @@ export function TransferDesigner() {
               cx={vcx}
               cy={vcy}
               r={r2 * scale}
-              fill="none"
-              stroke="#00D4AA"
+              fill='none'
+              stroke='#00D4AA'
               strokeWidth={1.5}
             />
 
@@ -150,8 +152,8 @@ export function TransferDesigner() {
               cy={vcy}
               rx={hohmann.transferOrbit.semiMajorAxis * scale}
               ry={hohmann.transferOrbit.semiMajorAxis * Math.sqrt(1 - hohmann.transferOrbit.eccentricity ** 2) * scale}
-              fill="none"
-              stroke="#FF6B35"
+              fill='none'
+              stroke='#FF6B35'
               strokeWidth={2}
               transform={`rotate(180, ${vcx}, ${vcy})`}
               opacity={0.8}
@@ -164,77 +166,61 @@ export function TransferDesigner() {
                 cy={vcy}
                 rx={bielliptic.transferOrbit.semiMajorAxis * scale}
                 ry={bielliptic.transferOrbit.semiMajorAxis * Math.sqrt(1 - bielliptic.transferOrbit.eccentricity ** 2) * scale}
-                fill="none"
-                stroke="#FF0055"
+                fill='none'
+                stroke='#FF0055'
                 strokeWidth={1.5}
-                strokeDasharray="4,2"
+                strokeDasharray='4,2'
                 transform={`rotate(180, ${vcx}, ${vcy})`}
                 opacity={0.6}
               />
             )}
 
             {/* Central body */}
-            <circle cx={vcx} cy={vcy} r={Math.max(bodyRadius * scale, 4)} fill="#FDB813" />
+            <circle cx={vcx} cy={vcy} r={Math.max(bodyRadius * scale, 4)} fill='#FDB813' />
           </svg>
         </div>
-      </div>
+      </InteractiveFrame>
 
       {/* Results */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="border border-black/10 p-4 bg-[#FF6B35]/5">
-          <h3 className="font-bold text-sm mb-4">Hohmann Transfer</h3>
-          <div className="grid grid-cols-2 gap-4 text-sm">
-            <div>
-              <div className="text-black/40 text-xs">Departure {'\u0394'}v</div>
-              <div className="font-mono">{formatVelocity(hohmann.deltaV1)}</div>
-            </div>
-            <div>
-              <div className="text-black/40 text-xs">Arrival {'\u0394'}v</div>
-              <div className="font-mono">{formatVelocity(hohmann.deltaV2)}</div>
-            </div>
-            <div>
-              <div className="text-black/40 text-xs">Total {'\u0394'}v</div>
-              <div className="font-mono font-bold">{formatVelocity(hohmann.totalDeltaV)}</div>
-            </div>
-            <div>
-              <div className="text-black/40 text-xs">Transfer time</div>
-              <div className="font-mono">{formatTime(hohmann.transferTime)}</div>
-            </div>
-          </div>
+      <div className='grid md:grid-cols-2 gap-4'>
+        <div className='border border-black/10 p-4 bg-black/5'>
+          <h3 className='font-bold text-sm mb-4'>Hohmann Transfer</h3>
+          <ReadoutGrid
+            columns={2}
+            size='sm'
+            items={[
+              { label: `Departure \u0394v`, value: formatVelocity(hohmann.deltaV1) },
+              { label: `Arrival \u0394v`, value: formatVelocity(hohmann.deltaV2) },
+              { label: `Total \u0394v`, value: formatVelocity(hohmann.totalDeltaV) },
+              { label: 'Transfer time', value: formatTime(hohmann.transferTime) },
+            ]}
+          />
         </div>
 
         {showBielliptic && (
-          <div className={`border p-4 ${biellipticBetter ? 'border-green-500 bg-green-50' : 'border-black/10 bg-black/5'}`}>
-            <h3 className="font-bold text-sm mb-4">
+          <div className={`border p-4 ${biellipticBetter ? 'border-[var(--color-lime)] bg-[var(--color-lime)]' : 'border-black/10 bg-black/5'}`}>
+            <h3 className='font-bold text-sm mb-4'>
               Bi-elliptic Transfer
-              {biellipticBetter && <span className="text-green-600 text-xs ml-2">RECOMMENDED</span>}
+              {biellipticBetter && <span className='text-black text-xs ml-2'>RECOMMENDED</span>}
             </h3>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <div className="text-black/40 text-xs">Burn 1 {'\u0394'}v</div>
-                <div className="font-mono">{formatVelocity(bielliptic.deltaV1)}</div>
-              </div>
-              <div>
-                <div className="text-black/40 text-xs">Burn 2 {'\u0394'}v</div>
-                <div className="font-mono">{formatVelocity(bielliptic.deltaV2)}</div>
-              </div>
-              <div>
-                <div className="text-black/40 text-xs">Burn 3 {'\u0394'}v</div>
-                <div className="font-mono">{formatVelocity(bielliptic.deltaV3)}</div>
-              </div>
-              <div>
-                <div className="text-black/40 text-xs">Total {'\u0394'}v</div>
-                <div className="font-mono font-bold">{formatVelocity(bielliptic.totalDeltaV)}</div>
-              </div>
-            </div>
-            <div className="mt-2 text-xs text-black/50">
+            <ReadoutGrid
+              columns={2}
+              size='sm'
+              items={[
+                { label: `Burn 1 \u0394v`, value: formatVelocity(bielliptic.deltaV1) },
+                { label: `Burn 2 \u0394v`, value: formatVelocity(bielliptic.deltaV2) },
+                { label: `Burn 3 \u0394v`, value: formatVelocity(bielliptic.deltaV3) },
+                { label: `Total \u0394v`, value: formatVelocity(bielliptic.totalDeltaV) },
+              ]}
+            />
+            <div className='mt-2 text-xs text-black/50'>
               Transfer time: {formatTime(bielliptic.transferTime)}
             </div>
           </div>
         )}
       </div>
 
-      <div className="text-xs text-black/50">
+      <div className='text-xs text-black/50'>
         Orbit ratio: {ratio.toFixed(1)}:1.
         {ratio > 11.94
           ? ' Bi-elliptic transfer requires less \u0394v than Hohmann (at the cost of longer travel time).'

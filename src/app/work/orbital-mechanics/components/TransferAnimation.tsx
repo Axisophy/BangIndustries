@@ -5,6 +5,10 @@ import {
   EARTH, MOON, hohmannTransfer, getTransferState,
   formatTime, formatVelocity, formatDistance
 } from '../lib/physics';
+import { InteractiveFrame } from '../../_components/InteractiveFrame';
+import {
+  Button, Slider, Toggle, ReadoutGrid, ControlGroup
+} from '../../_components/Controls';
 
 export function TransferAnimation() {
   const [timeProgress, setTimeProgress] = useState(0);  // 0 to 1
@@ -65,18 +69,70 @@ export function TransferAnimation() {
   const moonR = Math.max(MOON.radius * scale, 6);
   const moonOrbitR = MOON.orbitRadius! * scale;
 
+  const sidebarContent = (
+    <>
+      <ControlGroup title='Playback'>
+        <div className='flex gap-2'>
+          <Button
+            variant='primary'
+            onClick={() => setIsPlaying(!isPlaying)}
+          >
+            {isPlaying ? 'Pause' : 'Play'}
+          </Button>
+          <Button
+            variant='secondary'
+            onClick={() => { setTimeProgress(0); setIsPlaying(false); }}
+          >
+            Reset
+          </Button>
+        </div>
+        <Slider
+          label='Time'
+          value={timeProgress}
+          onChange={setTimeProgress}
+          min={0}
+          max={1}
+          step={0.001}
+          formatValue={(v) => `${Math.round(v * 100)}%`}
+        />
+      </ControlGroup>
+
+      <ControlGroup title='Display'>
+        <Toggle
+          label='Show naive path'
+          checked={showNaivePath}
+          onChange={setShowNaivePath}
+          description='Compare with straight-line trajectory'
+        />
+      </ControlGroup>
+
+      <ControlGroup title='Telemetry'>
+        <ReadoutGrid
+          columns={2}
+          size='sm'
+          items={[
+            { label: 'Velocity', value: formatVelocity(spacecraft.v) },
+            { label: 'Altitude', value: formatDistance(spacecraft.altitude) },
+            { label: 'Distance to Moon', value: formatDistance(spacecraft.distanceToMoon) },
+            { label: 'Mission Time', value: `T+${formatTime(timeProgress * transfer.transferTime)}` },
+          ]}
+        />
+      </ControlGroup>
+    </>
+  );
+
   return (
-    <div className="space-y-4">
-      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto bg-[#0a0a0a]">
+    <InteractiveFrame layout='sidebar' sidebar={sidebarContent}>
+      <svg viewBox={`0 0 ${width} ${height}`} className='w-full h-auto bg-[#0a0a0a]'>
         {/* Moon&apos;s orbit */}
         <circle
           cx={cx}
           cy={cy}
           r={moonOrbitR}
-          fill="none"
-          stroke="#222"
+          fill='none'
+          stroke='#222'
           strokeWidth={1}
-          strokeDasharray="4,4"
+          strokeDasharray='4,4'
         />
 
         {/* LEO orbit */}
@@ -84,8 +140,8 @@ export function TransferAnimation() {
           cx={cx}
           cy={cy}
           r={r1 * scale}
-          fill="none"
-          stroke="#4A90D9"
+          fill='none'
+          stroke='#4A90D9'
           strokeWidth={1}
           opacity={0.5}
         />
@@ -97,9 +153,9 @@ export function TransferAnimation() {
             y1={cy}
             x2={cx - moonOrbitR}
             y2={cy}
-            stroke="#FF0055"
+            stroke='#FF0055'
             strokeWidth={1}
-            strokeDasharray="4,4"
+            strokeDasharray='4,4'
             opacity={0.5}
           />
         )}
@@ -119,8 +175,8 @@ export function TransferAnimation() {
             }
             return points.join(' ');
           })()}
-          fill="none"
-          stroke="#FF6B35"
+          fill='none'
+          stroke='#FF6B35'
           strokeWidth={2}
           opacity={0.3}
         />
@@ -140,21 +196,21 @@ export function TransferAnimation() {
             }
             return points.join(' ');
           })()}
-          fill="none"
-          stroke="#FF6B35"
+          fill='none'
+          stroke='#FF6B35'
           strokeWidth={2}
         />
 
         {/* Earth */}
-        <circle cx={cx} cy={cy} r={earthR} fill="#4A90D9" />
+        <circle cx={cx} cy={cy} r={earthR} fill='#4A90D9' />
 
         {/* Moon */}
-        <circle cx={cx - moonOrbitR} cy={cy} r={moonR} fill="#C4C4C4" />
+        <circle cx={cx - moonOrbitR} cy={cy} r={moonR} fill='#C4C4C4' />
 
         {/* Spacecraft */}
         <g transform={`translate(${cx + spacecraft.x * scale}, ${cy - spacecraft.y * scale})`}>
-          <circle r={5} fill="#FFD700" />
-          <circle r={8} fill="none" stroke="#FFD700" strokeWidth={1} opacity={0.5} />
+          <circle r={5} fill='#FFD700' />
+          <circle r={8} fill='none' stroke='#FFD700' strokeWidth={1} opacity={0.5} />
         </g>
 
         {/* Distance line to Moon */}
@@ -163,89 +219,21 @@ export function TransferAnimation() {
           y1={cy - spacecraft.y * scale}
           x2={cx - moonOrbitR}
           y2={cy}
-          stroke="#666"
+          stroke='#666'
           strokeWidth={0.5}
-          strokeDasharray="2,2"
+          strokeDasharray='2,2'
         />
 
         {/* TLI marker */}
         <g transform={`translate(${cx + r1 * scale + 5}, ${cy - 15})`}>
-          <text fill="#FF6B35" fontSize="9" fontFamily="monospace">TLI</text>
+          <text fill='#FF6B35' fontSize='9' fontFamily='monospace'>TLI</text>
         </g>
 
         {/* LOI marker */}
         <g transform={`translate(${cx - moonOrbitR + 15}, ${cy - 15})`}>
-          <text fill="#00D4AA" fontSize="9" fontFamily="monospace">LOI</text>
+          <text fill='#00D4AA' fontSize='9' fontFamily='monospace'>LOI</text>
         </g>
       </svg>
-
-      {/* Controls */}
-      <div className="flex items-center gap-4">
-        <button
-          onClick={() => setIsPlaying(!isPlaying)}
-          className={`px-4 py-2 text-sm font-mono transition-colors ${
-            isPlaying
-              ? 'bg-[#FF6B35] text-white'
-              : 'bg-[#0055FF] text-white'
-          }`}
-        >
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
-
-        <input
-          type="range"
-          min={0}
-          max={1}
-          step={0.001}
-          value={timeProgress}
-          onChange={e => setTimeProgress(parseFloat(e.target.value))}
-          className="flex-1"
-        />
-
-        <button
-          onClick={() => { setTimeProgress(0); setIsPlaying(false); }}
-          className="px-4 py-2 text-sm font-mono bg-black/10 hover:bg-black/20 transition-colors"
-        >
-          Reset
-        </button>
-
-        <label className="flex items-center gap-2 text-sm">
-          <input
-            type="checkbox"
-            checked={showNaivePath}
-            onChange={e => setShowNaivePath(e.target.checked)}
-          />
-          <span className="text-black/60">Show &quot;straight line&quot;</span>
-        </label>
-      </div>
-
-      {/* Telemetry */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-black/5 p-4">
-          <div className="text-xs text-black/40 font-mono">Mission Time</div>
-          <div className="text-lg font-mono font-bold">
-            T+{formatTime(timeProgress * transfer.transferTime)}
-          </div>
-        </div>
-        <div className="bg-black/5 p-4">
-          <div className="text-xs text-black/40 font-mono">Velocity</div>
-          <div className="text-lg font-mono font-bold">
-            {formatVelocity(spacecraft.v)}
-          </div>
-        </div>
-        <div className="bg-black/5 p-4">
-          <div className="text-xs text-black/40 font-mono">Altitude</div>
-          <div className="text-lg font-mono font-bold">
-            {formatDistance(spacecraft.altitude)}
-          </div>
-        </div>
-        <div className="bg-black/5 p-4">
-          <div className="text-xs text-black/40 font-mono">Distance to Moon</div>
-          <div className="text-lg font-mono font-bold">
-            {formatDistance(spacecraft.distanceToMoon)}
-          </div>
-        </div>
-      </div>
-    </div>
+    </InteractiveFrame>
   );
 }

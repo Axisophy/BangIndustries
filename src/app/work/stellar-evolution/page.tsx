@@ -9,19 +9,19 @@ export default function StellarEvolutionPage() {
   return (
     <main className='min-h-screen bg-white'>
       {/* Hero */}
-      <section className='px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16'>
-        <div className='max-w-[75%]'>
-          <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]'>
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
+        <div className='max-w-full lg:max-w-[75%]'>
+          <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
             The Main Sequence and Beyond
           </h1>
-          <p className='text-2xl font-normal text-black/70 mt-4'>
+          <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
             Mapping stellar evolution with GAIA data
           </p>
-          <p className='text-base text-black/70 max-w-3xl mt-12 mb-12'>
+          <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
             The Hertzsprung-Russell diagram is astronomy&apos;s most powerful classification tool - a simple plot of temperature against brightness that reveals the life cycles of stars. Using data from the European Space Agency&apos;s GAIA mission, we explored different approaches to visualising five million stars, from raw point clouds to density maps to interactive explainers.
           </p>
           {/* Tags */}
-          <div className='flex flex-wrap gap-2'>
+          <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
             <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
             <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Science</span>
             <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Data visualisation</span>
@@ -32,7 +32,7 @@ export default function StellarEvolutionPage() {
       </section>
 
       {/* Static images — 2x2 grid */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           {/* Image 1: Full range point cloud */}
           <img
@@ -64,30 +64,30 @@ export default function StellarEvolutionPage() {
         </div>
 
         {/* Caption */}
-        <p className='text-sm text-black/50 mt-4 max-w-2xl'>
+        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
           Four views of the same dataset: five million stars from GAIA DR3. Top row shows the full range from hot blue stars to cool red dwarfs. Bottom row zooms into the main sequence where most stars spend their lives. Left column shows individual points; right column shows density.
         </p>
       </section>
 
       {/* Interactive: Famous Stars */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <h2 className='text-4xl font-bold tracking-tight mb-6'>Interactive: Well-Known Stars</h2>
         <div className='border border-black/10 bg-white overflow-hidden'>
-          <div className='h-[600px] lg:h-[700px]'>
+          <div className='h-[400px] md:h-[600px] lg:h-[700px]'>
             <HRDiagram className='w-full h-full' showEvolution={true} />
           </div>
         </div>
-        <p className='text-sm text-black/50 mt-4 max-w-2xl'>
+        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
           Click any star for details. Toggle categories to isolate different stellar types. The evolution pathway shows how our Sun will move through the diagram over its 12-billion-year lifetime.
         </p>
       </section>
 
       {/* Content sections */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20'>
-        <div className='grid lg:grid-cols-3 gap-24 lg:gap-32'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-24'>
 
           {/* Left column — main content */}
-          <div className='lg:col-span-2 space-y-12'>
+          <div className='lg:col-span-2 space-y-8 md:space-y-10 lg:space-y-12'>
 
             {/* The Challenge */}
             <div>
@@ -178,7 +178,7 @@ export default function StellarEvolutionPage() {
           </div>
 
           {/* Right column — metadata */}
-          <div className='space-y-8'>
+          <div className='space-y-6 md:space-y-8'>
 
             {/* Technology */}
             <div>

@@ -2,10 +2,10 @@ export default function ServicesPage() {
   return (
     <main className='min-h-screen bg-white'>
       {/* Intro Section */}
-      <section className='px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-16 md:pb-20'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16'>
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
-            <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]'>
+            <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
               Services
             </h1>
           </div>
@@ -20,8 +20,8 @@ export default function ServicesPage() {
       </section>
 
       {/* Service 1: Audit + Sprint */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20 border-t border-black/10 pt-12 md:pt-16 lg:pt-20'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 border-t border-black/10 pt-8 md:pt-12 lg:pt-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
             <span className='text-xs font-mono text-black/40 block mb-4'>[01]</span>
             <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
@@ -66,8 +66,8 @@ export default function ServicesPage() {
       </section>
 
       {/* Service 2: Explanation Design */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20 border-t border-black/10 pt-12 md:pt-16 lg:pt-20'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 border-t border-black/10 pt-8 md:pt-12 lg:pt-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
             <span className='text-xs font-mono text-black/40 block mb-4'>[02]</span>
             <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
@@ -113,8 +113,8 @@ export default function ServicesPage() {
       </section>
 
       {/* Service 3: Interactive System */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20 border-t border-black/10 pt-12 md:pt-16 lg:pt-20'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 border-t border-black/10 pt-8 md:pt-12 lg:pt-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
             <span className='text-xs font-mono text-black/40 block mb-4'>[03]</span>
             <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
@@ -159,8 +159,8 @@ export default function ServicesPage() {
       </section>
 
       {/* Retainer note */}
-      <section className='px-4 md:px-6 py-16 md:py-20 bg-black text-white'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16'>
+      <section className='px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 bg-black text-white'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
             <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
               Ongoing relationships
@@ -181,7 +181,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className='px-4 md:px-6 py-16 md:py-20'>
+      <section className='px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16'>
         <div className='max-w-xl'>
           <h2 className='text-2xl md:text-3xl font-bold tracking-tight mb-4'>
             Not sure which is right?

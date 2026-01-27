@@ -9,19 +9,19 @@ export default function OrbitalMechanicsPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16">
-        <div className="max-w-[75%]">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+      <section className="px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16">
+        <div className="max-w-full lg:max-w-[75%]">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]">
             The Geometry of Getting There
           </h1>
-          <p className="text-2xl font-normal text-black/70 mt-4">
+          <p className="text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2">
             Orbital mechanics and the path to the Moon
           </p>
-          <p className="text-base text-black/70 max-w-3xl mt-12 mb-12">
+          <p className="text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12">
             Spacecraft don&apos;t travel in straight lines. They fall — in carefully calculated curves that trade altitude for speed and speed for altitude. This interactive explainer unpacks the physics of orbital transfers, from the elegant Hohmann ellipse to the real mission profiles of Apollo and Artemis.
           </p>
           {/* Tags */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8">
             <span className="px-3 py-1 text-xs bg-black/5 text-black/60">Interactive</span>
             <span className="px-3 py-1 text-xs bg-black/5 text-black/60">Science</span>
             <span className="px-3 py-1 text-xs bg-black/5 text-black/60">Space</span>
@@ -31,7 +31,7 @@ export default function OrbitalMechanicsPage() {
       </section>
 
       {/* Section 1: Static Mission Map */}
-      <section className="px-4 md:px-6 pb-16 md:pb-20">
+      <section className="px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20">
         <h2 className="text-sm font-bold tracking-tight mb-6">The Transfer Ellipse</h2>
         <div className="border border-black/10 overflow-hidden">
           <MissionMap />
@@ -39,43 +39,37 @@ export default function OrbitalMechanicsPage() {
       </section>
 
       {/* Section 2: Animated Transfer */}
-      <section className="px-4 md:px-6 pb-16 md:pb-20">
+      <section className="px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20">
         <h2 className="text-sm font-bold tracking-tight mb-6">Interactive: Watch the Transfer</h2>
-        <div className="border border-black/10 bg-white p-6">
-          <TransferAnimation />
-        </div>
-        <p className="text-sm text-black/50 mt-4 max-w-2xl">
+        <TransferAnimation />
+        <p className="text-xs md:text-sm text-black/50 mt-4 max-w-2xl">
           Scrub through time to see how velocity and altitude change during a lunar transfer.
           Notice how the spacecraft slows as it climbs out of Earth&apos;s gravity well.
         </p>
       </section>
 
       {/* Section 3: Transfer Designer */}
-      <section className="px-4 md:px-6 pb-16 md:pb-20">
+      <section className="px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20">
         <h2 className="text-sm font-bold tracking-tight mb-6">Design Your Transfer</h2>
-        <div className="border border-black/10 bg-white p-6">
-          <TransferDesigner />
-        </div>
-        <p className="text-sm text-black/50 mt-4 max-w-2xl">
+        <TransferDesigner />
+        <p className="text-xs md:text-sm text-black/50 mt-4 max-w-2xl">
           Adjust the orbital parameters to see how {'\u0394'}v requirements change.
           For very distant targets (ratio {'>'} 11.94), a bi-elliptic transfer becomes more efficient than Hohmann — at the cost of much longer travel time.
         </p>
       </section>
 
       {/* Section 4: Mission Storyboard */}
-      <section className="px-4 md:px-6 pb-16 md:pb-20">
+      <section className="px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20">
         <h2 className="text-sm font-bold tracking-tight mb-6">Mission Profile: Step by Step</h2>
-        <div className="border border-black/10 bg-white p-6">
-          <MissionStoryboard />
-        </div>
+        <MissionStoryboard />
       </section>
 
       {/* Content sections */}
-      <section className="px-4 md:px-6 pb-16 md:pb-20">
-        <div className="grid lg:grid-cols-3 gap-24 lg:gap-32">
+      <section className="px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-24">
 
           {/* Left column - main content */}
-          <div className="lg:col-span-2 space-y-12">
+          <div className="lg:col-span-2 space-y-8 md:space-y-10 lg:space-y-12">
 
             {/* The Challenge */}
             <div>
@@ -166,7 +160,7 @@ export default function OrbitalMechanicsPage() {
           </div>
 
           {/* Right column - metadata */}
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
 
             {/* Technology */}
             <div>

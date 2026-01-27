@@ -8,19 +8,19 @@ export default function LogicSystemsPage() {
   return (
     <main className='min-h-screen bg-white'>
       {/* Hero */}
-      <section className='px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16'>
-        <div className='max-w-[75%]'>
-          <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]'>
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
+        <div className='max-w-full lg:max-w-[75%]'>
+          <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
             From Gates to Gradients
           </h1>
-          <p className='text-2xl font-normal text-black/70 mt-4'>
+          <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
             How logic circuits become learning machines
           </p>
-          <p className='text-base text-black/70 max-w-3xl mt-12 mb-12'>
+          <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
             Machine learning can seem like magic - black boxes that somehow learn to recognise faces, translate languages, or play games. But the foundations are surprisingly concrete. This interactive explainer builds from Boolean logic gates (AND, OR, NOT) through decision boundaries to neural networks, showing how simple rules compose into learning systems.
           </p>
           {/* Tags */}
-          <div className='flex flex-wrap gap-2'>
+          <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
             <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
             <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Education</span>
             <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Machine learning</span>
@@ -30,51 +30,45 @@ export default function LogicSystemsPage() {
       </section>
 
       {/* Static image placeholder */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <div className='border border-black/10 bg-black/5 aspect-[2/1] flex items-center justify-center'>
           <span className='text-black/30 text-sm font-mono'>logic_to_ml_progression.png</span>
         </div>
       </section>
 
       {/* Part A: Boolean Logic */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <h2 className='text-4xl font-bold tracking-tight mb-6'>Part A: Boolean Logic</h2>
-        <div className='border border-black/10 bg-white p-6'>
-          <CircuitPlayground />
-        </div>
-        <p className='text-sm text-black/50 mt-4 max-w-2xl'>
+        <CircuitPlayground />
+        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
           Logic gates are the atoms of computation. Click the inputs to toggle between 0 and 1, and watch how signals propagate through the circuit. The truth table shows all possible input combinations and their outputs.
         </p>
       </section>
 
       {/* Part B: Decision Boundaries */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <h2 className='text-4xl font-bold tracking-tight mb-6'>Part B: Decision Boundaries</h2>
-        <div className='border border-black/10 bg-white p-6'>
-          <DecisionBoundary />
-        </div>
-        <p className='text-sm text-black/50 mt-4 max-w-2xl'>
+        <DecisionBoundary />
+        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
           Classifiers divide feature space into regions. Try different datasets and models to see how the decision boundary changes shape. Notice how some models struggle with certain patterns - linear classifiers cannot solve XOR.
         </p>
       </section>
 
       {/* The Bridge */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <h2 className='text-4xl font-bold tracking-tight mb-6'>The Bridge: From Logic to Learning</h2>
-        <div className='border border-black/10 bg-white p-6'>
-          <LogicToMLBridge />
-        </div>
-        <p className='text-sm text-black/50 mt-4 max-w-2xl'>
+        <LogicToMLBridge />
+        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
           The progression from Boolean logic to neural networks is one of increasing flexibility. Logic gates implement fixed rules. Decision trees learn axis-aligned splits. Neural networks learn smooth, arbitrary boundaries - but the core operation (combining inputs to produce outputs) remains the same.
         </p>
       </section>
 
       {/* Content sections */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20'>
-        <div className='grid lg:grid-cols-3 gap-24 lg:gap-32'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-24'>
 
           {/* Left column - main content */}
-          <div className='lg:col-span-2 space-y-12'>
+          <div className='lg:col-span-2 space-y-8 md:space-y-10 lg:space-y-12'>
 
             {/* The Challenge */}
             <div>
@@ -162,7 +156,7 @@ export default function LogicSystemsPage() {
           </div>
 
           {/* Right column - metadata */}
-          <div className='space-y-8'>
+          <div className='space-y-6 md:space-y-8'>
 
             {/* Technology */}
             <div>

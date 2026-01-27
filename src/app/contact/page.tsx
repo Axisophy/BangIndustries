@@ -30,11 +30,11 @@ export default function ContactPage() {
   return (
     <main className='min-h-screen bg-white'>
       {/* Main Content */}
-      <section className='px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-16 md:pb-20'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16'>
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           {/* Left column - intro */}
           <div>
-            <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-8'>
+            <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mb-8'>
               Get in touch
             </h1>
             <p className='text-black/60 mb-8'>
@@ -155,7 +155,7 @@ export default function ContactPage() {
       </section>
 
       {/* Response time note */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <p className='text-sm text-black/40 max-w-md'>
           I typically respond within 1-2 working days. If your project is urgent,
           mention it in your message.

@@ -9,6 +9,8 @@ import {
   applyForceLayout,
 } from '../lib/generators';
 import { Network, Node } from '../lib/types';
+import { InteractiveFrame } from '../../_components/InteractiveFrame';
+import { Button, Slider } from '../../_components/Controls';
 
 export function EpidemicSimulation() {
   const [isRunning, setIsRunning] = useState(false);
@@ -158,95 +160,84 @@ export function EpidemicSimulation() {
     return Math.round((affected / total) * 100);
   };
 
+  const controlsContent = (
+    <div className='flex flex-wrap items-center gap-4'>
+      <Button variant='secondary' onClick={seedInfection}>
+        Seed infection
+      </Button>
+
+      <Button
+        variant='primary'
+        onClick={() => setIsRunning(!isRunning)}
+        disabled={history.random.length <= 1}
+      >
+        {isRunning ? 'Pause' : 'Run'}
+      </Button>
+
+      <Slider
+        label='Transmission'
+        value={transmissionRate}
+        onChange={setTransmissionRate}
+        min={0.05}
+        max={0.8}
+        step={0.05}
+        formatValue={v => `${Math.round(v * 100)}%`}
+        className='flex-1 min-w-[150px]'
+      />
+
+      <Button variant='secondary' onClick={() => setSeed(s => s + 1)}>
+        Reset
+      </Button>
+    </div>
+  );
+
   return (
-    <div className='space-y-6'>
-      {/* Controls */}
-      <div className='flex flex-wrap items-center gap-4 p-4 bg-black/5'>
-        <button
-          onClick={seedInfection}
-          className='px-3 py-2 text-xs font-mono bg-white border border-black/10 hover:bg-black/5'
-        >
-          Seed infection
-        </button>
+    <>
+      <InteractiveFrame layout='compact' controls={controlsContent}>
+        {/* Networks */}
+        <div className='grid grid-cols-3 gap-4'>
+          {networkTypes.map(({ key, label, color }) => (
+            <div key={key} className='space-y-2'>
+              <div className='flex justify-between items-center'>
+                <div className='text-sm font-bold'>{label}</div>
+                <div className='text-xs font-mono' style={{ color }}>
+                  {getInfectionRate(networks[key])}% affected
+                </div>
+              </div>
 
-        <button
-          onClick={() => setIsRunning(!isRunning)}
-          disabled={history.random.length <= 1}
-          className={`px-3 py-2 text-xs font-mono transition-colors ${
-            isRunning
-              ? 'bg-[#FF0055] text-white'
-              : 'bg-[#0055FF] text-white disabled:bg-black/20 disabled:text-black/40'
-          }`}
-        >
-          {isRunning ? 'Pause' : 'Run'}
-        </button>
-
-        <div className='flex-1 min-w-[150px]'>
-          <label className='text-xs font-mono text-black/50 block mb-1'>
-            Transmission: {Math.round(transmissionRate * 100)}%
-          </label>
-          <input
-            type='range'
-            min={0.05}
-            max={0.8}
-            step={0.05}
-            value={transmissionRate}
-            onChange={e => setTransmissionRate(parseFloat(e.target.value))}
-            className='w-full'
-          />
-        </div>
-
-        <button
-          onClick={() => setSeed(s => s + 1)}
-          className='px-3 py-2 text-xs font-mono bg-white border border-black/10 hover:bg-black/5'
-        >
-          Reset
-        </button>
-      </div>
-
-      {/* Networks */}
-      <div className='grid grid-cols-3 gap-4'>
-        {networkTypes.map(({ key, label, color }) => (
-          <div key={key} className='space-y-2'>
-            <div className='flex justify-between items-center'>
-              <div className='text-sm font-bold'>{label}</div>
-              <div className='text-xs font-mono' style={{ color }}>
-                {getInfectionRate(networks[key])}% affected
+              <div className='border border-black/10 bg-white aspect-[4/3]'>
+                <NetworkGraph
+                  network={networks[key]}
+                  width={280}
+                  height={220}
+                  nodeColorBy='state'
+                />
               </div>
             </div>
+          ))}
+        </div>
 
-            <div className='border border-black/10 bg-white aspect-[4/3]'>
-              <NetworkGraph
-                network={networks[key]}
-                width={280}
-                height={220}
-                nodeColorBy='state'
-              />
-            </div>
+        {/* Legend */}
+        <div className='flex justify-center gap-4 text-xs'>
+          <div className='flex items-center gap-2'>
+            <div className='w-3 h-3 bg-[#0055FF]' />
+            <span>Susceptible</span>
           </div>
-        ))}
-      </div>
-
-      {/* Legend */}
-      <div className='flex justify-center gap-6 text-xs'>
-        <div className='flex items-center gap-2'>
-          <div className='w-3 h-3 bg-[#0055FF]' />
-          <span>Susceptible</span>
+          <div className='flex items-center gap-2'>
+            <div className='w-3 h-3 bg-[#FF0055]' />
+            <span>Infected</span>
+          </div>
+          <div className='flex items-center gap-2'>
+            <div className='w-3 h-3 bg-[#CCFF00]' />
+            <span>Recovered</span>
+          </div>
         </div>
-        <div className='flex items-center gap-2'>
-          <div className='w-3 h-3 bg-[#FF0055]' />
-          <span>Infected</span>
-        </div>
-        <div className='flex items-center gap-2'>
-          <div className='w-3 h-3 bg-[#CCFF00]' />
-          <span>Recovered</span>
-        </div>
-      </div>
+      </InteractiveFrame>
 
       <p className='text-xs text-black/50'>
         Seed an infection, then run the simulation. Scale-free networks spread faster initially because hubs act as superspreaders.
         Small-world networks show wave-like propagation through clusters.
       </p>
-    </div>
+    </>
   );
 }

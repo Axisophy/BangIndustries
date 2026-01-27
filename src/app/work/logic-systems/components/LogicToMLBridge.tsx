@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { InteractiveFrame } from '../../_components/InteractiveFrame';
 
 interface Step {
   id: string;
@@ -37,30 +38,30 @@ const STEPS: Step[] = [
 export function LogicToMLBridge() {
   const [activeStep, setActiveStep] = useState(0);
 
-  return (
-    <div className='space-y-8'>
-      {/* Step selector */}
-      <div className='flex gap-2'>
-        {STEPS.map((step, i) => (
-          <button
-            key={step.id}
-            onClick={() => setActiveStep(i)}
-            className={`flex-1 p-4 text-left border transition-colors ${
-              activeStep === i
-                ? 'border-[#0055FF] bg-[#0055FF]/5'
-                : 'border-black/10 hover:border-black/20'
-            }`}
-          >
-            <div className='text-xs font-mono text-black/40 mb-1'>Step {i + 1}</div>
-            <div className='font-bold text-sm'>{step.title}</div>
-            <div className='text-xs text-black/50 mt-1'>{step.subtitle}</div>
-          </button>
-        ))}
-      </div>
+  const stepSelector = (
+    <div className='flex gap-2'>
+      {STEPS.map((step, i) => (
+        <button
+          key={step.id}
+          onClick={() => setActiveStep(i)}
+          className={`flex-1 p-4 text-left border transition-colors ${
+            activeStep === i
+              ? 'border-[#0055FF] bg-[#0055FF]/5'
+              : 'border-black/10 hover:border-black/20'
+          }`}
+        >
+          <div className='text-xs font-mono text-black/40 mb-1'>Step {i + 1}</div>
+          <div className='font-bold text-sm'>{step.title}</div>
+          <div className='text-xs text-black/50 mt-1'>{step.subtitle}</div>
+        </button>
+      ))}
+    </div>
+  );
 
-      {/* Visualization */}
+  return (
+    <InteractiveFrame layout='compact' controls={stepSelector}>
       <div className='grid md:grid-cols-2 gap-8'>
-        <div className='border border-black/10 bg-white p-6 aspect-square flex items-center justify-center'>
+        <div className='border border-black/10 bg-white p-4 aspect-square flex items-center justify-center'>
           <BoundaryVisualization type={STEPS[activeStep].visual} />
         </div>
 
@@ -84,7 +85,7 @@ export function LogicToMLBridge() {
           </div>
         </div>
       </div>
-    </div>
+    </InteractiveFrame>
   );
 }
 

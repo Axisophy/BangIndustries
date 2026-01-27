@@ -32,12 +32,12 @@ export default function Home() {
   return (
     <main className='min-h-screen bg-white'>
       {/* Hero Project Section */}
-      <section className='px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16'>
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
         {/* Colored placeholder for hero image/video */}
         <div className='w-full aspect-[16/9] bg-[var(--color-blue)]' />
 
         {/* Hero project title */}
-        <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1] mt-8'>
+        <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold tracking-tight leading-[1.1] mt-8'>
           Maxwell Pictogram System
         </h1>
 
@@ -56,7 +56,7 @@ export default function Home() {
       </section>
 
       {/* Selected Work Section */}
-      <section className='px-4 md:px-6 pb-16 md:pb-20'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <h2 className='text-2xl md:text-3xl font-bold tracking-tight mb-8 md:mb-12'>
           Selected work:
         </h2>

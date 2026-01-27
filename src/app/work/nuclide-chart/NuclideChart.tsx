@@ -381,12 +381,12 @@ export default function NuclideChart({ className = '' }: NuclideChartProps) {
           </div>
 
           {/* Controls */}
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-4">
             {/* Colour mode toggle */}
             <div className="flex">
               <button
                 onClick={() => setColorMode('decay')}
-                className={`px-3 py-1.5 text-xs font-mono transition-colors ${
+                className={`px-4 py-2 text-xs font-mono transition-colors ${
                   colorMode === 'decay'
                     ? 'bg-black text-white'
                     : 'bg-black/5 text-black/60 hover:text-black'
@@ -396,7 +396,7 @@ export default function NuclideChart({ className = '' }: NuclideChartProps) {
               </button>
               <button
                 onClick={() => setColorMode('halflife')}
-                className={`px-3 py-1.5 text-xs font-mono transition-colors ${
+                className={`px-4 py-2 text-xs font-mono transition-colors ${
                   colorMode === 'halflife'
                     ? 'bg-black text-white'
                     : 'bg-black/5 text-black/60 hover:text-black'
@@ -409,7 +409,7 @@ export default function NuclideChart({ className = '' }: NuclideChartProps) {
             {/* Magic numbers toggle */}
             <button
               onClick={() => setShowMagicNumbers(!showMagicNumbers)}
-              className={`px-3 py-1.5 text-xs font-mono transition-colors ${
+              className={`px-4 py-2 text-xs font-mono transition-colors ${
                 showMagicNumbers
                   ? 'bg-black text-white'
                   : 'bg-black/5 text-black/60 hover:text-black'
@@ -422,7 +422,7 @@ export default function NuclideChart({ className = '' }: NuclideChartProps) {
             <select
               value={highlightElement ?? ''}
               onChange={(e) => setHighlightElement(e.target.value ? parseInt(e.target.value) : null)}
-              className="text-xs font-mono border border-black/20 px-3 py-1.5 bg-white focus:outline-none focus:border-black"
+              className="text-xs font-mono border border-black/20 px-4 py-2 bg-white focus:outline-none focus:border-black"
             >
               <option value="">All elements</option>
               {Object.entries(ELEMENTS).slice(1).map(([z, el]) => (
@@ -477,7 +477,7 @@ export default function NuclideChart({ className = '' }: NuclideChartProps) {
 
           {/* Hover tooltip */}
           {hoveredNuclide && !isDragging && (
-            <div className="absolute top-4 left-4 bg-white border border-black/10 p-3 pointer-events-none">
+            <div className="absolute top-4 left-4 bg-white border border-black/10 p-4 pointer-events-none">
               <div className="flex items-baseline gap-2">
                 <span className="text-2xl font-mono font-bold">{hoveredNuclide.symbol}</span>
                 <span className="text-lg font-mono text-black/60">{hoveredNuclide.massNumber}</span>
@@ -518,18 +518,18 @@ export default function NuclideChart({ className = '' }: NuclideChartProps) {
               <div className="space-y-4">
                 {/* Composition */}
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="bg-black p-3">
+                  <div className="bg-black p-4">
                     <p className="text-[10px] font-mono text-white/50 uppercase tracking-wider mb-1">Protons (Z)</p>
                     <p className="text-2xl font-mono font-bold text-white">{selectedNuclide.z}</p>
                   </div>
-                  <div className="bg-black p-3">
+                  <div className="bg-black p-4">
                     <p className="text-[10px] font-mono text-white/50 uppercase tracking-wider mb-1">Neutrons (N)</p>
                     <p className="text-2xl font-mono font-bold text-white">{selectedNuclide.n}</p>
                   </div>
                 </div>
 
                 {/* Stability */}
-                <div className="bg-black p-3">
+                <div className="bg-black p-4">
                   <p className="text-[10px] font-mono text-white/50 uppercase tracking-wider mb-1">Stability</p>
                   <div className="flex items-center gap-2">
                     <span
@@ -547,7 +547,7 @@ export default function NuclideChart({ className = '' }: NuclideChartProps) {
 
                 {/* Abundance */}
                 {selectedNuclide.abundance !== null && (
-                  <div className="bg-black p-3">
+                  <div className="bg-black p-4">
                     <p className="text-[10px] font-mono text-white/50 uppercase tracking-wider mb-1">Natural Abundance</p>
                     <p className="text-2xl font-mono font-bold text-white">
                       {selectedNuclide.abundance.toFixed(selectedNuclide.abundance < 1 ? 4 : 2)}%
@@ -557,7 +557,7 @@ export default function NuclideChart({ className = '' }: NuclideChartProps) {
 
                 {/* Magic numbers */}
                 {(MAGIC_NUMBERS.includes(selectedNuclide.z) || MAGIC_NUMBERS.includes(selectedNuclide.n)) && (
-                  <div className="bg-[var(--color-lime)] p-3">
+                  <div className="bg-[var(--color-lime)] p-4">
                     <p className="text-[10px] font-mono text-black/60 uppercase tracking-wider mb-1">Magic Numbers</p>
                     <p className="text-sm text-black">
                       {MAGIC_NUMBERS.includes(selectedNuclide.z) && MAGIC_NUMBERS.includes(selectedNuclide.n)
@@ -572,7 +572,7 @@ export default function NuclideChart({ className = '' }: NuclideChartProps) {
 
                 {/* Notes */}
                 {selectedNuclide.notes && (
-                  <div className="bg-[var(--color-blue)] p-3">
+                  <div className="bg-[var(--color-blue)] p-4">
                     <p className="text-[10px] font-mono text-white/60 uppercase tracking-wider mb-1">Notes</p>
                     <p className="text-sm text-white">{selectedNuclide.notes}</p>
                   </div>
@@ -617,7 +617,7 @@ export default function NuclideChart({ className = '' }: NuclideChartProps) {
             <>
               <span className="text-black/40">Decay mode:</span>
               {Object.entries(DECAY_COLORS).slice(0, 8).map(([mode, color]) => (
-                <div key={mode} className="flex items-center gap-1.5">
+                <div key={mode} className="flex items-center gap-2">
                   <span className="w-3 h-3" style={{ backgroundColor: color }} />
                   <span className="text-black/60">{DECAY_LABELS[mode as DecayMode]}</span>
                 </div>
@@ -626,23 +626,23 @@ export default function NuclideChart({ className = '' }: NuclideChartProps) {
           ) : (
             <>
               <span className="text-black/40">Half-life:</span>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <span className="w-3 h-3 bg-black" />
                 <span className="text-black/60">Stable</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <span className="w-3 h-3" style={{ backgroundColor: '#1a508b' }} />
                 <span className="text-black/60">&gt;1 year</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <span className="w-3 h-3" style={{ backgroundColor: '#57c4e5' }} />
                 <span className="text-black/60">&gt;1 hour</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <span className="w-3 h-3" style={{ backgroundColor: '#ffc93c' }} />
                 <span className="text-black/60">&gt;1 min</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <span className="w-3 h-3" style={{ backgroundColor: '#e84545' }} />
                 <span className="text-black/60">&lt;1 ms</span>
               </div>

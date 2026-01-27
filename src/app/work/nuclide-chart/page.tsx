@@ -9,19 +9,19 @@ export default function NuclideChartPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16">
-        <div className="max-w-[75%]">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+      <section className="px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16">
+        <div className="max-w-full lg:max-w-[75%]">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]">
             Mapping Instability
           </h1>
-          <p className="text-2xl font-normal text-black/70 mt-4">
+          <p className="text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2">
             Charting 3,300 atomic species
           </p>
-          <p className="text-base text-black/70 max-w-3xl mt-12 mb-12">
+          <p className="text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12">
             The periodic table shows 118 elements - but that is only part of the story. Each element can exist in multiple forms, with different numbers of neutrons creating different isotopes. Some are stable. Most are not. This interactive chart maps all 3,300+ known nuclear species, revealing the narrow ridge of stability that runs through a vast terrain of radioactive decay.
           </p>
           {/* Tags */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8">
             <span className="px-3 py-1 text-xs bg-black/5 text-black/60">Interactive</span>
             <span className="px-3 py-1 text-xs bg-black/5 text-black/60">Science</span>
             <span className="px-3 py-1 text-xs bg-black/5 text-black/60">Data visualisation</span>
@@ -31,20 +31,20 @@ export default function NuclideChartPage() {
       </section>
 
       {/* Chart */}
-      <section className="px-4 md:px-6 pb-16 md:pb-20">
+      <section className="px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20">
         <div className="border border-black/10 bg-white overflow-hidden">
-          <div className="h-[750px] lg:h-[875px]">
+          <div className="h-[500px] md:h-[750px] lg:h-[875px]">
             <NuclideChart className="h-full" />
           </div>
         </div>
       </section>
 
       {/* Content sections */}
-      <section className="px-4 md:px-6 pb-16 md:pb-20">
-        <div className="grid lg:grid-cols-3 gap-24 lg:gap-32">
+      <section className="px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-24">
 
           {/* Left column - main content */}
-          <div className="lg:col-span-2 space-y-12">
+          <div className="lg:col-span-2 space-y-8 md:space-y-10 lg:space-y-12">
 
             {/* The Challenge */}
             <div>
@@ -129,7 +129,7 @@ export default function NuclideChartPage() {
           </div>
 
           {/* Right column - metadata */}
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
 
             {/* Technology */}
             <div>

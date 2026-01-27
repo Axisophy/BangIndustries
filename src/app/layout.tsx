@@ -27,7 +27,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <Navigation />
-        <main>
+        <main className="pt-14 md:pt-16">
           {children}
         </main>
         <Footer />

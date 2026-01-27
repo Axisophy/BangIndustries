@@ -116,7 +116,7 @@ export function MissionMap() {
 
         {/* Legend / Info boxes */}
         <g transform="translate(20, 20)">
-          <rect width={180} height={100} fill="#1a1a1a" rx={4} />
+          <rect width={180} height={100} fill="#1a1a1a" />
           <text x={10} y={25} fill="#FF6B35" fontSize="11" fontWeight="bold" fontFamily="monospace">
             Trans-Lunar Injection
           </text>
@@ -132,7 +132,7 @@ export function MissionMap() {
         </g>
 
         <g transform={`translate(${width - 200}, 20)`}>
-          <rect width={180} height={100} fill="#1a1a1a" rx={4} />
+          <rect width={180} height={100} fill="#1a1a1a" />
           <text x={10} y={25} fill="#00D4AA" fontSize="11" fontWeight="bold" fontFamily="monospace">
             Lunar Orbit Insertion
           </text>
@@ -148,7 +148,7 @@ export function MissionMap() {
         </g>
 
         <g transform={`translate(20, ${height - 80})`}>
-          <rect width={200} height={60} fill="#1a1a1a" rx={4} />
+          <rect width={200} height={60} fill="#1a1a1a" />
           <text x={10} y={20} fill="#fff" fontSize="11" fontWeight="bold" fontFamily="monospace">
             Total {'\u0394'}v: {formatVelocity(transfer.totalDeltaV)}
           </text>

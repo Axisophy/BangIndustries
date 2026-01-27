@@ -448,7 +448,7 @@ export default function HRDiagram({ className = '', showEvolution = false }: HRD
       {/* Detail panel */}
       {selected && (
         <div className='px-4 py-3 border-t border-black/10 shrink-0'>
-          <div className='flex items-baseline gap-3'>
+          <div className='flex items-baseline gap-4'>
             <span className='font-bold text-sm'>{selected.name}</span>
             <span className='text-xs font-mono text-black/40'>{selected.spectralType}</span>
             <span

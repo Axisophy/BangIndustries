@@ -2,8 +2,9 @@
 
 import React, { useState, useMemo } from 'react';
 import { GateSymbol } from './GateSymbol';
-import { Circuit } from '../lib/types';
 import { evaluateCircuit, generateTruthTable, PRESET_CIRCUITS } from '../lib/logic';
+import { InteractiveFrame } from '../../_components/InteractiveFrame';
+import { Button } from '../../_components/Controls';
 
 export function CircuitPlayground() {
   const [selectedPreset, setSelectedPreset] = useState<string>('and-gate');
@@ -41,27 +42,26 @@ export function CircuitPlayground() {
     }
   }, [selectedPreset, inputGates.length]);
 
-  return (
-    <div className='space-y-6'>
-      {/* Preset selector */}
-      <div className='flex gap-2'>
-        {Object.keys(PRESET_CIRCUITS).map(key => (
-          <button
-            key={key}
-            onClick={() => setSelectedPreset(key)}
-            className={`px-3 py-2 text-xs font-mono transition-colors ${
-              selectedPreset === key
-                ? 'bg-[#0055FF] text-white'
-                : 'bg-black/5 hover:bg-black/10'
-            }`}
-          >
-            {key.replace(/-/g, ' ')}
-          </button>
-        ))}
-      </div>
+  const controlsContent = (
+    <div className='flex gap-2'>
+      {Object.keys(PRESET_CIRCUITS).map(key => (
+        <Button
+          key={key}
+          onClick={() => setSelectedPreset(key)}
+          variant='secondary'
+          size='sm'
+          active={selectedPreset === key}
+        >
+          {key.replace(/-/g, ' ')}
+        </Button>
+      ))}
+    </div>
+  );
 
+  return (
+    <InteractiveFrame layout='compact' controls={controlsContent}>
       {/* Circuit diagram */}
-      <div className='border border-black/10 bg-white p-6'>
+      <div className='bg-white p-4'>
         <svg viewBox='0 0 500 280' className='w-full h-auto'>
           {/* Connections */}
           {circuit.connections.map((conn, i) => {
@@ -139,7 +139,7 @@ export function CircuitPlayground() {
       </div>
 
       {/* Truth table */}
-      <div className='border border-black/10 bg-white p-4'>
+      <div className='bg-white p-4'>
         <h3 className='text-sm font-bold mb-4'>Truth Table</h3>
         <div className='overflow-x-auto'>
           <table className='w-full text-xs font-mono'>
@@ -181,6 +181,6 @@ export function CircuitPlayground() {
           </table>
         </div>
       </div>
-    </div>
+    </InteractiveFrame>
   );
 }

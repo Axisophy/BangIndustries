@@ -10,6 +10,8 @@ import {
 } from '../lib/generators';
 import { calculateMetrics } from '../lib/metrics';
 import { Network, Node } from '../lib/types';
+import { InteractiveFrame } from '../../_components/InteractiveFrame';
+import { Button, Slider, ButtonGroup, ReadoutGrid } from '../../_components/Controls';
 
 export function AttackSimulation() {
   const [removalFraction, setRemovalFraction] = useState(0);
@@ -79,95 +81,68 @@ export function AttackSimulation() {
     { key: 'smallWorld', label: 'Small-World' },
   ] as const;
 
+  const controlsContent = (
+    <div className='flex flex-wrap items-center gap-4'>
+      <Slider
+        label='Nodes removed'
+        value={removalFraction}
+        onChange={setRemovalFraction}
+        min={0}
+        max={0.8}
+        step={0.02}
+        formatValue={v => `${Math.round(v * 100)}%`}
+        className='flex-1 min-w-[200px]'
+      />
+      <ButtonGroup
+        options={[
+          { value: 'random', label: 'Random failure' },
+          { value: 'targeted', label: 'Targeted attack' },
+        ]}
+        value={attackMode}
+        onChange={setAttackMode}
+      />
+      <Button variant='secondary' onClick={() => setSeed(s => s + 1)}>
+        Reset
+      </Button>
+    </div>
+  );
+
   return (
-    <div className='space-y-6'>
-      {/* Controls */}
-      <div className='flex flex-wrap items-center gap-6 p-4 bg-black/5'>
-        <div className='flex-1 min-w-[200px]'>
-          <label className='text-xs font-mono text-black/50 block mb-1'>
-            Nodes removed: {Math.round(removalFraction * 100)}%
-          </label>
-          <input
-            type='range'
-            min={0}
-            max={0.8}
-            step={0.02}
-            value={removalFraction}
-            onChange={e => setRemovalFraction(parseFloat(e.target.value))}
-            className='w-full'
-          />
-        </div>
+    <>
+      <InteractiveFrame layout='compact' controls={controlsContent}>
+        {/* Networks */}
+        <div className='grid grid-cols-3 gap-4'>
+          {networkTypes.map(({ key, label }) => (
+            <div key={key} className='space-y-2'>
+              <div className='text-sm font-bold text-center'>{label}</div>
 
-        <div className='flex gap-2'>
-          <button
-            onClick={() => setAttackMode('random')}
-            className={`px-3 py-2 text-xs font-mono transition-colors ${
-              attackMode === 'random'
-                ? 'bg-[#0055FF] text-white'
-                : 'bg-white border border-black/10 hover:bg-black/5'
-            }`}
-          >
-            Random failure
-          </button>
-          <button
-            onClick={() => setAttackMode('targeted')}
-            className={`px-3 py-2 text-xs font-mono transition-colors ${
-              attackMode === 'targeted'
-                ? 'bg-[#FF0055] text-white'
-                : 'bg-white border border-black/10 hover:bg-black/5'
-            }`}
-          >
-            Targeted attack
-          </button>
-        </div>
+              <div className='border border-black/10 bg-white aspect-[4/3]'>
+                <NetworkGraph
+                  network={attackedNetworks[key]}
+                  width={280}
+                  height={220}
+                  nodeColorBy='degree'
+                />
+              </div>
 
-        <button
-          onClick={() => setSeed(s => s + 1)}
-          className='px-3 py-2 text-xs font-mono bg-white border border-black/10 hover:bg-black/5'
-        >
-          Reset
-        </button>
-      </div>
-
-      {/* Networks */}
-      <div className='grid grid-cols-3 gap-4'>
-        {networkTypes.map(({ key, label }) => (
-          <div key={key} className='space-y-2'>
-            <div className='text-sm font-bold text-center'>{label}</div>
-
-            <div className='border border-black/10 bg-white aspect-[4/3]'>
-              <NetworkGraph
-                network={attackedNetworks[key]}
-                width={280}
-                height={220}
-                nodeColorBy='degree'
+              {/* Metrics */}
+              <ReadoutGrid
+                columns={2}
+                size='sm'
+                items={[
+                  { label: 'Largest component', value: `${Math.round(metrics[key].largestComponent * 100)}%` },
+                  { label: 'Isolated nodes', value: String(metrics[key].isolatedNodes) },
+                ]}
               />
             </div>
-
-            {/* Metrics */}
-            <div className='grid grid-cols-2 gap-2 text-xs'>
-              <div className='bg-black/5 p-2'>
-                <div className='text-black/40'>Largest component</div>
-                <div className='font-mono text-lg'>
-                  {Math.round(metrics[key].largestComponent * 100)}%
-                </div>
-              </div>
-              <div className='bg-black/5 p-2'>
-                <div className='text-black/40'>Isolated nodes</div>
-                <div className='font-mono text-lg'>
-                  {metrics[key].isolatedNodes}
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
+          ))}
+        </div>
+      </InteractiveFrame>
       <p className='text-xs text-black/50'>
         {attackMode === 'targeted'
           ? 'Targeted attack removes the most connected nodes first. Scale-free networks collapse rapidly because hubs hold the network together.'
           : 'Random failure removes nodes at random. Scale-free networks survive well because most nodes are peripheral - hubs are unlikely to be hit.'}
       </p>
-    </div>
+    </>
   );
 }

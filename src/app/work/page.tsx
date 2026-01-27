@@ -87,9 +87,9 @@ export default function WorkPage() {
   return (
     <main className='min-h-screen bg-white'>
       {/* Hero */}
-      <section className='px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16'>
-        <div className='max-w-[75%]'>
-          <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]'>
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
+        <div className='max-w-full lg:max-w-[75%]'>
+          <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
             Work
           </h1>
           <p className='text-base text-black/60 max-w-2xl mt-4'>
@@ -100,7 +100,7 @@ export default function WorkPage() {
       </section>
 
       {/* Filter */}
-      <section className='px-4 md:px-6 border-y border-black/10'>
+      <section className='px-4 md:px-6 lg:px-8 border-y border-black/10'>
         <div className='py-4'>
           <div className='flex flex-wrap gap-4'>
             {categories.map((category, index) => (
@@ -120,7 +120,7 @@ export default function WorkPage() {
       </section>
 
       {/* Project Grid — single column */}
-      <section className='px-4 md:px-6 py-16 md:py-20'>
+      <section className='px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16'>
         <div className='grid grid-cols-1 gap-px'>
           {projects.map((project, index) => (
             <Link
@@ -152,7 +152,7 @@ export default function WorkPage() {
       </section>
 
       {/* CTA */}
-      <section className='px-4 md:px-6 py-16 md:py-20 bg-black text-white'>
+      <section className='px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 bg-black text-white'>
         <div className='max-w-xl'>
           <h2 className='text-2xl md:text-3xl font-bold tracking-tight mb-4'>
             Have a project in mind?
