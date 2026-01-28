@@ -10,13 +10,22 @@ export default function FractalsPage() {
     <main className='min-h-screen bg-white'>
       {/* Hero - Video Background */}
       <section className='relative h-[70vh] min-h-[500px] bg-black overflow-hidden'>
-        {/* Video placeholder - replace with actual video */}
-        <div className='absolute inset-0 flex items-center justify-center'>
-          <span className='text-white/30 text-sm font-mono'>mandelbrot-zoom.mp4</span>
-        </div>
+        {/* Video background - TODO: Replace with R2 URL */}
+        {/* <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className='absolute inset-0 w-full h-full object-cover'
+        >
+          <source src='CLOUDFLARE_R2_URL_HERE' type='video/mp4' />
+        </video> */}
+
+        {/* Placeholder until video is hosted */}
+        <div className='absolute inset-0 bg-gradient-to-br from-[#0055FF]/20 via-black to-[#FF0055]/20' />
 
         {/* Dark overlay */}
-        <div className='absolute inset-0 bg-black/50' />
+        <div className='absolute inset-0 bg-black/40' />
 
         {/* Hero content */}
         <div className='absolute inset-0 flex items-center justify-center'>
