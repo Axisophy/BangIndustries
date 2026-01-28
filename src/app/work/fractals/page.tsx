@@ -30,6 +30,27 @@ export default function FractalsPage() {
         </div>
       </section>
 
+      {/* Video Hero */}
+      <section className='relative h-[70vh] min-h-[500px] bg-black overflow-hidden'>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className='absolute inset-0 w-full h-full object-cover'
+        >
+          <source src='https://bangindustries.co/video/mandelbrot_zoom_3840x2160.mp4' type='video/mp4' />
+        </video>
+        <div className='absolute inset-0 bg-black/40' />
+        <div className='absolute inset-0 flex items-center justify-center'>
+          <div className='text-center text-white px-4'>
+            <p className='text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl mx-auto'>
+              Infinite complexity. Simple rules. Zoom in forever.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* The Core Idea */}
       <section className='px-4 md:px-8 lg:px-12 pt-16 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20'>
         <div className='max-w-3xl'>
