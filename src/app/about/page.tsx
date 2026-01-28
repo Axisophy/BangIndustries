@@ -219,7 +219,7 @@ export default function AboutPage() {
             Have a project in mind?
           </h2>
           <p className='text-black/60 mb-8'>
-            I work with research institutions, publishers, museums, and organisations
+            We work with research institutions, publishers, museums, and organisations
             who need to communicate complex information clearly.
           </p>
           <a

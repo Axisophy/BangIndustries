@@ -39,11 +39,11 @@ function ServiceDropdown({
 
           <div className='space-y-4 mb-8'>
             <div className='flex justify-between py-4 border-b border-black/10'>
-              <span className='text-sm font-mono text-black/60'>Timeline</span>
+              <span className='text-sm text-black/60'>Timeline</span>
               <span className='text-sm'>{timeline}</span>
             </div>
             <div className='flex justify-between py-4 border-b border-black/10'>
-              <span className='text-sm font-mono text-black/60'>You get</span>
+              <span className='text-sm text-black/60'>You get</span>
               <span className='text-sm text-right max-w-xs'>{youGet}</span>
             </div>
           </div>
