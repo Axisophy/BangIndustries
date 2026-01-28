@@ -8,31 +8,24 @@ import { NaturalFractalsGallery } from './components/NaturalFractalsGallery';
 export default function FractalsPage() {
   return (
     <main className='min-h-screen bg-white'>
-      {/* Hero - Video Background */}
-      <section className='relative h-[70vh] min-h-[500px] bg-black overflow-hidden'>
-        {/* Video background */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className='absolute inset-0 w-full h-full object-cover'
-        >
-          <source src='https://bangindustries.co/video/mandelbrot_zoom_3840x2160.mp4' type='video/mp4' />
-        </video>
-
-        {/* Dark overlay */}
-        <div className='absolute inset-0 bg-black/40' />
-
-        {/* Hero content */}
-        <div className='absolute inset-0 flex items-center justify-center'>
-          <div className='text-center text-white px-4'>
-            <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1] mb-4'>
-              What are Fractals?
-            </h1>
-            <p className='text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl mx-auto'>
-              Infinite complexity. Simple rules. Zoom in forever.
-            </p>
+      {/* Hero */}
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
+        <div className='max-w-full lg:max-w-[75%]'>
+          <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
+            What are Fractals?
+          </h1>
+          <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+            A Beginner&apos;s Guide
+          </p>
+          <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
+            An accessible introduction to fractal geometry — from simple self-similarity to the infinite complexity of the Mandelbrot set. Designed to spark curiosity without requiring any mathematical background.
+          </p>
+          {/* Tags */}
+          <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
+            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Explanation Design</span>
+            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
+            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Mathematics</span>
+            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Educational</span>
           </div>
         </div>
       </section>
@@ -385,15 +378,6 @@ export default function FractalsPage() {
         </div>
       </section>
 
-      {/* Tags */}
-      <section className='px-4 md:px-8 lg:px-12 pb-16 md:pb-20'>
-        <div className='flex flex-wrap gap-2'>
-          <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
-          <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Mathematics</span>
-          <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Education</span>
-          <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Visualization</span>
-        </div>
-      </section>
     </main>
   );
 }
