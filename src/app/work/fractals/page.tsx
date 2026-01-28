@@ -10,19 +10,16 @@ export default function FractalsPage() {
     <main className='min-h-screen bg-white'>
       {/* Hero - Video Background */}
       <section className='relative h-[70vh] min-h-[500px] bg-black overflow-hidden'>
-        {/* Video background - TODO: Replace with R2 URL */}
-        {/* <video
+        {/* Video background */}
+        <video
           autoPlay
           loop
           muted
           playsInline
           className='absolute inset-0 w-full h-full object-cover'
         >
-          <source src='CLOUDFLARE_R2_URL_HERE' type='video/mp4' />
-        </video> */}
-
-        {/* Placeholder until video is hosted */}
-        <div className='absolute inset-0 bg-gradient-to-br from-[#0055FF]/20 via-black to-[#FF0055]/20' />
+          <source src='https://bangindustries.co/video/mandelbrot_zoom_3840x2160.mp4' type='video/mp4' />
+        </video>
 
         {/* Dark overlay */}
         <div className='absolute inset-0 bg-black/40' />
