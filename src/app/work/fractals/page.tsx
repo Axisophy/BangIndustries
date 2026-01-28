@@ -44,6 +44,9 @@ export default function FractalsPage() {
         <div className='absolute inset-0 bg-black/40' />
         <div className='absolute inset-0 flex items-center justify-center'>
           <div className='text-center text-white px-4'>
+            <h2 className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1] mb-4'>
+              What are Fractals?
+            </h2>
             <p className='text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl mx-auto'>
               Infinite complexity. Simple rules. Zoom in forever.
             </p>
