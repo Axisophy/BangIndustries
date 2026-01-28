@@ -190,7 +190,7 @@ export default function ContactPage() {
                     <option value='Visual Audit + Redesign Sprint'>Visual Audit + Redesign Sprint</option>
                     <option value='Explanation Design'>Explanation Design</option>
                     <option value='Interactive System'>Interactive System</option>
-                    <option value='Ongoing relationship / Retainer'>Ongoing relationship / Retainer</option>
+                    <option value='Retained relationship'>Retained relationship</option>
                     <option value='Something else'>Something else</option>
                   </select>
                 </div>

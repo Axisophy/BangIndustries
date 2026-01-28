@@ -113,12 +113,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* How I Work Section */}
+      {/* How We Work Section */}
       <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 pt-8 md:pt-12 lg:pt-16'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
             <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
-              How I work
+              How we work
             </h2>
           </div>
           <div>
