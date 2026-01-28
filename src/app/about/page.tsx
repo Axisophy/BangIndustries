@@ -19,14 +19,14 @@ export default function AboutPage() {
             <p className='text-black/60'>
               Founded by Simon Tyler, the practice combines deep subject understanding
               with illustration, data visualisation, and interactive design. We don&apos;t
-              just make things look good — we make them make sense.
+              just make things look good. We make them make sense.
             </p>
           </div>
         </div>
       </section>
 
       {/* Background Section */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 border-t border-black/10 pt-8 md:pt-12 lg:pt-16'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 pt-8 md:pt-12 lg:pt-16'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
             <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
@@ -49,8 +49,55 @@ export default function AboutPage() {
             </p>
             <p className='text-black/80 mb-8'>
               His work spans scientific illustration, data visualisation, and explanation
-              design — including multiple published books and the Atomic Printworks series
-              of scientific visualisation posters.
+              design. He has written and illustrated several books, including{' '}
+              <a
+                href='https://www.laurenceking.com/products/gizmo'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-[var(--color-blue)] hover:text-black transition-colors'
+              >
+                Gizmo
+              </a>
+              , a visual history of gadgets and technology,{' '}
+              <a
+                href='https://harpercollins.co.uk/products/bugs-simon-tyler?variant=39886877884494'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-[var(--color-blue)] hover:text-black transition-colors'
+              >
+                Bugs
+              </a>
+              {' '}for HarperCollins, and{' '}
+              <a
+                href='https://www.faber.co.uk/product/9780571349470-emergency-vehicles/'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-[var(--color-blue)] hover:text-black transition-colors'
+              >
+                Emergency Vehicles
+              </a>
+              , an illustrated children&apos;s book for Faber &amp; Faber.
+            </p>
+            <p className='text-black/80 mb-8'>
+              He also creates scientific visualisation products through{' '}
+              <a
+                href='https://axisophy.com'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-[var(--color-blue)] hover:text-black transition-colors'
+              >
+                Axisophy
+              </a>
+              , and explores computational art and generative systems at{' '}
+              <a
+                href='https://elxsis.com'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-[var(--color-blue)] hover:text-black transition-colors'
+              >
+                Elxsis
+              </a>
+              .
             </p>
             <p className='text-black/60'>
               <a
@@ -67,7 +114,7 @@ export default function AboutPage() {
       </section>
 
       {/* How I Work Section */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 border-t border-black/10 pt-8 md:pt-12 lg:pt-16'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 pt-8 md:pt-12 lg:pt-16'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
             <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
@@ -111,7 +158,7 @@ export default function AboutPage() {
                 <div>
                   <h3 className='text-xl md:text-2xl font-bold tracking-tight mb-1'>Production</h3>
                   <p className='text-black/60'>
-                    Building the final outputs — whether static graphics,
+                    Building the final outputs, whether static graphics,
                     interactive visualisations, or complete design systems.
                   </p>
                 </div>
@@ -132,7 +179,7 @@ export default function AboutPage() {
       </section>
 
       {/* Principles Section */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 border-t border-black/10 pt-8 md:pt-12 lg:pt-16'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 pt-8 md:pt-12 lg:pt-16'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
             <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
@@ -166,7 +213,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 border-t border-black/10 pt-8 md:pt-12 lg:pt-16'>
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 pt-8 md:pt-12 lg:pt-16'>
         <div className='max-w-xl'>
           <h2 className='text-2xl md:text-3xl font-bold tracking-tight mb-4'>
             Have a project in mind?
