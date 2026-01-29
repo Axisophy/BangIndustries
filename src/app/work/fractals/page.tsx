@@ -34,7 +34,6 @@ export default function FractalsPage() {
       <section className='relative h-[70vh] min-h-[500px] bg-black overflow-hidden'>
         <video
           autoPlay
-          loop
           muted
           playsInline
           className='absolute inset-0 w-full h-full object-cover'
