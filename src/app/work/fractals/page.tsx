@@ -37,10 +37,15 @@ function AudienceDropdown() {
 export default function FractalsPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const handleCanPlayThrough = () => {
     setIsVideoReady(true);
     videoRef.current?.play();
+    // Show overlay text after 2.5 seconds
+    setTimeout(() => {
+      setShowOverlay(true);
+    }, 2500);
   };
 
   return (
@@ -110,15 +115,18 @@ export default function FractalsPage() {
           <source src='https://bangindustries.co/video/mandelbrot_zoom_3840x2160.mp4' type='video/mp4' />
         </video>
         <div className='absolute inset-0 bg-black/40' />
-        <div className='absolute inset-0 flex items-center justify-center'>
+        <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${showOverlay ? 'opacity-100' : 'opacity-0'}`}>
           <div className='text-center text-white px-4'>
-            <p className='text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl mx-auto'>
-              Infinite complexity. Simple rules. Zoom in forever.
+            <h2 className='font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1] mb-4'>
+              What are Fractals?
+            </h2>
+            <p className='font-display text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-white/80'>
+              Infinite complexity. Simple rules.
             </p>
           </div>
         </div>
         {/* Scroll indicator */}
-        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-xs font-mono'>
+        <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-xs font-mono transition-opacity duration-1000 ${showOverlay ? 'opacity-100' : 'opacity-0'}`}>
           Scroll to explore
         </div>
       </section>
