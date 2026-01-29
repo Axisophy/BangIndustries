@@ -6,6 +6,34 @@ import { MandelbrotExplorer } from './components/MandelbrotExplorer';
 import { JuliaExplorer } from './components/JuliaExplorer';
 import { NaturalFractalsGallery } from './components/NaturalFractalsGallery';
 
+function AudienceDropdown() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className='flex items-center justify-between w-full text-left'
+      >
+        <span className='text-sm'>Generally interested adults</span>
+        <svg
+          className={`w-4 h-4 text-black/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path strokeLinecap='square' strokeLinejoin='miter' strokeWidth={2} d='M19 9l-7 7-7-7' />
+        </svg>
+      </button>
+      {isOpen && (
+        <p className='text-xs text-black/60 mt-2 leading-relaxed'>
+          Curious people with no assumed mathematics background. They&apos;ve seen fractal images before and have surface familiarity, but don&apos;t understand what they&apos;re actually looking at. They want to genuinely understand, not just admire.
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function FractalsPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
@@ -17,29 +45,59 @@ export default function FractalsPage() {
 
   return (
     <main className='min-h-screen bg-white'>
-      {/* Hero */}
+      {/* Header with Metadata Sidebar */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
-        <div className='max-w-full lg:max-w-[75%]'>
-          <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
-            What are Fractals?
-          </h1>
-          <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
-            A Beginner&apos;s Guide
-          </p>
-          <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
-            An accessible introduction to fractal geometry — from simple self-similarity to the infinite complexity of the Mandelbrot set. Designed to spark curiosity without requiring any mathematical background.
-          </p>
-          {/* Tags */}
-          <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
-            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Explanation Design</span>
-            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
-            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Mathematics</span>
-            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Educational</span>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16'>
+          {/* Left column - Title and description */}
+          <div className='lg:col-span-2'>
+            <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
+              What are Fractals?
+            </h1>
+            <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+              A Beginner&apos;s Guide
+            </p>
+            <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
+              An accessible introduction to fractal geometry — from simple self-similarity to the infinite complexity of the Mandelbrot set. Designed to spark curiosity without requiring any mathematical background.
+            </p>
+            {/* Tags */}
+            <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
+              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Explanation Design</span>
+              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
+              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Mathematics</span>
+            </div>
+          </div>
+
+          {/* Right column - Portfolio Metadata */}
+          <div className='space-y-6'>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+                Category
+              </span>
+              <span className='text-sm'>Explanation Design</span>
+            </div>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+                Audience
+              </span>
+              <AudienceDropdown />
+            </div>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+                Technology
+              </span>
+              <span className='text-sm'>React, Canvas/WebGL, D3.js</span>
+            </div>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+                Data
+              </span>
+              <span className='text-sm text-black/70'>Mathematical generation (no external datasets)</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Video Hero */}
+      {/* Stage 1: HOOK - Video */}
       <section className='relative h-[70vh] min-h-[500px] bg-black overflow-hidden'>
         <video
           ref={videoRef}
@@ -54,68 +112,87 @@ export default function FractalsPage() {
         <div className='absolute inset-0 bg-black/40' />
         <div className='absolute inset-0 flex items-center justify-center'>
           <div className='text-center text-white px-4'>
-            <h2 className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1] mb-4'>
-              What are Fractals?
-            </h2>
             <p className='text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl mx-auto'>
               Infinite complexity. Simple rules. Zoom in forever.
             </p>
           </div>
         </div>
+        {/* Scroll indicator */}
+        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-xs font-mono'>
+          Scroll to explore
+        </div>
       </section>
 
-      {/* The Core Idea */}
+      {/* Stage 2: ANCHOR - "You've Seen These Before" */}
       <section className='px-4 md:px-8 lg:px-12 pt-16 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20'>
+        <div className='max-w-3xl'>
+          <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
+            You&apos;ve Seen These Before
+          </h2>
+          <div className='space-y-4 text-black/70 leading-relaxed'>
+            <p>
+              You&apos;ve seen fractal images — on posters, screensavers, album covers. The Mandelbrot set, with its seahorses and spirals, has become one of the most recognisable images in mathematics.
+            </p>
+            <p>
+              But here&apos;s the thing: most people who recognise a fractal couldn&apos;t tell you what actually makes it a fractal. What&apos;s special about these shapes? Why can you zoom in forever? And how does such complexity come from such simple rules?
+            </p>
+            <p>
+              That&apos;s what we&apos;re going to explore.
+            </p>
+          </div>
+        </div>
+
+        {/* Familiarity grid */}
+        <div className='mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl'>
+          {[
+            { name: 'Mandelbrot set', file: 'mandelbrot-thumbnail.jpg' },
+            { name: 'Julia set', file: 'julia-thumbnail.jpg' },
+            { name: 'Fern', file: 'fern-thumbnail.jpg' },
+            { name: 'Koch snowflake', file: 'snowflake-thumbnail.jpg' },
+          ].map((item) => (
+            <div key={item.file} className='aspect-square bg-black/5 flex items-center justify-center border border-black/10'>
+              <span className='text-black/30 text-xs font-mono text-center px-2'>{item.file}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Stage 3: FOUNDATION - "Patterns Within Patterns" */}
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='max-w-3xl'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
             Patterns Within Patterns
           </h2>
           <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
-              Fractals are patterns that repeat at every scale. Zoom in on a fractal, and you&apos;ll
-              find smaller copies of the same shapes you just saw. Zoom in again, and there are more copies.
-              This self-similarity continues forever.
+              The defining feature of fractals is <strong>self-similarity</strong> — zoom in, and you find smaller copies of the same shapes you just saw. Zoom in on those copies, and you find even smaller copies. This continues forever.
             </p>
             <p>
-              The remarkable thing about fractals is that this infinite complexity often emerges from
-              surprisingly simple rules. A few lines of mathematics can generate structures of boundless
-              intricacy.
+              The remarkable thing is that this infinite complexity usually emerges from very simple rules. Let&apos;s see how.
             </p>
           </div>
         </div>
-
-        {/* Zoom sequence placeholder */}
-        <div className='mt-12 border border-black/10 aspect-[3/1] flex items-center justify-center bg-black/5'>
-          <span className='text-black/30 text-sm font-mono'>zoom-sequence.jpg</span>
-        </div>
-        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
-          Self-similarity: each zoom reveals the same patterns at smaller scales.
-        </p>
       </section>
 
-      {/* Koch Snowflake */}
+      {/* Koch Snowflake Interactive */}
       <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <div className='max-w-3xl mb-8'>
-          <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
-            Infinite Complexity from Simple Rules
-          </h2>
+          <h3 className='text-2xl md:text-3xl font-bold tracking-tight mb-6'>
+            The Koch Snowflake
+          </h3>
           <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
-              The Koch snowflake is one of the simplest fractals to understand. Start with an
-              equilateral triangle. Take each straight edge and replace it with a kinked version:
-              remove the middle third and add two sides of a smaller triangle pointing outward.
+              The Koch snowflake is one of the simplest fractals to understand. Start with an equilateral triangle. Take each straight edge and replace it with a kinked version: remove the middle third and add two sides of a smaller triangle pointing outward.
             </p>
             <p>
-              Now repeat. Every straight edge gets the same treatment. After just a few iterations,
-              the simple triangle transforms into an intricate snowflake. Continue forever, and you
-              get a shape with infinite perimeter but finite area.
+              Now repeat. Every straight edge gets the same treatment. After just a few iterations, the simple triangle transforms into an intricate snowflake. Continue forever, and you get a shape with infinite perimeter but finite area.
             </p>
           </div>
         </div>
         <KochSnowflake />
       </section>
 
-      {/* The Coastline Problem */}
+      {/* Stage 4: BUILD - Beat 4a: Coastline */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='max-w-3xl'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
@@ -123,18 +200,16 @@ export default function FractalsPage() {
           </h2>
           <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
-              In 1967, mathematician Benoit Mandelbrot asked a deceptively simple question:
-              how long is the coast of Britain?
+              In 1967, mathematician Benoit Mandelbrot asked a deceptively simple question: how long is the coast of Britain?
             </p>
             <p>
-              The answer depends on your ruler. Measure with a 100km ruler, skipping over bays
-              and inlets, and you get one number. Measure with a 1km ruler, following more detail,
-              and the coastline is longer. Use a 1-metre ruler, tracing around every rock, and
-              it&apos;s longer still.
+              The surprising answer: it depends on your ruler.
             </p>
             <p>
-              Coastlines are fractal. The closer you look, the more detail you find. There is
-              no &quot;true&quot; length. This insight was one of the foundations of fractal geometry.
+              Measure with a 100km ruler, skipping over bays and peninsulas, and you get one number. Measure with a 10km ruler, following more detail, and the coastline is longer. Use a 1km ruler, and longer still. Use a metre stick, tracing around every rock...
+            </p>
+            <p>
+              There is no &quot;true&quot; length. The closer you look, the more detail you find — just like the Koch snowflake edges. Coastlines are fractal.
             </p>
           </div>
         </div>
@@ -148,26 +223,24 @@ export default function FractalsPage() {
         </p>
       </section>
 
-      {/* Fractal Dimension */}
+      {/* Beat 4b: Fractal Dimension */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='max-w-3xl'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
-            Not Quite 1D, Not Quite 2D
+            More Than a Line, Less Than a Plane
           </h2>
           <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
-              A straight line is one-dimensional. A filled square is two-dimensional. But what
-              about a coastline? Or the Koch snowflake?
+              A straight line is one-dimensional. A filled square is two-dimensional. But what about a coastline? Or the Koch snowflake?
             </p>
             <p>
-              These shapes are too complex to be one-dimensional, but they don&apos;t fill a plane
-              like a square does. Mathematicians use the Hausdorff dimension (or fractal dimension)
-              to measure this in-between quality.
+              These shapes are too wiggly and complex to be one-dimensional — they&apos;re trying to fill more space than a simple line. But they don&apos;t fill a whole plane either.
             </p>
             <p>
-              The Koch snowflake has a dimension of about 1.26, meaning it fills more space than a line
-              but less than a plane. It&apos;s a measure of how thoroughly the shape fills space. The more
-              convoluted and space-filling, the higher the dimension.
+              Mathematicians measure this in-between quality with something called fractal dimension. The Koch snowflake has a dimension of about 1.26 — more than a line, less than a plane. It&apos;s a measure of how thoroughly a shape fills the space around it.
+            </p>
+            <p>
+              Britain&apos;s coastline? About 1.25. The more crinkled and space-filling, the higher the dimension.
             </p>
           </div>
         </div>
@@ -207,7 +280,7 @@ export default function FractalsPage() {
         </div>
       </section>
 
-      {/* Fractals in Nature */}
+      {/* Beat 4c: Nature */}
       <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <div className='max-w-3xl mb-8'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
@@ -215,71 +288,99 @@ export default function FractalsPage() {
           </h2>
           <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
-              Fractals aren&apos;t just mathematical curiosities. They&apos;re everywhere in the natural
-              world. Evolution has discovered that fractal branching is an efficient way to fill
-              space, distribute resources, and maximise surface area.
+              Fractals aren&apos;t just mathematical curiosities — they&apos;re everywhere in the natural world.
             </p>
             <p>
-              Look closely at a fern frond: each branch looks like a smaller copy of the whole.
-              River deltas branch and rebranch in patterns that echo at every scale. Your lungs
-              contain about 300 million tiny air sacs, reached through a fractal tree of branching
-              airways.
+              Look at a fern frond: each branch looks like a smaller copy of the whole. River deltas branch and rebranch in patterns that echo at every scale. Lightning bolts, blood vessels, tree branches, broccoli florets — all fractal.
+            </p>
+            <p>
+              Why? Because fractal branching is efficient. It&apos;s how nature solves the problem of reaching lots of places from one source, or fitting lots of surface area into limited space. Your lungs contain about 300 million air sacs, reached through a fractal tree of branching airways — all packed into your chest.
             </p>
           </div>
         </div>
         <NaturalFractalsGallery />
       </section>
 
-      {/* Mandelbrot Set */}
+      {/* Beat 4d: Mandelbrot */}
       <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <div className='max-w-3xl mb-8'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
-            The Most Famous Fractal
+            The Icon
           </h2>
           <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
-              The Mandelbrot set is perhaps the most famous image in mathematics. It&apos;s generated
-              by a simple formula: take a number, square it, add a constant, and repeat. Points
-              that don&apos;t spiral off to infinity are &quot;in&quot; the set.
+              The Mandelbrot set is the most famous image in mathematics. It&apos;s what was zooming in the video you saw at the top of this page.
             </p>
             <p>
-              The magic happens at the boundary. Zoom in on the edge of the Mandelbrot set and
-              you&apos;ll find spirals, seahorses, and intricate filigree. Zoom deeper, and the detail
-              never ends. And scattered throughout, you&apos;ll find miniature copies of the whole set,
-              connected by delicate filaments.
+              It&apos;s generated by an absurdly simple formula: take a number, square it, add a constant, repeat. Colour each point based on how quickly (or whether) it escapes to infinity.
             </p>
             <p>
-              The set was visualised and popularised by Benoit Mandelbrot in the 1980s, though its
-              mathematical foundations go back further. It has become an icon of complexity emerging
-              from simplicity.
+              The magic is at the boundary — that&apos;s where all the complexity lives. Zoom in on the edge, and you find spirals, seahorses, and intricate filigree. Zoom deeper, and the detail never ends. And scattered throughout, you&apos;ll find tiny copies of the whole set — self-similarity again.
+            </p>
+            <p>
+              Try it yourself.
             </p>
           </div>
         </div>
         <MandelbrotExplorer />
       </section>
 
-      {/* Julia Sets */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
-        <div className='max-w-3xl mb-8'>
+      {/* Stage 5: REWARD - "Now You See It" */}
+      <section className='px-4 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24 bg-black text-white'>
+        <div className='max-w-3xl'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
-            The Mandelbrot&apos;s Cousins
+            Now You See It
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
-              Every point on the Mandelbrot set corresponds to a different Julia set. Choose a
-              point inside the Mandelbrot set, and the Julia set is connected, forming a single
-              continuous shape. Choose a point outside, and the Julia set shatters into
-              disconnected dust.
+              Look at a fractal image now, and you see something different than you did ten minutes ago.
             </p>
             <p>
-              The Mandelbrot set is, in a sense, a map of all possible Julia sets. The two are
-              deeply intertwined mathematically, different views of the same underlying structure.
+              You see self-similarity — the pattern containing copies of itself at every scale. You understand why zooming works: the detail never runs out because the same structures repeat infinitely.
+            </p>
+            <p>
+              You know that this infinite complexity comes from simple rules — a few lines of mathematics generating boundless intricacy. And you know that nature discovered fractals long before we did.
+            </p>
+            <p className='text-white'>
+              That&apos;s what a fractal is. Not just a pretty picture, but a window into how complexity emerges from simplicity.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Stage 6: EXTEND - Clearly marked optional */}
+      <section className='px-4 md:px-8 lg:px-12 pt-16 md:pt-20 lg:pt-24 pb-8'>
+        <div className='max-w-3xl'>
+          <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-2'>
+            Going Deeper
+          </h2>
+          <p className='text-black/50 text-sm'>
+            For the curious — you&apos;ve got the main idea, this is extra.
+          </p>
+        </div>
+      </section>
+
+      {/* 6a: Julia Sets */}
+      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+        <div className='max-w-3xl mb-8'>
+          <h3 className='text-2xl md:text-3xl font-bold tracking-tight mb-6'>
+            Julia Sets
+          </h3>
+          <div className='space-y-4 text-black/70 leading-relaxed'>
+            <p>
+              The Mandelbrot set has a secret twin — actually, infinitely many twins.
+            </p>
+            <p>
+              Every point on the Mandelbrot set corresponds to a different Julia set. Choose a point inside the Mandelbrot set, and the Julia set is connected (one continuous shape). Choose a point outside, and the Julia set shatters into disconnected dust.
+            </p>
+            <p>
+              The Mandelbrot set is, in a sense, a map of all possible Julia sets.
             </p>
           </div>
         </div>
 
         {/* 3D Julia gallery placeholder */}
-        <div className='grid grid-cols-2 md:grid-cols-3 gap-4 mb-8'>
+        <div className='grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-3xl'>
           {['julia-dendrite.jpg', 'julia-rabbit.jpg', 'julia-spiral.jpg'].map((img) => (
             <div key={img} className='aspect-square bg-black/5 flex items-center justify-center border border-black/10'>
               <span className='text-black/30 text-xs font-mono'>{img}</span>
@@ -290,17 +391,15 @@ export default function FractalsPage() {
         <JuliaExplorer />
       </section>
 
-      {/* Beyond 2D */}
+      {/* 6b: Beyond 2D */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='max-w-3xl'>
-          <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
-            Taking It Further
-          </h2>
+          <h3 className='text-2xl md:text-3xl font-bold tracking-tight mb-6'>
+            Beyond Two Dimensions
+          </h3>
           <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
-              The Mandelbrot and Julia sets live in two dimensions. But mathematicians and artists
-              have extended fractal geometry into three dimensions and beyond. The Mandelbulb and
-              Mandelbox are 3D analogues that produce stunning organic forms.
+              Fractals extend into three dimensions and beyond. The Mandelbulb (discovered 2009) is a 3D analog of the Mandelbrot set — infinitely detailed surfaces you could explore forever.
             </p>
           </div>
         </div>
@@ -316,102 +415,135 @@ export default function FractalsPage() {
         </div>
       </section>
 
-      {/* Why It Matters */}
+      {/* 6c: Applications */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='max-w-3xl'>
-          <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
+          <h3 className='text-2xl md:text-3xl font-bold tracking-tight mb-6'>
             More Than Pretty Pictures
-          </h2>
+          </h3>
           <p className='text-black/70 leading-relaxed mb-8'>
-            Fractals aren&apos;t just beautiful. They&apos;re useful.
+            Fractals aren&apos;t just beautiful — they&apos;re useful.
           </p>
 
           <div className='space-y-6'>
             <div>
-              <h3 className='font-bold mb-1'>Antenna design</h3>
+              <h4 className='font-bold mb-1'>Antennas</h4>
               <p className='text-sm text-black/60'>
-                Fractal antennas pack more electrical length into smaller spaces, enabling the
-                compact antennas in mobile phones.
+                Fractal designs pack more electrical length into small spaces — that&apos;s why your phone can receive multiple frequencies.
               </p>
             </div>
             <div>
-              <h3 className='font-bold mb-1'>Computer graphics</h3>
+              <h4 className='font-bold mb-1'>Computer graphics</h4>
               <p className='text-sm text-black/60'>
-                Procedural fractals generate realistic terrain, clouds, and vegetation in films
-                and games without storing enormous amounts of data.
+                Games and films use fractal algorithms to generate realistic terrain, clouds, and vegetation.
               </p>
             </div>
             <div>
-              <h3 className='font-bold mb-1'>Medicine</h3>
+              <h4 className='font-bold mb-1'>Medicine</h4>
               <p className='text-sm text-black/60'>
-                The fractal branching of blood vessels and airways provides insights into healthy
-                and diseased tissue.
+                The fractal patterns of blood vessels and airways help doctors spot abnormalities.
               </p>
             </div>
             <div>
-              <h3 className='font-bold mb-1'>Finance</h3>
+              <h4 className='font-bold mb-1'>Finance</h4>
               <p className='text-sm text-black/60'>
-                Mandelbrot&apos;s later work applied fractal geometry to financial markets, revealing
-                patterns in price fluctuations that traditional models miss.
-              </p>
-            </div>
-            <div>
-              <h3 className='font-bold mb-1'>Data compression</h3>
-              <p className='text-sm text-black/60'>
-                Fractal compression algorithms exploit self-similarity to achieve high compression
-                ratios for images.
+                Mandelbrot&apos;s later work revealed fractal patterns in market price movements — something traditional models miss.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Further Reading */}
-      <section className='px-4 md:px-8 lg:px-12 pb-16 md:pb-20 lg:pb-24'>
+      {/* Stage 7: LAUNCH - Further Exploration */}
+      <section className='px-4 md:px-8 lg:px-12 pb-16 md:pb-20 lg:pb-24 border-t border-black/10 pt-16 md:pt-20'>
         <div className='max-w-3xl'>
-          <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
-            Further Reading
+          <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-8'>
+            Further Exploration
           </h2>
-          <ul className='space-y-2 text-sm'>
-            <li>
-              <a
-                href='https://en.wikipedia.org/wiki/Mandelbrot_set'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-[var(--color-blue)] hover:text-black transition-colors'
-              >
-                Mandelbrot set (Wikipedia)
-              </a>
-            </li>
-            <li>
-              <a
-                href='https://en.wikipedia.org/wiki/Julia_set'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-[var(--color-blue)] hover:text-black transition-colors'
-              >
-                Julia set (Wikipedia)
-              </a>
-            </li>
-            <li>
-              <a
-                href='https://en.wikipedia.org/wiki/Fractal_dimension'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-[var(--color-blue)] hover:text-black transition-colors'
-              >
-                Fractal dimension (Wikipedia)
-              </a>
-            </li>
-          </ul>
 
-          <p className='text-xs text-black/40 mt-8'>
-            Interactive visualisations built with React and Canvas. Inspired by the work of
-            Benoit Mandelbrot and countless fractal explorers.
+          <div className='space-y-8'>
+            <div>
+              <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                Recommended Reading
+              </h3>
+              <ul className='space-y-2 text-sm'>
+                <li>
+                  <a
+                    href='https://www.amazon.co.uk/Fractal-Geometry-Nature-Benoit-Mandelbrot/dp/0716711869'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-[var(--color-blue)] hover:text-black transition-colors'
+                  >
+                    The Fractal Geometry of Nature — Benoit Mandelbrot
+                  </a>
+                  <span className='text-black/40 ml-2'>The foundational text</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                Watch
+              </h3>
+              <ul className='space-y-2 text-sm'>
+                <li>
+                  <a
+                    href='https://www.youtube.com/watch?v=FFftmWSzgmk'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-[var(--color-blue)] hover:text-black transition-colors'
+                  >
+                    3Blue1Brown: Fractals are typically not self-similar
+                  </a>
+                  <span className='text-black/40 ml-2'>A deeper dive into what fractals really are</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                Reference
+              </h3>
+              <ul className='space-y-2 text-sm'>
+                <li>
+                  <a
+                    href='https://en.wikipedia.org/wiki/Mandelbrot_set'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-[var(--color-blue)] hover:text-black transition-colors'
+                  >
+                    Mandelbrot set (Wikipedia)
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href='https://en.wikipedia.org/wiki/Julia_set'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-[var(--color-blue)] hover:text-black transition-colors'
+                  >
+                    Julia set (Wikipedia)
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href='https://en.wikipedia.org/wiki/Fractal_dimension'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-[var(--color-blue)] hover:text-black transition-colors'
+                  >
+                    Fractal dimension (Wikipedia)
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <p className='text-xs text-black/40 mt-12'>
+            Interactive visualisations built with React and Canvas. Inspired by the work of Benoit Mandelbrot and countless fractal explorers.
           </p>
         </div>
       </section>
-
     </main>
   );
 }
