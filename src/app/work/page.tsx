@@ -4,6 +4,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Work — Bang Industries',
   description: 'Selected projects in data visualisation, explanation design, and scientific illustration.',
+  alternates: {
+    canonical: 'https://bangindustries.co/work',
+  },
 };
 
 const projects = [

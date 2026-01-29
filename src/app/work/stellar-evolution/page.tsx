@@ -3,6 +3,9 @@ import HRDiagram from './HRDiagram';
 export const metadata = {
   title: 'The Main Sequence and Beyond — Bang Industries',
   description: 'Mapping stellar evolution with GAIA data. Exploring different approaches to visualising five million stars on the Hertzsprung-Russell diagram.',
+  alternates: {
+    canonical: 'https://bangindustries.co/work/stellar-evolution',
+  },
 };
 
 export default function StellarEvolutionPage() {

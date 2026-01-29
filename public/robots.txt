@@ -1,0 +1,6 @@
+# robots.txt for Bang Industries
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://bangindustries.co/sitemap.xml

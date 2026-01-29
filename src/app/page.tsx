@@ -1,4 +1,13 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Bang Industries — Data Visualisation & Explanation Design',
+  description: 'Design studio specialising in data visualisation, scientific illustration, and explanation design. We make complex ideas clear and visually extraordinary.',
+  alternates: {
+    canonical: 'https://bangindustries.co',
+  },
+};
 
 // Placeholder project data
 const projects = [
