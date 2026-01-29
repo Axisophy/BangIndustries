@@ -1,11 +1,20 @@
 'use client';
 
+import { useRef, useState } from 'react';
 import { KochSnowflake } from './components/KochSnowflake';
 import { MandelbrotExplorer } from './components/MandelbrotExplorer';
 import { JuliaExplorer } from './components/JuliaExplorer';
 import { NaturalFractalsGallery } from './components/NaturalFractalsGallery';
 
 export default function FractalsPage() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+
+  const handleCanPlayThrough = () => {
+    setIsVideoReady(true);
+    videoRef.current?.play();
+  };
+
   return (
     <main className='min-h-screen bg-white'>
       {/* Hero */}
@@ -33,10 +42,12 @@ export default function FractalsPage() {
       {/* Video Hero */}
       <section className='relative h-[70vh] min-h-[500px] bg-black overflow-hidden'>
         <video
-          autoPlay
+          ref={videoRef}
+          preload='auto'
           muted
           playsInline
-          className='absolute inset-0 w-full h-full object-cover'
+          onCanPlayThrough={handleCanPlayThrough}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`}
         >
           <source src='https://bangindustries.co/video/mandelbrot_zoom_3840x2160.mp4' type='video/mp4' />
         </video>
