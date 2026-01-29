@@ -93,10 +93,6 @@ export function KochSnowflake() {
             strokeLinejoin='miter'
           />
 
-          {/* Iteration label */}
-          <text x='250' y='485' textAnchor='middle' fontSize='12' fill='#666' fontFamily='system-ui'>
-            Iteration {iterations}
-          </text>
         </svg>
       </div>
     </InteractiveFrame>

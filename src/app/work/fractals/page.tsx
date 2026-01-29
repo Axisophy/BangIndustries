@@ -480,7 +480,7 @@ export default function FractalsPage() {
       </section>
 
       {/* Stage 7: LAUNCH - Further Exploration */}
-      <section className='px-4 md:px-6 lg:px-8 pb-16 md:pb-20 lg:pb-24 border-t border-black/10 pt-16 md:pt-20'>
+      <section className='px-4 md:px-6 lg:px-8 pb-16 md:pb-20 lg:pb-24 pt-16 md:pt-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Further Exploration
@@ -563,10 +563,6 @@ export default function FractalsPage() {
                 </ul>
               </div>
             </div>
-
-            <p className='text-xs text-black/40 mt-12'>
-              Interactive visualisations built with React and Canvas. Inspired by the work of Benoit Mandelbrot and countless fractal explorers.
-            </p>
           </div>
         </div>
       </section>

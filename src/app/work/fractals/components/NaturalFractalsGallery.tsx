@@ -51,11 +51,10 @@ function ImagePlaceholder({ caption }: { caption: string }) {
 
 export function NaturalFractalsGallery() {
   return (
-    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-black/10'>
+    <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
       {NATURAL_FRACTALS.map((item) => (
-        <div key={item.alt} className='bg-white'>
-          <ImagePlaceholder caption={item.caption} />
-          <p className='text-xs text-black/50 p-2 text-center'>{item.caption}</p>
+        <div key={item.alt} className='aspect-square bg-black/5 flex items-center justify-center border border-black/10'>
+          <span className='text-black/30 text-xs font-mono text-center px-2'>{item.caption}</span>
         </div>
       ))}
     </div>
