@@ -18,7 +18,7 @@ export default function OrbitalMechanicsPage() {
             Orbital mechanics and the path to the Moon
           </p>
           <p className="text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12">
-            Spacecraft don&apos;t travel in straight lines. They fall — in carefully calculated curves that trade altitude for speed and speed for altitude. This interactive explainer unpacks the physics of orbital transfers, from the elegant Hohmann ellipse to the real mission profiles of Apollo and Artemis.
+            Spacecraft don&apos;t travel in straight lines. They fall  - in carefully calculated curves that trade altitude for speed and speed for altitude. This interactive explainer unpacks the physics of orbital transfers, from the elegant Hohmann ellipse to the real mission profiles of Apollo and Artemis.
           </p>
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8">
@@ -54,7 +54,7 @@ export default function OrbitalMechanicsPage() {
         <TransferDesigner />
         <p className="text-xs md:text-sm text-black/50 mt-4 max-w-2xl">
           Adjust the orbital parameters to see how {'\u0394'}v requirements change.
-          For very distant targets (ratio {'>'} 11.94), a bi-elliptic transfer becomes more efficient than Hohmann — at the cost of much longer travel time.
+          For very distant targets (ratio {'>'} 11.94), a bi-elliptic transfer becomes more efficient than Hohmann  - at the cost of much longer travel time.
         </p>
       </section>
 
@@ -77,7 +77,7 @@ export default function OrbitalMechanicsPage() {
                 The Challenge
               </h2>
               <p className="text-black/70 leading-relaxed">
-                Orbital mechanics is counterintuitive. To go faster, you fire your engine backward. To catch something ahead of you, you slow down first. To reach the Moon, you don&apos;t point at it — you aim at where it will be in three days. For Mxwll, we wanted to build interactive tools that make these dynamics visible, grounding the abstract mathematics in animated trajectories and real mission data.
+                Orbital mechanics is counterintuitive. To go faster, you fire your engine backward. To catch something ahead of you, you slow down first. To reach the Moon, you don&apos;t point at it  - you aim at where it will be in three days. For Mxwll, we wanted to build interactive tools that make these dynamics visible, grounding the abstract mathematics in animated trajectories and real mission data.
               </p>
             </div>
 
@@ -88,13 +88,13 @@ export default function OrbitalMechanicsPage() {
               </h2>
               <div className="space-y-4 text-black/70 leading-relaxed">
                 <p>
-                  The Hohmann transfer, discovered in 1925, is the most fuel-efficient way to move between two circular orbits. It uses two engine burns: one to enter an elliptical transfer orbit, and another to circularize at the destination. The elegance lies in timing the burns at specific points — periapsis and apoapsis — where velocity changes have maximum effect.
+                  The Hohmann transfer, discovered in 1925, is the most fuel-efficient way to move between two circular orbits. It uses two engine burns: one to enter an elliptical transfer orbit, and another to circularize at the destination. The elegance lies in timing the burns at specific points  - periapsis and apoapsis  - where velocity changes have maximum effect.
                 </p>
                 <p>
-                  This efficiency comes from the Oberth effect: a rocket engine produces more useful energy when the spacecraft is already moving fast. Burning deep in a gravity well (close to a planet) is more efficient than burning far away. It&apos;s why spacecraft don&apos;t just point at their destination and fire — they follow curves that exploit gravitational dynamics.
+                  This efficiency comes from the Oberth effect: a rocket engine produces more useful energy when the spacecraft is already moving fast. Burning deep in a gravity well (close to a planet) is more efficient than burning far away. It&apos;s why spacecraft don&apos;t just point at their destination and fire  - they follow curves that exploit gravitational dynamics.
                 </p>
                 <p>
-                  Real missions add complexity. The Moon is moving, so timing matters. The spacecraft needs to arrive when the Moon is actually there. Artemis missions use an even more complex trajectory — a near-rectilinear halo orbit (NRHO) that balances fuel efficiency, communication, and the geometry of lunar operations.
+                  Real missions add complexity. The Moon is moving, so timing matters. The spacecraft needs to arrive when the Moon is actually there. Artemis missions use an even more complex trajectory  - a near-rectilinear halo orbit (NRHO) that balances fuel efficiency, communication, and the geometry of lunar operations.
                 </p>
               </div>
             </div>
@@ -109,7 +109,7 @@ export default function OrbitalMechanicsPage() {
                   We built four interactive components that work as a progression:
                 </p>
                 <p>
-                  The mission map provides an overview — Earth, Moon, and the transfer ellipse with annotated burns. It establishes the visual vocabulary for what follows.
+                  The mission map provides an overview  - Earth, Moon, and the transfer ellipse with annotated burns. It establishes the visual vocabulary for what follows.
                 </p>
                 <p>
                   The transfer animation lets users scrub through time and watch telemetry change. Speed drops as altitude increases; distance to the Moon shrinks; the coast phase becomes tangible rather than abstract.
@@ -118,7 +118,7 @@ export default function OrbitalMechanicsPage() {
                   The transfer designer exposes the mathematics. Users can adjust orbital parameters and see how {'\u0394'}v requirements respond. The bi-elliptic comparison reveals a counterintuitive result: sometimes three burns beats two.
                 </p>
                 <p>
-                  The mission storyboard grounds everything in real operations — the actual phases of Apollo and Artemis, with technical details about what each burn accomplishes and why it happens where it does.
+                  The mission storyboard grounds everything in real operations  - the actual phases of Apollo and Artemis, with technical details about what each burn accomplishes and why it happens where it does.
                 </p>
               </div>
             </div>

@@ -6,7 +6,7 @@ import { MandelbrotExplorer } from './components/MandelbrotExplorer';
 import { JuliaExplorer } from './components/JuliaExplorer';
 import { NaturalFractalsGallery } from './components/NaturalFractalsGallery';
 
-function AudienceDropdown() {
+function MetadataDropdown({ title, children }: { title: string; children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -15,7 +15,7 @@ function AudienceDropdown() {
         onClick={() => setIsOpen(!isOpen)}
         className='flex items-center justify-between w-full text-left'
       >
-        <span className='text-sm'>Generally interested adults</span>
+        <span className='text-sm'>{title}</span>
         <svg
           className={`w-4 h-4 text-black/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill='none'
@@ -26,9 +26,9 @@ function AudienceDropdown() {
         </svg>
       </button>
       {isOpen && (
-        <p className='text-xs text-black/60 mt-2 leading-relaxed'>
-          Curious people with no assumed mathematics background. They&apos;ve seen fractal images before and have surface familiarity, but don&apos;t understand what they&apos;re actually looking at. They want to genuinely understand, not just admire.
-        </p>
+        <div className='text-xs text-black/60 mt-2 leading-relaxed space-y-2'>
+          {children}
+        </div>
       )}
     </div>
   );
@@ -62,7 +62,7 @@ export default function FractalsPage() {
               A Beginner&apos;s Guide
             </p>
             <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
-              An accessible introduction to fractal geometry — from simple self-similarity to the infinite complexity of the Mandelbrot set. Designed to spark curiosity without requiring any mathematical background.
+              An accessible introduction to fractal geometry  - from simple self-similarity to the infinite complexity of the Mandelbrot set. Designed to spark curiosity without requiring any mathematical background.
             </p>
             {/* Tags */}
             <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
@@ -84,7 +84,28 @@ export default function FractalsPage() {
               <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
                 Audience
               </span>
-              <AudienceDropdown />
+              <MetadataDropdown title='Generally interested adults'>
+                <p>Curious people with no assumed mathematics background. They&apos;ve seen fractal images before - screensavers, posters, album covers - and have surface familiarity, but don&apos;t understand what they&apos;re actually looking at. They want to genuinely understand, not just admire. The reward is the feeling of &quot;now I actually get this.&quot;</p>
+              </MetadataDropdown>
+            </div>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+                Approach
+              </span>
+              <MetadataDropdown title='Approach'>
+                <p>Fractals have a surface familiarity problem - most people have seen the images but have no idea what they&apos;re actually looking at. We start by acknowledging that recognition, then reframe it as a gap worth closing.</p>
+                <p>The Koch snowflake does the heavy lifting. It&apos;s the simplest possible fractal: one rule, obvious self-similarity, no mathematics required. Once that clicks, everything else - coastlines, nature, the Mandelbrot set - becomes variations on the same theme.</p>
+                <p>The Mandelbrot explorer comes late, after the conceptual work is done. By then, zooming isn&apos;t just pretty - they understand why the detail never runs out.</p>
+              </MetadataDropdown>
+            </div>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+                Adaptability
+              </span>
+              <MetadataDropdown title='Adaptability'>
+                <p>This approach - concrete example first, progressive complexity, interactive exploration - works for any subject where the core concept is genuinely simple but obscured by intimidating presentation. Chaos theory, network effects, probability distributions, the electromagnetic spectrum.</p>
+                <p>It wouldn&apos;t suit subjects that genuinely require mathematical prerequisites to make sense - quantum mechanics, general relativity, Fourier transforms. For those, either the audience needs to be narrower (people with calculus), or the explanation needs to be more metaphorical and less precise.</p>
+              </MetadataDropdown>
             </div>
             <div>
               <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
@@ -135,7 +156,7 @@ export default function FractalsPage() {
           </h2>
           <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
-              You&apos;ve seen fractal images — on posters, screensavers, album covers. The Mandelbrot set, with its seahorses and spirals, has become one of the most recognisable images in mathematics.
+              You&apos;ve seen fractal images  - on posters, screensavers, album covers. The Mandelbrot set, with its seahorses and spirals, has become one of the most recognisable images in mathematics.
             </p>
             <p>
               But here&apos;s the thing: most people who recognise a fractal couldn&apos;t tell you what actually makes it a fractal. What&apos;s special about these shapes? Why can you zoom in forever? And how does such complexity come from such simple rules?
@@ -169,7 +190,7 @@ export default function FractalsPage() {
           </h2>
           <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
-              The defining feature of fractals is <strong>self-similarity</strong> — zoom in, and you find smaller copies of the same shapes you just saw. Zoom in on those copies, and you find even smaller copies. This continues forever.
+              The defining feature of fractals is <strong>self-similarity</strong>  - zoom in, and you find smaller copies of the same shapes you just saw. Zoom in on those copies, and you find even smaller copies. This continues forever.
             </p>
             <p>
               The remarkable thing is that this infinite complexity usually emerges from very simple rules. Let&apos;s see how.
@@ -213,7 +234,7 @@ export default function FractalsPage() {
               Measure with a 100km ruler, skipping over bays and peninsulas, and you get one number. Measure with a 10km ruler, following more detail, and the coastline is longer. Use a 1km ruler, and longer still. Use a metre stick, tracing around every rock...
             </p>
             <p>
-              There is no &quot;true&quot; length. The closer you look, the more detail you find — just like the Koch snowflake edges. Coastlines are fractal.
+              There is no &quot;true&quot; length. The closer you look, the more detail you find  - just like the Koch snowflake edges. Coastlines are fractal.
             </p>
           </div>
         </div>
@@ -238,10 +259,10 @@ export default function FractalsPage() {
               A straight line is one-dimensional. A filled square is two-dimensional. But what about a coastline? Or the Koch snowflake?
             </p>
             <p>
-              These shapes are too wiggly and complex to be one-dimensional — they&apos;re trying to fill more space than a simple line. But they don&apos;t fill a whole plane either.
+              These shapes are too wiggly and complex to be one-dimensional  - they&apos;re trying to fill more space than a simple line. But they don&apos;t fill a whole plane either.
             </p>
             <p>
-              Mathematicians measure this in-between quality with something called fractal dimension. The Koch snowflake has a dimension of about 1.26 — more than a line, less than a plane. It&apos;s a measure of how thoroughly a shape fills the space around it.
+              Mathematicians measure this in-between quality with something called fractal dimension. The Koch snowflake has a dimension of about 1.26  - more than a line, less than a plane. It&apos;s a measure of how thoroughly a shape fills the space around it.
             </p>
             <p>
               Britain&apos;s coastline? About 1.25. The more crinkled and space-filling, the higher the dimension.
@@ -292,13 +313,13 @@ export default function FractalsPage() {
           </h2>
           <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
-              Fractals aren&apos;t just mathematical curiosities — they&apos;re everywhere in the natural world.
+              Fractals aren&apos;t just mathematical curiosities  - they&apos;re everywhere in the natural world.
             </p>
             <p>
-              Look at a fern frond: each branch looks like a smaller copy of the whole. River deltas branch and rebranch in patterns that echo at every scale. Lightning bolts, blood vessels, tree branches, broccoli florets — all fractal.
+              Look at a fern frond: each branch looks like a smaller copy of the whole. River deltas branch and rebranch in patterns that echo at every scale. Lightning bolts, blood vessels, tree branches, broccoli florets  - all fractal.
             </p>
             <p>
-              Why? Because fractal branching is efficient. It&apos;s how nature solves the problem of reaching lots of places from one source, or fitting lots of surface area into limited space. Your lungs contain about 300 million air sacs, reached through a fractal tree of branching airways — all packed into your chest.
+              Why? Because fractal branching is efficient. It&apos;s how nature solves the problem of reaching lots of places from one source, or fitting lots of surface area into limited space. Your lungs contain about 300 million air sacs, reached through a fractal tree of branching airways  - all packed into your chest.
             </p>
           </div>
         </div>
@@ -319,7 +340,7 @@ export default function FractalsPage() {
               It&apos;s generated by an absurdly simple formula: take a number, square it, add a constant, repeat. Colour each point based on how quickly (or whether) it escapes to infinity.
             </p>
             <p>
-              The magic is at the boundary — that&apos;s where all the complexity lives. Zoom in on the edge, and you find spirals, seahorses, and intricate filigree. Zoom deeper, and the detail never ends. And scattered throughout, you&apos;ll find tiny copies of the whole set — self-similarity again.
+              The magic is at the boundary  - that&apos;s where all the complexity lives. Zoom in on the edge, and you find spirals, seahorses, and intricate filigree. Zoom deeper, and the detail never ends. And scattered throughout, you&apos;ll find tiny copies of the whole set  - self-similarity again.
             </p>
             <p>
               Try it yourself.
@@ -340,10 +361,10 @@ export default function FractalsPage() {
               Look at a fractal image now, and you see something different than you did ten minutes ago.
             </p>
             <p>
-              You see self-similarity — the pattern containing copies of itself at every scale. You understand why zooming works: the detail never runs out because the same structures repeat infinitely.
+              You see self-similarity  - the pattern containing copies of itself at every scale. You understand why zooming works: the detail never runs out because the same structures repeat infinitely.
             </p>
             <p>
-              You know that this infinite complexity comes from simple rules — a few lines of mathematics generating boundless intricacy. And you know that nature discovered fractals long before we did.
+              You know that this infinite complexity comes from simple rules  - a few lines of mathematics generating boundless intricacy. And you know that nature discovered fractals long before we did.
             </p>
             <p className='text-white'>
               That&apos;s what a fractal is. Not just a pretty picture, but a window into how complexity emerges from simplicity.
@@ -359,7 +380,7 @@ export default function FractalsPage() {
             Going Deeper
           </h2>
           <p className='text-black/50 text-sm'>
-            For the curious — you&apos;ve got the main idea, this is extra.
+            For the curious  - you&apos;ve got the main idea, this is extra.
           </p>
         </div>
       </section>
@@ -372,7 +393,7 @@ export default function FractalsPage() {
           </h3>
           <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
-              The Mandelbrot set has a secret twin — actually, infinitely many twins.
+              The Mandelbrot set has a secret twin  - actually, infinitely many twins.
             </p>
             <p>
               Every point on the Mandelbrot set corresponds to a different Julia set. Choose a point inside the Mandelbrot set, and the Julia set is connected (one continuous shape). Choose a point outside, and the Julia set shatters into disconnected dust.
@@ -402,7 +423,7 @@ export default function FractalsPage() {
             Beyond Two Dimensions
           </h3>
           <p className='text-black/70 leading-relaxed'>
-            Fractals extend into three dimensions and beyond. The Mandelbulb (discovered 2009) is a 3D analog of the Mandelbrot set — infinitely detailed surfaces you could explore forever.
+            Fractals extend into three dimensions and beyond. The Mandelbulb (discovered 2009) is a 3D analog of the Mandelbrot set  - infinitely detailed surfaces you could explore forever.
           </p>
         </div>
 
@@ -425,14 +446,14 @@ export default function FractalsPage() {
           </h3>
           <div>
             <p className='text-black/70 leading-relaxed mb-8'>
-              Fractals aren&apos;t just beautiful — they&apos;re useful.
+              Fractals aren&apos;t just beautiful  - they&apos;re useful.
             </p>
 
             <div className='space-y-6'>
               <div>
                 <h4 className='font-bold mb-1'>Antennas</h4>
                 <p className='text-sm text-black/60'>
-                  Fractal designs pack more electrical length into small spaces — that&apos;s why your phone can receive multiple frequencies.
+                  Fractal designs pack more electrical length into small spaces  - that&apos;s why your phone can receive multiple frequencies.
                 </p>
               </div>
               <div>
@@ -450,7 +471,7 @@ export default function FractalsPage() {
               <div>
                 <h4 className='font-bold mb-1'>Finance</h4>
                 <p className='text-sm text-black/60'>
-                  Mandelbrot&apos;s later work revealed fractal patterns in market price movements — something traditional models miss.
+                  Mandelbrot&apos;s later work revealed fractal patterns in market price movements  - something traditional models miss.
                 </p>
               </div>
             </div>
@@ -478,7 +499,7 @@ export default function FractalsPage() {
                       rel='noopener noreferrer'
                       className='text-[var(--color-blue)] hover:text-black transition-colors'
                     >
-                      The Fractal Geometry of Nature — Benoit Mandelbrot
+                      The Fractal Geometry of Nature  - Benoit Mandelbrot
                     </a>
                     <span className='text-black/40 ml-2'>The foundational text</span>
                   </li>

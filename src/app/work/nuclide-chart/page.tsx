@@ -1,7 +1,7 @@
 import NuclideChart from './NuclideChart';
 
 export const metadata = {
-  title: 'Mapping Instability — Bang Industries',
+  title: 'Mapping Instability  - Bang Industries',
   description: 'An interactive exploration of all 3,300+ known isotopes, mapped by protons and neutrons.',
   alternates: {
     canonical: 'https://bangindustries.co/work/nuclide-chart',

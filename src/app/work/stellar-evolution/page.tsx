@@ -1,7 +1,7 @@
 import HRDiagram from './HRDiagram';
 
 export const metadata = {
-  title: 'The Main Sequence and Beyond — Bang Industries',
+  title: 'The Main Sequence and Beyond  - Bang Industries',
   description: 'Mapping stellar evolution with GAIA data. Exploring different approaches to visualising five million stars on the Hertzsprung-Russell diagram.',
   alternates: {
     canonical: 'https://bangindustries.co/work/stellar-evolution',
@@ -34,7 +34,7 @@ export default function StellarEvolutionPage() {
         </div>
       </section>
 
-      {/* Static images — 2x2 grid */}
+      {/* Static images  - 2x2 grid */}
       <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           {/* Image 1: Full range point cloud */}
@@ -89,7 +89,7 @@ export default function StellarEvolutionPage() {
       <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-24'>
 
-          {/* Left column — main content */}
+          {/* Left column  - main content */}
           <div className='lg:col-span-2 space-y-8 md:space-y-10 lg:space-y-12'>
 
             {/* The Challenge */}
@@ -180,7 +180,7 @@ export default function StellarEvolutionPage() {
 
           </div>
 
-          {/* Right column — metadata */}
+          {/* Right column  - metadata */}
           <div className='space-y-6 md:space-y-8'>
 
             {/* Technology */}

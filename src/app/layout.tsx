@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Bang Industries — Data Visualisation & Explanation Design",
+  title: "Bang Industries  - Data Visualisation & Explanation Design",
   description: "Design studio specialising in data visualisation, scientific illustration, and explanation design. We make complex ideas clear and visually extraordinary.",
   keywords: ["data visualisation", "explanation design", "scientific illustration", "infographics", "interactive design"],
   authors: [{ name: "Bang Industries" }],

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Work — Bang Industries',
+  title: 'Work  - Bang Industries',
   description: 'Selected projects in data visualisation, explanation design, and scientific illustration.',
   alternates: {
     canonical: 'https://bangindustries.co/work',
@@ -122,7 +122,7 @@ export default function WorkPage() {
         </div>
       </section>
 
-      {/* Project Grid — single column */}
+      {/* Project Grid  - single column */}
       <section className='px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16'>
         <div className='grid grid-cols-1 gap-px'>
           {projects.map((project, index) => (

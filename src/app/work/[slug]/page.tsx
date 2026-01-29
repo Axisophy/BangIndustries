@@ -45,7 +45,7 @@ const projects: Record<string, {
     category: 'Scientific Illustration',
     year: '2020–Present',
     description: 'Scientific poster designs including periodic table and solar system visualisations.',
-    challenge: 'Scientific posters often sacrifice visual appeal for accuracy, or vice versa. We wanted to create prints that scientists would hang on their walls — beautiful and accurate.',
+    challenge: 'Scientific posters often sacrifice visual appeal for accuracy, or vice versa. We wanted to create prints that scientists would hang on their walls  - beautiful and accurate.',
     solution: 'Using Müller-Brockmann\'s grid system, we developed a visual language for scientific data that maintains rigorous accuracy while achieving genuine visual beauty.',
     color: 'bg-black',
   },
@@ -72,12 +72,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   if (!project) {
     return {
-      title: 'Project Not Found — Bang Industries',
+      title: 'Project Not Found  - Bang Industries',
     };
   }
   
   return {
-    title: `${project.title} — Bang Industries`,
+    title: `${project.title}  - Bang Industries`,
     description: project.description,
     alternates: {
       canonical: `https://bangindustries.co/work/${slug}`,

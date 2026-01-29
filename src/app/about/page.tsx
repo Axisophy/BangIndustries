@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About — Bang Industries',
+  title: 'About  - Bang Industries',
   description: 'Bang Industries is a design practice specialising in explanation design for complex systems. Founded by Simon Tyler, combining deep subject understanding with illustration, data visualisation, and interactive design.',
   alternates: {
     canonical: 'https://bangindustries.co/about',

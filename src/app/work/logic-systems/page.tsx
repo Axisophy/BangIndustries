@@ -17,11 +17,11 @@ export default function LogicSystemsPage() {
             How logic circuits become learning machines
           </p>
           <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
-            Machine learning can feel like magic — or like impenetrable mathematics.
+            Machine learning can feel like magic  - or like impenetrable mathematics.
             Neither is true. This interactive guide builds from something concrete
             (logic gates, the AND/OR/NOT you might remember from school) to something
             powerful (neural networks that can learn almost any pattern). The key
-            insight: they&apos;re all doing the same thing — dividing space into regions.
+            insight: they&apos;re all doing the same thing  - dividing space into regions.
           </p>
           {/* Tags */}
           <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
@@ -61,7 +61,7 @@ export default function LogicSystemsPage() {
         <p className='text-black/70 leading-relaxed max-w-3xl mb-8'>
           Now forget the rules. Instead of telling a computer exactly what to do,
           we show it examples and let it figure out the pattern. The coloured regions
-          show what the model has learned — where it would classify new data points.
+          show what the model has learned  - where it would classify new data points.
         </p>
         <DecisionBoundary />
       </section>
@@ -72,7 +72,7 @@ export default function LogicSystemsPage() {
         <p className='text-black/70 leading-relaxed max-w-3xl mb-8'>
           Here&apos;s the connection: logic gates create sharp, hand-coded boundaries.
           Decision trees learn chunky, axis-aligned splits. Neural networks learn
-          smooth curves. Each step adds flexibility — and the ability to learn
+          smooth curves. Each step adds flexibility  - and the ability to learn
           from data rather than being programmed by hand.
         </p>
         <LogicToMLBridge />
@@ -102,13 +102,13 @@ export default function LogicSystemsPage() {
               </h2>
               <div className='space-y-4 text-black/70 leading-relaxed'>
                 <p>
-                  Boolean logic is the foundation of all digital computation. AND gates output 1 only if both inputs are 1. OR gates output 1 if either input is 1. NOT gates flip the input. From these primitives, you can build any computable function — including arithmetic, memory, and entire computers.
+                  Boolean logic is the foundation of all digital computation. AND gates output 1 only if both inputs are 1. OR gates output 1 if either input is 1. NOT gates flip the input. From these primitives, you can build any computable function  - including arithmetic, memory, and entire computers.
                 </p>
                 <p>
-                  The key insight connecting logic to machine learning is the concept of a decision boundary. A Boolean function divides its input space into regions that map to 0 or 1. A machine learning classifier does the same thing — but instead of the boundary being hand-designed, it is learned from examples.
+                  The key insight connecting logic to machine learning is the concept of a decision boundary. A Boolean function divides its input space into regions that map to 0 or 1. A machine learning classifier does the same thing  - but instead of the boundary being hand-designed, it is learned from examples.
                 </p>
                 <p>
-                  The simplest ML classifier (logistic regression) learns a single straight line to separate classes. More complex models (polynomial features, neural networks) learn curved or wiggly boundaries. The tradeoff is always between flexibility and the risk of overfitting — memorising the training data rather than learning the underlying pattern.
+                  The simplest ML classifier (logistic regression) learns a single straight line to separate classes. More complex models (polynomial features, neural networks) learn curved or wiggly boundaries. The tradeoff is always between flexibility and the risk of overfitting  - memorising the training data rather than learning the underlying pattern.
                 </p>
               </div>
             </div>
@@ -129,7 +129,7 @@ export default function LogicSystemsPage() {
                   The decision boundary visualiser plots training points in 2D and shows how different classifiers carve up the space. Sliders let users adjust regularisation (for linear models), k (for k-NN), or kernel width (for RBF) to see underfitting and overfitting in action.
                 </p>
                 <p>
-                  The bridge diagram shows the conceptual progression from fixed logic to learned rules to smooth approximations, emphasising that neural networks are not magic — they are compositions of simple functions, just like logic circuits.
+                  The bridge diagram shows the conceptual progression from fixed logic to learned rules to smooth approximations, emphasising that neural networks are not magic  - they are compositions of simple functions, just like logic circuits.
                 </p>
               </div>
             </div>
@@ -140,7 +140,7 @@ export default function LogicSystemsPage() {
                 Adaptability
               </h2>
               <p className='text-black/70 leading-relaxed'>
-                The pedagogical pattern here — start concrete, build to abstract, show the connections — applies to any complex system. We have used similar approaches to explain cryptography (from XOR to public key), compression (from run-length to neural codecs), and optimisation (from gradient descent to modern optimisers).
+                The pedagogical pattern here  - start concrete, build to abstract, show the connections  - applies to any complex system. We have used similar approaches to explain cryptography (from XOR to public key), compression (from run-length to neural codecs), and optimisation (from gradient descent to modern optimisers).
               </p>
             </div>
 
