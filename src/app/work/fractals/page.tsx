@@ -149,7 +149,7 @@ export default function FractalsPage() {
       </section>
 
       {/* Stage 2: ANCHOR - "You've Seen These Before" */}
-      <section className='px-4 md:px-6 lg:px-8 pt-16 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20'>
+      <section className='px-4 md:px-8 lg:px-12 pt-16 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             You&apos;ve Seen These Before
@@ -183,7 +183,7 @@ export default function FractalsPage() {
       </section>
 
       {/* Stage 3: FOUNDATION - "Patterns Within Patterns" */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Patterns Within Patterns
@@ -200,7 +200,7 @@ export default function FractalsPage() {
       </section>
 
       {/* Koch Snowflake Interactive */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             The Koch Snowflake
@@ -218,7 +218,7 @@ export default function FractalsPage() {
       </section>
 
       {/* Stage 4: BUILD - Beat 4a: Coastline */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             How Long is Britain&apos;s Coastline?
@@ -249,7 +249,7 @@ export default function FractalsPage() {
       </section>
 
       {/* Beat 4b: Fractal Dimension */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             More Than a Line, Less Than a Plane
@@ -306,7 +306,7 @@ export default function FractalsPage() {
       </section>
 
       {/* Beat 4c: Nature */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Nature&apos;s Favourite Pattern
@@ -327,7 +327,7 @@ export default function FractalsPage() {
       </section>
 
       {/* Beat 4d: Mandelbrot */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Icon
@@ -351,7 +351,7 @@ export default function FractalsPage() {
       </section>
 
       {/* Stage 5: REWARD - "Now You See It" */}
-      <section className='px-4 md:px-6 lg:px-8 py-16 md:py-20 lg:py-24 bg-black text-white'>
+      <section className='px-4 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24 bg-black text-white'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Now You See It
@@ -374,7 +374,7 @@ export default function FractalsPage() {
       </section>
 
       {/* Stage 6: EXTEND - Clearly marked optional */}
-      <section className='px-4 md:px-6 lg:px-8 pt-16 md:pt-20 lg:pt-24 pb-8'>
+      <section className='px-4 md:px-8 lg:px-12 pt-16 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Going Deeper
@@ -386,7 +386,7 @@ export default function FractalsPage() {
       </section>
 
       {/* 6a: Julia Sets */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Julia Sets
@@ -417,7 +417,7 @@ export default function FractalsPage() {
       </section>
 
       {/* 6b: Beyond 2D */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Beyond Two Dimensions
@@ -439,7 +439,7 @@ export default function FractalsPage() {
       </section>
 
       {/* 6c: Applications */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             More Than Pretty Pictures
@@ -480,7 +480,7 @@ export default function FractalsPage() {
       </section>
 
       {/* Stage 7: LAUNCH - Further Exploration */}
-      <section className='px-4 md:px-6 lg:px-8 pb-16 md:pb-20 lg:pb-24 pt-16 md:pt-20'>
+      <section className='px-4 md:px-8 lg:px-12 pb-16 md:pb-20 lg:pb-24 pt-16 md:pt-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Further Exploration
