@@ -219,7 +219,7 @@ export default function FractalsPage() {
 
       {/* Stage 4: BUILD - Beat 4a: Coastline */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
-        <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
+        <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             How Long is Britain&apos;s Coastline?
           </h2>
@@ -240,7 +240,7 @@ export default function FractalsPage() {
         </div>
 
         {/* Coastline diagram placeholder - full width */}
-        <div className='mt-12 border border-black/10 aspect-[2/1] flex items-center justify-center bg-black/5'>
+        <div className='border border-black/10 aspect-[2/1] flex items-center justify-center bg-black/5'>
           <span className='text-black/30 text-sm font-mono'>coastline-measurement.svg</span>
         </div>
         <p className='text-xs md:text-sm text-black/50 mt-4'>
@@ -250,7 +250,7 @@ export default function FractalsPage() {
 
       {/* Beat 4b: Fractal Dimension */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
-        <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
+        <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             More Than a Line, Less Than a Plane
           </h2>
@@ -271,7 +271,7 @@ export default function FractalsPage() {
         </div>
 
         {/* Dimension comparison - full width */}
-        <div className='mt-12 grid grid-cols-3 gap-4'>
+        <div className='grid grid-cols-3 gap-4'>
           <div className='border border-black/10 p-4 flex flex-col items-center'>
             <div className='h-24 flex items-center justify-center'>
               <svg width='100' height='4' viewBox='0 0 100 4'>
@@ -418,7 +418,7 @@ export default function FractalsPage() {
 
       {/* 6b: Beyond 2D */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
-        <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
+        <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Beyond Two Dimensions
           </h3>
@@ -428,7 +428,7 @@ export default function FractalsPage() {
         </div>
 
         {/* 3D renders placeholder - full width */}
-        <div className='mt-12 grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           <div className='aspect-square bg-black/5 flex items-center justify-center border border-black/10'>
             <span className='text-black/30 text-sm font-mono'>mandelbulb.jpg</span>
           </div>
