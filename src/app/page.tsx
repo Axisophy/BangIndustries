@@ -41,12 +41,12 @@ export default function Home() {
   return (
     <main className='min-h-screen bg-white'>
       {/* Hero Project Section */}
-      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20'>
         {/* Colored placeholder for hero image/video */}
         <div className='w-full aspect-[16/9] bg-[var(--color-blue)]' />
 
         {/* Hero project title */}
-        <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold tracking-tight leading-[1.1] mt-8'>
+        <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mt-8'>
           Maxwell Pictogram System
         </h1>
 
@@ -65,8 +65,8 @@ export default function Home() {
       </section>
 
       {/* Selected Work Section */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
-        <h2 className='text-2xl md:text-3xl font-bold tracking-tight mb-8 md:mb-12'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
+        <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-8 md:mb-12'>
           Selected work:
         </h2>
 
@@ -82,12 +82,12 @@ export default function Home() {
                 <div className='flex flex-col md:flex-row md:items-start md:justify-between gap-4'>
                   <div className='flex-1'>
                     <div className='flex items-baseline gap-4 mb-2'>
-                      <span className='text-xs font-mono text-black/40'>[{project.number}]</span>
-                      <h3 className='text-xl md:text-2xl font-bold tracking-tight group-hover:text-[var(--color-blue)] transition-colors'>
+                      <span className='text-xs font-mono text-black/50'>[{project.number}]</span>
+                      <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight group-hover:text-[var(--color-blue)] transition-colors'>
                         {project.title}
                       </h3>
                     </div>
-                    <p className='text-black/60 max-w-xl'>
+                    <p className='text-black/70 max-w-xl'>
                       {project.description}
                     </p>
                   </div>
@@ -95,7 +95,7 @@ export default function Home() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className='text-[10px] font-mono uppercase tracking-wider text-black/40 bg-black/5 px-2 py-1'
+                        className='text-xs font-mono uppercase tracking-wider text-black/50 bg-black/5 px-2 py-1'
                       >
                         {tag}
                       </span>
@@ -111,7 +111,7 @@ export default function Home() {
         <div className='mt-8 md:mt-12'>
           <Link
             href='/work'
-            className='text-base text-black/40 hover:text-[var(--color-blue)] transition-colors inline-flex items-center gap-2'
+            className='text-base text-black/50 hover:text-[var(--color-blue)] transition-colors inline-flex items-center gap-2'
           >
             View all work <span aria-hidden='true'>→</span>
           </Link>

@@ -24,26 +24,26 @@ function ServiceDropdown({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 pt-8 md:pt-12 lg:pt-16'>
+    <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
         <div>
-          <span className='text-xs font-mono text-black/40 block mb-4'>[{number}]</span>
-          <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
+          <span className='text-xs font-mono text-black/50 block mb-4'>[{number}]</span>
+          <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight'>
             {title}
           </h2>
         </div>
         <div>
-          <p className='text-black/80 mb-8'>
+          <p className='text-black/70 mb-8'>
             {shortDescription}
           </p>
 
           <div className='space-y-4 mb-8'>
             <div className='flex justify-between py-4 border-b border-black/10'>
-              <span className='text-sm text-black/60'>Timeline</span>
+              <span className='text-sm text-black/70'>Timeline</span>
               <span className='text-sm'>{timeline}</span>
             </div>
             <div className='flex justify-between py-4 border-b border-black/10'>
-              <span className='text-sm text-black/60'>You get</span>
+              <span className='text-sm text-black/70'>You get</span>
               <span className='text-sm text-right max-w-xs'>{youGet}</span>
             </div>
           </div>
@@ -52,7 +52,7 @@ function ServiceDropdown({
           <div className='mb-8'>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className='inline-flex items-center gap-2 text-sm text-black/60 hover:text-black transition-colors'
+              className='inline-flex items-center gap-2 text-sm text-black/70 hover:text-black transition-colors'
             >
               <span>{isOpen ? 'Show less' : 'Learn more'}</span>
               <svg
@@ -71,7 +71,7 @@ function ServiceDropdown({
                   {expandedContent}
                 </div>
                 <p className='text-sm text-black/50'>
-                  <span className='font-bold text-black/60'>Good for:</span> {goodFor}
+                  <span className='font-bold text-black/70'>Good for:</span> {goodFor}
                 </p>
               </div>
             )}
@@ -93,7 +93,7 @@ export default function ServicesPage() {
   return (
     <main className='min-h-screen bg-white'>
       {/* Intro Section */}
-      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
             <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
@@ -101,7 +101,7 @@ export default function ServicesPage() {
             </h1>
           </div>
           <div>
-            <p className='text-lg md:text-xl text-black/80'>
+            <p className='text-lg md:text-xl text-black/70'>
               Explanation design for complex systems. From quick audits
               to full interactive builds, structured around what you need
               to communicate and who needs to understand it.
@@ -174,44 +174,44 @@ export default function ServicesPage() {
       />
 
       {/* Service 4: Beyond Projects */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20 pt-8 md:pt-12 lg:pt-16'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
-            <span className='text-xs font-mono text-black/40 block mb-4'>[04]</span>
-            <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
+            <span className='text-xs font-mono text-black/50 block mb-4'>[04]</span>
+            <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight'>
               Beyond Projects
             </h2>
           </div>
           <div>
-            <p className='text-black/80 mb-8'>
+            <p className='text-black/70 mb-8'>
               Not everything fits neatly into a project scope. We also work with organisations on an ongoing basis, and take on work that doesn&apos;t fit the categories above.
             </p>
 
             <div className='space-y-8'>
               <div>
-                <h3 className='text-xl md:text-2xl font-bold tracking-tight mb-2'>Retained relationships</h3>
-                <p className='text-black/60'>
+                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Retained relationships</h3>
+                <p className='text-black/70'>
                   For organisations with continuous visualisation needs, a retained relationship provides dedicated capacity and priority scheduling. Research groups, publications, science communication teams. Typically structured as a monthly commitment with agreed days included.
                 </p>
               </div>
 
               <div>
-                <h3 className='text-xl md:text-2xl font-bold tracking-tight mb-2'>Pictogram and symbol systems</h3>
-                <p className='text-black/60'>
+                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Pictogram and symbol systems</h3>
+                <p className='text-black/70'>
                   Custom icon sets and visual languages for publishing, wayfinding, or product interfaces. Systematic approaches to visual communication that scale across multiple contexts.
                 </p>
               </div>
 
               <div>
-                <h3 className='text-xl md:text-2xl font-bold tracking-tight mb-2'>Workshops and consulting</h3>
-                <p className='text-black/60'>
+                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Workshops and consulting</h3>
+                <p className='text-black/70'>
                   Half-day or full-day sessions on visual communication, explanation design, or data visualisation. For teams who want to build internal capability or think through a visual communication strategy.
                 </p>
               </div>
 
               <div>
-                <h3 className='text-xl md:text-2xl font-bold tracking-tight mb-2'>Something else</h3>
-                <p className='text-black/60'>
+                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Something else</h3>
+                <p className='text-black/70'>
                   If you have a project that doesn&apos;t fit these descriptions, get in touch anyway. We&apos;re always interested in complex problems that need clear visual solutions.
                 </p>
               </div>
@@ -228,12 +228,12 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className='px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='max-w-xl'>
-          <h2 className='text-2xl md:text-3xl font-bold tracking-tight mb-4'>
+          <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-4'>
             Not sure which is right?
           </h2>
-          <p className='text-black/60 mb-8'>
+          <p className='text-black/70 mb-8'>
             Start with a conversation. Tell us what you&apos;re trying to communicate
             and we&apos;ll figure out the best approach together.
           </p>

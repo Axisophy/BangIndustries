@@ -57,21 +57,21 @@ export default function ContactPage() {
   return (
     <main className='min-h-screen bg-white'>
       {/* Main Content */}
-      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           {/* Left column - intro */}
           <div>
             <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mb-8'>
               Get in touch
             </h1>
-            <p className='text-black/60 mb-8'>
+            <p className='text-black/70 mb-8'>
               Have a project in mind? Tell me what you&apos;re working on
               and we&apos;ll find a time to talk.
             </p>
 
             <div className='space-y-8 text-sm'>
               <div>
-                <span className='text-xs uppercase tracking-wider text-black/40 block mb-1'>
+                <span className='text-xs uppercase tracking-wider text-black/50 block mb-1'>
                   Email
                 </span>
                 <a
@@ -82,7 +82,7 @@ export default function ContactPage() {
                 </a>
               </div>
               <div>
-                <span className='text-xs uppercase tracking-wider text-black/40 block mb-1'>
+                <span className='text-xs uppercase tracking-wider text-black/50 block mb-1'>
                   Location
                 </span>
                 <span>St Leonards-on-Sea, UK</span>
@@ -94,8 +94,8 @@ export default function ContactPage() {
           <div>
             {formState === 'success' ? (
               <div className='space-y-6'>
-                <h2 className='text-2xl font-bold tracking-tight'>Message sent</h2>
-                <p className='text-black/60'>
+                <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight'>Message sent</h2>
+                <p className='text-black/70'>
                   Thanks for getting in touch. I&apos;ll get back to you within 1-2 working days.
                 </p>
                 <button
@@ -123,7 +123,7 @@ export default function ContactPage() {
                 )}
 
                 <div>
-                  <label htmlFor='name' className='block text-sm text-black/60 mb-2'>
+                  <label htmlFor='name' className='block text-sm text-black/70 mb-2'>
                     Name
                   </label>
                   <input
@@ -139,7 +139,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor='email' className='block text-sm text-black/60 mb-2'>
+                  <label htmlFor='email' className='block text-sm text-black/70 mb-2'>
                     Email
                   </label>
                   <input
@@ -155,7 +155,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor='organisation' className='block text-sm text-black/60 mb-2'>
+                  <label htmlFor='organisation' className='block text-sm text-black/70 mb-2'>
                     Organisation
                   </label>
                   <input
@@ -170,7 +170,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor='interest' className='block text-sm text-black/60 mb-2'>
+                  <label htmlFor='interest' className='block text-sm text-black/70 mb-2'>
                     What are you interested in?
                   </label>
                   <select
@@ -196,7 +196,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor='message' className='block text-sm text-black/60 mb-2'>
+                  <label htmlFor='message' className='block text-sm text-black/70 mb-2'>
                     Tell me about your project
                   </label>
                   <textarea
@@ -227,8 +227,8 @@ export default function ContactPage() {
       </section>
 
       {/* Response time note */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
-        <p className='text-sm text-black/40 max-w-md'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
+        <p className='text-sm text-black/50 max-w-md'>
           I typically respond within 1-2 working days. If your project is urgent,
           mention it in your message.
         </p>

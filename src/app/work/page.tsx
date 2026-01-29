@@ -90,12 +90,12 @@ export default function WorkPage() {
   return (
     <main className='min-h-screen bg-white'>
       {/* Hero */}
-      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20'>
         <div className='max-w-full lg:max-w-[75%]'>
           <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
             Work
           </h1>
-          <p className='text-base text-black/60 max-w-2xl mt-4'>
+          <p className='text-base text-black/70 max-w-2xl mt-4'>
             Selected projects in data visualisation, explanation design, and scientific illustration.
             Each piece is crafted to make complex information clear and visually compelling.
           </p>
@@ -103,7 +103,7 @@ export default function WorkPage() {
       </section>
 
       {/* Filter */}
-      <section className='px-4 md:px-6 lg:px-8 border-y border-black/10'>
+      <section className='px-4 md:px-8 lg:px-12 border-y border-black/10'>
         <div className='py-4'>
           <div className='flex flex-wrap gap-4'>
             {categories.map((category, index) => (
@@ -112,7 +112,7 @@ export default function WorkPage() {
                 className={`text-sm px-4 py-2 transition-colors ${
                   index === 0
                     ? 'bg-black text-white'
-                    : 'text-black/60 hover:text-black'
+                    : 'text-black/70 hover:text-black'
                 }`}
               >
                 {category}
@@ -123,7 +123,7 @@ export default function WorkPage() {
       </section>
 
       {/* Project Grid  - single column */}
-      <section className='px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 gap-px'>
           {projects.map((project, index) => (
             <Link
@@ -133,19 +133,19 @@ export default function WorkPage() {
             >
               <article className='py-8 border-b border-black/10'>
                 <div className={`aspect-[4/3] ${project.color} mb-4 flex items-center justify-center transition-transform group-hover:scale-[0.98]`}>
-                  <span className='text-white/40 font-mono text-sm'>
+                  <span className='text-white/50 font-mono text-sm'>
                     [{String(index + 1).padStart(2, '0')}]
                   </span>
                 </div>
                 <div className='mb-2'>
-                  <span className='text-xs font-mono text-black/40'>
+                  <span className='text-xs font-mono text-black/50'>
                     {project.category}
                   </span>
                 </div>
-                <h2 className='text-xl md:text-2xl font-bold tracking-tight group-hover:text-[var(--color-blue)] transition-colors'>
+                <h2 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight group-hover:text-[var(--color-blue)] transition-colors'>
                   {project.title}
                 </h2>
-                <p className='text-black/60 mt-2'>
+                <p className='text-black/70 mt-2'>
                   {project.description}
                 </p>
               </article>
@@ -155,12 +155,12 @@ export default function WorkPage() {
       </section>
 
       {/* CTA */}
-      <section className='px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 bg-black text-white'>
+      <section className='px-4 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20 bg-black text-white'>
         <div className='max-w-xl'>
-          <h2 className='text-2xl md:text-3xl font-bold tracking-tight mb-4'>
+          <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-4'>
             Have a project in mind?
           </h2>
-          <p className='text-white/60 mb-8 max-w-xl'>
+          <p className='text-white/70 mb-8 max-w-xl'>
             We&apos;re always interested in new challenges. Let&apos;s discuss how we can bring visual clarity to your data.
           </p>
           <Link

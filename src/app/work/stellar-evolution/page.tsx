@@ -1,41 +1,113 @@
+'use client';
+
+import { useState } from 'react';
 import HRDiagram from './HRDiagram';
 
-export const metadata = {
-  title: 'The Main Sequence and Beyond  - Bang Industries',
-  description: 'Mapping stellar evolution with GAIA data. Exploring different approaches to visualising five million stars on the Hertzsprung-Russell diagram.',
-  alternates: {
-    canonical: 'https://bangindustries.co/work/stellar-evolution',
-  },
-};
+function MetadataDropdown({ title, children }: { title?: string; children: React.ReactNode }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center ${title ? 'justify-between w-full' : ''} text-left`}
+      >
+        {title && <span className='text-sm'>{title}</span>}
+        <svg
+          className={`w-4 h-4 text-black/50 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path strokeLinecap='square' strokeLinejoin='miter' strokeWidth={2} d='M19 9l-7 7-7-7' />
+        </svg>
+      </button>
+      {isOpen && (
+        <div className='text-xs text-black/50 mt-2 leading-relaxed space-y-2'>
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function StellarEvolutionPage() {
   return (
     <main className='min-h-screen bg-white'>
-      {/* Hero */}
-      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
-        <div className='max-w-full lg:max-w-[75%]'>
-          <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
-            The Main Sequence and Beyond
-          </h1>
-          <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
-            Mapping stellar evolution with GAIA data
-          </p>
-          <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
-            The Hertzsprung-Russell diagram is astronomy&apos;s most powerful classification tool - a simple plot of temperature against brightness that reveals the life cycles of stars. Using data from the European Space Agency&apos;s GAIA mission, we explored different approaches to visualising five million stars, from raw point clouds to density maps to interactive explainers.
-          </p>
-          {/* Tags */}
-          <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
-            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
-            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Science</span>
-            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Data visualisation</span>
-            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Mxwll</span>
-            <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>GAIA</span>
+      {/* Header with Metadata Sidebar */}
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16'>
+          {/* Left column - Title and description */}
+          <div className='lg:col-span-2'>
+            <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
+              The Main Sequence and Beyond
+            </h1>
+            <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+              Mapping stellar evolution with GAIA data
+            </p>
+            <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
+              The Hertzsprung-Russell diagram is astronomy&apos;s most powerful classification tool - a simple plot of temperature against brightness that reveals the life cycles of stars. Using data from the European Space Agency&apos;s GAIA mission, we explored different approaches to visualising five million stars, from raw point clouds to density maps to interactive explainers.
+            </p>
+            {/* Tags */}
+            <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
+              <span className='px-3 py-1 text-xs bg-black/5 text-black/50'>Interactive</span>
+              <span className='px-3 py-1 text-xs bg-black/5 text-black/50'>Science</span>
+              <span className='px-3 py-1 text-xs bg-black/5 text-black/50'>Data visualisation</span>
+              <span className='px-3 py-1 text-xs bg-black/5 text-black/50'>Mxwll</span>
+              <span className='px-3 py-1 text-xs bg-black/5 text-black/50'>GAIA</span>
+            </div>
+          </div>
+
+          {/* Right column - Portfolio Metadata */}
+          <div className='space-y-6'>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+                Category
+              </span>
+              <span className='text-sm'>Data Visualisation</span>
+            </div>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+                Audience
+              </span>
+              <MetadataDropdown title='Astronomy enthusiasts and educators'>
+                <p>People curious about stellar physics, from students encountering the HR diagram for the first time to educators looking for interactive teaching tools.</p>
+              </MetadataDropdown>
+            </div>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+                Approach
+              </span>
+              <MetadataDropdown>
+                <p>We created four complementary views of the same data: point clouds for preserving individual stars, density maps for revealing structure, famous star overlays for orientation, and evolution pathways for understanding stellar lifecycles.</p>
+              </MetadataDropdown>
+            </div>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+                Adaptability
+              </span>
+              <MetadataDropdown>
+                <p>The layered approach - dense data renders plus selective annotation plus animated explanation - applies to any classification space where both population distribution and individual examples matter.</p>
+              </MetadataDropdown>
+            </div>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+                Technology
+              </span>
+              <span className='text-sm'>Python, Matplotlib, React, SVG</span>
+            </div>
+            <div>
+              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+                Data
+              </span>
+              <span className='text-sm text-black/70'>ESA GAIA DR3, SIMBAD</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Static images  - 2x2 grid */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
+      {/* Static images - 2x2 grid */}
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           {/* Image 1: Full range point cloud */}
           <img
@@ -73,8 +145,7 @@ export default function StellarEvolutionPage() {
       </section>
 
       {/* Interactive: Famous Stars */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
-        <h2 className='text-4xl font-bold tracking-tight mb-6'>Interactive: Well-Known Stars</h2>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='border border-black/10 bg-white overflow-hidden'>
           <div className='h-[400px] md:h-[600px] lg:h-[700px]'>
             <HRDiagram className='w-full h-full' showEvolution={true} />
@@ -86,134 +157,53 @@ export default function StellarEvolutionPage() {
       </section>
 
       {/* Content sections */}
-      <section className='px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-20'>
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-24'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
+        <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
+          <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight'>
+            The Challenge
+          </h2>
+          <p className='text-black/70 leading-relaxed'>
+            Every astronomy textbook includes an HR diagram, but most versions are static, cluttered with labels, or assume prior knowledge. For Mxwll, we needed approaches that could work at different levels - from a striking data visualisation showing millions of stars, to an accessible interactive where users could explore individual stars and understand what the diagram reveals about stellar physics.
+          </p>
+        </div>
+      </section>
 
-          {/* Left column  - main content */}
-          <div className='lg:col-span-2 space-y-8 md:space-y-10 lg:space-y-12'>
-
-            {/* The Challenge */}
-            <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-6'>
-                The Challenge
-              </h2>
-              <p className='text-black/70 leading-relaxed'>
-                Every astronomy textbook includes an HR diagram, but most versions are static, cluttered with labels, or assume prior knowledge. For Mxwll, we needed approaches that could work at different levels - from a striking data visualisation showing millions of stars, to an accessible interactive where users could explore individual stars and understand what the diagram reveals about stellar physics.
-              </p>
-            </div>
-
-            {/* Background */}
-            <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-6'>
-                Background
-              </h2>
-              <div className='space-y-4 text-black/70 leading-relaxed'>
-                <p>
-                  The Hertzsprung-Russell diagram plots stars by two properties: surface temperature (or colour) and luminosity (or absolute magnitude). Hot blue stars sit on the left; cool red stars on the right. Bright stars sit at the top; dim stars at the bottom.
-                </p>
-                <p>
-                  What emerges is not a random scatter but distinct structures. The main sequence - a diagonal band from hot-bright to cool-dim - contains stars in the hydrogen-burning phase of their lives, including our Sun. Red giants cluster in the upper right: cooler but enormously luminous because of their size. White dwarfs huddle in the lower left: hot but dim because they are tiny stellar remnants.
-                </p>
-                <p>
-                  The diagram is effectively a map of stellar evolution. Stars do not stay in one place - they move through the diagram as they age, spending most of their time on the main sequence before expanding into giants and eventually collapsing into white dwarfs or exploding as supernovae.
-                </p>
-              </div>
-            </div>
-
-            {/* Approach */}
-            <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-6'>
-                Approach
-              </h2>
-              <div className='space-y-4 text-black/70 leading-relaxed'>
-                <p>
-                  We explored four complementary visualisation strategies:
-                </p>
-                <p>
-                  Point clouds show every star as an individual dot. With five million points, the sheer density reveals structure - the main sequence appears as a bright ridge simply because that is where most stars are. This approach preserves outliers and extremes.
-                </p>
-                <p>
-                  Density maps (hexbin) aggregate points into cells coloured by count. Structure becomes clearer, and rendering is faster, but individual stars disappear into the statistics.
-                </p>
-                <p>
-                  The famous stars overlay plots well-documented stars - Sirius, Betelgeuse, Proxima Centauri - as labelled points. This creates landmarks for orientation and lets users connect abstract positions to real objects in the night sky.
-                </p>
-                <p>
-                  The evolution pathway shows how a single star moves through the diagram over billions of years. Our Sun, currently on the main sequence, will expand into a red giant, shed its outer layers, and end as a white dwarf. Seeing this trajectory makes the diagram&apos;s deeper meaning visible.
-                </p>
-              </div>
-            </div>
-
-            {/* Adaptability */}
-            <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-6'>
-                Adaptability
-              </h2>
-              <p className='text-black/70 leading-relaxed'>
-                The layered approach - dense data renders plus selective annotation plus animated explanation - could apply to any classification space where both the population distribution and individual examples matter: species distributions in trait space, materials in property space, financial instruments in risk-return space.
-              </p>
-            </div>
-
-            {/* Related Projects */}
-            <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-6'>
-                Related Projects
-              </h2>
-              <ul className='space-y-2 text-sm'>
-                <li>
-                  <a href='/work/nuclide-chart' className='text-black/70 hover:text-[var(--color-pink)] transition-colors'>
-                    Chart of Nuclides →
-                  </a>
-                </li>
-                <li>
-                  <a href='/work/periodic-table' className='text-black/70 hover:text-[var(--color-pink)] transition-colors'>
-                    Periodic Table →
-                  </a>
-                </li>
-                <li>
-                  <a href='/work/exoplanet-systems' className='text-black/70 hover:text-[var(--color-pink)] transition-colors'>
-                    Exoplanet Systems →
-                  </a>
-                </li>
-              </ul>
-            </div>
-
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
+        <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
+          <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight'>
+            Background
+          </h2>
+          <div className='space-y-4 text-black/70 leading-relaxed'>
+            <p>
+              The Hertzsprung-Russell diagram plots stars by two properties: surface temperature (or colour) and luminosity (or absolute magnitude). Hot blue stars sit on the left; cool red stars on the right. Bright stars sit at the top; dim stars at the bottom.
+            </p>
+            <p>
+              What emerges is not a random scatter but distinct structures. The main sequence - a diagonal band from hot-bright to cool-dim - contains stars in the hydrogen-burning phase of their lives, including our Sun. Red giants cluster in the upper right: cooler but enormously luminous because of their size. White dwarfs huddle in the lower left: hot but dim because they are tiny stellar remnants.
+            </p>
+            <p>
+              The diagram is effectively a map of stellar evolution. Stars do not stay in one place - they move through the diagram as they age, spending most of their time on the main sequence before expanding into giants and eventually collapsing into white dwarfs or exploding as supernovae.
+            </p>
           </div>
+        </div>
+      </section>
 
-          {/* Right column  - metadata */}
-          <div className='space-y-6 md:space-y-8'>
-
-            {/* Technology */}
-            <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-6'>
-                Technology
-              </h2>
-              <p className='text-sm text-black/70 leading-relaxed'>
-                Python/Matplotlib for static renders, React/SVG for interactive diagram. GAIA data cached locally for rapid iteration.
-              </p>
-            </div>
-
-            {/* Data */}
-            <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-6'>
-                Data
-              </h2>
-              <p className='text-sm text-black/70 leading-relaxed'>
-                European Space Agency GAIA DR3 (5 million stars with reliable parallax measurements). Well-known star properties from SIMBAD astronomical database.
-              </p>
-            </div>
-
-            {/* Status */}
-            <div>
-              <h2 className='text-4xl font-bold tracking-tight mb-6'>
-                Status
-              </h2>
-              <p className='text-sm text-black/70 leading-relaxed'>
-                Static visualisations complete. Interactive explorer functional. Full integration with Mxwll stellar database in development.
-              </p>
-            </div>
-
-          </div>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
+        <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
+          <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight'>
+            Related Projects
+          </h2>
+          <ul className='space-y-2 text-sm'>
+            <li>
+              <a href='/work/nuclide-chart' className='text-black/70 hover:text-[var(--color-pink)] transition-colors'>
+                Chart of Nuclides →
+              </a>
+            </li>
+            <li>
+              <a href='/work/fractals' className='text-black/70 hover:text-[var(--color-pink)] transition-colors'>
+                Fractals →
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
     </main>

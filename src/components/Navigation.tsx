@@ -37,16 +37,16 @@ export default function Navigation() {
   }, [isOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black">
+    <header className='fixed top-0 left-0 right-0 z-50 bg-black'>
       {/* Main nav bar */}
-      <nav className="flex items-center justify-between px-4 md:px-6 lg:px-8 h-14 md:h-16">
+      <nav className='flex items-center justify-between px-4 md:px-8 lg:px-12 h-14 md:h-16'>
         {/* Logo */}
-        <Link href="/" className="flex items-center">
-          <Logo color="white" className="h-5 md:h-6 w-auto" />
+        <Link href='/' className='flex items-center'>
+          <Logo color='white' className='h-5 md:h-6 w-auto' />
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+        <div className='hidden md:flex items-center gap-6 lg:gap-8'>
           {NAV_ITEMS.map(item => (
             <Link
               key={item.href}
@@ -54,7 +54,7 @@ export default function Navigation() {
               className={`text-sm transition-colors ${
                 pathname.startsWith(item.href)
                   ? 'text-[var(--color-pink)]'
-                  : 'text-white/60 hover:text-white'
+                  : 'text-white/70 hover:text-white'
               }`}
             >
               {item.label}
@@ -65,11 +65,11 @@ export default function Navigation() {
         {/* Mobile Hamburger Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 -mr-2"
-          aria-label="Toggle menu"
+          className='md:hidden p-2 -mr-2'
+          aria-label='Toggle menu'
           aria-expanded={isOpen}
         >
-          <div className="w-5 h-4 relative flex flex-col justify-between">
+          <div className='w-5 h-4 relative flex flex-col justify-between'>
             <span className={`block h-0.5 w-full bg-white transition-transform origin-center ${
               isOpen ? 'rotate-45 translate-y-[7px]' : ''
             }`} />
@@ -85,12 +85,12 @@ export default function Navigation() {
 
       {/* Homepage tagline — desktop/tablet only */}
       {isHomepage && (
-        <div className="hidden md:block border-t border-white/10 px-4 md:px-6 lg:px-8 py-6 lg:py-8">
-          <div className="max-w-2xl">
-            <p className="text-base lg:text-lg text-white/90 font-bold tracking-tight leading-snug">
+        <div className='hidden md:block border-t border-white/10 px-4 md:px-8 lg:px-12 py-6 lg:py-8'>
+          <div className='max-w-2xl'>
+            <p className='text-base lg:text-lg text-white/90 font-bold tracking-tight leading-snug'>
               Data visualisation and explanation design studio
             </p>
-            <p className="text-sm lg:text-base text-white/60 leading-relaxed mt-2">
+            <p className='text-sm lg:text-base text-white/70 leading-relaxed mt-2'>
               We make complex ideas clear. Scientific visualisation, illustrated explanation,
               and interactive data design for publishers, institutions, and organisations
               who need to communicate with precision and craft.
@@ -105,7 +105,7 @@ export default function Navigation() {
         transition-opacity duration-200
         ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
       `}>
-        <div className="flex flex-col p-6">
+        <div className='flex flex-col p-6'>
           {NAV_ITEMS.map(item => (
             <Link
               key={item.href}
