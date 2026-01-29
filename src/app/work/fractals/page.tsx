@@ -6,16 +6,16 @@ import { MandelbrotExplorer } from './components/MandelbrotExplorer';
 import { JuliaExplorer } from './components/JuliaExplorer';
 import { NaturalFractalsGallery } from './components/NaturalFractalsGallery';
 
-function MetadataDropdown({ title, children }: { title: string; children: React.ReactNode }) {
+function MetadataDropdown({ title, children }: { title?: string; children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='flex items-center justify-between w-full text-left'
+        className={`flex items-center ${title ? 'justify-between w-full' : ''} text-left`}
       >
-        <span className='text-sm'>{title}</span>
+        {title && <span className='text-sm'>{title}</span>}
         <svg
           className={`w-4 h-4 text-black/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill='none'
@@ -92,7 +92,7 @@ export default function FractalsPage() {
               <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
                 Approach
               </span>
-              <MetadataDropdown title='Approach'>
+              <MetadataDropdown>
                 <p>Fractals have a surface familiarity problem - most people have seen the images but have no idea what they&apos;re actually looking at. We start by acknowledging that recognition, then reframe it as a gap worth closing.</p>
                 <p>The Koch snowflake does the heavy lifting. It&apos;s the simplest possible fractal: one rule, obvious self-similarity, no mathematics required. Once that clicks, everything else - coastlines, nature, the Mandelbrot set - becomes variations on the same theme.</p>
                 <p>The Mandelbrot explorer comes late, after the conceptual work is done. By then, zooming isn&apos;t just pretty - they understand why the detail never runs out.</p>
@@ -102,7 +102,7 @@ export default function FractalsPage() {
               <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
                 Adaptability
               </span>
-              <MetadataDropdown title='Adaptability'>
+              <MetadataDropdown>
                 <p>This approach - concrete example first, progressive complexity, interactive exploration - works for any subject where the core concept is genuinely simple but obscured by intimidating presentation. Chaos theory, network effects, probability distributions, the electromagnetic spectrum.</p>
                 <p>It wouldn&apos;t suit subjects that genuinely require mathematical prerequisites to make sense - quantum mechanics, general relativity, Fourier transforms. For those, either the audience needs to be narrower (people with calculus), or the explanation needs to be more metaphorical and less precise.</p>
               </MetadataDropdown>
