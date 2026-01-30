@@ -129,7 +129,6 @@ export default function StellarEvolutionPage() {
           preload='auto'
           muted
           playsInline
-          loop
           onCanPlayThrough={handleCanPlayThrough}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`}
         >
