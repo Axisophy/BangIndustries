@@ -54,20 +54,22 @@ Use CSS variables: `var(--color-blue)`, `var(--color-pink)`, `var(--color-lime)`
 ```
 Hero (h1):
   Mobile:  text-3xl  (1.875rem / 30px)
-  md:      text-5xl  (3rem / 48px)
-  lg:      text-6xl  (3.75rem / 60px)
-  xl:      text-7xl  (4.5rem / 72px)
+  md:      text-4xl  (2.25rem / 36px)
+  lg:      text-5xl  (3rem / 48px)
+  xl:      text-6xl  (3.75rem / 60px)
 
 h2:
   Mobile:  text-2xl  (1.5rem / 24px)
   md:      text-3xl  (1.875rem / 30px)
+  lg:      text-4xl  (2.25rem / 36px)
 
 h3:
   Mobile:  text-xl   (1.25rem / 20px)
   md:      text-2xl  (1.5rem / 24px)
+  lg:      text-3xl  (1.875rem / 30px)
 
 Labels/Meta: text-xs (0.75rem / 12px)
-Tags:        text-[10px]
+Tags:        text-xs (0.75rem / 12px)
 Nav:         text-sm (0.875rem / 14px)
 ```
 
@@ -78,19 +80,17 @@ Nav:         text-sm (0.875rem / 14px)
 **Page Padding:**
 ```
 Horizontal:
-  Mobile:  px-4  (16px)
-  md:      px-6  (24px)
+  Mobile:  px-4   (16px)
+  md:      px-8   (32px)
+  lg:      px-12  (48px)
 
 Vertical (sections):
-  Mobile:  py-12 (48px)
-  md:      py-16 (64px)
-  lg:      py-20 (80px)
+  pb-12 md:pb-16 lg:pb-20
 ```
 
 **Hero:**
-- Top offset: pt-[100px]
-- Bottom margin: mb-16 (64px) / md:mb-24 (96px)
-- Text constrained to max-w-[75%]
+- Top offset: `pt-24 md:pt-28 lg:pt-32`
+- Bottom padding: `pb-12 md:pb-16 lg:pb-20`
 
 ### Spacing Scale (immutable)
 ```
@@ -143,7 +143,7 @@ className="inline-flex items-center gap-2 text-[var(--color-blue)] hover:text-bl
 
 **Labels/Meta:**
 ```tsx
-className="text-xs font-mono uppercase tracking-wider text-black/40"
+className="text-xs font-mono uppercase tracking-wider text-black/50"
 ```
 
 **Project Cards:**
@@ -152,18 +152,23 @@ className="text-xs font-mono uppercase tracking-wider text-black/40"
 - Hover: `transition-transform group-hover:scale-[0.98]`
 - Number format: `[01]`, `[02]`, etc.
 
-### Color Usage
+### Text Opacity
 
-**Text Opacity:**
-- Primary text: `text-black` or `text-white`
-- Secondary text: `text-black/60` or `text-white/60`
-- Tertiary/meta: `text-black/40` or `text-white/40`
+```
+Primary text:    text-black / text-white
+Secondary text:  text-black/70 / text-white/70
+Tertiary text:   text-black/50 / text-white/50
+Metadata labels: text-black/50 (mono uppercase)
+```
 
-**Borders:**
-- Subtle: `border-black/5` or `border-black/10`
-- Medium: `border-black/20`
+### Borders
 
-**Backgrounds:**
+```
+Subtle:  border-black/10
+Medium:  border-black/20
+```
+
+### Backgrounds
 - Page: white (#FFFFFF)
 - Dark sections: `bg-black text-white`
 - Accent sections: `bg-[var(--color-lime)]` (use sparingly)
@@ -209,53 +214,68 @@ public/
 
 **Number formatting:** Two digits with leading zero: `01`, `02`, etc.
 
+---
+
 ## Work Page Template
 
-Canonical template for all work/case study pages. Reference `/work/nuclide-chart/page.tsx` as the implementation.
+Canonical template for all work/case study pages. All 6 work pages follow this structure.
 
 ### Hero Section
 
 ```
-section: px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-12 md:pb-16
-  div: max-w-[75%]
+section: px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20
 ```
 
-- **Title (h1):** `text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]`
-- **Subtitle:** `text-2xl font-normal text-black/70 mt-4`
-- **Description:** `text-base text-black/70 max-w-3xl mt-12 mb-12`
-- **Tags:** `flex flex-wrap gap-2` with individual tags as `px-3 py-1 text-xs bg-black/5 text-black/60` (NHG Text, not mono)
+- **Title (h1):** `text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]`
+- **Subtitle:** `text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-4`
+- **Description:** `text-base text-black/70 max-w-3xl mt-8 mb-8`
+- **Tags:** `flex flex-wrap gap-2` with individual tags as `px-3 py-1 text-xs bg-black/5 text-black/50`
 
-### Chart/Visual Section
+### Visual/Interactive Section
 
 ```
-section: px-4 md:px-6 pb-16 md:pb-20
+section: px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20
   div: border border-black/10 bg-white overflow-hidden
-    div: h-[750px] lg:h-[875px]
 ```
 
-Standard frame for interactive visualisations. Additional images go between this and the content section.
+Standard frame for interactive visualisations and images.
 
 ### Content Section
 
 ```
-section: px-4 md:px-6 pb-16 md:pb-20
-  div: grid lg:grid-cols-3 gap-24 lg:gap-32
+section: px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20
+  div: grid lg:grid-cols-[3fr_7fr] gap-12 lg:gap-16
 ```
 
-**Left column** (`lg:col-span-2 space-y-12`):
-- The Challenge, Background, Approach, Adaptability, Related Projects
+**Left column** (metadata sidebar):
+- Uses `MetadataDropdown` component for expandable sections
+- Sections: Category, Audience, Approach, Adaptability, Technology, Data
 
-**Right column** (`space-y-8`):
-- Technology, Data
+**Right column** (main content):
+- The Challenge, Background, Technical approach, etc.
+- `space-y-12` between major sections
 
-**Section headings (h2):** `text-4xl font-bold tracking-tight mb-6`
+**Section headings (h2):** `text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-6`
 
-**Body text:**
-- Left column: `text-black/70 leading-relaxed` (16px)
-- Right column: `text-sm text-black/70 leading-relaxed` (14px)
-- Multi-paragraph: wrap in `div: space-y-4`
+**Body text:** `text-black/70 leading-relaxed`
 
-**Related links:** `ul: space-y-2 text-sm` with `a: text-black/70 hover:text-[var(--color-pink)] transition-colors`
+**Multi-paragraph:** wrap in `div: space-y-4`
+
+### MetadataDropdown Component
+
+Expandable metadata sections for work page sidebars:
+
+```tsx
+<MetadataDropdown label="Category" defaultOpen>
+  <p className="text-sm text-black/70">Scientific Visualisation</p>
+</MetadataDropdown>
+```
+
+- Label: `text-xs font-mono uppercase tracking-wider text-black/50`
+- Chevron indicator for expand/collapse
+- Content: `text-sm text-black/70`
+
+---
 
 ## Code Style
 
