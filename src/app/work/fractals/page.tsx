@@ -133,7 +133,7 @@ export default function FractalsPage() {
           onCanPlayThrough={handleCanPlayThrough}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`}
         >
-          <source src='https://bangindustries.co/video/mandelbrot_zoom_3840x2160.mp4' type='video/mp4' />
+          <source src='/video/mandelbrot-zoom-web.mp4' type='video/mp4' />
         </video>
         <div className='absolute inset-0 bg-black/40' />
         <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${showOverlay ? 'opacity-100' : 'opacity-0'}`}>
