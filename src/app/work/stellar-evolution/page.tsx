@@ -37,7 +37,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
 export default function StellarEvolutionPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(true); // Show immediately for placeholder
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const handleCanPlayThrough = () => {
     setIsVideoReady(true);
@@ -123,25 +123,19 @@ export default function StellarEvolutionPage() {
 
       {/* Stage 1: HOOK - Video/Visual */}
       <section className='relative h-[70vh] min-h-[500px] bg-black overflow-hidden'>
-        {/* Gradient placeholder for video */}
-        <div className='absolute inset-0 bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f0f23]'>
-          {/* Star field effect */}
-          <div className='absolute inset-0 opacity-60' style={{
-            backgroundImage: `radial-gradient(1px 1px at 20px 30px, white, transparent),
-                              radial-gradient(1px 1px at 40px 70px, white, transparent),
-                              radial-gradient(1px 1px at 50px 160px, white, transparent),
-                              radial-gradient(1px 1px at 90px 40px, white, transparent),
-                              radial-gradient(1px 1px at 130px 80px, white, transparent),
-                              radial-gradient(1.5px 1.5px at 160px 120px, #ffeaa7, transparent),
-                              radial-gradient(1px 1px at 200px 50px, white, transparent),
-                              radial-gradient(1px 1px at 220px 180px, white, transparent),
-                              radial-gradient(2px 2px at 280px 100px, #ff6b6b, transparent),
-                              radial-gradient(1px 1px at 320px 60px, white, transparent)`,
-            backgroundSize: '350px 200px',
-          }} />
-          <span className='absolute bottom-4 right-4 text-white/20 text-xs font-mono'>VIDEO PLACEHOLDER</span>
-        </div>
-        <div className='absolute inset-0 bg-black/40' />
+        {/* HR Animation Video */}
+        <video
+          ref={videoRef}
+          preload='auto'
+          muted
+          playsInline
+          loop
+          onCanPlayThrough={handleCanPlayThrough}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <source src='/video/hr_animation.mp4' type='video/mp4' />
+        </video>
+        <div className='absolute inset-0 bg-black/30' />
         <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${showOverlay ? 'opacity-100' : 'opacity-0'}`}>
           <div className='text-center text-white px-4'>
             <h2 className='font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1] mb-4'>
