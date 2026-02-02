@@ -197,6 +197,36 @@ export default function StellarEvolutionPage() {
         <AnnotatedHRDiagram />
       </section>
 
+      {/* THREE MILLION STARS */}
+      <section className='py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-12'>
+        <div className='max-w-4xl mx-auto'>
+          <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
+            Three Million Stars
+          </h2>
+          <div className='text-black/70 space-y-4 mb-8 md:mb-12'>
+            <p>
+              That&apos;s the theory. Here&apos;s the reality.
+            </p>
+            <p>
+              This diagram shows three million real stars, measured by the GAIA space telescope with unprecedented precision. Every dot is an actual star in our galaxy.
+            </p>
+            <p>
+              Notice how they cluster. The main sequence isn&apos;t a neat line  - it&apos;s a dense river of stars, because that&apos;s where stars spend most of their lives. The giants and white dwarfs are sparser by comparison  - those phases are brief.
+            </p>
+            <p>
+              This is what the night sky looks like when you can see it all at once.
+            </p>
+          </div>
+        </div>
+        <div className='max-w-6xl mx-auto'>
+          <img
+            src='/images/work/stellar-evolution/gaia-hr-3million.png'
+            alt='HR diagram showing three million stars from GAIA telescope data'
+            className='w-full h-auto'
+          />
+        </div>
+      </section>
+
       {/* Stage 4a: BUILD - "Stars You Know" */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
