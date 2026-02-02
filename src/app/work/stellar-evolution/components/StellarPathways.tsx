@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { InteractiveFrame } from '../../_components/InteractiveFrame';
-import { HR_CONFIG, SPECTRAL_CLASSES } from '../lib/stars-data';
+import { HR_EVOLUTION_CONFIG, SPECTRAL_CLASSES } from '../lib/stars-data';
 import { ALL_PATHS, EvolutionPath } from '../lib/pathways-data';
 
 const TEMP_TICKS = [40000, 20000, 10000, 5000, 3000];
@@ -40,22 +40,22 @@ export function StellarPathways() {
     return () => observer.disconnect();
   }, []);
 
-  const { margin } = HR_CONFIG;
+  const { margin } = HR_EVOLUTION_CONFIG;
   const vw = dims?.width ?? 800;
   const vh = dims?.height ?? 500;
   const pw = vw - margin.left - margin.right;
   const ph = vh - margin.top - margin.bottom;
 
   const toX = useCallback((temp: number) => {
-    const logMin = Math.log10(HR_CONFIG.tempMin);
-    const logMax = Math.log10(HR_CONFIG.tempMax);
+    const logMin = Math.log10(HR_EVOLUTION_CONFIG.tempMin);
+    const logMax = Math.log10(HR_EVOLUTION_CONFIG.tempMax);
     const logTemp = Math.log10(temp);
     return margin.left + ((logMax - logTemp) / (logMax - logMin)) * pw;
   }, [pw, margin.left]);
 
   const toY = useCallback((lum: number) => {
-    const logMin = Math.log10(HR_CONFIG.lumMin);
-    const logMax = Math.log10(HR_CONFIG.lumMax);
+    const logMin = Math.log10(HR_EVOLUTION_CONFIG.lumMin);
+    const logMax = Math.log10(HR_EVOLUTION_CONFIG.lumMax);
     const logLum = Math.log10(Math.max(lum, 0.000001));
     return margin.top + ((logMax - logLum) / (logMax - logMin)) * ph;
   }, [ph, margin.top]);
