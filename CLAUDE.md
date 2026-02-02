@@ -277,6 +277,306 @@ Expandable metadata sections for work page sidebars:
 
 ---
 
+## Explainer Pages — Seven-Stage Arc
+
+Explainer pages (like Fractals, Stellar Evolution, Nuclide Chart, Orbital Mechanics) follow a specific narrative structure and layout pattern. Use this when creating new explainer pages.
+
+### Content Structure Overview
+
+| Stage | Duration | Purpose |
+|-------|----------|---------|
+| HOOK | 5-10 sec | Visual punch, create curiosity |
+| ANCHOR | 30 sec | Connect to what reader knows |
+| FOUNDATION | 2-5 min | Simple concrete example of core concept |
+| BUILD | 5-15 min | Progressive complexity, 3-5 beats |
+| REWARD | 1-2 min | "Now you get it" consolidation |
+| EXTEND | optional | Deeper material, clearly flagged |
+| LAUNCH | — | Pathways to further exploration |
+
+### Stage 1: HOOK
+
+**Purpose:** Visual punch, create curiosity
+
+```tsx
+<section className='relative h-[70vh] min-h-[500px] bg-black overflow-hidden'>
+  <video
+    autoPlay
+    loop
+    muted
+    playsInline
+    className='absolute inset-0 w-full h-full object-cover'
+  >
+    <source src='/work/[slug]/hook-video.mp4' type='video/mp4' />
+  </video>
+  <div className='absolute inset-0 flex items-center justify-center'>
+    <div className='text-center text-white px-4'>
+      <h2 className='font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1] mb-4'>
+        {title}
+      </h2>
+      <p className='font-display text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-white/80'>
+        {subtitle}
+      </p>
+    </div>
+  </div>
+</section>
+```
+
+**Rules:**
+- Visual dominates — minimal text
+- `h-[70vh] min-h-[500px]` for viewport coverage
+- Animation/video should pose a question without answering it
+
+### Stage 2: ANCHOR
+
+**Purpose:** Connect to what reader already knows
+
+```tsx
+<section className='px-4 md:px-8 lg:px-12 pt-16 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20'>
+  <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
+    <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
+      {heading}
+    </h2>
+    <div className='space-y-4 text-black/70 leading-relaxed'>
+      {/* 2-4 paragraphs, conversational tone */}
+    </div>
+  </div>
+</section>
+```
+
+**Rules:**
+- Two-column layout: heading left, content right
+- Conversational, second-person voice ("You've seen...", "You know...")
+- No interactive elements — pure reading
+
+### Stage 3: FOUNDATION
+
+**Purpose:** Simple concrete example of core concept
+
+```tsx
+<section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
+  <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
+    <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
+      {heading}
+    </h2>
+    <div className='space-y-4 text-black/70 leading-relaxed'>
+      {/* Brief setup text */}
+    </div>
+  </div>
+  <div className='border border-black/10 bg-white overflow-hidden'>
+    <FoundationInteractive />
+  </div>
+  <p className='text-xs md:text-sm text-black/50 mt-4'>
+    {caption}
+  </p>
+</section>
+```
+
+**Rules:**
+- First interactive element appears here
+- Interactive should be simple — one core concept only
+- Respects 3-4 chunk working memory limit
+
+### Stage 4: BUILD
+
+**Purpose:** Progressive complexity in 3-5 beats
+
+```tsx
+<section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
+  <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
+    <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
+      {beat.heading}
+    </h2>
+    <div className='space-y-4 text-black/70 leading-relaxed'>
+      {beat.content}
+    </div>
+  </div>
+  {beat.visual && (
+    <>
+      <div className='border border-black/10 bg-white overflow-hidden'>
+        {beat.visual}
+      </div>
+      <p className='text-xs md:text-sm text-black/50 mt-4'>
+        {beat.visualCaption}
+      </p>
+    </>
+  )}
+</section>
+```
+
+**Rules:**
+- Each beat introduces ONE new concept
+- Consistent two-column layout throughout
+- 3-5 beats total — more creates cognitive overload
+
+### Stage 5: REWARD
+
+**Purpose:** Consolidation, "now you get it" moment
+
+```tsx
+<section className='px-4 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24 bg-black text-white'>
+  <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
+    <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
+      {heading}
+    </h2>
+    <div className='space-y-4 text-white/70 leading-relaxed'>
+      {/* Synthesise what they've learned */}
+    </div>
+  </div>
+</section>
+```
+
+**Rules:**
+- **Full inversion:** `bg-black text-white` signals transition
+- Same two-column grid layout (consistency)
+- This is the "ah-ha" moment — don't rush it
+
+### Stage 6: EXTEND
+
+**Purpose:** Deeper material for those who want more
+
+```tsx
+<section className='px-4 md:px-8 lg:px-12 pt-16 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20'>
+  <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
+    <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
+      Going Deeper
+    </h2>
+    <p className='text-black/50 text-sm'>
+      For the curious - you've got the main idea, this is extra.
+    </p>
+  </div>
+</section>
+
+{/* Multiple subsections follow */}
+<section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
+  <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
+    <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
+      {subsectionHeading}
+    </h3>
+    <div className='space-y-4 text-black/70 leading-relaxed'>
+      {subsectionContent}
+    </div>
+  </div>
+</section>
+```
+
+**Rules:**
+- Always expanded (no collapse/details element)
+- Multiple h3 subsections acceptable
+- Can be more technical — audience has self-selected
+
+### Stage 7: LAUNCH
+
+**Purpose:** Pathways to further exploration
+
+```tsx
+<section className='px-4 md:px-8 lg:px-12 pb-16 md:pb-20 lg:pb-24 pt-16 md:pt-20'>
+  <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
+    <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
+      Further Exploration
+    </h2>
+    <div className='space-y-8'>
+      <div>
+        <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+          Recommended Reading
+        </h3>
+        <ul className='space-y-2 text-sm'>
+          {/* Links with descriptions */}
+        </ul>
+      </div>
+      <div>
+        <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+          Related Explainers
+        </h3>
+        <ul className='space-y-2 text-sm'>
+          {/* Internal links */}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+**Rules:**
+- Related explainers (internal links)
+- External resources (reputable sources)
+- Never more than 6 options (decision paralysis)
+
+### Visual Elements
+
+**Interactive/Visual Containers:**
+```tsx
+<div className='border border-black/10 bg-white overflow-hidden'>
+  {/* Interactive content */}
+</div>
+<p className='text-xs md:text-sm text-black/50 mt-4'>
+  {caption}
+</p>
+```
+
+**Callout — Key Insight:**
+```tsx
+<div className='border-l-4 border-[var(--color-blue)] pl-4 py-2 my-6'>
+  <p className='text-black/70 font-medium'>{insight}</p>
+</div>
+```
+
+**Callout — Warning:**
+```tsx
+<div className='border-l-4 border-[var(--color-pink)] pl-4 py-2 my-6'>
+  <p className='text-black/70 font-medium'>{warning}</p>
+</div>
+```
+
+**Definition:**
+```tsx
+<div className='bg-black/5 p-4 my-6'>
+  <p className='font-bold text-xs uppercase tracking-wider text-black/50 mb-1'>
+    {term}
+  </p>
+  <p className='text-black/70'>{definition}</p>
+</div>
+```
+
+### Explainer File Structure
+
+```
+/app/work/[slug]/
+├── page.tsx              # Main page with inline content
+├── components/
+│   ├── HookVideo.tsx     # Stage 1 video/animation
+│   ├── [Interactive].tsx # Interactive components
+│   └── ...
+```
+
+### Audience Adaptation
+
+| Audience | Tone | Complexity | Interactivity |
+|----------|------|------------|---------------|
+| Kids (8-12) | Playful | 3-4 chunks max | Gamified |
+| General Adults | Curious, respectful | 4-5 chunks | Guided discovery |
+| Business Leaders | Direct, strategic | Lead with conclusions | Diagnostic tools |
+| Policymakers | Evidence-based | Systems framing | Scenario modelling |
+
+### Explainer Checklist
+
+**Content:**
+- [ ] Hook creates genuine curiosity
+- [ ] Anchor connects to prior knowledge
+- [ ] Foundation uses ONE simple example
+- [ ] Build has 3-5 beats, each with ONE concept
+- [ ] Reward provides emotional satisfaction
+- [ ] Extend is expanded (not collapsed)
+- [ ] Launch offers 3-6 pathways
+
+**Design:**
+- [ ] Two-column grid: `grid-cols-[3fr_7fr]`
+- [ ] Correct padding: `px-4 md:px-8 lg:px-12`
+- [ ] Borders use `border-black/10`
+- [ ] Reward section inverts: `bg-black text-white`
+- [ ] Sharp corners throughout
+
+---
+
 ## Code Style
 
 - Use `'` not `"` for JSX strings
