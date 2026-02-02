@@ -5,24 +5,14 @@ import { useState } from 'react';
 function ServiceDropdown({
   number,
   title,
-  shortDescription,
-  timeline,
-  youGet,
+  children,
   ctaText,
-  expandedContent,
-  goodFor,
 }: {
   number: string;
   title: string;
-  shortDescription: string;
-  timeline: string;
-  youGet: string;
+  children: React.ReactNode;
   ctaText: string;
-  expandedContent: React.ReactNode;
-  goodFor: string;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
@@ -33,59 +23,52 @@ function ServiceDropdown({
           </h2>
         </div>
         <div>
-          <p className='text-black/70 mb-8'>
-            {shortDescription}
-          </p>
-
-          <div className='space-y-4 mb-8'>
-            <div className='flex justify-between py-4 border-b border-black/10'>
-              <span className='text-sm text-black/70'>Timeline</span>
-              <span className='text-sm'>{timeline}</span>
-            </div>
-            <div className='flex justify-between py-4 border-b border-black/10'>
-              <span className='text-sm text-black/70'>You get</span>
-              <span className='text-sm text-right max-w-xs'>{youGet}</span>
-            </div>
-          </div>
-
-          {/* Expandable content */}
-          <div className='mb-8'>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className='inline-flex items-center gap-2 text-sm text-black/70 hover:text-black transition-colors'
-            >
-              <span>{isOpen ? 'Show less' : 'Learn more'}</span>
-              <svg
-                className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-              >
-                <path strokeLinecap='square' strokeLinejoin='miter' strokeWidth={2} d='M19 9l-7 7-7-7' />
-              </svg>
-            </button>
-
-            {isOpen && (
-              <div className='mt-6 pt-6 border-t border-black/10'>
-                <div className='text-black/70 space-y-4 mb-6'>
-                  {expandedContent}
-                </div>
-                <p className='text-sm text-black/50'>
-                  <span className='font-bold text-black/70'>Good for:</span> {goodFor}
-                </p>
-              </div>
-            )}
-          </div>
-
+          {children}
           <a
             href='/contact'
-            className='inline-flex items-center gap-2 text-[var(--color-blue)] hover:text-black transition-colors'
+            className='inline-flex items-center gap-2 text-[var(--color-blue)] hover:text-black transition-colors mt-8'
           >
             {ctaText} <span aria-hidden='true'>→</span>
           </a>
         </div>
       </div>
     </section>
+  );
+}
+
+function ExpandableSection({
+  title,
+  children,
+  defaultOpen = false,
+}: {
+  title: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  return (
+    <div className='border-t border-black/10 pt-6 mt-6'>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className='inline-flex items-center gap-2 text-sm font-bold hover:text-[var(--color-blue)] transition-colors'
+      >
+        <span>{title}</span>
+        <svg
+          className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path strokeLinecap='square' strokeLinejoin='miter' strokeWidth={2} d='M19 9l-7 7-7-7' />
+        </svg>
+      </button>
+      {isOpen && (
+        <div className='mt-4 text-black/70 space-y-4'>
+          {children}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -110,74 +93,217 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Service 1: Audit + Sprint */}
+      {/* Service 1: Visual Audit + Redesign Sprint */}
       <ServiceDropdown
         number='01'
         title='Visual Audit + Redesign Sprint'
-        shortDescription="A focused review of your existing materials, followed by redesigned samples showing what's possible. Often the fastest way to see whether we're a good fit."
-        timeline='3-5 days'
-        youGet='Audit report, 2-3 redesigned samples, recommendations'
         ctaText='Discuss a sprint'
-        expandedContent={
-          <>
-            <p>
-              This works well for teams who know their current materials aren&apos;t working but aren&apos;t sure where to start. We&apos;ll review your reports, presentations, publications, or data outputs and identify what&apos;s holding them back.
-            </p>
-            <p>
-              You&apos;ll receive redesigned samples showing a different approach, plus a recommendations document outlining priorities and next steps. It&apos;s a low-commitment way to explore working together, and frequently converts into longer engagements once you see the potential.
-            </p>
-          </>
-        }
-        goodFor='Research teams preparing for REF submissions, publishers reviewing a book series, organisations refreshing their visual communications.'
-      />
+      >
+        <p className='text-black/70 mb-6'>
+          A structured diagnostic of your existing explanation materials, followed by redesigned samples showing what&apos;s possible.
+        </p>
+
+        <div className='mb-6'>
+          <h3 className='text-lg font-bold mb-4'>What We Look For</h3>
+          <p className='text-black/70 mb-4'>
+            We assess against five common failure patterns:
+          </p>
+          <ul className='space-y-3 text-black/70'>
+            <li className='flex gap-3'>
+              <span className='text-black/40'>-</span>
+              <span><strong>The Expert&apos;s Explanation</strong> - Opens with definitions, assumes knowledge the audience lacks</span>
+            </li>
+            <li className='flex gap-3'>
+              <span className='text-black/40'>-</span>
+              <span><strong>The Data Dump</strong> - Everything presented at equal weight, no hierarchy or progression</span>
+            </li>
+            <li className='flex gap-3'>
+              <span className='text-black/40'>-</span>
+              <span><strong>The Beautiful Confusion</strong> - Visually impressive, conceptually unclear</span>
+            </li>
+            <li className='flex gap-3'>
+              <span className='text-black/40'>-</span>
+              <span><strong>The Boring Textbook</strong> - Accurate but no hook, no engagement</span>
+            </li>
+            <li className='flex gap-3'>
+              <span className='text-black/40'>-</span>
+              <span><strong>The Wrong Audience</strong> - Vocabulary or detail level mismatched to readers</span>
+            </li>
+          </ul>
+          <p className='text-black/70 mt-4'>
+            Plus cognitive load analysis, visual encoding assessment, and progression mapping.
+          </p>
+        </div>
+
+        <div className='mb-6'>
+          <h3 className='text-lg font-bold mb-4'>What You Get</h3>
+          <p className='text-black/70'>
+            Audit report identifying specific issues and opportunities. 2-3 redesigned samples demonstrating improved approaches. Prioritised recommendations covering quick wins and structural changes.
+          </p>
+        </div>
+
+        <div className='flex justify-between py-4 border-y border-black/10 mb-6'>
+          <span className='text-sm text-black/70'>Timeline</span>
+          <span className='text-sm'>3-5 days</span>
+        </div>
+
+        <p className='text-sm text-black/50 italic'>
+          Often the fastest way to see whether we&apos;re a good fit.
+        </p>
+      </ServiceDropdown>
 
       {/* Service 2: Explanation Design */}
       <ServiceDropdown
         number='02'
         title='Explanation Design'
-        shortDescription='Taking a complex topic and making it clear through visual design. Research findings, technical processes, data that needs to tell a story.'
-        timeline='2-4 weeks'
-        youGet='Research synthesis, visual system, production files'
         ctaText='Discuss a project'
-        expandedContent={
-          <>
-            <p>
-              This is the core of what we do. You have something complex that needs explaining to an audience who doesn&apos;t share your expertise. We work to understand the subject deeply, then design visual systems that make it comprehensible.
-            </p>
-            <p>
-              The process includes subject research and discovery, concept development and sketching, and production of final outputs. These might be static graphics, illustrated diagrams, infographics, or lightly interactive pieces.
-            </p>
-          </>
-        }
-        goodFor='Research institutions communicating findings to public audiences, publishers needing illustrated explanations, companies explaining complex products or processes, think tanks producing policy briefs.'
-      />
+      >
+        <p className='text-black/70 mb-6'>
+          Taking a complex topic and making it genuinely clear - not just presentable.
+        </p>
 
-      {/* Service 3: Interactive System */}
+        <div className='mb-6'>
+          <h3 className='text-lg font-bold mb-4'>Our Process</h3>
+          <p className='text-black/70 mb-4'>
+            We don&apos;t start with visual style. We start with the information gap: What does your audience already know? What do they need to understand? What&apos;s the shortest path between those two states?
+          </p>
+          <p className='text-black/70'>
+            From there: audience analysis (expertise level, context, time constraints, what they&apos;ll do with the understanding), concept mapping (identifying dependencies, sequencing from concrete to abstract), visual strategy (choosing the right encoding for each type of information), progressive disclosure (layering complexity so readers aren&apos;t overwhelmed), and production (final outputs calibrated to your channels and contexts).
+          </p>
+        </div>
+
+        <div className='mb-6'>
+          <h3 className='text-lg font-bold mb-4'>What You Get</h3>
+          <p className='text-black/70'>
+            Research synthesis and information architecture. Visual system including illustration style, colour palette, typography, and diagram conventions. Production files in the formats you need. Documentation for internal teams.
+          </p>
+        </div>
+
+        <div className='flex justify-between py-4 border-y border-black/10'>
+          <span className='text-sm text-black/70'>Timeline</span>
+          <span className='text-sm'>2-4 weeks</span>
+        </div>
+      </ServiceDropdown>
+
+      {/* Service 3: Adaptive Explanation Systems */}
       <ServiceDropdown
         number='03'
-        title='Interactive System'
-        shortDescription='Web-based interactive visualisations and explorable explanations. For when users need to filter, zoom, compare, or discover relationships in data themselves.'
-        timeline='4-8 weeks'
-        youGet='Deployed interactive, source code, documentation'
-        ctaText='Discuss a build'
-        expandedContent={
-          <>
-            <p>
-              Some explanations only work when people can explore them directly. Interactive systems let users interrogate data, test scenarios, or navigate complex information at their own pace.
-            </p>
-            <p>
-              Built with D3.js, React, and modern web technologies. We handle the full process: data pipeline development, design, build, deployment, and technical handover. You get production-ready code and documentation so your team can maintain and extend it.
-            </p>
-          </>
-        }
-        goodFor='Research groups with rich datasets, organisations needing public-facing data tools, educational platforms, anyone whose story is best told through exploration rather than presentation.'
-      />
+        title='Adaptive Explanation Systems'
+        ctaText='Discuss adaptive systems'
+      >
+        <p className='text-black/70 mb-6'>
+          Not everyone needs the same explanation.
+        </p>
+        <p className='text-black/70 mb-6'>
+          A scientist and a policymaker looking at the same research need fundamentally different approaches. Not just simpler or harder, but structured around different mental models. A complete beginner and someone with adjacent expertise need different entry points entirely.
+        </p>
 
-      {/* Service 4: Beyond Projects */}
+        <div className='mb-6'>
+          <h3 className='text-lg font-bold mb-4'>The Problem</h3>
+          <p className='text-black/70'>
+            Traditional explanations force a choice: optimise for one audience and lose everyone else, or compromise with a middle-ground that serves no one well. Research shows that techniques helping novices can actively harm expert comprehension, and vice versa.
+          </p>
+        </div>
+
+        <div className='mb-6'>
+          <h3 className='text-lg font-bold mb-4'>Our Approach</h3>
+          <p className='text-black/70 mb-4'>
+            We design explanation systems that adapt to your audience. The right implementation depends on your content, your audiences, and your technical environment:
+          </p>
+          <div className='space-y-4'>
+            <div>
+              <p className='font-bold'>Level Selection</p>
+              <p className='text-black/70 text-sm'>
+                Users indicate their background, system serves appropriate version. Simple to build, requires writing 2-3 variants.
+              </p>
+            </div>
+            <div>
+              <p className='font-bold'>Assessment-Based Routing</p>
+              <p className='text-black/70 text-sm'>
+                Short diagnostic questions gauge actual knowledge level, route to calibrated content. Better than self-report because people misjudge their own expertise.
+              </p>
+            </div>
+            <div>
+              <p className='font-bold'>Progressive Disclosure</p>
+              <p className='text-black/70 text-sm'>
+                Single explanation with &quot;I know this already&quot; shortcuts and &quot;tell me more&quot; expansions. User self-directs through complexity.
+              </p>
+            </div>
+            <div>
+              <p className='font-bold'>Background-Aware Assembly</p>
+              <p className='text-black/70 text-sm'>
+                Content blocks assembled based on user&apos;s stated profession, education, or familiarity with related concepts. &quot;You&apos;re an engineer, so you&apos;ll recognise this as similar to...&quot; leverages existing mental models.
+              </p>
+            </div>
+            <div>
+              <p className='font-bold'>AI-Powered Generation</p>
+              <p className='text-black/70 text-sm'>
+                For audiences too diverse for pre-written variants, real-time generation tailored to each user&apos;s stated context.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className='mb-6'>
+          <h3 className='text-lg font-bold mb-4'>What You Get</h3>
+          <p className='text-black/70'>
+            Audience research identifying distinct user segments and their knowledge profiles. Content architecture designed for adaptation. Technical implementation appropriate to your platform. Analytics showing how different audiences engage.
+          </p>
+        </div>
+
+        <div className='mb-6'>
+          <h3 className='text-lg font-bold mb-4'>Why This Matters</h3>
+          <p className='text-black/70'>
+            Every adaptive system generates data: what level users select, how they perform on assessment questions, where they use shortcuts versus expansions. This feeds back into refinement. Your explanation gets better over time.
+          </p>
+        </div>
+      </ServiceDropdown>
+
+      {/* Service 4: Interactive Explanations */}
+      <ServiceDropdown
+        number='04'
+        title='Interactive Explanations'
+        ctaText='Discuss an interactive project'
+      >
+        <p className='text-black/70 mb-6'>
+          Static graphics explain. Interactive systems let people think.
+        </p>
+        <p className='text-black/70 mb-6'>
+          When the goal is genuine understanding, not just awareness, interaction transforms explanation from information delivery into an environment for exploration.
+        </p>
+
+        <div className='mb-6'>
+          <h3 className='text-lg font-bold mb-4'>When Interaction Adds Value</h3>
+          <p className='text-black/70'>
+            Not everything benefits from interactivity. It works best when the concept has parameters readers might want to vary, when different starting conditions lead to different outcomes, when understanding requires building intuition through experimentation, or when personalisation is part of the insight.
+          </p>
+        </div>
+
+        <div className='mb-6'>
+          <h3 className='text-lg font-bold mb-4'>What We Build</h3>
+          <p className='text-black/70'>
+            Explorable explanations where readers manipulate variables and see consequences. Data tools that let users filter to their specific situation. Calculators that make abstract relationships concrete. Simulations that compress time or reveal hidden dynamics.
+          </p>
+        </div>
+
+        <div className='mb-6'>
+          <h3 className='text-lg font-bold mb-4'>Technical Range</h3>
+          <p className='text-black/70'>
+            From embedded widgets within existing pages to full standalone web applications. React, D3.js, Observable, Three.js. We match technology to the problem.
+          </p>
+        </div>
+
+        <div className='flex justify-between py-4 border-y border-black/10'>
+          <span className='text-sm text-black/70'>Timeline</span>
+          <span className='text-sm'>4-8 weeks</span>
+        </div>
+      </ServiceDropdown>
+
+      {/* Service 5: Beyond Projects */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
           <div>
-            <span className='text-xs font-mono text-black/50 block mb-4'>[04]</span>
+            <span className='text-xs font-mono text-black/50 block mb-4'>[05]</span>
             <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight'>
               Beyond Projects
             </h2>
@@ -189,28 +315,45 @@ export default function ServicesPage() {
 
             <div className='space-y-8'>
               <div>
-                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Retained relationships</h3>
+                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Retained Relationships</h3>
                 <p className='text-black/70'>
                   For organisations with continuous visualisation needs, a retained relationship provides dedicated capacity and priority scheduling. Research groups, publications, science communication teams. Typically structured as a monthly commitment with agreed days included.
                 </p>
               </div>
 
               <div>
-                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Pictogram and symbol systems</h3>
+                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Pictogram and Symbol Systems</h3>
                 <p className='text-black/70'>
                   Custom icon sets and visual languages for publishing, wayfinding, or product interfaces. Systematic approaches to visual communication that scale across multiple contexts.
                 </p>
               </div>
 
               <div>
-                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Workshops and consulting</h3>
-                <p className='text-black/70'>
-                  Half-day or full-day sessions on visual communication, explanation design, or data visualisation. For teams who want to build internal capability or think through a visual communication strategy.
+                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Workshops and Consulting</h3>
+                <p className='text-black/70 mb-4'>
+                  For organisations building internal explanation design capability.
+                </p>
+                <p className='text-black/70 mb-4'>
+                  Not every team needs external designers for every project. Sometimes what&apos;s needed is a framework your people can apply themselves.
+                </p>
+                <div className='space-y-3 text-black/70'>
+                  <p>
+                    <strong>Explanation Audit Training</strong> - Teaching your team to diagnose common failure patterns using our assessment framework.
+                  </p>
+                  <p>
+                    <strong>Visual Communication Workshops</strong> - Half-day or full-day sessions covering cognitive principles, visual encoding, audience calibration. Practical exercises with your actual content.
+                  </p>
+                  <p>
+                    <strong>Design System Development</strong> - Creating reusable frameworks your team can maintain and extend. Pictogram libraries, diagram conventions, style guides with rationale.
+                  </p>
+                </div>
+                <p className='text-black/70 mt-4 text-sm'>
+                  Typical engagements include research groups improving grant application diagrams, publishing teams standardising visual approaches, and science communication teams developing consistent methodology.
                 </p>
               </div>
 
               <div>
-                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Something else</h3>
+                <h3 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-2'>Something Else</h3>
                 <p className='text-black/70'>
                   If you have a project that doesn&apos;t fit these descriptions, get in touch anyway. We&apos;re always interested in complex problems that need clear visual solutions.
                 </p>
