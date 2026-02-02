@@ -223,9 +223,18 @@ export function StellarPathways() {
             {pathsWithCoords.map(path => {
               const isActive = activePaths.has(path.id);
               const isHovered = hoveredPath === path.id;
-              const pathD = path.coords.map((pt, i) =>
+              const isBlackHole = path.endpoint === 'black_hole';
+
+              // For black holes, exclude the final point (they don't emit light)
+              const visibleCoords = isBlackHole
+                ? path.coords.slice(0, -1)
+                : path.coords;
+              const pathD = visibleCoords.map((pt, i) =>
                 `${i === 0 ? 'M' : 'L'}${pt.x.toFixed(1)},${pt.y.toFixed(1)}`
               ).join(' ');
+
+              // For black hole arrow: start from the last visible point
+              const lastVisiblePoint = visibleCoords[visibleCoords.length - 1];
 
               return (
                 <g
@@ -251,14 +260,37 @@ export function StellarPathways() {
                     fillOpacity={isActive || isHovered ? 0.8 : 0.2}
                   />
 
-                  {/* End point */}
-                  <circle
-                    cx={path.coords[path.coords.length - 1].x}
-                    cy={path.coords[path.coords.length - 1].y}
-                    r={path.endpoint === 'black_hole' ? 6 : 4}
-                    fill={ENDPOINT_ICONS[path.endpoint].color}
-                    fillOpacity={isActive || isHovered ? 0.8 : 0.2}
-                  />
+                  {/* End point - different handling for black holes */}
+                  {isBlackHole ? (
+                    // Black hole: downward arrow indicating collapse
+                    <g>
+                      <line
+                        x1={lastVisiblePoint.x}
+                        y1={lastVisiblePoint.y}
+                        x2={lastVisiblePoint.x}
+                        y2={lastVisiblePoint.y + 40}
+                        stroke={ENDPOINT_ICONS.black_hole.color}
+                        strokeWidth={2}
+                        strokeOpacity={isActive || isHovered ? 0.6 : 0.2}
+                        strokeDasharray='4 3'
+                      />
+                      {/* Arrow head */}
+                      <polygon
+                        points={`${lastVisiblePoint.x},${lastVisiblePoint.y + 48} ${lastVisiblePoint.x - 5},${lastVisiblePoint.y + 38} ${lastVisiblePoint.x + 5},${lastVisiblePoint.y + 38}`}
+                        fill={ENDPOINT_ICONS.black_hole.color}
+                        fillOpacity={isActive || isHovered ? 0.6 : 0.2}
+                      />
+                    </g>
+                  ) : (
+                    // Normal endpoint circle
+                    <circle
+                      cx={path.coords[path.coords.length - 1].x}
+                      cy={path.coords[path.coords.length - 1].y}
+                      r={4}
+                      fill={ENDPOINT_ICONS[path.endpoint].color}
+                      fillOpacity={isActive || isHovered ? 0.8 : 0.2}
+                    />
+                  )}
 
                   {/* Path label at start */}
                   {(isActive || isHovered) && (
@@ -280,8 +312,8 @@ export function StellarPathways() {
                   {/* Endpoint label */}
                   {(isActive || isHovered) && (
                     <text
-                      x={path.coords[path.coords.length - 1].x + 8}
-                      y={path.coords[path.coords.length - 1].y + 4}
+                      x={isBlackHole ? lastVisiblePoint.x + 8 : path.coords[path.coords.length - 1].x + 8}
+                      y={isBlackHole ? lastVisiblePoint.y + 56 : path.coords[path.coords.length - 1].y + 4}
                       style={{
                         fontSize: '9px',
                         fontFamily: 'input-mono, monospace',
@@ -289,7 +321,7 @@ export function StellarPathways() {
                         opacity: 0.7,
                       }}
                     >
-                      {path.endpointLabel}
+                      {isBlackHole ? 'Collapses to black hole' : path.endpointLabel}
                     </text>
                   )}
                 </g>

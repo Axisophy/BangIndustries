@@ -270,11 +270,12 @@ export const HR_CONFIG = {
   margin: { top: 40, right: 20, bottom: 50, left: 65 },
 };
 
-// Wider config for evolution diagrams (needs to show hot white dwarfs at ~100,000K)
+// Wider config for evolution diagrams (needs to show hot white dwarfs at ~100,000K
+// and neutron stars at very low luminosity)
 export const HR_EVOLUTION_CONFIG = {
   tempMin: 2500,
   tempMax: 150000,
-  lumMin: 0.0001,
+  lumMin: 0.0000001, // 10^-7 — low enough for neutron stars
   lumMax: 500000,
   margin: { top: 40, right: 20, bottom: 50, left: 65 },
 };
