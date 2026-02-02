@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Work  - Bang Industries',
-  description: 'Interactive explainers that make complex ideas accessible. From fractals to stellar evolution, nuclear physics to orbital mechanics.',
+  description: 'Interactive explainers that make complex ideas accessible. From fractals to game theory, designed for different audiences.',
   alternates: {
     canonical: 'https://bangindustries.co/work',
   },
@@ -15,9 +15,9 @@ const projects = [
     title: 'What are Fractals?',
     subtitle: 'A Beginner\'s Guide',
     category: 'Explanation Design',
-    description: 'An accessible introduction to fractal geometry  - from simple self-similarity to the infinite complexity of the Mandelbrot set.',
+    description: 'An accessible introduction to fractal geometry - from simple self-similarity to the infinite complexity of the Mandelbrot set.',
     slug: 'fractals',
-    tags: ['Mathematics', 'Interactive'],
+    tags: ['Mathematics', 'Interactive', 'General Audience'],
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const projects = [
     category: 'Explanation Design',
     description: 'Using the Hertzsprung-Russell diagram to explore how every star in the night sky is on a journey through the same cosmic story.',
     slug: 'stellar-evolution',
-    tags: ['Astronomy', 'Interactive'],
+    tags: ['Astronomy', 'Interactive', 'General Audience'],
   },
   {
     id: 3,
@@ -35,16 +35,43 @@ const projects = [
     category: 'Explanation Design',
     description: 'From the familiar periodic table to the vast landscape of 3,300+ atomic species. What makes atoms stable or unstable.',
     slug: 'nuclide-chart',
-    tags: ['Nuclear Physics', 'Interactive'],
+    tags: ['Nuclear Physics', 'Interactive', 'General Audience'],
   },
   {
     id: 4,
     title: 'Orbital Mechanics',
     subtitle: 'A Beginner\'s Guide',
     category: 'Explanation Design',
-    description: 'How spacecraft navigate  - from the counterintuitive physics of orbits to the elegant mathematics of getting to the Moon.',
+    description: 'How spacecraft navigate - from the counterintuitive physics of orbits to the elegant mathematics of getting to the Moon.',
     slug: 'orbital-mechanics',
-    tags: ['Space', 'Interactive'],
+    tags: ['Space', 'Interactive', 'General Audience'],
+  },
+  {
+    id: 5,
+    title: 'What\'s Inside Your Console?',
+    subtitle: 'A Guide for Gamers',
+    category: 'Explanation Design',
+    description: 'You use it every day to play games. But what\'s actually happening inside that box? An explainer designed for kids 8-12.',
+    slug: 'console-hardware',
+    tags: ['Technology', 'Interactive', 'Kids (8-12)'],
+  },
+  {
+    id: 6,
+    title: 'Why Your Competitor\'s Head Start Doesn\'t Matter',
+    subtitle: 'Network Effects and Market Timing',
+    category: 'Explanation Design',
+    description: 'Google wasn\'t first. Facebook wasn\'t first. iPhone wasn\'t first. Why did they win? A strategic framework for business leaders.',
+    slug: 'network-effects',
+    tags: ['Strategy', 'Interactive', 'Business Leaders'],
+  },
+  {
+    id: 7,
+    title: 'The Braess Paradox',
+    subtitle: 'When More Makes Things Worse',
+    category: 'Explanation Design',
+    description: 'Adding a highway can make traffic worse. Understanding why individual optimization creates collective harm - essential for infrastructure policy.',
+    slug: 'braess-paradox',
+    tags: ['Game Theory', 'Interactive', 'Policymakers'],
   },
 ];
 
