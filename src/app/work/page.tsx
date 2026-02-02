@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Work  - Bang Industries',
-  description: 'Selected projects in data visualisation, explanation design, and scientific illustration.',
+  description: 'Interactive explainers that make complex ideas accessible. From fractals to stellar evolution, nuclear physics to orbital mechanics.',
   alternates: {
     canonical: 'https://bangindustries.co/work',
   },
@@ -12,114 +12,56 @@ export const metadata: Metadata = {
 const projects = [
   {
     id: 1,
-    title: 'Avocado vs Homeownership',
-    category: 'Data Visualisation',
-    description: 'The correlation between avocado prices and millennial homeownership rates.',
-    slug: 'avocado-homeownership',
-    color: 'bg-[var(--color-lime)]',
+    title: 'What are Fractals?',
+    subtitle: 'A Beginner\'s Guide',
+    category: 'Explanation Design',
+    description: 'An accessible introduction to fractal geometry  - from simple self-similarity to the infinite complexity of the Mandelbrot set.',
+    slug: 'fractals',
+    tags: ['Mathematics', 'Interactive'],
   },
   {
     id: 2,
-    title: 'Cities for Artists',
-    category: 'Data Visualisation',
-    description: 'Where can you afford to be creative? A global ranking.',
-    slug: 'cities-for-artists',
-    color: 'bg-[var(--color-pink)]',
+    title: 'Stellar Evolution',
+    subtitle: 'A map of how stars live and die',
+    category: 'Explanation Design',
+    description: 'Using the Hertzsprung-Russell diagram to explore how every star in the night sky is on a journey through the same cosmic story.',
+    slug: 'stellar-evolution',
+    tags: ['Astronomy', 'Interactive'],
   },
   {
     id: 3,
-    title: 'Mxwll Dashboard System',
-    category: 'Interactive Design',
-    description: 'Pictogram system and data widgets for energy management.',
-    slug: 'mxwll',
-    color: 'bg-[var(--color-blue)]',
+    title: 'Chart of Nuclides',
+    subtitle: 'A Beginner\'s Guide',
+    category: 'Explanation Design',
+    description: 'From the familiar periodic table to the vast landscape of 3,300+ atomic species. What makes atoms stable or unstable.',
+    slug: 'nuclide-chart',
+    tags: ['Nuclear Physics', 'Interactive'],
   },
   {
     id: 4,
-    title: 'Atomic Printworks',
-    category: 'Scientific Illustration',
-    description: 'Periodic table, solar system, and scientific poster designs.',
-    slug: 'atomic-printworks',
-    color: 'bg-black',
-  },
-  {
-    id: 5,
-    title: 'Book Illustrations',
+    title: 'Orbital Mechanics',
+    subtitle: 'A Beginner\'s Guide',
     category: 'Explanation Design',
-    description: 'Interior illustrations and infographics for published books.',
-    slug: 'books',
-    color: 'bg-[var(--color-blue)]',
-  },
-  {
-    id: 6,
-    title: 'Project Six',
-    category: 'Data Visualisation',
-    description: 'Project description placeholder.',
-    slug: 'project-6',
-    color: 'bg-[var(--color-pink)]',
-  },
-  {
-    id: 7,
-    title: 'The Main Sequence and Beyond',
-    category: 'Data Visualisation',
-    description: 'Mapping stellar evolution with GAIA data across the Hertzsprung-Russell diagram.',
-    slug: 'stellar-evolution',
-    color: 'bg-black',
-  },
-  {
-    id: 8,
-    title: 'Fragile by Design',
-    category: 'Interactive Design',
-    description: 'How topology shapes resilience, epidemics, and information flow in networks.',
-    slug: 'network-theory',
-    color: 'bg-[var(--color-blue)]',
-  },
-  {
-    id: 9,
-    title: 'From Gates to Gradients',
-    category: 'Interactive Design',
-    description: 'How logic circuits become learning machines.',
-    slug: 'logic-systems',
-    color: 'bg-[var(--color-pink)]',
+    description: 'How spacecraft navigate  - from the counterintuitive physics of orbits to the elegant mathematics of getting to the Moon.',
+    slug: 'orbital-mechanics',
+    tags: ['Space', 'Interactive'],
   },
 ];
-
-const categories = ['All', 'Data Visualisation', 'Explanation Design', 'Scientific Illustration', 'Interactive Design'];
 
 export default function WorkPage() {
   return (
     <main className='min-h-screen bg-white'>
       {/* Hero */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20'>
-        <div className='max-w-full lg:max-w-[75%]'>
-          <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
-            Work
-          </h1>
-          <p className='text-base text-black/70 max-w-2xl mt-4'>
-            Selected projects in data visualisation, explanation design, and scientific illustration.
-            Each piece is crafted to make complex information clear and visually compelling.
-          </p>
-        </div>
-      </section>
-
-      {/* Filter */}
-      <section className='px-4 md:px-8 lg:px-12 border-y border-black/10'>
-        <div className='py-4'>
-          <div className='flex flex-wrap gap-4'>
-            {categories.map((category, index) => (
-              <button
-                key={category}
-                className={`text-sm px-4 py-2 transition-colors ${
-                  index === 0
-                    ? 'bg-black text-white'
-                    : 'text-black/70 hover:text-black'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
+        <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
+          Work
+        </h1>
+        <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+          Explanation Design
+        </p>
+        <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8'>
+          Interactive explainers that make complex ideas accessible. Each piece builds understanding progressively  - starting with what you already know, then revealing the deeper structure beneath.
+        </p>
       </section>
 
       {/* Project Grid  - single column */}
@@ -132,22 +74,37 @@ export default function WorkPage() {
               className='group block'
             >
               <article className='py-8 border-b border-black/10'>
-                <div className={`aspect-[4/3] ${project.color} mb-4 flex items-center justify-center transition-transform group-hover:scale-[0.98]`}>
-                  <span className='text-white/50 font-mono text-sm'>
-                    [{String(index + 1).padStart(2, '0')}]
-                  </span>
+                <div className='grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-4 lg:gap-8'>
+                  {/* Left: Number and category */}
+                  <div className='flex items-baseline gap-4'>
+                    <span className='text-xs font-mono text-black/40'>
+                      [{String(index + 1).padStart(2, '0')}]
+                    </span>
+                    <span className='text-xs font-mono uppercase tracking-wider text-black/50'>
+                      {project.category}
+                    </span>
+                  </div>
+
+                  {/* Right: Content */}
+                  <div>
+                    <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight group-hover:text-[var(--color-blue)] transition-colors'>
+                      {project.title}
+                    </h2>
+                    <p className='text-lg md:text-xl text-black/70 mt-1'>
+                      {project.subtitle}
+                    </p>
+                    <p className='text-black/70 mt-4 max-w-2xl'>
+                      {project.description}
+                    </p>
+                    <div className='flex flex-wrap gap-2 mt-4'>
+                      {project.tags.map((tag) => (
+                        <span key={tag} className='px-3 py-1 text-xs bg-black/5 text-black/60'>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div className='mb-2'>
-                  <span className='text-xs font-mono text-black/50'>
-                    {project.category}
-                  </span>
-                </div>
-                <h2 className='text-xl md:text-2xl lg:text-3xl font-bold tracking-tight group-hover:text-[var(--color-blue)] transition-colors'>
-                  {project.title}
-                </h2>
-                <p className='text-black/70 mt-2'>
-                  {project.description}
-                </p>
               </article>
             </Link>
           ))}
@@ -155,21 +112,23 @@ export default function WorkPage() {
       </section>
 
       {/* CTA */}
-      <section className='px-4 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20 bg-black text-white'>
-        <div className='max-w-xl'>
-          <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-4'>
-            Have a project in mind?
+      <section className='px-4 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24 bg-black text-white'>
+        <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12'>
+          <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
+            Have a complex idea?
           </h2>
-          <p className='text-white/70 mb-8 max-w-xl'>
-            We&apos;re always interested in new challenges. Let&apos;s discuss how we can bring visual clarity to your data.
-          </p>
-          <Link
-            href='/contact'
-            className='inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-lime)] text-black hover:bg-white transition-colors'
-          >
-            Get in Touch
-            <span aria-hidden='true'>→</span>
-          </Link>
+          <div>
+            <p className='text-white/70 mb-8 max-w-xl'>
+              We build interactive explainers that make difficult concepts accessible. If you have something that needs explaining  - to customers, students, or the public  - let&apos;s talk.
+            </p>
+            <Link
+              href='/contact'
+              className='inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-lime)] text-black font-display font-bold hover:bg-white transition-colors'
+            >
+              Get in Touch
+              <span aria-hidden='true'>→</span>
+            </Link>
+          </div>
         </div>
       </section>
     </main>
