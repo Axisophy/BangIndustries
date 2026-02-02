@@ -198,12 +198,12 @@ export default function StellarEvolutionPage() {
       </section>
 
       {/* THREE MILLION STARS */}
-      <section className='py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-12'>
-        <div className='max-w-4xl mx-auto'>
-          <h2 className='text-3xl md:text-4xl font-bold tracking-tight mb-6'>
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
+        <div className='grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-8 lg:gap-12 mb-8'>
+          <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Three Million Stars
           </h2>
-          <div className='text-black/70 space-y-4 mb-8 md:mb-12'>
+          <div className='space-y-4 text-black/70 leading-relaxed'>
             <p>
               That&apos;s the theory. Here&apos;s the reality.
             </p>
@@ -218,13 +218,11 @@ export default function StellarEvolutionPage() {
             </p>
           </div>
         </div>
-        <div className='max-w-6xl mx-auto'>
-          <img
-            src='/images/work/stellar-evolution/gaia-hr-3million.png'
-            alt='HR diagram showing three million stars from GAIA telescope data'
-            className='w-full h-auto'
-          />
-        </div>
+        <img
+          src='/images/work/stellar-evolution/gaia-hr-3million.png'
+          alt='HR diagram showing three million stars from GAIA telescope data'
+          className='w-full h-auto'
+        />
       </section>
 
       {/* Stage 4a: BUILD - "Stars You Know" */}
