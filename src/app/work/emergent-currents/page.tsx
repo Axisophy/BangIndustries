@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const FlowFieldVisualiser = dynamic(() => import('@/components/FlowFieldVisualiser'), { ssr: false });
 
 function MetadataDropdown({ title, children }: { title?: string; children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -97,11 +100,9 @@ export default function EmergentCurrentsPage() {
         <div className='w-full aspect-video bg-black' />
       </section>
 
-      {/* Interactive Visualiser Placeholder */}
+      {/* Interactive Visualiser */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
-        <div className='w-full aspect-video bg-neutral-900 flex items-center justify-center'>
-          <span className='text-xs font-mono text-white/30'>Interactive visualiser</span>
-        </div>
+        <FlowFieldVisualiser />
       </section>
 
       {/* Content Grid */}
