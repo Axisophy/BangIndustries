@@ -29,9 +29,10 @@ void main() {
     gl_Position = vec4(pos, 0.0, 1.0);
 
     // Point size: brighter stars bigger
-    // abs_mag range roughly -5 to 17. Map to size 1-6.
+    // abs_mag range roughly -5 to 17. Map to size range.
+    // Brightest (abs_mag < 0): 7-8px, Sun-like (abs_mag ~5): 2-3px, Dimmest (abs_mag > 12): 1px
     float magNorm = clamp((a_absMag - (-5.0)) / 22.0, 0.0, 1.0);
-    gl_PointSize = mix(6.0, 1.5, magNorm) * u_pointScale;
+    gl_PointSize = mix(8.0, 1.0, magNorm) * u_pointScale;
 
     v_temperature = a_temperature;
 
