@@ -12,7 +12,7 @@ export default function DesignSystemsPage() {
   };
 
   return (
-    <div className='min-h-screen bg-white'>
+    <div className='min-h-screen bg-white text-black'>
       {/* Header */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20 border-b border-black/10'>
         <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display tracking-tight'>

@@ -13,7 +13,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
       >
         {title && <span className='text-sm'>{title}</span>}
         <svg
-          className={`w-4 h-4 text-black/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-white/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'
@@ -22,7 +22,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
         </svg>
       </button>
       {isOpen && (
-        <div className='text-xs text-black/60 mt-2 leading-relaxed space-y-2'>
+        <div className='text-xs text-white/60 mt-2 leading-relaxed space-y-2'>
           {children}
         </div>
       )}
@@ -35,20 +35,20 @@ function ComponentCard({ name, icon, role, color }: { name: string; icon: string
 
   return (
     <div
-      className={`p-6 border border-black/10 transition-all cursor-pointer ${isHovered ? 'bg-black/5' : ''}`}
+      className={`p-6 border border-white/10 transition-all cursor-pointer ${isHovered ? 'bg-white/10' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className={`text-4xl mb-4 ${color}`}>{icon}</div>
       <h4 className='text-lg font-bold mb-2'>{name}</h4>
-      <p className='text-black/70 text-sm'>{role}</p>
+      <p className='text-white/70 text-sm'>{role}</p>
     </div>
   );
 }
 
 export default function ConsoleHardwarePage() {
   return (
-    <main className='min-h-screen bg-white'>
+    <main className='min-h-screen bg-black'>
       {/* Header with Metadata Sidebar */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16'>
@@ -57,31 +57,31 @@ export default function ConsoleHardwarePage() {
             <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
               What&apos;s Inside Your Console?
             </h1>
-            <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+            <p className='text-lg md:text-xl lg:text-2xl font-normal text-white/70 mt-2'>
               A Guide for Gamers
             </p>
-            <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
+            <p className='text-base text-white/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
               You use it every day to play games. But what&apos;s actually happening inside that box? Let&apos;s open it up and find out what makes your console tick - no tools required.
             </p>
             {/* Tags */}
             <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Explanation Design</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Technology</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Kids (8-12)</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Explanation Design</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Interactive</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Technology</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Kids (8-12)</span>
             </div>
           </div>
 
           {/* Right column - Portfolio Metadata */}
           <div className='space-y-6'>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Category
               </span>
               <span className='text-sm'>Explanation Design</span>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Audience
               </span>
               <MetadataDropdown title='Kids (8-12)'>
@@ -89,7 +89,7 @@ export default function ConsoleHardwarePage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Approach
               </span>
               <MetadataDropdown>
@@ -98,7 +98,7 @@ export default function ConsoleHardwarePage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Adaptability
               </span>
               <MetadataDropdown>
@@ -106,7 +106,7 @@ export default function ConsoleHardwarePage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Technology
               </span>
               <span className='text-sm'>React, SVG Animation</span>
@@ -147,7 +147,7 @@ export default function ConsoleHardwarePage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Computer That Plays Games
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Your PlayStation, Xbox, or Switch might look like a simple box. But inside? It&apos;s a seriously powerful computer - more powerful than every computer on Earth... in 1980. Combined.
             </p>
@@ -185,7 +185,7 @@ export default function ConsoleHardwarePage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Four Main Parts
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Every gaming console - PlayStation, Xbox, Nintendo Switch - has these four things inside. They all need to work together for you to play a game.
             </p>
@@ -222,7 +222,7 @@ export default function ConsoleHardwarePage() {
             color='text-black'
           />
         </div>
-        <p className='text-xs md:text-sm text-black/50 mt-4'>
+        <p className='text-xs md:text-sm text-white/50 mt-4'>
           Click each part to learn more about what it does.
         </p>
       </section>
@@ -233,7 +233,7 @@ export default function ConsoleHardwarePage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Brain (CPU)
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               CPU stands for &quot;Central Processing Unit&quot; - but you can just think of it as the brain.
             </p>
@@ -244,7 +244,7 @@ export default function ConsoleHardwarePage() {
               CPUs are measured in &quot;gigahertz&quot; (GHz). That&apos;s how fast they can think. A PS5 runs at 3.5 GHz, which means it can do 3.5 <em>billion</em> simple calculations every second.
             </p>
             <div className='border-l-4 border-[var(--color-blue)] pl-4 py-2 my-6'>
-              <p className='text-black/70 font-medium'>Think of it like this: if you could do one maths problem per second, it would take you 111 years to do what your console&apos;s CPU does in one second.</p>
+              <p className='text-white/70 font-medium'>Think of it like this: if you could do one maths problem per second, it would take you 111 years to do what your console&apos;s CPU does in one second.</p>
             </div>
           </div>
         </div>
@@ -256,7 +256,7 @@ export default function ConsoleHardwarePage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Artist (GPU)
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               GPU stands for &quot;Graphics Processing Unit&quot; - the part that draws everything you see.
             </p>
@@ -267,7 +267,7 @@ export default function ConsoleHardwarePage() {
               Why doesn&apos;t the CPU do this? Because drawing is actually thousands of tiny calculations happening at once. &quot;What colour should this pixel be?&quot; multiplied by 8 million pixels. The GPU is specially designed to do millions of simple calculations at the same time - something the CPU can&apos;t do.
             </p>
             <div className='border-l-4 border-[var(--color-pink)] pl-4 py-2 my-6'>
-              <p className='text-black/70 font-medium'>The CPU is like one really smart person. The GPU is like thousands of less clever people all working together. For drawing, thousands of workers wins.</p>
+              <p className='text-white/70 font-medium'>The CPU is like one really smart person. The GPU is like thousands of less clever people all working together. For drawing, thousands of workers wins.</p>
             </div>
           </div>
         </div>
@@ -279,7 +279,7 @@ export default function ConsoleHardwarePage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Fast vs Slow Memory
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Your console has two types of memory, and they&apos;re <em>very</em> different.
             </p>
@@ -289,11 +289,11 @@ export default function ConsoleHardwarePage() {
             <p>
               <strong>Storage</strong> (SSD or hard drive) is like a library. Much slower to access, but permanent. This is where your games are installed, where your save files live. A PS5 has 16 GB of RAM but 825 GB of storage - over 50 times more.
             </p>
-            <div className='bg-black/5 p-4 my-6'>
-              <p className='font-bold text-xs uppercase tracking-wider text-black/50 mb-1'>
+            <div className='bg-white/10 p-4 my-6'>
+              <p className='font-bold text-xs uppercase tracking-wider text-white/50 mb-1'>
                 Why this matters
               </p>
-              <p className='text-black/70'>Loading screens exist because the console is copying stuff from slow storage into fast RAM. Faster storage = shorter loading screens. That&apos;s why new consoles with SSDs load so much faster than old ones.</p>
+              <p className='text-white/70'>Loading screens exist because the console is copying stuff from slow storage into fast RAM. Faster storage = shorter loading screens. That&apos;s why new consoles with SSDs load so much faster than old ones.</p>
             </div>
           </div>
         </div>
@@ -305,7 +305,7 @@ export default function ConsoleHardwarePage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             What Happens When You Start a Game
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Let&apos;s follow what actually happens when you launch a game:
             </p>
@@ -363,7 +363,7 @@ export default function ConsoleHardwarePage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Going Deeper
           </h2>
-          <p className='text-black/50 text-sm'>
+          <p className='text-white/50 text-sm'>
             Got the basics? Here&apos;s more cool stuff.
           </p>
         </div>
@@ -375,7 +375,7 @@ export default function ConsoleHardwarePage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Why Does It Get Hot?
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Ever noticed your console gets warm? That&apos;s not a bug - it&apos;s physics.
             </p>
@@ -395,7 +395,7 @@ export default function ConsoleHardwarePage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             How Far We&apos;ve Come
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               The original PlayStation (1994) had 2 MB of RAM. The PS5 has 16,000 MB. That&apos;s 8,000 times more.
             </p>
@@ -418,10 +418,10 @@ export default function ConsoleHardwarePage() {
           <div>
             <div className='space-y-8'>
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Questions to Think About
                 </h3>
-                <ul className='space-y-2 text-sm text-black/70'>
+                <ul className='space-y-2 text-sm text-white/70'>
                   <li>- How is your phone different from a console? (Hint: it&apos;s got the same four parts...)</li>
                   <li>- Why do some games take longer to load than others?</li>
                   <li>- What happens if the GPU can&apos;t keep up? (Ever seen a game &quot;lag&quot;?)</li>
@@ -429,7 +429,7 @@ export default function ConsoleHardwarePage() {
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Watch
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -447,14 +447,14 @@ export default function ConsoleHardwarePage() {
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Related Explainers
                 </h3>
                 <ul className='space-y-2 text-sm'>
                   <li>
                     <a
                       href='/work/fractals'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       What are Fractals? →
                     </a>

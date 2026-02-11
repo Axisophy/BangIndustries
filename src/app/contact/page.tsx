@@ -55,7 +55,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className='min-h-screen bg-white'>
+    <main className='min-h-screen'>
       {/* Main Content */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16'>
@@ -64,25 +64,25 @@ export default function ContactPage() {
             <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mb-8'>
               Get in touch
             </h1>
-            <p className='text-black/70 mb-8'>
+            <p className='text-white/70 mb-8'>
               Have a project in mind? Tell me what you&apos;re working on
               and we&apos;ll find a time to talk.
             </p>
 
             <div className='space-y-8 text-sm'>
               <div>
-                <span className='text-xs uppercase tracking-wider text-black/50 block mb-1'>
+                <span className='text-xs uppercase tracking-wider text-white/50 block mb-1'>
                   Email
                 </span>
                 <a
                   href='mailto:studio@bangindustries.co'
-                  className='text-[var(--color-blue)] hover:text-black transition-colors'
+                  className='text-[var(--color-blue)] hover:text-white transition-colors'
                 >
                   studio@bangindustries.co
                 </a>
               </div>
               <div>
-                <span className='text-xs uppercase tracking-wider text-black/50 block mb-1'>
+                <span className='text-xs uppercase tracking-wider text-white/50 block mb-1'>
                   Location
                 </span>
                 <span>St Leonards-on-Sea, UK</span>
@@ -95,12 +95,12 @@ export default function ContactPage() {
             {formState === 'success' ? (
               <div className='space-y-6'>
                 <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight'>Message sent</h2>
-                <p className='text-black/70'>
+                <p className='text-white/70'>
                   Thanks for getting in touch. I&apos;ll get back to you within 1-2 working days.
                 </p>
                 <button
                   onClick={resetForm}
-                  className='text-sm text-[var(--color-blue)] hover:text-black transition-colors'
+                  className='text-sm text-[var(--color-blue)] hover:text-white transition-colors'
                 >
                   Send another message
                 </button>
@@ -109,7 +109,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className='space-y-8'>
                 {formState === 'error' && (
                   <div className='p-4 bg-[var(--color-pink)]/10 border border-[var(--color-pink)]/20'>
-                    <p className='text-sm text-black/70'>
+                    <p className='text-sm text-white/70'>
                       Something went wrong. Please try again or email{' '}
                       <a
                         href='mailto:studio@bangindustries.co'
@@ -123,7 +123,7 @@ export default function ContactPage() {
                 )}
 
                 <div>
-                  <label htmlFor='name' className='block text-sm text-black/70 mb-2'>
+                  <label htmlFor='name' className='block text-sm text-white/70 mb-2'>
                     Name
                   </label>
                   <input
@@ -134,12 +134,12 @@ export default function ContactPage() {
                     disabled={formState === 'loading'}
                     value={formData.name}
                     onChange={handleChange}
-                    className='w-full px-4 py-4 border border-black/20 bg-transparent focus:border-black focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+                    className='w-full px-4 py-4 border border-white/20 bg-transparent focus:border-white focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
                   />
                 </div>
 
                 <div>
-                  <label htmlFor='email' className='block text-sm text-black/70 mb-2'>
+                  <label htmlFor='email' className='block text-sm text-white/70 mb-2'>
                     Email
                   </label>
                   <input
@@ -150,12 +150,12 @@ export default function ContactPage() {
                     disabled={formState === 'loading'}
                     value={formData.email}
                     onChange={handleChange}
-                    className='w-full px-4 py-4 border border-black/20 bg-transparent focus:border-black focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+                    className='w-full px-4 py-4 border border-white/20 bg-transparent focus:border-white focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
                   />
                 </div>
 
                 <div>
-                  <label htmlFor='organisation' className='block text-sm text-black/70 mb-2'>
+                  <label htmlFor='organisation' className='block text-sm text-white/70 mb-2'>
                     Organisation
                   </label>
                   <input
@@ -165,12 +165,12 @@ export default function ContactPage() {
                     disabled={formState === 'loading'}
                     value={formData.organisation}
                     onChange={handleChange}
-                    className='w-full px-4 py-4 border border-black/20 bg-transparent focus:border-black focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+                    className='w-full px-4 py-4 border border-white/20 bg-transparent focus:border-white focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
                   />
                 </div>
 
                 <div>
-                  <label htmlFor='interest' className='block text-sm text-black/70 mb-2'>
+                  <label htmlFor='interest' className='block text-sm text-white/70 mb-2'>
                     What are you interested in?
                   </label>
                   <select
@@ -179,9 +179,9 @@ export default function ContactPage() {
                     disabled={formState === 'loading'}
                     value={formData.interest}
                     onChange={handleChange}
-                    className='w-full px-4 py-4 border border-black/20 bg-transparent focus:border-black focus:outline-none transition-colors appearance-none disabled:opacity-50 disabled:cursor-not-allowed'
+                    className='w-full px-4 py-4 border border-white/20 bg-transparent focus:border-white focus:outline-none transition-colors appearance-none disabled:opacity-50 disabled:cursor-not-allowed'
                     style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' fill-opacity='0.4' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' fill-opacity='0.4' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
                       backgroundRepeat: 'no-repeat',
                       backgroundPosition: 'right 16px center',
                     }}
@@ -196,7 +196,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor='message' className='block text-sm text-black/70 mb-2'>
+                  <label htmlFor='message' className='block text-sm text-white/70 mb-2'>
                     Tell me about your project
                   </label>
                   <textarea
@@ -208,14 +208,14 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder='What are you trying to communicate? Who needs to understand it? Any constraints?'
-                    className='w-full px-4 py-4 border border-black/20 bg-transparent focus:border-black focus:outline-none transition-colors resize-none placeholder:text-black/30 disabled:opacity-50 disabled:cursor-not-allowed'
+                    className='w-full px-4 py-4 border border-white/20 bg-transparent focus:border-white focus:outline-none transition-colors resize-none placeholder:text-white/30 disabled:opacity-50 disabled:cursor-not-allowed'
                   />
                 </div>
 
                 <button
                   type='submit'
                   disabled={formState === 'loading'}
-                  className='inline-flex items-center gap-2 px-6 py-3 bg-black text-white text-sm font-display hover:bg-[var(--color-blue)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+                  className='inline-flex items-center gap-2 px-6 py-3 bg-white text-black text-sm font-display hover:bg-[var(--color-blue)] hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
                 >
                   {formState === 'loading' ? 'Sending...' : 'Send message'}
                   {formState !== 'loading' && <span aria-hidden='true'>→</span>}
@@ -228,7 +228,7 @@ export default function ContactPage() {
 
       {/* Response time note */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
-        <p className='text-sm text-black/50 max-w-md'>
+        <p className='text-sm text-white/50 max-w-md'>
           I typically respond within 1-2 working days. If your project is urgent,
           mention it in your message.
         </p>

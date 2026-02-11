@@ -22,8 +22,8 @@
   --color-lime: #CCFF00;
 
   /* Semantic Colors */
-  --background: var(--color-white);
-  --foreground: var(--color-black);
+  --background: var(--color-black);
+  --foreground: var(--color-white);
   --accent-primary: var(--color-blue);
   --accent-secondary: var(--color-pink);
   --accent-tertiary: var(--color-lime);

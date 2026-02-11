@@ -13,7 +13,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
       >
         {title && <span className='text-sm'>{title}</span>}
         <svg
-          className={`w-4 h-4 text-black/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-white/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'
@@ -22,7 +22,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
         </svg>
       </button>
       {isOpen && (
-        <div className='text-xs text-black/60 mt-2 leading-relaxed space-y-2'>
+        <div className='text-xs text-white/60 mt-2 leading-relaxed space-y-2'>
           {children}
         </div>
       )}
@@ -32,12 +32,12 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
 
 function CaseStudyCard({ city, year, action, result }: { city: string; year: string; action: string; result: string }) {
   return (
-    <div className='border border-black/10 p-6'>
+    <div className='border border-white/10 p-6'>
       <div className='flex items-baseline gap-2 mb-2'>
         <span className='font-bold'>{city}</span>
-        <span className='text-xs font-mono text-black/40'>{year}</span>
+        <span className='text-xs font-mono text-white/40'>{year}</span>
       </div>
-      <p className='text-sm text-black/70 mb-2'>{action}</p>
+      <p className='text-sm text-white/70 mb-2'>{action}</p>
       <p className='text-sm font-medium text-[var(--color-blue)]'>{result}</p>
     </div>
   );
@@ -45,7 +45,7 @@ function CaseStudyCard({ city, year, action, result }: { city: string; year: str
 
 export default function BraessParadoxPage() {
   return (
-    <main className='min-h-screen bg-white'>
+    <main className='min-h-screen bg-black'>
       {/* Header with Metadata Sidebar */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16'>
@@ -54,31 +54,31 @@ export default function BraessParadoxPage() {
             <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
               The Braess Paradox
             </h1>
-            <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+            <p className='text-lg md:text-xl lg:text-2xl font-normal text-white/70 mt-2'>
               When More Makes Things Worse
             </p>
-            <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
+            <p className='text-base text-white/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
               Adding a new highway can make traffic worse. Expanding capacity can reduce throughput. This isn&apos;t a paradox - it&apos;s game theory. Understanding why individual optimization creates collective harm is essential for effective infrastructure and network policy.
             </p>
             {/* Tags */}
             <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Explanation Design</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Policy</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Game Theory</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Explanation Design</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Interactive</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Policy</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Game Theory</span>
             </div>
           </div>
 
           {/* Right column - Portfolio Metadata */}
           <div className='space-y-6'>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Category
               </span>
               <span className='text-sm'>Explanation Design</span>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Audience
               </span>
               <MetadataDropdown title='Policymakers'>
@@ -86,7 +86,7 @@ export default function BraessParadoxPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Approach
               </span>
               <MetadataDropdown>
@@ -95,7 +95,7 @@ export default function BraessParadoxPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Adaptability
               </span>
               <MetadataDropdown>
@@ -103,7 +103,7 @@ export default function BraessParadoxPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Technology
               </span>
               <span className='text-sm'>React, D3.js, Network Simulation</span>
@@ -150,7 +150,7 @@ export default function BraessParadoxPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             When More Makes Things Worse
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               In 2003, Seoul demolished the Cheonggyecheon Expressway - a six-lane elevated highway carrying 168,000 vehicles per day through the city centre.
             </p>
@@ -173,7 +173,7 @@ export default function BraessParadoxPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Classic Network
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Consider a simple network. 100 cars need to travel from point A to point B. There are two routes: one through the north (via N), one through the south (via S).
             </p>
@@ -190,15 +190,15 @@ export default function BraessParadoxPage() {
         </div>
 
         {/* Network diagram placeholder */}
-        <div className='border border-black/10 bg-black/5 p-12 flex items-center justify-center min-h-[400px]'>
+        <div className='border border-white/10 bg-white/10 p-12 flex items-center justify-center min-h-[400px]'>
           <div className='text-center'>
-            <p className='text-black/40 font-mono text-sm mb-2'>[Interactive Network Diagram]</p>
-            <p className='text-black/50 text-sm max-w-md'>
+            <p className='text-white/40 font-mono text-sm mb-2'>[Interactive Network Diagram]</p>
+            <p className='text-white/50 text-sm max-w-md'>
               Route 100 cars from A to B. Watch as adding the shortcut makes everyone&apos;s journey longer.
             </p>
           </div>
         </div>
-        <p className='text-xs md:text-sm text-black/50 mt-4'>
+        <p className='text-xs md:text-sm text-white/50 mt-4'>
           The classic Braess network. Before the shortcut: 95 minutes per car. After: 100 minutes per car.
         </p>
       </section>
@@ -209,7 +209,7 @@ export default function BraessParadoxPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Mechanism
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Here&apos;s what happens when the shortcut opens:
             </p>
@@ -234,7 +234,7 @@ export default function BraessParadoxPage() {
               </li>
             </ol>
             <div className='border-l-4 border-[var(--color-blue)] pl-4 py-2 my-6'>
-              <p className='text-black/70 font-medium'>
+              <p className='text-white/70 font-medium'>
                 The shortcut didn&apos;t reduce travel time - it eliminated the only mechanism forcing traffic to distribute efficiently.
               </p>
             </div>
@@ -248,7 +248,7 @@ export default function BraessParadoxPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Real-World Evidence
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               The Braess Paradox isn&apos;t just theory. It&apos;s been documented in real infrastructure:
             </p>
@@ -301,7 +301,7 @@ export default function BraessParadoxPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Nash Equilibrium vs System Optimum
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               The Braess Paradox illustrates a fundamental tension in game theory.
             </p>
@@ -314,11 +314,11 @@ export default function BraessParadoxPage() {
             <p>
               In networks with certain characteristics, the Nash equilibrium can be significantly worse than the system optimum. This gap is called the &quot;Price of Anarchy&quot; - the cost society pays for uncoordinated decision-making.
             </p>
-            <div className='bg-black/5 p-4 my-6'>
-              <p className='font-bold text-xs uppercase tracking-wider text-black/50 mb-1'>
+            <div className='bg-white/10 p-4 my-6'>
+              <p className='font-bold text-xs uppercase tracking-wider text-white/50 mb-1'>
                 Policy Implication
               </p>
-              <p className='text-black/70'>
+              <p className='text-white/70'>
                 When the Price of Anarchy is high, infrastructure additions can make things worse. The solution isn&apos;t always more capacity - sometimes it&apos;s better coordination mechanisms.
               </p>
             </div>
@@ -332,7 +332,7 @@ export default function BraessParadoxPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Beyond Traffic
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               The Braess Paradox appears wherever agents independently optimize their routes through a shared network:
             </p>
@@ -395,7 +395,7 @@ export default function BraessParadoxPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Going Deeper
           </h2>
-          <p className='text-black/50 text-sm'>
+          <p className='text-white/50 text-sm'>
             Technical background for those who want the formal framework.
           </p>
         </div>
@@ -407,11 +407,11 @@ export default function BraessParadoxPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Formal Definition
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               The Braess Paradox occurs when adding an edge to a network increases the cost at Nash equilibrium. Formally: let G be a network with edge costs c{'\u2091'}(f{'\u2091'}) depending on flow f{'\u2091'}. Adding edge e&apos; creates network G&apos;. The paradox occurs when:
             </p>
-            <p className='font-mono text-sm bg-black/5 p-4'>
+            <p className='font-mono text-sm bg-white/10 p-4'>
               C{'\u2099\u2091'}(G&apos;) {'>'} C{'\u2099\u2091'}(G)
             </p>
             <p>
@@ -430,7 +430,7 @@ export default function BraessParadoxPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Mechanism Design Solutions
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               If we can&apos;t rely on individual optimization to produce good outcomes, how do we achieve coordination?
             </p>
@@ -470,7 +470,7 @@ export default function BraessParadoxPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Historical Context
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Dietrich Braess published his paradox in 1968 in the German journal Unternehmensforschung. It remained relatively obscure until the 1990s, when researchers began finding real-world examples.
             </p>
@@ -493,7 +493,7 @@ export default function BraessParadoxPage() {
           <div>
             <div className='space-y-8'>
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Recommended Reading
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -506,7 +506,7 @@ export default function BraessParadoxPage() {
                     >
                       Algorithmic Game Theory - Nisan et al.
                     </a>
-                    <span className='text-black/40 ml-2'>Comprehensive technical reference</span>
+                    <span className='text-white/40 ml-2'>Comprehensive technical reference</span>
                   </li>
                   <li>
                     <a
@@ -517,13 +517,13 @@ export default function BraessParadoxPage() {
                     >
                       Thinking in Systems - Donella Meadows
                     </a>
-                    <span className='text-black/40 ml-2'>Accessible systems thinking primer</span>
+                    <span className='text-white/40 ml-2'>Accessible systems thinking primer</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Reference
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -561,14 +561,14 @@ export default function BraessParadoxPage() {
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Related Explainers
                 </h3>
                 <ul className='space-y-2 text-sm'>
                   <li>
                     <a
                       href='/work/network-effects'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       Network Effects →
                     </a>
@@ -576,7 +576,7 @@ export default function BraessParadoxPage() {
                   <li>
                     <a
                       href='/work/orbital-mechanics'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       Orbital Mechanics →
                     </a>
@@ -584,7 +584,7 @@ export default function BraessParadoxPage() {
                   <li>
                     <a
                       href='/work/fractals'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       What are Fractals? →
                     </a>

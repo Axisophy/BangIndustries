@@ -14,7 +14,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
       >
         {title && <span className='text-sm'>{title}</span>}
         <svg
-          className={`w-4 h-4 text-black/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-white/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'
@@ -23,7 +23,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
         </svg>
       </button>
       {isOpen && (
-        <div className='text-xs text-black/60 mt-2 leading-relaxed space-y-2'>
+        <div className='text-xs text-white/60 mt-2 leading-relaxed space-y-2'>
           {children}
         </div>
       )}
@@ -33,7 +33,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
 
 export default function NuclideChartPage() {
   return (
-    <main className='min-h-screen bg-white'>
+    <main className='min-h-screen bg-black'>
       {/* Header with Metadata Sidebar */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16'>
@@ -42,30 +42,30 @@ export default function NuclideChartPage() {
             <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
               Chart of Nuclides
             </h1>
-            <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+            <p className='text-lg md:text-xl lg:text-2xl font-normal text-white/70 mt-2'>
               A Beginner&apos;s Guide
             </p>
-            <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
+            <p className='text-base text-white/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
               An accessible introduction to nuclear physics through the chart of nuclides  - from the familiar periodic table to the vast landscape of 3,300+ atomic species. Designed to explain what makes atoms stable or unstable without requiring any physics background.
             </p>
             {/* Tags */}
             <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Explanation Design</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Nuclear Physics</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Explanation Design</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Interactive</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Nuclear Physics</span>
             </div>
           </div>
 
           {/* Right column - Portfolio Metadata */}
           <div className='space-y-6'>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Category
               </span>
               <span className='text-sm'>Explanation Design</span>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Audience
               </span>
               <MetadataDropdown title='Generally interested adults'>
@@ -73,7 +73,7 @@ export default function NuclideChartPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Approach
               </span>
               <MetadataDropdown>
@@ -82,7 +82,7 @@ export default function NuclideChartPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Adaptability
               </span>
               <MetadataDropdown>
@@ -91,16 +91,16 @@ export default function NuclideChartPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Technology
               </span>
               <span className='text-sm'>React, Canvas, TypeScript</span>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Data
               </span>
-              <span className='text-sm text-black/70'>IAEA Nuclear Data Services (3,352 nuclides)</span>
+              <span className='text-sm text-white/70'>IAEA Nuclear Data Services (3,352 nuclides)</span>
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default function NuclideChartPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             You Know the Periodic Table
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Everyone learns the periodic table. 118 elements, organised by proton count. Hydrogen has 1 proton, helium has 2, carbon has 6, uranium has 92. It&apos;s one of the most successful organising schemes in science.
             </p>
@@ -153,7 +153,7 @@ export default function NuclideChartPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Beyond the Elements
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               A <strong>nuclide</strong> is a specific combination of protons and neutrons. While the periodic table shows 118 elements, there are over 3,300 known nuclides  - different versions of those elements with varying neutron counts.
             </p>
@@ -173,7 +173,7 @@ export default function NuclideChartPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Valley of Stability
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Look at the chart and you&apos;ll see a pattern: stable nuclides (shown in black) cluster along a diagonal path. This is the <strong>valley of stability</strong>.
             </p>
@@ -188,7 +188,7 @@ export default function NuclideChartPage() {
             </p>
           </div>
         </div>
-        <div className='border border-black/10 bg-white overflow-hidden'>
+        <div className='border border-white/10 bg-black overflow-hidden'>
           <div className='h-[500px] md:h-[750px] lg:h-[875px]'>
             <NuclideChart className='h-full' />
           </div>
@@ -201,7 +201,7 @@ export default function NuclideChartPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Magic Numbers
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Certain numbers of protons or neutrons create especially stable nuclei: 2, 8, 20, 28, 50, 82, and 126. These are the <strong>magic numbers</strong>.
             </p>
@@ -221,7 +221,7 @@ export default function NuclideChartPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Decay and Time
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Every unstable nuclide has a half-life  - the time it takes for half of any sample to decay. These range from fractions of a second to billions of years.
             </p>
@@ -267,7 +267,7 @@ export default function NuclideChartPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Going Deeper
           </h2>
-          <p className='text-black/50 text-sm'>
+          <p className='text-white/50 text-sm'>
             For the curious  - you&apos;ve got the main idea, this is extra.
           </p>
         </div>
@@ -279,7 +279,7 @@ export default function NuclideChartPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Types of Decay
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               <strong>Beta-minus decay:</strong> A neutron converts to a proton, emitting an electron and an antineutrino. The atom moves one square up and one left on the chart. Common for neutron-rich nuclides.
             </p>
@@ -302,7 +302,7 @@ export default function NuclideChartPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             The Island of Stability
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Theory predicts that around 114 protons and 184 neutrons, there should be another region of enhanced stability  - an &quot;island&quot; beyond the sea of short-lived superheavy elements.
             </p>
@@ -322,7 +322,7 @@ export default function NuclideChartPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Where Elements Come From
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               The chart of nuclides is also a map of cosmic chemistry. Hydrogen and helium came from the Big Bang. Carbon, nitrogen, and oxygen are forged in stellar cores. Iron is the endpoint of fusion in massive stars.
             </p>
@@ -345,7 +345,7 @@ export default function NuclideChartPage() {
           <div>
             <div className='space-y-8'>
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Recommended Reading
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -358,7 +358,7 @@ export default function NuclideChartPage() {
                     >
                       The Periodic Table  - Primo Levi
                     </a>
-                    <span className='text-black/40 ml-2'>Memoir through chemistry</span>
+                    <span className='text-white/40 ml-2'>Memoir through chemistry</span>
                   </li>
                   <li>
                     <a
@@ -369,13 +369,13 @@ export default function NuclideChartPage() {
                     >
                       The Making of the Atomic Bomb  - Richard Rhodes
                     </a>
-                    <span className='text-black/40 ml-2'>Nuclear physics in historical context</span>
+                    <span className='text-white/40 ml-2'>Nuclear physics in historical context</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Watch
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -388,13 +388,13 @@ export default function NuclideChartPage() {
                     >
                       Kurzgesagt: The Most Dangerous Stuff in the Universe
                     </a>
-                    <span className='text-black/40 ml-2'>Strange matter and nuclear stability</span>
+                    <span className='text-white/40 ml-2'>Strange matter and nuclear stability</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Reference
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -432,14 +432,14 @@ export default function NuclideChartPage() {
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Related Explainers
                 </h3>
                 <ul className='space-y-2 text-sm'>
                   <li>
                     <a
                       href='/work/stellar-evolution'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       Stellar Evolution →
                     </a>
@@ -447,7 +447,7 @@ export default function NuclideChartPage() {
                   <li>
                     <a
                       href='/work/fractals'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       What are Fractals? →
                     </a>

@@ -17,7 +17,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
       >
         {title && <span className='text-sm'>{title}</span>}
         <svg
-          className={`w-4 h-4 text-black/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-white/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'
@@ -26,7 +26,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
         </svg>
       </button>
       {isOpen && (
-        <div className='text-xs text-black/60 mt-2 leading-relaxed space-y-2'>
+        <div className='text-xs text-white/60 mt-2 leading-relaxed space-y-2'>
           {children}
         </div>
       )}
@@ -48,7 +48,7 @@ export default function StellarEvolutionPage() {
   };
 
   return (
-    <main className='min-h-screen bg-white'>
+    <main className='min-h-screen bg-black'>
       {/* Header with Metadata Sidebar */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16'>
@@ -57,30 +57,30 @@ export default function StellarEvolutionPage() {
             <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
               Stellar Evolution
             </h1>
-            <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+            <p className='text-lg md:text-xl lg:text-2xl font-normal text-white/70 mt-2'>
               A map of how stars live and die
             </p>
-            <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
+            <p className='text-base text-white/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
               An accessible guide to stellar lifecycles  - from the hydrogen-burning main sequence to red giants, white dwarfs, and beyond. Using the Hertzsprung-Russell diagram as our map, we&apos;ll explore how every star in the night sky is on a journey through the same cosmic story.
             </p>
             {/* Tags */}
             <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Explanation Design</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Astronomy</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Explanation Design</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Interactive</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Astronomy</span>
             </div>
           </div>
 
           {/* Right column - Portfolio Metadata */}
           <div className='space-y-6'>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Category
               </span>
               <span className='text-sm'>Explanation Design</span>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Audience
               </span>
               <MetadataDropdown title='Generally interested adults'>
@@ -88,7 +88,7 @@ export default function StellarEvolutionPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Approach
               </span>
               <MetadataDropdown>
@@ -97,7 +97,7 @@ export default function StellarEvolutionPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Adaptability
               </span>
               <MetadataDropdown>
@@ -106,16 +106,16 @@ export default function StellarEvolutionPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Technology
               </span>
               <span className='text-sm'>React, Canvas, D3.js</span>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Data
               </span>
-              <span className='text-sm text-black/70'>GAIA DR3 (3 million stars)</span>
+              <span className='text-sm text-white/70'>GAIA DR3 (3 million stars)</span>
             </div>
           </div>
         </div>
@@ -153,7 +153,7 @@ export default function StellarEvolutionPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Stars Don&apos;t Last Forever
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               The Sun rises every morning. It&apos;s been doing that for as long as humans have existed, and for billions of years before that. It feels permanent  - the most reliable thing in the sky.
             </p>
@@ -179,7 +179,7 @@ export default function StellarEvolutionPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Map
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               A century ago, astronomers discovered something remarkable. If you plot stars by their colour (which tells you temperature) against their brightness, they don&apos;t scatter randomly. They cluster in patterns.
             </p>
@@ -203,7 +203,7 @@ export default function StellarEvolutionPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Three Million Stars
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               That&apos;s the theory. Here&apos;s the reality.
             </p>
@@ -231,7 +231,7 @@ export default function StellarEvolutionPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Stars You Know
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Let&apos;s find some familiar faces on this map.
             </p>
@@ -255,7 +255,7 @@ export default function StellarEvolutionPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Sun&apos;s Future
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Stars don&apos;t stay in one place on this diagram. They move  - slowly, over billions of years.
             </p>
@@ -285,7 +285,7 @@ export default function StellarEvolutionPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Mass Is Destiny
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Not all stars end as white dwarfs. A star&apos;s mass at birth determines everything about its life  - how long it lives, how brightly it burns, and how it dies.
             </p>
@@ -335,7 +335,7 @@ export default function StellarEvolutionPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Going Deeper
           </h2>
-          <p className='text-black/50 text-sm'>
+          <p className='text-white/50 text-sm'>
             For the curious  - you&apos;ve got the main idea, this is extra.
           </p>
         </div>
@@ -347,7 +347,7 @@ export default function StellarEvolutionPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Spectral Classification
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Astronomers classify stars by spectral type: O, B, A, F, G, K, M  - from hottest to coolest. The Sun is a G-type star. The letters come from historical classification systems, which is why they&apos;re not in alphabetical order.
             </p>
@@ -367,7 +367,7 @@ export default function StellarEvolutionPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             The Gaia Mission
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               The data behind these visualisations comes from the European Space Agency&apos;s Gaia spacecraft, which has measured the positions, distances, and brightnesses of nearly two billion stars with unprecedented precision.
             </p>
@@ -384,7 +384,7 @@ export default function StellarEvolutionPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             We Are Star Stuff
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Stars don&apos;t just burn  - they build. In their cores, they forge heavier elements from lighter ones. The Sun is currently fusing hydrogen into helium. Larger stars fuse helium into carbon, carbon into oxygen, all the way up to iron.
             </p>
@@ -407,7 +407,7 @@ export default function StellarEvolutionPage() {
           <div>
             <div className='space-y-8'>
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Recommended Reading
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -420,13 +420,13 @@ export default function StellarEvolutionPage() {
                     >
                       The Life and Death of Stars  - Kenneth R. Lang
                     </a>
-                    <span className='text-black/40 ml-2'>Comprehensive but accessible</span>
+                    <span className='text-white/40 ml-2'>Comprehensive but accessible</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Watch
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -439,13 +439,13 @@ export default function StellarEvolutionPage() {
                     >
                       Kurzgesagt: The Life and Death of Stars
                     </a>
-                    <span className='text-black/40 ml-2'>Beautifully animated overview</span>
+                    <span className='text-white/40 ml-2'>Beautifully animated overview</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Reference
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -483,14 +483,14 @@ export default function StellarEvolutionPage() {
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Related Explainers
                 </h3>
                 <ul className='space-y-2 text-sm'>
                   <li>
                     <a
                       href='/work/fractals'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       What are Fractals? →
                     </a>
@@ -498,7 +498,7 @@ export default function StellarEvolutionPage() {
                   <li>
                     <a
                       href='/work/nuclide-chart'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       Chart of Nuclides →
                     </a>

@@ -106,7 +106,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div className="mb-8">
             <Link 
               href="/work" 
-              className="text-sm text-black/40 hover:text-black transition-colors"
+              className="text-sm text-white/40 hover:text-white transition-colors"
             >
               ← Back to Work
             </Link>
@@ -115,22 +115,22 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
             <div className="md:col-span-8">
               <h1 className="text-4xl md:text-5xl mb-4">{project.title}</h1>
-              <p className="text-xl text-black/60">{project.description}</p>
+              <p className="text-xl text-white/60">{project.description}</p>
             </div>
             <div className="md:col-span-4">
               <dl className="space-y-4">
                 <div>
-                  <dt className="text-xs font-mono uppercase tracking-wider text-black/40">Category</dt>
-                  <dd className="text-black">{project.category}</dd>
+                  <dt className="text-xs font-mono uppercase tracking-wider text-white/40">Category</dt>
+                  <dd className="text-white">{project.category}</dd>
                 </div>
                 <div>
-                  <dt className="text-xs font-mono uppercase tracking-wider text-black/40">Year</dt>
-                  <dd className="text-black">{project.year}</dd>
+                  <dt className="text-xs font-mono uppercase tracking-wider text-white/40">Year</dt>
+                  <dd className="text-white">{project.year}</dd>
                 </div>
                 {project.client && (
                   <div>
-                    <dt className="text-xs font-mono uppercase tracking-wider text-black/40">Client</dt>
-                    <dd className="text-black">{project.client}</dd>
+                    <dt className="text-xs font-mono uppercase tracking-wider text-white/40">Client</dt>
+                    <dd className="text-white">{project.client}</dd>
                   </div>
                 )}
               </dl>
@@ -147,34 +147,34 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Challenge & Solution */}
-      <section className="py-16 md:py-24 border-t border-black/10">
+      <section className="py-16 md:py-24 border-t border-white/10">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
             <div>
-              <h2 className="text-xs font-mono uppercase tracking-wider text-black/40 mb-4">
+              <h2 className="text-xs font-mono uppercase tracking-wider text-white/40 mb-4">
                 The Challenge
               </h2>
-              <p className="text-lg text-black/70">{project.challenge}</p>
+              <p className="text-lg text-white/70">{project.challenge}</p>
             </div>
             <div>
-              <h2 className="text-xs font-mono uppercase tracking-wider text-black/40 mb-4">
+              <h2 className="text-xs font-mono uppercase tracking-wider text-white/40 mb-4">
                 The Solution
               </h2>
-              <p className="text-lg text-black/70">{project.solution}</p>
+              <p className="text-lg text-white/70">{project.solution}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Project Images Placeholder */}
-      <section className="py-16 md:py-24 bg-black/[0.02]">
+      <section className="py-16 md:py-24 bg-white/[0.02]">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="aspect-[4/3] bg-black/10 flex items-center justify-center">
-              <span className="text-black/40 font-mono text-sm">[Image 01]</span>
+            <div className="aspect-[4/3] bg-white/10 flex items-center justify-center">
+              <span className="text-white/40 font-mono text-sm">[Image 01]</span>
             </div>
-            <div className="aspect-[4/3] bg-black/10 flex items-center justify-center">
-              <span className="text-black/40 font-mono text-sm">[Image 02]</span>
+            <div className="aspect-[4/3] bg-white/10 flex items-center justify-center">
+              <span className="text-white/40 font-mono text-sm">[Image 02]</span>
             </div>
           </div>
         </div>
@@ -182,16 +182,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       <section className="py-16 md:py-24">
         <div className="container">
-          <div className="aspect-video bg-black/10 flex items-center justify-center">
-            <span className="text-black/40 font-mono text-sm">[Full-width image]</span>
+          <div className="aspect-video bg-white/10 flex items-center justify-center">
+            <span className="text-white/40 font-mono text-sm">[Full-width image]</span>
           </div>
         </div>
       </section>
 
       {/* Next Project */}
-      <section className="py-16 md:py-24 border-t border-black/10">
+      <section className="py-16 md:py-24 border-t border-white/10">
         <div className="container">
-          <p className="text-xs font-mono uppercase tracking-wider text-black/40 mb-4">
+          <p className="text-xs font-mono uppercase tracking-wider text-white/40 mb-4">
             Next Project
           </p>
           <Link 

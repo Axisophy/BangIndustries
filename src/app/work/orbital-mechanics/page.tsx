@@ -17,7 +17,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
       >
         {title && <span className='text-sm'>{title}</span>}
         <svg
-          className={`w-4 h-4 text-black/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-white/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'
@@ -26,7 +26,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
         </svg>
       </button>
       {isOpen && (
-        <div className='text-xs text-black/60 mt-2 leading-relaxed space-y-2'>
+        <div className='text-xs text-white/60 mt-2 leading-relaxed space-y-2'>
           {children}
         </div>
       )}
@@ -36,7 +36,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
 
 export default function OrbitalMechanicsPage() {
   return (
-    <main className='min-h-screen bg-white'>
+    <main className='min-h-screen bg-black'>
       {/* Header with Metadata Sidebar */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16'>
@@ -45,30 +45,30 @@ export default function OrbitalMechanicsPage() {
             <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
               Orbital Mechanics
             </h1>
-            <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+            <p className='text-lg md:text-xl lg:text-2xl font-normal text-white/70 mt-2'>
               A Beginner&apos;s Guide
             </p>
-            <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
+            <p className='text-base text-white/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
               An accessible introduction to how spacecraft navigate  - from the counterintuitive physics of orbits to the elegant mathematics of getting to the Moon. Designed to explain what mission controllers actually do without requiring any calculus.
             </p>
             {/* Tags */}
             <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Explanation Design</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Space</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Explanation Design</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Interactive</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Space</span>
             </div>
           </div>
 
           {/* Right column - Portfolio Metadata */}
           <div className='space-y-6'>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Category
               </span>
               <span className='text-sm'>Explanation Design</span>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Audience
               </span>
               <MetadataDropdown title='Generally interested adults'>
@@ -76,7 +76,7 @@ export default function OrbitalMechanicsPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Approach
               </span>
               <MetadataDropdown>
@@ -85,7 +85,7 @@ export default function OrbitalMechanicsPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Adaptability
               </span>
               <MetadataDropdown>
@@ -94,16 +94,16 @@ export default function OrbitalMechanicsPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Technology
               </span>
               <span className='text-sm'>React, TypeScript, SVG</span>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Data
               </span>
-              <span className='text-sm text-black/70'>NASA mission profiles, JPL Horizons</span>
+              <span className='text-sm text-white/70'>NASA mission profiles, JPL Horizons</span>
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@ export default function OrbitalMechanicsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Space Travel Isn&apos;t Like Driving
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               On Earth, if you want to go somewhere, you point at it and hit the accelerator. Want to go faster? Press harder. Want to catch up to something ahead of you? Speed up.
             </p>
@@ -165,7 +165,7 @@ export default function OrbitalMechanicsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Orbits Are Just Falling
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Here&apos;s the key insight: an orbiting spacecraft is falling toward Earth  - it&apos;s just moving sideways fast enough that it keeps missing.
             </p>
@@ -188,7 +188,7 @@ export default function OrbitalMechanicsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Shape of Orbits
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Orbits come in different shapes, all ellipses (or circles, which are just special ellipses).
             </p>
@@ -203,7 +203,7 @@ export default function OrbitalMechanicsPage() {
             </p>
           </div>
         </div>
-        <div className='border border-black/10 overflow-hidden'>
+        <div className='border border-white/10 overflow-hidden'>
           <MissionMap />
         </div>
       </section>
@@ -214,7 +214,7 @@ export default function OrbitalMechanicsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Hohmann Transfer
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               In 1925, German engineer Walter Hohmann discovered the most fuel-efficient way to move between two circular orbits. It uses exactly two engine burns.
             </p>
@@ -232,10 +232,10 @@ export default function OrbitalMechanicsPage() {
             </p>
           </div>
         </div>
-        <div className='border border-black/10 overflow-hidden'>
+        <div className='border border-white/10 overflow-hidden'>
           <TransferAnimation />
         </div>
-        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
+        <p className='text-xs md:text-sm text-white/50 mt-4 max-w-2xl'>
           Scrub through time to see how velocity and altitude change during a lunar transfer. Notice how the spacecraft slows as it climbs out of Earth&apos;s gravity well.
         </p>
       </section>
@@ -246,7 +246,7 @@ export default function OrbitalMechanicsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Oberth Effect
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Here&apos;s something strange: a rocket engine produces more useful energy when the spacecraft is already moving fast.
             </p>
@@ -261,10 +261,10 @@ export default function OrbitalMechanicsPage() {
             </p>
           </div>
         </div>
-        <div className='border border-black/10 overflow-hidden'>
+        <div className='border border-white/10 overflow-hidden'>
           <TransferDesigner />
         </div>
-        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
+        <p className='text-xs md:text-sm text-white/50 mt-4 max-w-2xl'>
           Adjust the orbital parameters to see how {'\u0394'}v requirements change. For very distant targets (ratio {'>'} 11.94), a bi-elliptic transfer becomes more efficient than Hohmann  - at the cost of much longer travel time.
         </p>
       </section>
@@ -275,7 +275,7 @@ export default function OrbitalMechanicsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Real Missions
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Real lunar missions add complexity. The Moon is moving, so timing matters  - you need to arrive when the Moon is actually there. The spacecraft needs to enter lunar orbit, not just fly past.
             </p>
@@ -290,7 +290,7 @@ export default function OrbitalMechanicsPage() {
             </p>
           </div>
         </div>
-        <div className='border border-black/10 overflow-hidden'>
+        <div className='border border-white/10 overflow-hidden'>
           <MissionStoryboard />
         </div>
       </section>
@@ -324,7 +324,7 @@ export default function OrbitalMechanicsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Going Deeper
           </h2>
-          <p className='text-black/50 text-sm'>
+          <p className='text-white/50 text-sm'>
             For the curious  - you&apos;ve got the main idea, this is extra.
           </p>
         </div>
@@ -336,7 +336,7 @@ export default function OrbitalMechanicsPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Orbital Elements
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Mission controllers describe orbits using six numbers called Keplerian elements: semi-major axis (size), eccentricity (shape), inclination (tilt), longitude of ascending node (orientation), argument of periapsis (rotation), and true anomaly (position).
             </p>
@@ -353,7 +353,7 @@ export default function OrbitalMechanicsPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Gravity Assists
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               For interplanetary missions, fuel is precious. Spacecraft can &quot;borrow&quot; energy from planets through gravity assists  - flying close enough to be deflected, gaining (or losing) speed relative to the Sun without burning any fuel.
             </p>
@@ -373,7 +373,7 @@ export default function OrbitalMechanicsPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             The Three-Body Problem
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Everything we&apos;ve discussed assumes only one gravitational body matters at a time. In reality, a spacecraft traveling to the Moon feels both Earth&apos;s and the Moon&apos;s gravity (and the Sun&apos;s, and...).
             </p>
@@ -396,7 +396,7 @@ export default function OrbitalMechanicsPage() {
           <div>
             <div className='space-y-8'>
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Recommended Reading
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -409,7 +409,7 @@ export default function OrbitalMechanicsPage() {
                     >
                       Fundamentals of Astrodynamics  - Bate, Mueller, White
                     </a>
-                    <span className='text-black/40 ml-2'>The classic textbook</span>
+                    <span className='text-white/40 ml-2'>The classic textbook</span>
                   </li>
                   <li>
                     <a
@@ -420,13 +420,13 @@ export default function OrbitalMechanicsPage() {
                     >
                       Ignition!  - John D. Clark
                     </a>
-                    <span className='text-black/40 ml-2'>History of rocket propellants, surprisingly entertaining</span>
+                    <span className='text-white/40 ml-2'>History of rocket propellants, surprisingly entertaining</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Watch
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -439,13 +439,13 @@ export default function OrbitalMechanicsPage() {
                     >
                       Scott Manley: Orbital Mechanics
                     </a>
-                    <span className='text-black/40 ml-2'>Clear explanations with Kerbal Space Program</span>
+                    <span className='text-white/40 ml-2'>Clear explanations with Kerbal Space Program</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Play
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -458,13 +458,13 @@ export default function OrbitalMechanicsPage() {
                     >
                       Kerbal Space Program
                     </a>
-                    <span className='text-black/40 ml-2'>The best way to develop orbital intuition</span>
+                    <span className='text-white/40 ml-2'>The best way to develop orbital intuition</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Reference
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -502,14 +502,14 @@ export default function OrbitalMechanicsPage() {
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Related Explainers
                 </h3>
                 <ul className='space-y-2 text-sm'>
                   <li>
                     <a
                       href='/work/stellar-evolution'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       Stellar Evolution →
                     </a>
@@ -517,7 +517,7 @@ export default function OrbitalMechanicsPage() {
                   <li>
                     <a
                       href='/work/nuclide-chart'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       Chart of Nuclides →
                     </a>
@@ -525,7 +525,7 @@ export default function OrbitalMechanicsPage() {
                   <li>
                     <a
                       href='/work/fractals'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       What are Fractals? →
                     </a>

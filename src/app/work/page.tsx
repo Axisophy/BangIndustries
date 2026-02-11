@@ -77,16 +77,16 @@ const projects = [
 
 export default function WorkPage() {
   return (
-    <main className='min-h-screen bg-white'>
+    <main className='min-h-screen'>
       {/* Hero */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20'>
         <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
           Work
         </h1>
-        <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+        <p className='text-lg md:text-xl lg:text-2xl font-normal text-white/70 mt-2'>
           Explanation Design
         </p>
-        <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8'>
+        <p className='text-base text-white/70 max-w-3xl mt-6 md:mt-8'>
           Interactive explainers that make complex ideas accessible. Each piece builds understanding progressively  - starting with what you already know, then revealing the deeper structure beneath.
         </p>
       </section>
@@ -100,14 +100,14 @@ export default function WorkPage() {
               href={`/work/${project.slug}`}
               className='group block'
             >
-              <article className='py-8 border-b border-black/10'>
+              <article className='py-8 border-b border-white/10'>
                 <div className='grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-4 lg:gap-8'>
                   {/* Left: Number and category */}
                   <div className='flex items-baseline gap-4'>
-                    <span className='text-xs font-mono text-black/40'>
+                    <span className='text-xs font-mono text-white/40'>
                       [{String(index + 1).padStart(2, '0')}]
                     </span>
-                    <span className='text-xs font-mono uppercase tracking-wider text-black/50'>
+                    <span className='text-xs font-mono uppercase tracking-wider text-white/50'>
                       {project.category}
                     </span>
                   </div>
@@ -117,15 +117,15 @@ export default function WorkPage() {
                     <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight group-hover:text-[var(--color-blue)] transition-colors'>
                       {project.title}
                     </h2>
-                    <p className='text-lg md:text-xl text-black/70 mt-1'>
+                    <p className='text-lg md:text-xl text-white/70 mt-1'>
                       {project.subtitle}
                     </p>
-                    <p className='text-black/70 mt-4 max-w-2xl'>
+                    <p className='text-white/70 mt-4 max-w-2xl'>
                       {project.description}
                     </p>
                     <div className='flex flex-wrap gap-2 mt-4'>
                       {project.tags.map((tag) => (
-                        <span key={tag} className='px-3 py-1 text-xs bg-black/5 text-black/60'>
+                        <span key={tag} className='px-3 py-1 text-xs bg-white/10 text-white/60'>
                           {tag}
                         </span>
                       ))}

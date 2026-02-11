@@ -16,7 +16,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
       >
         {title && <span className='text-sm'>{title}</span>}
         <svg
-          className={`w-4 h-4 text-black/50 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-white/50 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'
@@ -25,7 +25,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
         </svg>
       </button>
       {isOpen && (
-        <div className='text-xs text-black/50 mt-2 leading-relaxed space-y-2'>
+        <div className='text-xs text-white/50 mt-2 leading-relaxed space-y-2'>
           {children}
         </div>
       )}
@@ -35,7 +35,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
 
 export default function LogicSystemsPage() {
   return (
-    <main className='min-h-screen bg-white'>
+    <main className='min-h-screen bg-black'>
       {/* Header with Metadata Sidebar */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20'>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16'>
@@ -44,10 +44,10 @@ export default function LogicSystemsPage() {
             <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
               From Gates to Gradients
             </h1>
-            <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+            <p className='text-lg md:text-xl lg:text-2xl font-normal text-white/70 mt-2'>
               How logic circuits become learning machines
             </p>
-            <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
+            <p className='text-base text-white/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
               Machine learning can feel like magic - or like impenetrable mathematics.
               Neither is true. This interactive guide builds from something concrete
               (logic gates, the AND/OR/NOT you might remember from school) to something
@@ -56,23 +56,23 @@ export default function LogicSystemsPage() {
             </p>
             {/* Tags */}
             <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/50'>Interactive</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/50'>Education</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/50'>Machine learning</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/50'>Mxwll</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/50'>Interactive</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/50'>Education</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/50'>Machine learning</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/50'>Mxwll</span>
             </div>
           </div>
 
           {/* Right column - Portfolio Metadata */}
           <div className='space-y-6'>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/50 block mb-2'>
                 Category
               </span>
               <span className='text-sm'>Interactive Design</span>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/50 block mb-2'>
                 Audience
               </span>
               <MetadataDropdown title='Curious non-specialists'>
@@ -80,7 +80,7 @@ export default function LogicSystemsPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/50 block mb-2'>
                 Approach
               </span>
               <MetadataDropdown>
@@ -88,7 +88,7 @@ export default function LogicSystemsPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/50 block mb-2'>
                 Adaptability
               </span>
               <MetadataDropdown>
@@ -96,16 +96,16 @@ export default function LogicSystemsPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/50 block mb-2'>
                 Technology
               </span>
               <span className='text-sm'>React, TypeScript, SVG</span>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/50 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/50 block mb-2'>
                 Data
               </span>
-              <span className='text-sm text-black/70'>Procedurally generated datasets</span>
+              <span className='text-sm text-white/70'>Procedurally generated datasets</span>
             </div>
           </div>
         </div>
@@ -113,10 +113,10 @@ export default function LogicSystemsPage() {
 
       {/* Static image placeholder */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
-        <div className='border border-black/10 bg-black/5 aspect-[2/1] flex items-center justify-center'>
+        <div className='border border-white/10 bg-white/10 aspect-[2/1] flex items-center justify-center'>
           <span className='text-black/30 text-sm font-mono'>logic_to_ml_progression.png</span>
         </div>
-        <p className='text-xs md:text-sm text-black/50 mt-4 max-w-2xl'>
+        <p className='text-xs md:text-sm text-white/50 mt-4 max-w-2xl'>
           The same classification problem solved three ways: Boolean logic (sharp quadrants),
           decision tree (axis-aligned rectangles), neural network (smooth curves).
         </p>
@@ -124,21 +124,21 @@ export default function LogicSystemsPage() {
 
       {/* Part A: Boolean Logic */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
-        <div className='border border-black/10 bg-white overflow-hidden'>
+        <div className='border border-white/10 bg-black overflow-hidden'>
           <CircuitPlayground />
         </div>
       </section>
 
       {/* Part B: Decision Boundaries */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
-        <div className='border border-black/10 bg-white overflow-hidden'>
+        <div className='border border-white/10 bg-black overflow-hidden'>
           <DecisionBoundary />
         </div>
       </section>
 
       {/* The Bridge */}
       <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
-        <div className='border border-black/10 bg-white overflow-hidden'>
+        <div className='border border-white/10 bg-black overflow-hidden'>
           <LogicToMLBridge />
         </div>
       </section>
@@ -149,7 +149,7 @@ export default function LogicSystemsPage() {
           <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight'>
             The Challenge
           </h2>
-          <p className='text-black/70 leading-relaxed'>
+          <p className='text-white/70 leading-relaxed'>
             Machine learning has a reputation problem. To non-specialists, it appears as either impenetrable mathematics or magical black boxes. Neither framing helps people understand what these systems actually do, why they work, or where they fail. For Mxwll, we wanted to build a bridge from the familiar (logic gates, the kind you might have encountered in a physics class) to the unfamiliar (neural networks, the kind that power modern AI).
           </p>
         </div>
@@ -160,7 +160,7 @@ export default function LogicSystemsPage() {
           <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight'>
             Background
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Boolean logic is the foundation of all digital computation. AND gates output 1 only if both inputs are 1. OR gates output 1 if either input is 1. NOT gates flip the input. From these primitives, you can build any computable function - including arithmetic, memory, and entire computers.
             </p>
@@ -181,17 +181,17 @@ export default function LogicSystemsPage() {
           </h2>
           <ul className='space-y-2 text-sm'>
             <li>
-              <a href='/work/network-theory' className='text-black/70 hover:text-[var(--color-pink)] transition-colors'>
+              <a href='/work/network-theory' className='text-white/70 hover:text-[var(--color-pink)] transition-colors'>
                 Network Theory →
               </a>
             </li>
             <li>
-              <a href='/work/stellar-evolution' className='text-black/70 hover:text-[var(--color-pink)] transition-colors'>
+              <a href='/work/stellar-evolution' className='text-white/70 hover:text-[var(--color-pink)] transition-colors'>
                 Stellar Evolution →
               </a>
             </li>
             <li>
-              <a href='/work/fractals' className='text-black/70 hover:text-[var(--color-pink)] transition-colors'>
+              <a href='/work/fractals' className='text-white/70 hover:text-[var(--color-pink)] transition-colors'>
                 Fractals →
               </a>
             </li>

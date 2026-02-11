@@ -13,7 +13,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
       >
         {title && <span className='text-sm'>{title}</span>}
         <svg
-          className={`w-4 h-4 text-black/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-white/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'
@@ -22,7 +22,7 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
         </svg>
       </button>
       {isOpen && (
-        <div className='text-xs text-black/60 mt-2 leading-relaxed space-y-2'>
+        <div className='text-xs text-white/60 mt-2 leading-relaxed space-y-2'>
           {children}
         </div>
       )}
@@ -32,10 +32,10 @@ function MetadataDropdown({ title, children }: { title?: string; children: React
 
 function TimelineItem({ year, first, winner }: { year: string; first: string; winner: string }) {
   return (
-    <div className='flex items-center gap-4 py-4 border-b border-black/10'>
-      <span className='text-xs font-mono text-black/40 w-16'>{year}</span>
-      <span className='text-black/50 flex-1'>{first}</span>
-      <span className='text-black/40'>→</span>
+    <div className='flex items-center gap-4 py-4 border-b border-white/10'>
+      <span className='text-xs font-mono text-white/40 w-16'>{year}</span>
+      <span className='text-white/50 flex-1'>{first}</span>
+      <span className='text-white/40'>→</span>
       <span className='font-bold flex-1'>{winner}</span>
     </div>
   );
@@ -43,7 +43,7 @@ function TimelineItem({ year, first, winner }: { year: string; first: string; wi
 
 export default function NetworkEffectsPage() {
   return (
-    <main className='min-h-screen bg-white'>
+    <main className='min-h-screen bg-black'>
       {/* Header with Metadata Sidebar */}
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-12 lg:pb-16'>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16'>
@@ -52,31 +52,31 @@ export default function NetworkEffectsPage() {
             <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1]'>
               Why Your Competitor&apos;s Head Start Doesn&apos;t Matter
             </h1>
-            <p className='text-lg md:text-xl lg:text-2xl font-normal text-black/70 mt-2'>
+            <p className='text-lg md:text-xl lg:text-2xl font-normal text-white/70 mt-2'>
               Network Effects and Market Timing
             </p>
-            <p className='text-base text-black/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
+            <p className='text-base text-white/70 max-w-3xl mt-6 md:mt-8 lg:mt-12'>
               The companies that dominate their markets are rarely the ones that got there first. This explainer shows when first-mover advantage matters, when it doesn&apos;t, and what actually determines market outcomes.
             </p>
             {/* Tags */}
             <div className='flex flex-wrap gap-2 mt-4 md:mt-6 lg:mt-8'>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Explanation Design</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Interactive</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Strategy</span>
-              <span className='px-3 py-1 text-xs bg-black/5 text-black/60'>Business Leaders</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Explanation Design</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Interactive</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Strategy</span>
+              <span className='px-3 py-1 text-xs bg-white/10 text-white/60'>Business Leaders</span>
             </div>
           </div>
 
           {/* Right column - Portfolio Metadata */}
           <div className='space-y-6'>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Category
               </span>
               <span className='text-sm'>Explanation Design</span>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Audience
               </span>
               <MetadataDropdown title='Business Leaders'>
@@ -84,7 +84,7 @@ export default function NetworkEffectsPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Approach
               </span>
               <MetadataDropdown>
@@ -93,7 +93,7 @@ export default function NetworkEffectsPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Adaptability
               </span>
               <MetadataDropdown>
@@ -101,7 +101,7 @@ export default function NetworkEffectsPage() {
               </MetadataDropdown>
             </div>
             <div>
-              <span className='text-xs font-mono uppercase tracking-wider text-black/40 block mb-2'>
+              <span className='text-xs font-mono uppercase tracking-wider text-white/40 block mb-2'>
                 Technology
               </span>
               <span className='text-sm'>React, D3.js, SVG</span>
@@ -139,7 +139,7 @@ export default function NetworkEffectsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Myth of First-Mover Advantage
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               <strong>The conventional wisdom is wrong.</strong>
             </p>
@@ -157,7 +157,7 @@ export default function NetworkEffectsPage() {
 
         {/* Timeline visual */}
         <div className='mt-12 max-w-3xl'>
-          <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+          <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
             First Mover vs Market Winner
           </h3>
           <TimelineItem year='1995' first='AltaVista (Search)' winner='Google (1998)' />
@@ -174,7 +174,7 @@ export default function NetworkEffectsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             What Are Network Effects?
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               A network effect exists when a product becomes more valuable as more people use it.
             </p>
@@ -185,7 +185,7 @@ export default function NetworkEffectsPage() {
               This creates exponential dynamics. Early growth is painful (why join a network with few users?). But once you cross a threshold, growth accelerates: each new user makes the product better, which attracts more users, which makes it even better.
             </p>
             <div className='border-l-4 border-[var(--color-blue)] pl-4 py-2 my-6'>
-              <p className='text-black/70 font-medium'>
+              <p className='text-white/70 font-medium'>
                 The key insight: In network-effect markets, market share isn&apos;t linear. A 10% lead can become a 90% market share when the tipping point hits.
               </p>
             </div>
@@ -193,15 +193,15 @@ export default function NetworkEffectsPage() {
         </div>
 
         {/* S-curve placeholder */}
-        <div className='border border-black/10 bg-black/5 p-12 flex items-center justify-center'>
+        <div className='border border-white/10 bg-white/10 p-12 flex items-center justify-center'>
           <div className='text-center'>
-            <p className='text-black/40 font-mono text-sm mb-2'>[Interactive S-Curve]</p>
-            <p className='text-black/50 text-sm max-w-md'>
+            <p className='text-white/40 font-mono text-sm mb-2'>[Interactive S-Curve]</p>
+            <p className='text-white/50 text-sm max-w-md'>
               Adjust user growth rate and see value curve respond. Before tipping point: slow. After: explosive.
             </p>
           </div>
         </div>
-        <p className='text-xs md:text-sm text-black/50 mt-4'>
+        <p className='text-xs md:text-sm text-white/50 mt-4'>
           The S-curve of network adoption. The tipping point is where growth becomes self-sustaining.
         </p>
       </section>
@@ -212,7 +212,7 @@ export default function NetworkEffectsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Three Types of Network Effects
           </h2>
-          <div className='space-y-6 text-black/70 leading-relaxed'>
+          <div className='space-y-6 text-white/70 leading-relaxed'>
             <div>
               <h3 className='text-lg font-bold text-black mb-2'>Direct Network Effects</h3>
               <p>
@@ -241,7 +241,7 @@ export default function NetworkEffectsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             The Tipping Point
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Network-effect markets have a brutal characteristic: winner takes most.
             </p>
@@ -252,7 +252,7 @@ export default function NetworkEffectsPage() {
               MySpace had 115 million users in 2008. By 2011, it was irrelevant. Not because the product got worse, but because Facebook crossed the tipping point and network effects made switching costs unbearable.
             </p>
             <div className='border-l-4 border-[var(--color-pink)] pl-4 py-2 my-6'>
-              <p className='text-black/70 font-medium'>
+              <p className='text-white/70 font-medium'>
                 &quot;Almost winning&quot; in a network-effect market often means total loss. There&apos;s no silver medal.
               </p>
             </div>
@@ -266,7 +266,7 @@ export default function NetworkEffectsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             When First-Mover Does Matter
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               First-mover advantage is real - just not where most people think.
             </p>
@@ -318,24 +318,24 @@ export default function NetworkEffectsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Does Your Market Have Network Effects?
           </h2>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Ask these questions about your market:
             </p>
             <div className='space-y-4 mt-6'>
-              <div className='bg-black/5 p-4'>
+              <div className='bg-white/10 p-4'>
                 <p className='font-bold text-black mb-1'>1. Does your product get better when more people use it?</p>
                 <p className='text-sm'>If yes: network effects are likely present.</p>
               </div>
-              <div className='bg-black/5 p-4'>
+              <div className='bg-white/10 p-4'>
                 <p className='font-bold text-black mb-1'>2. Would users lose value if they switched to a competitor?</p>
                 <p className='text-sm'>If yes: you have switching costs, which amplify network effects.</p>
               </div>
-              <div className='bg-black/5 p-4'>
+              <div className='bg-white/10 p-4'>
                 <p className='font-bold text-black mb-1'>3. Is there a clear &quot;tipping point&quot; in your market&apos;s history?</p>
                 <p className='text-sm'>If yes: you&apos;re in a winner-take-most market.</p>
               </div>
-              <div className='bg-black/5 p-4'>
+              <div className='bg-white/10 p-4'>
                 <p className='font-bold text-black mb-1'>4. Are there multiple viable competitors with similar market share?</p>
                 <p className='text-sm'>If yes: either tipping hasn&apos;t happened yet, or network effects are weak.</p>
               </div>
@@ -373,7 +373,7 @@ export default function NetworkEffectsPage() {
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
             Going Deeper
           </h2>
-          <p className='text-black/50 text-sm'>
+          <p className='text-white/50 text-sm'>
             For those who want the detail behind the framework.
           </p>
         </div>
@@ -385,7 +385,7 @@ export default function NetworkEffectsPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             The Mathematics
           </h3>
-          <div className='space-y-4 text-black/70 leading-relaxed'>
+          <div className='space-y-4 text-white/70 leading-relaxed'>
             <p>
               Metcalfe&apos;s Law suggests network value grows proportionally to n{'\u00B2'} (users squared). A network with 10 users has potential value of 100; with 100 users, value is 10,000.
             </p>
@@ -405,7 +405,7 @@ export default function NetworkEffectsPage() {
           <h3 className='text-2xl md:text-3xl font-bold tracking-tight'>
             Case Studies
           </h3>
-          <div className='space-y-6 text-black/70 leading-relaxed'>
+          <div className='space-y-6 text-white/70 leading-relaxed'>
             <div>
               <h4 className='font-bold text-black mb-2'>Uber vs Lyft</h4>
               <p>
@@ -431,7 +431,7 @@ export default function NetworkEffectsPage() {
           <div>
             <div className='space-y-8'>
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Recommended Reading
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -444,7 +444,7 @@ export default function NetworkEffectsPage() {
                     >
                       Platform Revolution - Parker, Van Alstyne, Choudary
                     </a>
-                    <span className='text-black/40 ml-2'>Comprehensive platform strategy</span>
+                    <span className='text-white/40 ml-2'>Comprehensive platform strategy</span>
                   </li>
                   <li>
                     <a
@@ -455,13 +455,13 @@ export default function NetworkEffectsPage() {
                     >
                       Zero to One - Peter Thiel
                     </a>
-                    <span className='text-black/40 ml-2'>Monopoly and network effects</span>
+                    <span className='text-white/40 ml-2'>Monopoly and network effects</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Reference
                 </h3>
                 <ul className='space-y-2 text-sm'>
@@ -489,14 +489,14 @@ export default function NetworkEffectsPage() {
               </div>
 
               <div>
-                <h3 className='text-xs font-mono uppercase tracking-wider text-black/40 mb-4'>
+                <h3 className='text-xs font-mono uppercase tracking-wider text-white/40 mb-4'>
                   Related Explainers
                 </h3>
                 <ul className='space-y-2 text-sm'>
                   <li>
                     <a
                       href='/work/braess-paradox'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       The Braess Paradox →
                     </a>
@@ -504,7 +504,7 @@ export default function NetworkEffectsPage() {
                   <li>
                     <a
                       href='/work/fractals'
-                      className='text-black/70 hover:text-[var(--color-pink)] transition-colors'
+                      className='text-white/70 hover:text-[var(--color-pink)] transition-colors'
                     >
                       What are Fractals? →
                     </a>
