@@ -378,93 +378,114 @@ export default function FlowFieldVisualiser() {
     setParams(prev => ({ ...prev, [key]: value }));
   }, []);
 
-  return (
-    <div ref={containerRef} className="relative w-full aspect-video bg-[#0a0808] cursor-crosshair overflow-hidden">
-      <canvas ref={canvasRef} className="block w-full h-full" />
+  // Reusable controls panel content
+  const ControlsContent = () => (
+    <>
+      <h2 className="text-[10px] font-medium tracking-[0.12em] uppercase text-white/40 mb-4">
+        Curl Flow Fields
+      </h2>
 
-      {/* Controls overlay */}
+      {/* Scale */}
+      <div className="flex justify-between items-baseline mb-0.5">
+        <span className="text-[9px] font-medium tracking-[0.08em] uppercase text-white/65">Scale</span>
+        <span className="text-[10px] tabular-nums text-white/45 font-mono">{params.scale}</span>
+      </div>
+      <input type="range" className="w-full mb-3" min={0.001} max={0.01} step={0.0005} value={params.scale}
+        onChange={e => handleParamChange('scale', parseFloat(e.target.value))}
+        style={{ height: '1px', accentColor: 'rgba(255,255,255,0.55)' }} />
+
+      {/* Particles */}
+      <div className="flex justify-between items-baseline mb-0.5">
+        <span className="text-[9px] font-medium tracking-[0.08em] uppercase text-white/65">Particles</span>
+        <span className="text-[10px] tabular-nums text-white/45 font-mono">{params.count}</span>
+      </div>
+      <input type="range" className="w-full mb-3" min={1000} max={20000} step={500} value={params.count}
+        onChange={e => handleParamChange('count', parseInt(e.target.value))} />
+
+      {/* Speed */}
+      <div className="flex justify-between items-baseline mb-0.5">
+        <span className="text-[9px] font-medium tracking-[0.08em] uppercase text-white/65">Speed</span>
+        <span className="text-[10px] tabular-nums text-white/45 font-mono">{params.speed.toFixed(1)}</span>
+      </div>
+      <input type="range" className="w-full mb-3" min={0.5} max={5} step={0.1} value={params.speed}
+        onChange={e => handleParamChange('speed', parseFloat(e.target.value))} />
+
+      {/* Fade */}
+      <div className="flex justify-between items-baseline mb-0.5">
+        <span className="text-[9px] font-medium tracking-[0.08em] uppercase text-white/65">Trail Fade</span>
+        <span className="text-[10px] tabular-nums text-white/45 font-mono">{params.fade}</span>
+      </div>
+      <input type="range" className="w-full mb-3" min={0.002} max={0.05} step={0.001} value={params.fade}
+        onChange={e => handleParamChange('fade', parseFloat(e.target.value))} />
+
+      {/* Palettes */}
+      <div className="text-[8px] font-medium tracking-[0.1em] uppercase text-white/25 mt-3 mb-1.5">Palette</div>
+      <div className="flex flex-wrap gap-1 mb-3">
+        {Object.entries(PALETTES).map(([key, val]) => (
+          <button key={key}
+            className={`px-2.5 py-1 text-[8px] font-medium tracking-[0.08em] uppercase border rounded-sm transition-all duration-200 cursor-pointer
+              ${currentPalette === key
+                ? 'border-[#f72585] text-[#f72585]'
+                : 'border-white/10 text-white/45 hover:border-white/25 hover:text-white/75'
+              }`}
+            style={{ background: 'transparent', fontFamily: 'inherit' }}
+            onClick={() => handlePaletteChange(key)}
+          >
+            {val.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Stats */}
+      <div className="mt-3 p-2 rounded-sm font-mono text-[9px] leading-relaxed text-white/30"
+        style={{ background: 'rgba(255,255,255,0.03)' }}>
+        particles: {stats.particles.toLocaleString()}<br />
+        fps: {stats.fps}<br />
+        frame: {stats.frame.toLocaleString()}
+      </div>
+
+      {/* Keyboard hints */}
+      <div className="flex flex-wrap gap-2 mt-2.5">
+        {[['H','hide'],['R','reset'],['S','save'],['␣','pause']].map(([k, label]) => (
+          <span key={k} className="text-[9px] text-white/30 flex items-center gap-1">
+            <code className="px-1 py-px border border-white/10 rounded-sm font-mono text-[9px] text-white/35">{k}</code>
+            {label}
+          </span>
+        ))}
+      </div>
+    </>
+  );
+
+  return (
+    <div className="flex flex-col">
+      {/* Canvas container */}
+      <div ref={containerRef} className="relative w-full aspect-video bg-[#0a0808] cursor-crosshair overflow-hidden">
+        <canvas ref={canvasRef} className="block w-full h-full" />
+
+        {/* Desktop controls - floating overlay (hidden on mobile) */}
+        <div
+          className={`hidden lg:block absolute top-4 right-4 w-[220px] p-4 rounded-md transition-all duration-300 z-10
+            ${controlsVisible ? 'opacity-100' : 'opacity-0 pointer-events-none translate-x-2'}`}
+          style={{
+            background: 'rgba(8, 8, 10, 0.88)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(255, 255, 255, 0.06)',
+          }}
+        >
+          <ControlsContent />
+        </div>
+      </div>
+
+      {/* Mobile controls - below canvas (hidden on desktop) */}
       <div
-        className={`absolute top-4 right-4 w-[220px] p-4 rounded-md transition-all duration-300 z-10
-          ${controlsVisible ? 'opacity-100' : 'opacity-0 pointer-events-none translate-x-2'}`}
+        className="lg:hidden p-4 bg-[#0a0808]"
         style={{
-          background: 'rgba(8, 8, 10, 0.88)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
           border: '1px solid rgba(255, 255, 255, 0.06)',
+          borderTop: 'none',
         }}
       >
-        <h2 className="text-[10px] font-medium tracking-[0.12em] uppercase text-white/40 mb-4">
-          Curl Flow Fields
-        </h2>
-
-        {/* Scale */}
-        <div className="flex justify-between items-baseline mb-0.5">
-          <span className="text-[9px] font-medium tracking-[0.08em] uppercase text-white/65">Scale</span>
-          <span className="text-[10px] tabular-nums text-white/45 font-mono">{params.scale}</span>
-        </div>
-        <input type="range" className="w-full mb-3" min={0.001} max={0.01} step={0.0005} value={params.scale}
-          onChange={e => handleParamChange('scale', parseFloat(e.target.value))}
-          style={{ height: '1px', accentColor: 'rgba(255,255,255,0.55)' }} />
-
-        {/* Particles */}
-        <div className="flex justify-between items-baseline mb-0.5">
-          <span className="text-[9px] font-medium tracking-[0.08em] uppercase text-white/65">Particles</span>
-          <span className="text-[10px] tabular-nums text-white/45 font-mono">{params.count}</span>
-        </div>
-        <input type="range" className="w-full mb-3" min={1000} max={20000} step={500} value={params.count}
-          onChange={e => handleParamChange('count', parseInt(e.target.value))} />
-
-        {/* Speed */}
-        <div className="flex justify-between items-baseline mb-0.5">
-          <span className="text-[9px] font-medium tracking-[0.08em] uppercase text-white/65">Speed</span>
-          <span className="text-[10px] tabular-nums text-white/45 font-mono">{params.speed.toFixed(1)}</span>
-        </div>
-        <input type="range" className="w-full mb-3" min={0.5} max={5} step={0.1} value={params.speed}
-          onChange={e => handleParamChange('speed', parseFloat(e.target.value))} />
-
-        {/* Fade */}
-        <div className="flex justify-between items-baseline mb-0.5">
-          <span className="text-[9px] font-medium tracking-[0.08em] uppercase text-white/65">Trail Fade</span>
-          <span className="text-[10px] tabular-nums text-white/45 font-mono">{params.fade}</span>
-        </div>
-        <input type="range" className="w-full mb-3" min={0.002} max={0.05} step={0.001} value={params.fade}
-          onChange={e => handleParamChange('fade', parseFloat(e.target.value))} />
-
-        {/* Palettes */}
-        <div className="text-[8px] font-medium tracking-[0.1em] uppercase text-white/25 mt-3 mb-1.5">Palette</div>
-        <div className="flex flex-wrap gap-1 mb-3">
-          {Object.entries(PALETTES).map(([key, val]) => (
-            <button key={key}
-              className={`px-2.5 py-1 text-[8px] font-medium tracking-[0.08em] uppercase border rounded-sm transition-all duration-200 cursor-pointer
-                ${currentPalette === key
-                  ? 'border-[#f72585] text-[#f72585]'
-                  : 'border-white/10 text-white/45 hover:border-white/25 hover:text-white/75'
-                }`}
-              style={{ background: 'transparent', fontFamily: 'inherit' }}
-              onClick={() => handlePaletteChange(key)}
-            >
-              {val.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Stats */}
-        <div className="mt-3 p-2 rounded-sm font-mono text-[9px] leading-relaxed text-white/30"
-          style={{ background: 'rgba(255,255,255,0.03)' }}>
-          particles: {stats.particles.toLocaleString()}<br />
-          fps: {stats.fps}<br />
-          frame: {stats.frame.toLocaleString()}
-        </div>
-
-        {/* Keyboard hints */}
-        <div className="flex flex-wrap gap-2 mt-2.5">
-          {[['H','hide'],['R','reset'],['S','save'],['␣','pause']].map(([k, label]) => (
-            <span key={k} className="text-[9px] text-white/30 flex items-center gap-1">
-              <code className="px-1 py-px border border-white/10 rounded-sm font-mono text-[9px] text-white/35">{k}</code>
-              {label}
-            </span>
-          ))}
-        </div>
+        <ControlsContent />
       </div>
     </div>
   );

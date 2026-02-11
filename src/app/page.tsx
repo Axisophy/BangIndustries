@@ -12,9 +12,16 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className='min-h-screen'>
-      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20'>
+      {/* Hero text */}
+      <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 py-16 md:py-24 lg:py-32'>
+        <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight'>
+          Making complex concepts comprehensible
+        </h1>
+      </section>
+
+      {/* Emergent Currents */}
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
         <Link href='/work/emergent-currents' className='block group'>
-          {/* Video */}
           <video
             autoPlay
             loop
@@ -24,15 +31,32 @@ export default function Home() {
           >
             <source src='/video/flow_fields.mp4' type='video/mp4' />
           </video>
-
-          {/* Title */}
-          <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mt-8 group-hover:text-[var(--color-blue)] transition-colors'>
+          <h2 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mt-8 group-hover:text-[var(--color-blue)] transition-colors'>
             Emergent Currents
-          </h1>
-
-          {/* Subtitle */}
+          </h2>
           <p className='text-lg md:text-xl lg:text-2xl font-normal text-white/70 mt-4'>
             Particles tracing a divergence-free noise field
+          </p>
+        </Link>
+      </section>
+
+      {/* Morphogenesis */}
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
+        <Link href='/work/morphogenesis' className='block group'>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className='w-full aspect-video bg-black object-cover'
+          >
+            <source src='/video/reaction_diffusion.mp4' type='video/mp4' />
+          </video>
+          <h2 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mt-8 group-hover:text-[var(--color-blue)] transition-colors'>
+            Morphogenesis
+          </h2>
+          <p className='text-lg md:text-xl lg:text-2xl font-normal text-white/70 mt-4'>
+            Watching Turing patterns emerge from reaction and diffusion
           </p>
         </Link>
       </section>
