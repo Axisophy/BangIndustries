@@ -16,7 +16,6 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState('');
   const pathname = usePathname();
-  const isHomepage = pathname === '/';
 
   // Close menu on route change (render-time state adjustment)
   if (pathname !== lastPathname) {
@@ -83,21 +82,6 @@ export default function Navigation() {
         </button>
       </nav>
 
-      {/* Homepage tagline — desktop/tablet only */}
-      {isHomepage && (
-        <div className='hidden md:block border-t border-white/10 px-4 md:px-8 lg:px-12 py-6 lg:py-8'>
-          <div className='max-w-2xl'>
-            <p className='text-base lg:text-lg text-white/90 font-bold tracking-tight leading-snug'>
-              Data visualisation and explanation design studio
-            </p>
-            <p className='text-sm lg:text-base text-white/70 leading-relaxed mt-2'>
-              We make complex ideas clear. Scientific visualisation, illustrated explanation,
-              and interactive data design for publishers, institutions, and organisations
-              who need to communicate with precision and craft.
-            </p>
-          </div>
-        </div>
-      )}
 
       {/* Mobile Menu Overlay */}
       <div className={`
