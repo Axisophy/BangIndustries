@@ -14,8 +14,16 @@ export default function Home() {
     <main className='min-h-screen'>
       <section className='px-4 md:px-8 lg:px-12 pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20'>
         <Link href='/work/emergent-currents' className='block group'>
-          {/* Video placeholder */}
-          <div className='w-full aspect-video bg-black' />
+          {/* Video */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className='w-full aspect-video bg-black object-cover'
+          >
+            <source src='/video/flow_fields.mp4' type='video/mp4' />
+          </video>
 
           {/* Title */}
           <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mt-8 group-hover:text-[var(--color-blue)] transition-colors'>
