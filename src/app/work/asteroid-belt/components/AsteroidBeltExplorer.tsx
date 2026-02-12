@@ -10,7 +10,7 @@ import {
   generateCircleVertices,
 } from '../lib/shaders';
 import { loadAsteroidData, prepareAsteroidBuffers } from '../lib/mock-data';
-import { KIRKWOOD_GAPS, PLANET_ORBITS } from '../lib/types';
+import { KIRKWOOD_GAPS, PLANET_ORBITS, ASTEROID_FAMILIES } from '../lib/types';
 
 interface AsteroidBeltExplorerProps {
   className?: string;
@@ -96,20 +96,17 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
   // Track transition value for annotations
   const [transitionProgress, setTransitionProgress] = useState(0);
 
-  // Get the transition value for WebGL (0 = spatial, 1 = histogram)
-  // For now, only spatial and histogram are fully implemented
-  const getTransitionValue = useCallback(() => {
-    if (activeView === 'spatial' || previousView === 'spatial') {
-      if (activeView === 'histogram' || previousView === 'histogram') {
-        // Transitioning between spatial and histogram
-        const isSpatialToHistogram = activeView === 'histogram';
-        return isSpatialToHistogram ? transitionProgress : 1 - transitionProgress;
-      }
+  // Map view IDs to numeric indices for shader
+  const viewIdToIndex = useCallback((viewId: ViewId): number => {
+    switch (viewId) {
+      case 'spatial': return 0;
+      case 'histogram': return 1;
+      case 'family': return 2;
+      case 'danger': return 3;
+      case 'discovery': return 4;
+      default: return 0;
     }
-    // For other views, return based on active view
-    if (activeView === 'histogram') return 1;
-    return 0;
-  }, [activeView, previousView, transitionProgress]);
+  }, []);
 
   // Show toast notification
   const showToast = useCallback((message: string) => {
@@ -121,27 +118,22 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
   const transitionToView = useCallback((viewId: ViewId) => {
     if (isTransitioning || activeView === viewId) return;
 
-    // For now, only spatial and histogram are implemented
-    if (viewId !== 'spatial' && viewId !== 'histogram') {
-      showToast(`${VIEWS.find(v => v.id === viewId)?.label} view coming soon`);
-      return;
-    }
-
     setPreviousView(activeView);
     setActiveView(viewId);
     setIsTransitioning(true);
     transitionRef.current = { value: 0, startTime: performance.now() };
 
-    // Set appropriate camera for the view
+    // Set appropriate camera for each view
     panRef.current = { x: 0, y: 0 };
-    if (viewId === 'histogram') {
-      zoomRef.current = 1.0;
-      setZoom(1.0);
-    } else {
+    if (viewId === 'spatial') {
       zoomRef.current = 0.15;
       setZoom(0.15);
+    } else {
+      // All other views use 1.0 zoom
+      zoomRef.current = 1.0;
+      setZoom(1.0);
     }
-  }, [activeView, isTransitioning, showToast]);
+  }, [activeView, isTransitioning]);
 
   // Auto-play sequence
   const startAutoPlay = useCallback(() => {
@@ -215,45 +207,47 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
       const vao = gl.createVertexArray();
       gl.bindVertexArray(vao);
 
-      // Spatial positions
-      const spatialBuffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, spatialBuffer);
-      gl.bufferData(gl.ARRAY_BUFFER, buffers.spatialPositions, gl.STATIC_DRAW);
-      const spatialLoc = gl.getAttribLocation(asteroidProgram, 'a_spatialPos');
-      gl.enableVertexAttribArray(spatialLoc);
-      gl.vertexAttribPointer(spatialLoc, 2, gl.FLOAT, false, 0, 0);
+      // Position buffer helper
+      const createPosBuffer = (data: Float32Array, attrName: string) => {
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+        const loc = gl.getAttribLocation(asteroidProgram, attrName);
+        if (loc >= 0) {
+          gl.enableVertexAttribArray(loc);
+          gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+        }
+        return buffer;
+      };
 
-      // Histogram positions
-      const histogramBuffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, histogramBuffer);
-      gl.bufferData(gl.ARRAY_BUFFER, buffers.histogramPositions, gl.STATIC_DRAW);
-      const histogramLoc = gl.getAttribLocation(asteroidProgram, 'a_histogramPos');
-      gl.enableVertexAttribArray(histogramLoc);
-      gl.vertexAttribPointer(histogramLoc, 2, gl.FLOAT, false, 0, 0);
+      // Float buffer helper
+      const createFloatBuffer = (data: Float32Array, attrName: string) => {
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+        const loc = gl.getAttribLocation(asteroidProgram, attrName);
+        if (loc >= 0) {
+          gl.enableVertexAttribArray(loc);
+          gl.vertexAttribPointer(loc, 1, gl.FLOAT, false, 0, 0);
+        }
+        return buffer;
+      };
 
-      // Semi-major axis
-      const smaBuffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, smaBuffer);
-      gl.bufferData(gl.ARRAY_BUFFER, buffers.semiMajorAxes, gl.STATIC_DRAW);
-      const smaLoc = gl.getAttribLocation(asteroidProgram, 'a_semiMajorAxis');
-      gl.enableVertexAttribArray(smaLoc);
-      gl.vertexAttribPointer(smaLoc, 1, gl.FLOAT, false, 0, 0);
+      // Position buffers for all 5 views
+      createPosBuffer(buffers.spatialPositions, 'a_posOrbits');
+      createPosBuffer(buffers.histogramPositions, 'a_posGaps');
+      createPosBuffer(buffers.familyPositions, 'a_posFamilies');
+      createPosBuffer(buffers.dangerPositions, 'a_posDanger');
+      createPosBuffer(buffers.discoveryPositions, 'a_posDiscovery');
 
-      // Magnitude
-      const magBuffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, magBuffer);
-      gl.bufferData(gl.ARRAY_BUFFER, buffers.magnitudes, gl.STATIC_DRAW);
-      const magLoc = gl.getAttribLocation(asteroidProgram, 'a_magnitude');
-      gl.enableVertexAttribArray(magLoc);
-      gl.vertexAttribPointer(magLoc, 1, gl.FLOAT, false, 0, 0);
-
-      // Orbit class
-      const classBuffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, classBuffer);
-      gl.bufferData(gl.ARRAY_BUFFER, buffers.orbitClasses, gl.STATIC_DRAW);
-      const classLoc = gl.getAttribLocation(asteroidProgram, 'a_orbitClass');
-      gl.enableVertexAttribArray(classLoc);
-      gl.vertexAttribPointer(classLoc, 1, gl.FLOAT, false, 0, 0);
+      // Per-asteroid data buffers
+      createFloatBuffer(buffers.semiMajorAxes, 'a_semiMajorAxis');
+      createFloatBuffer(buffers.eccentricities, 'a_eccentricity');
+      createFloatBuffer(buffers.magnitudes, 'a_magnitude');
+      createFloatBuffer(buffers.orbitClasses, 'a_orbitClass');
+      createFloatBuffer(buffers.families, 'a_family');
+      createFloatBuffer(buffers.discoveryYears, 'a_discoveryYear');
+      createFloatBuffer(buffers.perihelions, 'a_perihelion');
 
       gl.bindVertexArray(null);
 
@@ -323,37 +317,26 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
         fpsRef.current.lastTime = now;
       }
 
-      // Auto-play sequence - only handles spatial and histogram for now
+      // Auto-play sequence - cycles through all 5 views
       if (playRef.current.active) {
         const elapsed = now - playRef.current.startTime;
-        const cycleTime = 18000; // 18s cycle
-        const phase = (elapsed % cycleTime) / cycleTime;
+        const viewDuration = 8000; // 8s per view (includes 3s transition)
+        const totalCycle = viewDuration * 5; // 40s for full cycle
+        const cyclePosition = elapsed % totalCycle;
+        const viewIndex = Math.floor(cyclePosition / viewDuration);
+        const viewPhase = (cyclePosition % viewDuration) / viewDuration;
 
-        if (phase < 0.333) {
-          // Spatial view (6s)
-          if (activeView !== 'spatial' && !isTransitioning) {
-            transitionToView('spatial');
-          }
-          const zoomPhase = phase / 0.333;
-          zoomRef.current = 0.12 + zoomPhase * 0.08;
+        const viewOrder: ViewId[] = ['spatial', 'histogram', 'family', 'danger', 'discovery'];
+        const targetView = viewOrder[viewIndex];
+
+        if (activeView !== targetView && !isTransitioning && viewPhase < 0.1) {
+          transitionToView(targetView);
+        }
+
+        // Slow zoom animation for spatial view
+        if (targetView === 'spatial' && activeView === 'spatial') {
+          zoomRef.current = 0.12 + viewPhase * 0.06;
           setZoom(zoomRef.current);
-        } else if (phase < 0.5) {
-          // Transition to histogram (3s)
-          if (activeView !== 'histogram' && !isTransitioning) {
-            transitionToView('histogram');
-          }
-        } else if (phase < 0.833) {
-          // Histogram view (6s)
-          zoomRef.current = 1.0;
-          setZoom(1.0);
-          panRef.current = { x: 0, y: 0 };
-        } else {
-          // Transition back (3s)
-          if (activeView !== 'spatial' && !isTransitioning) {
-            transitionToView('spatial');
-            zoomRef.current = 0.12;
-            setZoom(0.12);
-          }
         }
       }
 
@@ -381,18 +364,24 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
       gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
 
       const dpr = window.devicePixelRatio || 1;
-      const transitionValue = getTransitionValue();
+
+      // Calculate orbit circle visibility
+      // Show orbits when in spatial view or transitioning to/from it
+      const inSpatialView = activeView === 'spatial' || previousView === 'spatial';
+      const spatialness = activeView === 'spatial'
+        ? (isTransitioning ? transitionRef.current.value : 1)
+        : (previousView === 'spatial' && isTransitioning ? 1 - transitionRef.current.value : 0);
 
       // Draw orbit circles (spatial view)
       const orbitVAOs = (gl as WebGL2RenderingContext & { orbitVAOs?: { vao: WebGLVertexArrayObject; count: number; color: number[] }[] }).orbitVAOs;
-      if (orbitVAOs && transitionValue < 0.5) {
+      if (orbitVAOs && inSpatialView && spatialness > 0.01) {
         gl.useProgram(orbitProgram);
 
         gl.uniform2f(gl.getUniformLocation(orbitProgram, 'u_pan'), panRef.current.x, panRef.current.y);
         gl.uniform1f(gl.getUniformLocation(orbitProgram, 'u_zoom'), zoomRef.current);
         gl.uniform2f(gl.getUniformLocation(orbitProgram, 'u_resolution'), gl.canvas.width, gl.canvas.height);
 
-        const orbitAlpha = 1 - transitionValue * 2;
+        const orbitAlpha = spatialness;
 
         for (const orbit of orbitVAOs) {
           gl.bindVertexArray(orbit.vao);
@@ -414,13 +403,25 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
       if (asteroidVAO) {
         gl.bindVertexArray(asteroidVAO);
 
-        gl.uniform1f(gl.getUniformLocation(program, 'u_transition'), transitionValue);
+        // View transition uniforms
+        const fromView = viewIdToIndex(previousView);
+        const toView = viewIdToIndex(activeView);
+        gl.uniform1i(gl.getUniformLocation(program, 'u_viewFrom'), fromView);
+        gl.uniform1i(gl.getUniformLocation(program, 'u_viewTo'), toView);
+        gl.uniform1f(gl.getUniformLocation(program, 'u_transition'), transitionRef.current.value);
+
+        // Camera uniforms
         gl.uniform2f(gl.getUniformLocation(program, 'u_pan'), panRef.current.x, panRef.current.y);
         gl.uniform1f(gl.getUniformLocation(program, 'u_zoom'), zoomRef.current);
         gl.uniform2f(gl.getUniformLocation(program, 'u_resolution'), gl.canvas.width, gl.canvas.height);
         gl.uniform1f(gl.getUniformLocation(program, 'u_pointScale'), dpr);
+
+        // Animation uniforms
         gl.uniform1f(gl.getUniformLocation(program, 'u_time'), timeRef.current);
         gl.uniform1f(gl.getUniformLocation(program, 'u_orbitalSpeed'), 0.02);
+
+        // Discovery view filter (current year shown)
+        gl.uniform1f(gl.getUniformLocation(program, 'u_discoveryYear'), 2024.0);
 
         gl.drawArrays(gl.POINTS, 0, asteroidCountRef.current);
       }
@@ -435,7 +436,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isLoading, isTransitioning, activeView, getTransitionValue, transitionToView]);
+  }, [isLoading, isTransitioning, activeView, previousView, viewIdToIndex, transitionToView]);
 
   // Mouse/touch interactions
   useEffect(() => {
@@ -568,14 +569,19 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
     return 5 + xNorm * 90;
   };
 
-  // Calculate view-specific opacities
-  const transitionValue = getTransitionValue();
-  const spatialOpacity = activeView === 'spatial' && !isTransitioning ? 1 :
-    (previousView === 'spatial' && isTransitioning ? 1 - transitionProgress :
-    (activeView === 'spatial' && isTransitioning ? transitionProgress : 0));
-  const histogramOpacity = activeView === 'histogram' && !isTransitioning ? 1 :
-    (previousView === 'histogram' && isTransitioning ? 1 - transitionProgress :
-    (activeView === 'histogram' && isTransitioning ? transitionProgress : 0));
+  // Calculate view-specific opacities for annotations
+  const getViewOpacity = (viewId: ViewId): number => {
+    if (activeView === viewId && !isTransitioning) return 1;
+    if (previousView === viewId && isTransitioning) return 1 - transitionProgress;
+    if (activeView === viewId && isTransitioning) return transitionProgress;
+    return 0;
+  };
+
+  const spatialOpacity = getViewOpacity('spatial');
+  const histogramOpacity = getViewOpacity('histogram');
+  const familyOpacity = getViewOpacity('family');
+  const dangerOpacity = getViewOpacity('danger');
+  const discoveryOpacity = getViewOpacity('discovery');
 
   return (
     <div ref={containerRef} className={`relative bg-[#050508] ${className}`}>
@@ -718,7 +724,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
         </div>
       )}
 
-      {/* Legend - bottom left */}
+      {/* Legend - bottom left (spatial view) */}
       {!isLoading && spatialOpacity > 0.5 && (
         <div
           className="absolute bottom-20 left-4 pointer-events-none text-[8px] font-mono text-white/40 space-y-1"
@@ -730,6 +736,161 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
               <span>{item.label}</span>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Family view annotations */}
+      {!isLoading && familyOpacity > 0.5 && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ opacity: Math.max(0, (familyOpacity - 0.5) * 2) }}
+        >
+          {/* Axis labels */}
+          <div className="absolute bottom-14 md:bottom-16 left-1/2 transform -translate-x-1/2 text-[9px] font-mono text-white/30">
+            Semi-major axis (AU)
+          </div>
+          <div className="absolute left-4 top-1/2 transform -translate-y-1/2 -rotate-90 origin-center">
+            <div className="text-[9px] font-mono text-white/30">
+              Eccentricity
+            </div>
+          </div>
+
+          {/* Title */}
+          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 text-center">
+            <div className="text-sm font-mono text-white/60 uppercase tracking-wider">
+              Asteroid Families
+            </div>
+            <div className="text-[9px] font-mono text-white/30 mt-1">
+              Collisional fragments cluster in orbital element space
+            </div>
+          </div>
+
+          {/* Family legend */}
+          <div className="absolute bottom-20 left-4 text-[8px] font-mono text-white/40 space-y-1">
+            {ASTEROID_FAMILIES.slice(0, 5).map((family) => (
+              <div key={family.name} className="flex items-center gap-2">
+                <div
+                  className="w-2 h-2 rounded-full"
+                  style={{ backgroundColor: `rgb(${family.color.join(',')})` }}
+                />
+                <span>{family.name}</span>
+              </div>
+            ))}
+          </div>
+          <div className="absolute bottom-20 left-28 text-[8px] font-mono text-white/40 space-y-1">
+            {ASTEROID_FAMILIES.slice(5).map((family) => (
+              <div key={family.name} className="flex items-center gap-2">
+                <div
+                  className="w-2 h-2 rounded-full"
+                  style={{ backgroundColor: `rgb(${family.color.join(',')})` }}
+                />
+                <span>{family.name}</span>
+              </div>
+            ))}
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-white/30" />
+              <span>Background</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Danger view annotations */}
+      {!isLoading && dangerOpacity > 0.5 && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ opacity: Math.max(0, (dangerOpacity - 0.5) * 2) }}
+        >
+          {/* Title */}
+          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 text-center">
+            <div className="text-sm font-mono text-[var(--color-pink)] uppercase tracking-wider">
+              Near-Earth Objects
+            </div>
+            <div className="text-[9px] font-mono text-white/30 mt-1">
+              Asteroids with perihelion &lt; 1.3 AU
+            </div>
+          </div>
+
+          {/* X-axis label */}
+          <div className="absolute bottom-14 md:bottom-16 left-1/2 transform -translate-x-1/2 text-[9px] font-mono text-white/30">
+            Perihelion distance (AU)
+          </div>
+
+          {/* Earth orbit marker */}
+          <div
+            className="absolute text-[9px] font-mono text-[var(--color-blue)]"
+            style={{ left: 'calc(5% + 66.67% * 1.0 / 1.5)', bottom: '20%' }}
+          >
+            <div className="w-px h-12 bg-[var(--color-blue)]/30" />
+            <div className="mt-1">Earth</div>
+          </div>
+
+          {/* Legend */}
+          <div className="absolute bottom-20 left-4 text-[8px] font-mono text-white/40 space-y-1">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-red-500" />
+              <span>Closest approach</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-orange-400" />
+              <span>Earth-crossing</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-white/20" />
+              <span>Safe (Main Belt)</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Discovery view annotations */}
+      {!isLoading && discoveryOpacity > 0.5 && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ opacity: Math.max(0, (discoveryOpacity - 0.5) * 2) }}
+        >
+          {/* Title */}
+          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 text-center">
+            <div className="text-sm font-mono text-white/60 uppercase tracking-wider">
+              Discovery Timeline
+            </div>
+            <div className="text-[9px] font-mono text-white/30 mt-1">
+              From Ceres (1801) to modern surveys
+            </div>
+          </div>
+
+          {/* X-axis: decade labels */}
+          <div className="absolute bottom-20 md:bottom-24 left-0 right-0">
+            {[1850, 1900, 1950, 2000].map((year) => {
+              const xPercent = 5 + ((year - 1800) / 225) * 90;
+              return (
+                <div
+                  key={year}
+                  className="absolute text-center"
+                  style={{ left: `${xPercent}%`, transform: 'translateX(-50%)' }}
+                >
+                  <div className="w-px h-2 bg-white/30 mx-auto" />
+                  <div className="text-[9px] font-mono text-white/40 mt-1">{year}</div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Key events */}
+          <div className="absolute left-4 top-20 text-[8px] font-mono text-white/40 space-y-2">
+            <div>
+              <span className="text-white/60">1801</span> Ceres discovered
+            </div>
+            <div>
+              <span className="text-white/60">1891</span> Astrophotography begins
+            </div>
+            <div>
+              <span className="text-white/60">1998</span> LINEAR survey
+            </div>
+            <div>
+              <span className="text-white/60">2010</span> WISE/Pan-STARRS
+            </div>
+          </div>
         </div>
       )}
 
