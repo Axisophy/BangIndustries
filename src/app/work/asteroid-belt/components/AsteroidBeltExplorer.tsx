@@ -16,7 +16,16 @@ interface AsteroidBeltExplorerProps {
   className?: string;
 }
 
-type ViewMode = 'spatial' | 'histogram';
+// View definitions
+const VIEWS = [
+  { id: 'spatial', label: 'Orbits', shortLabel: 'Orb', shortcut: '1' },
+  { id: 'histogram', label: 'Gaps', shortLabel: 'Gap', shortcut: '2' },
+  { id: 'family', label: 'Families', shortLabel: 'Fam', shortcut: '3' },
+  { id: 'danger', label: 'Danger', shortLabel: 'Dnr', shortcut: '4' },
+  { id: 'discovery', label: 'Discovery', shortLabel: 'Dis', shortcut: '5' },
+] as const;
+
+type ViewId = typeof VIEWS[number]['id'];
 
 // Cubic ease-in-out
 function easeInOutCubic(t: number): number {
@@ -35,19 +44,14 @@ const GAP_EXPLANATIONS: Record<string, string> = {
 // Histogram axis tick marks
 const HISTOGRAM_TICKS = [2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0];
 
-// Orbit class legend items with colors matching shader
-const LEGEND_ITEMS = {
-  spatial: [
-    { label: 'Main Belt', color: 'rgb(179, 179, 166)' },
-    { label: 'Jupiter Trojans', color: 'rgb(128, 153, 217)' },
-    { label: 'Hildas', color: 'rgb(153, 179, 204)' },
-    { label: 'Hungarias', color: 'rgb(217, 191, 128)' },
-    { label: 'Near-Earth', color: 'rgb(230, 102, 77)' },
-  ],
-  histogram: [
-    { label: 'Vertical lines mark Jupiter orbital resonances', color: '' },
-  ],
-};
+// Orbit class legend items
+const ORBIT_CLASS_LEGEND = [
+  { label: 'Main Belt', color: 'rgb(179, 179, 166)' },
+  { label: 'Jupiter Trojans', color: 'rgb(128, 153, 217)' },
+  { label: 'Hildas', color: 'rgb(153, 179, 204)' },
+  { label: 'Hungarias', color: 'rgb(217, 191, 128)' },
+  { label: 'Near-Earth', color: 'rgb(230, 102, 77)' },
+];
 
 export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExplorerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -60,11 +64,12 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
   const timeRef = useRef<number>(0);
   const startTimeRef = useRef<number>(0);
 
-  // View state
-  const [viewMode, setViewMode] = useState<ViewMode>('spatial');
+  // View state - now supports 5 views
+  const [activeView, setActiveView] = useState<ViewId>('spatial');
+  const [previousView, setPreviousView] = useState<ViewId>('spatial');
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const transitionRef = useRef({ value: 0, target: 0, startTime: 0 });
-  const TRANSITION_DURATION = 3000; // 3 seconds for dramatic effect
+  const transitionRef = useRef({ value: 0, startTime: 0 });
+  const TRANSITION_DURATION = 3000;
 
   // Camera state
   const panRef = useRef({ x: 0, y: 0 });
@@ -75,68 +80,82 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
   const isDraggingRef = useRef(false);
   const lastMouseRef = useRef({ x: 0, y: 0 });
 
-  // Demo mode
-  const [demoMode, setDemoMode] = useState(false);
-  const demoRef = useRef({ active: false, startTime: 0 });
+  // Auto-play sequence
+  const [isPlaying, setIsPlaying] = useState(false);
+  const playRef = useRef({ active: false, startTime: 0, currentIndex: 0 });
 
   // UI state
   const [isLoading, setIsLoading] = useState(true);
-  const [showFps, setShowFps] = useState(false);
   const [fps, setFps] = useState(60);
   const fpsRef = useRef({ frames: 0, lastTime: performance.now() });
-  const [mobileControlsOpen, setMobileControlsOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Track transition value for rendering annotations
-  const [transitionValue, setTransitionValue] = useState(0);
+  // Track transition value for annotations
+  const [transitionProgress, setTransitionProgress] = useState(0);
 
-  // Scrub slider state
-  const [isScrubbing, setIsScrubbing] = useState(false);
-  const scrubValueRef = useRef(0);
+  // Get the transition value for WebGL (0 = spatial, 1 = histogram)
+  // For now, only spatial and histogram are fully implemented
+  const getTransitionValue = useCallback(() => {
+    if (activeView === 'spatial' || previousView === 'spatial') {
+      if (activeView === 'histogram' || previousView === 'histogram') {
+        // Transitioning between spatial and histogram
+        const isSpatialToHistogram = activeView === 'histogram';
+        return isSpatialToHistogram ? transitionProgress : 1 - transitionProgress;
+      }
+    }
+    // For other views, return based on active view
+    if (activeView === 'histogram') return 1;
+    return 0;
+  }, [activeView, previousView, transitionProgress]);
 
-  // Toggle view with animation
-  const toggleView = useCallback(() => {
-    if (isTransitioning) return;
+  // Show toast notification
+  const showToast = useCallback((message: string) => {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(null), 2000);
+  }, []);
 
-    const newMode = viewMode === 'spatial' ? 'histogram' : 'spatial';
-    setViewMode(newMode);
+  // Transition to a new view
+  const transitionToView = useCallback((viewId: ViewId) => {
+    if (isTransitioning || activeView === viewId) return;
+
+    // For now, only spatial and histogram are implemented
+    if (viewId !== 'spatial' && viewId !== 'histogram') {
+      showToast(`${VIEWS.find(v => v.id === viewId)?.label} view coming soon`);
+      return;
+    }
+
+    setPreviousView(activeView);
+    setActiveView(viewId);
     setIsTransitioning(true);
+    transitionRef.current = { value: 0, startTime: performance.now() };
 
-    transitionRef.current.target = newMode === 'histogram' ? 1 : 0;
-    transitionRef.current.startTime = performance.now();
-
-    // Reset camera for new view
-    if (newMode === 'histogram') {
-      panRef.current = { x: 0, y: 0 };
+    // Set appropriate camera for the view
+    panRef.current = { x: 0, y: 0 };
+    if (viewId === 'histogram') {
       zoomRef.current = 1.0;
       setZoom(1.0);
     } else {
-      panRef.current = { x: 0, y: 0 };
       zoomRef.current = 0.15;
       setZoom(0.15);
     }
-  }, [viewMode, isTransitioning]);
+  }, [activeView, isTransitioning, showToast]);
 
-  // Demo mode logic
-  const startDemo = useCallback(() => {
-    setDemoMode(true);
-    demoRef.current = { active: true, startTime: performance.now() };
-
-    // Start in spatial view
-    if (viewMode !== 'spatial') {
-      setViewMode('spatial');
-      transitionRef.current = { value: 0, target: 0, startTime: 0 };
-      panRef.current = { x: 0, y: 0 };
-      zoomRef.current = 0.15;
-      setZoom(0.15);
+  // Auto-play sequence
+  const startAutoPlay = useCallback(() => {
+    setIsPlaying(true);
+    playRef.current = { active: true, startTime: performance.now(), currentIndex: 0 };
+    // Start from spatial view
+    if (activeView !== 'spatial') {
+      transitionToView('spatial');
     }
-  }, [viewMode]);
+  }, [activeView, transitionToView]);
 
-  const stopDemo = useCallback(() => {
-    setDemoMode(false);
-    demoRef.current.active = false;
+  const stopAutoPlay = useCallback(() => {
+    setIsPlaying(false);
+    playRef.current.active = false;
   }, []);
 
   // Screenshot
@@ -145,10 +164,10 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
     if (!canvas) return;
 
     const link = document.createElement('a');
-    link.download = `asteroid-belt-${viewMode}-${Date.now()}.png`;
+    link.download = `asteroid-belt-${activeView}-${Date.now()}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
-  }, [viewMode]);
+  }, [activeView]);
 
   // Fullscreen toggle
   const toggleFullscreen = useCallback(() => {
@@ -159,63 +178,6 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
       container.requestFullscreen().then(() => setIsFullscreen(true));
     } else {
       document.exitFullscreen().then(() => setIsFullscreen(false));
-    }
-  }, []);
-
-  // Scrub slider handlers
-  const handleScrubStart = useCallback(() => {
-    if (demoMode) stopDemo();
-    setIsScrubbing(true);
-    setIsTransitioning(false);
-  }, [demoMode, stopDemo]);
-
-  const handleScrubChange = useCallback((value: number) => {
-    scrubValueRef.current = value;
-    transitionRef.current.value = value;
-    setTransitionValue(value);
-
-    // Update view mode based on scrub position
-    if (value > 0.5 && viewMode === 'spatial') {
-      setViewMode('histogram');
-    } else if (value <= 0.5 && viewMode === 'histogram') {
-      setViewMode('spatial');
-    }
-
-    // Adjust zoom based on transition
-    const spatialZoom = 0.15;
-    const histogramZoom = 1.0;
-    zoomRef.current = spatialZoom + (histogramZoom - spatialZoom) * value;
-    setZoom(zoomRef.current);
-
-    // Reset pan during scrub
-    panRef.current = { x: 0, y: 0 };
-  }, [viewMode]);
-
-  const handleScrubEnd = useCallback((value: number) => {
-    setIsScrubbing(false);
-
-    // Snap to ends if close
-    if (value < 0.1) {
-      transitionRef.current.value = 0;
-      transitionRef.current.target = 0;
-      setTransitionValue(0);
-      setViewMode('spatial');
-      zoomRef.current = 0.15;
-      setZoom(0.15);
-    } else if (value > 0.9) {
-      transitionRef.current.value = 1;
-      transitionRef.current.target = 1;
-      setTransitionValue(1);
-      setViewMode('histogram');
-      zoomRef.current = 1.0;
-      setZoom(1.0);
-    } else {
-      // Animate to nearest end
-      const target = value < 0.5 ? 0 : 1;
-      transitionRef.current.target = target;
-      transitionRef.current.startTime = performance.now();
-      setIsTransitioning(true);
-      setViewMode(target === 0 ? 'spatial' : 'histogram');
     }
   }, []);
 
@@ -235,7 +197,6 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
     }
     glRef.current = gl;
 
-    // Create shader programs
     const asteroidProgram = createProgram(gl, vertexShaderSource, fragmentShaderSource);
     const orbitProgram = createProgram(gl, orbitVertexShaderSource, orbitFragmentShaderSource);
 
@@ -247,12 +208,10 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
     programRef.current = asteroidProgram;
     orbitProgramRef.current = orbitProgram;
 
-    // Load asteroid data
     loadAsteroidData(100000).then((data) => {
       const buffers = prepareAsteroidBuffers(data.asteroids);
       asteroidCountRef.current = buffers.count;
 
-      // Create and bind VAO for asteroids
       const vao = gl.createVertexArray();
       gl.bindVertexArray(vao);
 
@@ -298,7 +257,6 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
 
       gl.bindVertexArray(null);
 
-      // Store VAO reference
       (gl as WebGL2RenderingContext & { asteroidVAO: WebGLVertexArrayObject }).asteroidVAO = vao!;
 
       // Create orbit circle buffers
@@ -322,12 +280,9 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
       (gl as WebGL2RenderingContext & { orbitVAOs: typeof orbitVAOs }).orbitVAOs = orbitVAOs;
 
       setIsLoading(false);
-
-      // Trigger entry animation after a brief delay
       setTimeout(() => setHasEntered(true), 100);
     });
 
-    // Handle resize
     const handleResize = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
@@ -354,13 +309,10 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
     const orbitProgram = orbitProgramRef.current;
     if (!gl || !program || !orbitProgram || isLoading) return;
 
-    // Initialize start time
     startTimeRef.current = performance.now();
 
     const render = () => {
       const now = performance.now();
-
-      // Update time for orbital motion (in seconds)
       timeRef.current = (now - startTimeRef.current) / 1000;
 
       // FPS calculation
@@ -371,92 +323,76 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
         fpsRef.current.lastTime = now;
       }
 
-      // Demo mode automation - 18s cycle
-      // 6s spatial zoom | 3s transition | 6s histogram hold | 3s transition back
-      if (demoRef.current.active) {
-        const elapsed = now - demoRef.current.startTime;
-        const cycleTime = 18000;
+      // Auto-play sequence - only handles spatial and histogram for now
+      if (playRef.current.active) {
+        const elapsed = now - playRef.current.startTime;
+        const cycleTime = 18000; // 18s cycle
         const phase = (elapsed % cycleTime) / cycleTime;
 
         if (phase < 0.333) {
-          // Spatial view with slow zoom (6s)
-          if (transitionRef.current.target !== 0) {
-            transitionRef.current.target = 0;
-            transitionRef.current.startTime = now;
-            setViewMode('spatial');
-            setIsTransitioning(true);
+          // Spatial view (6s)
+          if (activeView !== 'spatial' && !isTransitioning) {
+            transitionToView('spatial');
           }
           const zoomPhase = phase / 0.333;
           zoomRef.current = 0.12 + zoomPhase * 0.08;
           setZoom(zoomRef.current);
         } else if (phase < 0.5) {
           // Transition to histogram (3s)
-          if (transitionRef.current.target !== 1) {
-            transitionRef.current.target = 1;
-            transitionRef.current.startTime = now;
-            setViewMode('histogram');
-            setIsTransitioning(true);
+          if (activeView !== 'histogram' && !isTransitioning) {
+            transitionToView('histogram');
           }
         } else if (phase < 0.833) {
-          // Histogram view hold (6s)
+          // Histogram view (6s)
           zoomRef.current = 1.0;
           setZoom(1.0);
           panRef.current = { x: 0, y: 0 };
         } else {
-          // Transition back to spatial (3s)
-          if (transitionRef.current.target !== 0) {
-            transitionRef.current.target = 0;
-            transitionRef.current.startTime = now;
-            setViewMode('spatial');
-            setIsTransitioning(true);
+          // Transition back (3s)
+          if (activeView !== 'spatial' && !isTransitioning) {
+            transitionToView('spatial');
             zoomRef.current = 0.12;
             setZoom(0.12);
           }
         }
       }
 
-      // Update transition (skip if scrubbing)
-      if (isTransitioning && !isScrubbing) {
+      // Update transition
+      if (isTransitioning) {
         const elapsed = now - transitionRef.current.startTime;
         const progress = Math.min(elapsed / TRANSITION_DURATION, 1);
         const eased = easeInOutCubic(progress);
 
-        const start = transitionRef.current.target === 1 ? 0 : 1;
-        const end = transitionRef.current.target;
-        transitionRef.current.value = start + (end - start) * eased;
+        transitionRef.current.value = eased;
+        setTransitionProgress(eased);
 
         if (progress >= 1) {
-          transitionRef.current.value = end;
           setIsTransitioning(false);
+          setTransitionProgress(1);
         }
-      }
-
-      // Update transition value for React rendering (skip if scrubbing - handled by scrub)
-      if (!isScrubbing) {
-        setTransitionValue(transitionRef.current.value);
       }
 
       // Clear
       gl.clearColor(0.02, 0.02, 0.03, 1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
 
-      // Enable blending - additive for glowing density
+      // Enable blending
       gl.enable(gl.BLEND);
       gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
 
       const dpr = window.devicePixelRatio || 1;
+      const transitionValue = getTransitionValue();
 
-      // Draw orbit circles (only in spatial view)
+      // Draw orbit circles (spatial view)
       const orbitVAOs = (gl as WebGL2RenderingContext & { orbitVAOs?: { vao: WebGLVertexArrayObject; count: number; color: number[] }[] }).orbitVAOs;
-      if (orbitVAOs && transitionRef.current.value < 0.5) {
+      if (orbitVAOs && transitionValue < 0.5) {
         gl.useProgram(orbitProgram);
 
         gl.uniform2f(gl.getUniformLocation(orbitProgram, 'u_pan'), panRef.current.x, panRef.current.y);
         gl.uniform1f(gl.getUniformLocation(orbitProgram, 'u_zoom'), zoomRef.current);
         gl.uniform2f(gl.getUniformLocation(orbitProgram, 'u_resolution'), gl.canvas.width, gl.canvas.height);
 
-        // Fade orbits during transition
-        const orbitAlpha = 1 - transitionRef.current.value * 2;
+        const orbitAlpha = 1 - transitionValue * 2;
 
         for (const orbit of orbitVAOs) {
           gl.bindVertexArray(orbit.vao);
@@ -478,13 +414,13 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
       if (asteroidVAO) {
         gl.bindVertexArray(asteroidVAO);
 
-        gl.uniform1f(gl.getUniformLocation(program, 'u_transition'), transitionRef.current.value);
+        gl.uniform1f(gl.getUniformLocation(program, 'u_transition'), transitionValue);
         gl.uniform2f(gl.getUniformLocation(program, 'u_pan'), panRef.current.x, panRef.current.y);
         gl.uniform1f(gl.getUniformLocation(program, 'u_zoom'), zoomRef.current);
         gl.uniform2f(gl.getUniformLocation(program, 'u_resolution'), gl.canvas.width, gl.canvas.height);
         gl.uniform1f(gl.getUniformLocation(program, 'u_pointScale'), dpr);
         gl.uniform1f(gl.getUniformLocation(program, 'u_time'), timeRef.current);
-        gl.uniform1f(gl.getUniformLocation(program, 'u_orbitalSpeed'), 0.02); // Slow orbital motion
+        gl.uniform1f(gl.getUniformLocation(program, 'u_orbitalSpeed'), 0.02);
 
         gl.drawArrays(gl.POINTS, 0, asteroidCountRef.current);
       }
@@ -499,7 +435,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isLoading, isTransitioning, isScrubbing]);
+  }, [isLoading, isTransitioning, activeView, getTransitionValue, transitionToView]);
 
   // Mouse/touch interactions
   useEffect(() => {
@@ -507,7 +443,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
     if (!canvas) return;
 
     const handleMouseDown = (e: MouseEvent) => {
-      if (demoMode) stopDemo();
+      if (isPlaying) stopAutoPlay();
       isDraggingRef.current = true;
       lastMouseRef.current = { x: e.clientX, y: e.clientY };
     };
@@ -531,7 +467,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      if (demoMode) stopDemo();
+      if (isPlaying) stopAutoPlay();
 
       const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
       const newZoom = Math.max(0.05, Math.min(5, zoomRef.current * zoomFactor));
@@ -539,10 +475,9 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
       setZoom(newZoom);
     };
 
-    // Touch support
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches.length === 1) {
-        if (demoMode) stopDemo();
+        if (isPlaying) stopAutoPlay();
         isDraggingRef.current = true;
         lastMouseRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       }
@@ -584,19 +519,25 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
       canvas.removeEventListener('touchmove', handleTouchMove);
       canvas.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [demoMode, stopDemo]);
+  }, [isPlaying, stopAutoPlay]);
 
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // View shortcuts 1-5
+      const viewIndex = parseInt(e.key) - 1;
+      if (viewIndex >= 0 && viewIndex < VIEWS.length) {
+        e.preventDefault();
+        transitionToView(VIEWS[viewIndex].id);
+        return;
+      }
+
       if (e.key === ' ' || e.key === 'Spacebar') {
         e.preventDefault();
-        toggleView();
-      } else if (e.key === 'd' || e.key === 'D') {
-        if (demoMode) {
-          stopDemo();
+        if (isPlaying) {
+          stopAutoPlay();
         } else {
-          startDemo();
+          startAutoPlay();
         }
       } else if (e.key === 's' || e.key === 'S') {
         takeScreenshot();
@@ -607,7 +548,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [toggleView, demoMode, startDemo, stopDemo, takeScreenshot, toggleFullscreen]);
+  }, [transitionToView, isPlaying, startAutoPlay, stopAutoPlay, takeScreenshot, toggleFullscreen]);
 
   // Fullscreen change listener
   useEffect(() => {
@@ -624,12 +565,17 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
     const A_MIN = 1.5;
     const A_MAX = 5.5;
     const xNorm = (au - A_MIN) / (A_MAX - A_MIN);
-    return 5 + xNorm * 90; // Map to 5%-95% of width
+    return 5 + xNorm * 90;
   };
 
-  // Calculate annotation opacity
-  const histogramAnnotationOpacity = transitionValue > 0.85 ? Math.min(1, (transitionValue - 0.85) / 0.15) : 0;
-  const spatialAnnotationOpacity = transitionValue < 0.15 ? Math.min(1, (0.15 - transitionValue) / 0.15) : 0;
+  // Calculate view-specific opacities
+  const transitionValue = getTransitionValue();
+  const spatialOpacity = activeView === 'spatial' && !isTransitioning ? 1 :
+    (previousView === 'spatial' && isTransitioning ? 1 - transitionProgress :
+    (activeView === 'spatial' && isTransitioning ? transitionProgress : 0));
+  const histogramOpacity = activeView === 'histogram' && !isTransitioning ? 1 :
+    (previousView === 'histogram' && isTransitioning ? 1 - transitionProgress :
+    (activeView === 'histogram' && isTransitioning ? transitionProgress : 0));
 
   return (
     <div ref={containerRef} className={`relative bg-[#050508] ${className}`}>
@@ -642,7 +588,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
         </div>
       )}
 
-      {/* Canvas with entry animation */}
+      {/* Canvas */}
       <canvas
         ref={canvasRef}
         className={`w-full h-full cursor-grab active:cursor-grabbing transition-all duration-1000 ${
@@ -651,14 +597,14 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
         style={{ touchAction: 'none' }}
       />
 
-      {/* Histogram annotations (visible when transition > 0.85) */}
-      {!isLoading && histogramAnnotationOpacity > 0 && (
+      {/* Histogram annotations */}
+      {!isLoading && histogramOpacity > 0.5 && (
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ opacity: histogramAnnotationOpacity }}
+          style={{ opacity: Math.max(0, (histogramOpacity - 0.5) * 2) }}
         >
           {/* X-axis tick marks */}
-          <div className="absolute bottom-12 md:bottom-14 left-0 right-0">
+          <div className="absolute bottom-20 md:bottom-24 left-0 right-0">
             {HISTOGRAM_TICKS.map((tick) => (
               <div
                 key={tick}
@@ -672,7 +618,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
           </div>
 
           {/* X-axis label */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-[9px] font-mono text-white/30">
+          <div className="absolute bottom-14 md:bottom-16 left-1/2 transform -translate-x-1/2 text-[9px] font-mono text-white/30">
             Distance from the Sun (AU)
           </div>
 
@@ -685,7 +631,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
             </div>
           </div>
 
-          {/* Kirkwood gap annotations with dashed lines and explanations */}
+          {/* Kirkwood gap annotations */}
           {KIRKWOOD_GAPS.map((gap, i) => {
             const xPercent = auToScreenX(gap.a);
 
@@ -695,21 +641,18 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
                 className="absolute text-center"
                 style={{ left: `${xPercent}%`, transform: 'translateX(-50%)' }}
               >
-                {/* Dashed vertical line from annotation to x-axis */}
                 <div
                   className="absolute top-24 md:top-28 w-px"
                   style={{
-                    height: 'calc(100% - 7rem)',
+                    height: 'calc(100% - 10rem)',
                     background: 'repeating-linear-gradient(to bottom, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 4px, transparent 4px, transparent 8px)',
                   }}
                 />
 
-                {/* Ratio label */}
                 <div className="absolute top-16 md:top-20">
                   <div className="text-xs md:text-sm font-mono text-white/70 font-medium">
                     {gap.ratio}
                   </div>
-                  {/* Explanation */}
                   <div className="text-[9px] font-mono text-white/30 mt-1 whitespace-nowrap">
                     {GAP_EXPLANATIONS[gap.ratio]}
                   </div>
@@ -720,11 +663,11 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
         </div>
       )}
 
-      {/* Spatial view annotations (visible when transition < 0.15) */}
-      {!isLoading && spatialAnnotationOpacity > 0 && (
+      {/* Spatial view annotations */}
+      {!isLoading && spatialOpacity > 0.5 && (
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ opacity: spatialAnnotationOpacity }}
+          style={{ opacity: Math.max(0, (spatialOpacity - 0.5) * 2) }}
         >
           {/* Sun indicator */}
           <div
@@ -741,8 +684,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
 
           {/* Planet labels */}
           {PLANET_ORBITS.map((planet) => {
-            // Position label along orbit, adjusted by pan/zoom
-            const angle = Math.PI * 0.25; // 45 degrees
+            const angle = Math.PI * 0.25;
             const labelX = planet.a * Math.cos(angle);
             const labelY = planet.a * Math.sin(angle);
 
@@ -762,7 +704,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
             );
           })}
 
-          {/* Main Belt label - curved along the belt center (~2.7 AU) */}
+          {/* Main Belt label */}
           <div
             className="absolute text-[10px] font-mono text-white/15 uppercase tracking-widest"
             style={{
@@ -776,234 +718,133 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
         </div>
       )}
 
-      {/* Desktop control panel */}
-      <div className="hidden md:block absolute top-4 right-4 bg-black/60 backdrop-blur-sm border border-white/10 p-4 space-y-4 text-white/80 text-sm">
-        <div className="font-mono text-xs text-white/40 uppercase tracking-wider">Controls</div>
-
-        {/* View toggle */}
-        <button
-          onClick={toggleView}
-          disabled={isTransitioning}
-          className="w-full px-3 py-2 bg-white/10 hover:bg-white/20 disabled:opacity-50 transition-colors text-left"
+      {/* Legend - bottom left */}
+      {!isLoading && spatialOpacity > 0.5 && (
+        <div
+          className="absolute bottom-20 left-4 pointer-events-none text-[8px] font-mono text-white/40 space-y-1"
+          style={{ opacity: Math.max(0, (spatialOpacity - 0.5) * 2) }}
         >
-          {viewMode === 'spatial' ? 'Show Kirkwood Gaps' : 'Show Spatial View'}
-          <span className="float-right text-white/40">[Space]</span>
-        </button>
-
-        {/* Zoom display */}
-        <div className="flex justify-between items-center">
-          <span className="text-white/50">Zoom</span>
-          <span className="font-mono">{zoom.toFixed(2)}x</span>
-        </div>
-
-        {/* Demo mode */}
-        <button
-          onClick={demoMode ? stopDemo : startDemo}
-          className="w-full px-3 py-2 bg-white/10 hover:bg-white/20 transition-colors text-left"
-        >
-          {demoMode ? 'Stop Demo' : 'Start Demo'}
-          <span className="float-right text-white/40">[D]</span>
-        </button>
-
-        {/* Screenshot */}
-        <button
-          onClick={takeScreenshot}
-          className="w-full px-3 py-2 bg-white/10 hover:bg-white/20 transition-colors text-left"
-        >
-          Screenshot
-          <span className="float-right text-white/40">[S]</span>
-        </button>
-
-        {/* Fullscreen */}
-        <button
-          onClick={toggleFullscreen}
-          className="w-full px-3 py-2 bg-white/10 hover:bg-white/20 transition-colors text-left"
-        >
-          {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
-          <span className="float-right text-white/40">[F]</span>
-        </button>
-
-        {/* FPS toggle */}
-        <button
-          onClick={() => setShowFps(!showFps)}
-          className="w-full px-3 py-2 bg-white/10 hover:bg-white/20 transition-colors text-left"
-        >
-          {showFps ? 'Hide FPS' : 'Show FPS'}
-        </button>
-
-        {showFps && (
-          <div className="font-mono text-xs text-white/50">
-            {fps} FPS | {asteroidCountRef.current.toLocaleString()} asteroids
-          </div>
-        )}
-      </div>
-
-      {/* Mobile controls */}
-      <div className="md:hidden absolute bottom-4 left-4 right-4">
-        {mobileControlsOpen ? (
-          <div className="bg-black/80 backdrop-blur-sm border border-white/10 p-4 space-y-3 text-white/80 text-sm">
-            <div className="flex justify-between items-center">
-              <span className="font-mono text-xs text-white/40 uppercase tracking-wider">Controls</span>
-              <button onClick={() => setMobileControlsOpen(false)} className="text-white/50 text-lg">
-                &times;
-              </button>
+          {ORBIT_CLASS_LEGEND.map((item) => (
+            <div key={item.label} className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
+              <span>{item.label}</span>
             </div>
-
-            <button
-              onClick={() => { toggleView(); setMobileControlsOpen(false); }}
-              disabled={isTransitioning}
-              className="w-full px-3 py-2 bg-white/10 disabled:opacity-50 transition-colors text-left"
-            >
-              {viewMode === 'spatial' ? 'Show Kirkwood Gaps' : 'Show Spatial View'}
-            </button>
-
-            <button
-              onClick={() => { demoMode ? stopDemo() : startDemo(); setMobileControlsOpen(false); }}
-              className="w-full px-3 py-2 bg-white/10 transition-colors text-left"
-            >
-              {demoMode ? 'Stop Demo' : 'Start Demo'}
-            </button>
-
-            <button
-              onClick={toggleFullscreen}
-              className="w-full px-3 py-2 bg-white/10 transition-colors text-left"
-            >
-              {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
-            </button>
-          </div>
-        ) : (
-          <button
-            onClick={() => setMobileControlsOpen(true)}
-            className="bg-black/60 backdrop-blur-sm border border-white/10 px-4 py-2 text-white/70 text-sm"
-          >
-            Controls
-          </button>
-        )}
-      </div>
-
-      {/* View indicator and info toggle */}
-      <div className="absolute top-4 left-4 flex items-center gap-3">
-        <div className="text-white/40 text-xs font-mono uppercase tracking-wider">
-          {viewMode === 'spatial' ? 'Solar System View' : 'Kirkwood Gaps Histogram'}
-          {demoMode && <span className="ml-2 text-[var(--color-blue)]">[Demo]</span>}
+          ))}
         </div>
-        <button
-          onClick={() => setShowInfo(!showInfo)}
-          className="w-5 h-5 rounded-full border border-white/30 text-white/50 text-xs flex items-center justify-center hover:border-white/50 hover:text-white/70 transition-colors"
-          title="About this visualisation"
-        >
-          i
-        </button>
-      </div>
+      )}
+
+      {/* Toast notification */}
+      {toastMessage && (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20
+          bg-black/80 backdrop-blur-sm border border-white/10 px-4 py-2
+          text-white/70 text-sm font-mono rounded-lg">
+          {toastMessage}
+        </div>
+      )}
 
       {/* Info panel */}
       {showInfo && (
-        <div className="absolute top-12 left-4 max-w-xs bg-black/80 backdrop-blur-sm border border-white/10 p-4 text-[11px] text-white/60 leading-relaxed">
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20
+          w-72 bg-black/80 backdrop-blur-xl border border-white/10
+          rounded-lg p-4 text-[10px] font-mono text-white/50">
           <button
             onClick={() => setShowInfo(false)}
-            className="absolute top-2 right-2 text-white/40 hover:text-white/60 text-sm"
+            className="absolute top-2 right-2 text-white/40 hover:text-white/60"
           >
             &times;
           </button>
-          <p className="mb-3">
-            You&apos;re looking at 100,000 asteroids plotted from Minor Planet Center orbital data.
-          </p>
-          <p className="mb-3">
-            In the solar system view, each dot is an asteroid at its computed position. The inner asteroids orbit faster than outer ones, following Kepler&apos;s laws.
-          </p>
-          <p>
-            Switch to the Kirkwood Gaps view to see how Jupiter&apos;s gravity has carved empty channels through the belt at specific orbital resonances.
-          </p>
-        </div>
-      )}
-
-      {/* Legend - bottom left, crossfades between views */}
-      {!isLoading && (
-        <div className="absolute bottom-16 left-4 pointer-events-none">
-          {/* Spatial legend */}
-          <div
-            className="text-[8px] font-mono text-white/40 space-y-1"
-            style={{ opacity: 1 - transitionValue }}
-          >
-            {LEGEND_ITEMS.spatial.map((item) => (
-              <div key={item.label} className="flex items-center gap-2">
-                <div
-                  className="w-2 h-2 rounded-full"
-                  style={{ backgroundColor: item.color }}
-                />
-                <span>{item.label}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Histogram legend */}
-          <div
-            className="text-[8px] font-mono text-white/40 absolute top-0 left-0"
-            style={{ opacity: transitionValue }}
-          >
-            {LEGEND_ITEMS.histogram.map((item) => (
-              <div key={item.label} className="flex items-center gap-2">
-                {item.color && (
-                  <div
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: item.color }}
-                  />
-                )}
-                <span>{item.label}</span>
-              </div>
-            ))}
+          <div className="text-[9px] uppercase tracking-wider text-white/30 mb-2">Data</div>
+          <div>{asteroidCountRef.current.toLocaleString()} asteroids from Minor Planet Center</div>
+          <div>Orbital elements computed at epoch 2025-01-01</div>
+          <div className="mt-2 text-white/30">{fps} FPS | WebGL2</div>
+          <div className="mt-2 text-[8px] text-white/20">
+            Keys 1-5: Switch view | Space: Play | S: Save | F: Fullscreen
           </div>
         </div>
       )}
 
-      {/* Scrub slider */}
+      {/* Bottom bar - View selector */}
       {!isLoading && (
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent pt-8 pb-4 px-4 md:px-8">
-          <div className="max-w-2xl mx-auto">
-            <div className="flex items-center gap-4">
-              <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider whitespace-nowrap">
-                Solar System
-              </span>
-              <div className="flex-1 relative">
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.001"
-                  value={transitionValue}
-                  onChange={(e) => handleScrubChange(parseFloat(e.target.value))}
-                  onMouseDown={handleScrubStart}
-                  onTouchStart={handleScrubStart}
-                  onMouseUp={(e) => handleScrubEnd(parseFloat((e.target as HTMLInputElement).value))}
-                  onTouchEnd={(e) => handleScrubEnd(parseFloat((e.target as HTMLInputElement).value))}
-                  className="w-full h-1 appearance-none bg-white/20 cursor-pointer
-                    [&::-webkit-slider-thumb]:appearance-none
-                    [&::-webkit-slider-thumb]:w-4
-                    [&::-webkit-slider-thumb]:h-4
-                    [&::-webkit-slider-thumb]:rounded-full
-                    [&::-webkit-slider-thumb]:bg-white
-                    [&::-webkit-slider-thumb]:cursor-grab
-                    [&::-webkit-slider-thumb]:active:cursor-grabbing
-                    [&::-webkit-slider-thumb]:shadow-[0_0_10px_rgba(255,255,255,0.5)]
-                    [&::-moz-range-thumb]:w-4
-                    [&::-moz-range-thumb]:h-4
-                    [&::-moz-range-thumb]:rounded-full
-                    [&::-moz-range-thumb]:bg-white
-                    [&::-moz-range-thumb]:border-0
-                    [&::-moz-range-thumb]:cursor-grab
-                    [&::-moz-range-thumb]:active:cursor-grabbing"
-                />
-                {/* Progress fill */}
-                <div
-                  className="absolute top-0 left-0 h-1 bg-white/40 pointer-events-none"
-                  style={{ width: `${transitionValue * 100}%` }}
-                />
-              </div>
-              <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider whitespace-nowrap">
-                Kirkwood Gaps
-              </span>
-            </div>
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10
+          flex items-center gap-1
+          bg-black/70 backdrop-blur-xl
+          border border-white/10 rounded-full
+          px-2 py-1.5">
+
+          {/* View buttons - Desktop */}
+          <div className="hidden md:flex items-center gap-1">
+            {VIEWS.map((view) => (
+              <button
+                key={view.id}
+                onClick={() => transitionToView(view.id)}
+                disabled={isTransitioning}
+                className={`
+                  px-3 py-1.5 text-[10px] uppercase tracking-[0.08em] rounded-full
+                  transition-all duration-300
+                  ${activeView === view.id
+                    ? 'bg-white/15 text-white/90'
+                    : 'text-white/40 hover:text-white/60 hover:bg-white/5'}
+                  disabled:opacity-50
+                `}
+              >
+                {view.label}
+              </button>
+            ))}
           </div>
+
+          {/* View buttons - Mobile (short labels) */}
+          <div className="flex md:hidden items-center gap-1">
+            {VIEWS.map((view) => (
+              <button
+                key={view.id}
+                onClick={() => transitionToView(view.id)}
+                disabled={isTransitioning}
+                className={`
+                  px-2 py-1.5 text-[9px] uppercase tracking-[0.05em] rounded-full
+                  transition-all duration-300
+                  ${activeView === view.id
+                    ? 'bg-white/15 text-white/90'
+                    : 'text-white/40 hover:text-white/60 hover:bg-white/5'}
+                  disabled:opacity-50
+                `}
+              >
+                {view.shortLabel}
+              </button>
+            ))}
+          </div>
+
+          {/* Separator */}
+          <div className="w-px h-4 bg-white/10 mx-1" />
+
+          {/* Utility buttons */}
+          <button
+            onClick={isPlaying ? stopAutoPlay : startAutoPlay}
+            className={`w-7 h-7 flex items-center justify-center rounded-full
+              transition-all duration-300
+              ${isPlaying ? 'bg-white/15 text-white/90' : 'text-white/40 hover:text-white/60 hover:bg-white/5'}`}
+            title={isPlaying ? 'Stop' : 'Play sequence'}
+          >
+            {isPlaying ? '■' : '▶'}
+          </button>
+
+          <button
+            onClick={() => setShowInfo(!showInfo)}
+            className={`w-7 h-7 flex items-center justify-center rounded-full text-sm
+              transition-all duration-300
+              ${showInfo ? 'bg-white/15 text-white/90' : 'text-white/40 hover:text-white/60 hover:bg-white/5'}`}
+            title="Info"
+          >
+            ⓘ
+          </button>
+
+          <button
+            onClick={toggleFullscreen}
+            className="w-7 h-7 flex items-center justify-center rounded-full text-xs
+              text-white/40 hover:text-white/60 hover:bg-white/5 transition-all duration-300"
+            title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+          >
+            {isFullscreen ? '⛶' : '⛶'}
+          </button>
         </div>
       )}
     </div>
