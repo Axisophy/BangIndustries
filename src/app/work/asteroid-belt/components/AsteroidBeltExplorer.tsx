@@ -74,7 +74,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
   // Camera state
   const panRef = useRef({ x: 0, y: 0 });
   const zoomRef = useRef(0.15);
-  const [zoom, setZoom] = useState(0.15);
+  const [, setZoom] = useState(0.15);
 
   // Interaction state
   const isDraggingRef = useRef(false);
@@ -87,11 +87,12 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
   // UI state
   const [isLoading, setIsLoading] = useState(true);
   const [fps, setFps] = useState(60);
-  const fpsRef = useRef({ frames: 0, lastTime: performance.now() });
+  const fpsRef = useRef({ frames: 0, lastTime: 0 });
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [webglError, setWebglError] = useState<string | null>(null);
 
   // Track transition value for annotations
   const [transitionProgress, setTransitionProgress] = useState(0);
@@ -178,34 +179,45 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const gl = canvas.getContext('webgl2', {
+    // Try to get WebGL2 context
+    let gl = canvas.getContext('webgl2', {
       alpha: false,
       antialias: true,
       preserveDrawingBuffer: true,
     });
+
+    // If that fails, try with minimal options
     if (!gl) {
-      console.error('WebGL2 not supported');
+      gl = canvas.getContext('webgl2');
+    }
+
+    // If still fails, show error
+    if (!gl) {
+      const gl1 = canvas.getContext('webgl');
+      if (gl1) {
+        setWebglError('WebGL2 not supported. Try enabling hardware acceleration in browser settings.');
+      } else {
+        setWebglError('WebGL not supported. Please enable hardware acceleration or try a different browser.');
+      }
+      setIsLoading(false);
       return;
     }
+
     glRef.current = gl;
 
-    console.log('[Asteroid] Creating shader programs...');
     const asteroidProgram = createProgram(gl, vertexShaderSource, fragmentShaderSource);
     const orbitProgram = createProgram(gl, orbitVertexShaderSource, orbitFragmentShaderSource);
 
     if (!asteroidProgram || !orbitProgram) {
-      console.error('[Asteroid] Failed to create shader programs');
-      setIsLoading(false); // Don't leave it stuck on loading
+      console.error('Failed to create shader programs');
+      setIsLoading(false);
       return;
     }
-    console.log('[Asteroid] Shader programs created successfully');
 
     programRef.current = asteroidProgram;
     orbitProgramRef.current = orbitProgram;
 
-    console.log('[Asteroid] Loading asteroid data...');
     loadAsteroidData(100000).then((data) => {
-      console.log('[Asteroid] Data loaded, preparing buffers...');
       const buffers = prepareAsteroidBuffers(data.asteroids);
       asteroidCountRef.current = buffers.count;
 
@@ -278,7 +290,6 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
 
       (gl as WebGL2RenderingContext & { orbitVAOs: typeof orbitVAOs }).orbitVAOs = orbitVAOs;
 
-      console.log('[Asteroid] All buffers created, setting isLoading to false');
       setIsLoading(false);
       setTimeout(() => setHasEntered(true), 100);
     }).catch((err) => {
@@ -368,7 +379,7 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
       gl.clearColor(0.02, 0.02, 0.03, 1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
 
-      // Enable blending
+      // Enable additive blending
       gl.enable(gl.BLEND);
       gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
 
@@ -595,10 +606,33 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
   return (
     <div ref={containerRef} className={`relative bg-[#050508] ${className}`}>
       {/* Loading overlay */}
-      {isLoading && (
+      {isLoading && !webglError && (
         <div className="absolute inset-0 flex items-center justify-center bg-[#050508] z-10">
           <div className="text-white/50 text-sm font-mono animate-pulse">
             Loading 100,000 asteroids...
+          </div>
+        </div>
+      )}
+
+      {/* WebGL error overlay */}
+      {webglError && (
+        <div className="absolute inset-0 flex items-center justify-center bg-[#050508] z-10">
+          <div className="text-center px-8">
+            <div className="text-white/70 text-sm font-mono mb-4">
+              {webglError}
+            </div>
+            <div className="text-white/40 text-xs font-mono mb-4">
+              Chrome: Settings &gt; System &gt; Use hardware acceleration<br />
+              Firefox: about:config &gt; webgl.disabled = false
+            </div>
+            <a
+              href="https://get.webgl.org/webgl2/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-blue)] text-xs font-mono hover:text-white transition-colors"
+            >
+              Test WebGL2 support
+            </a>
           </div>
         </div>
       )}
