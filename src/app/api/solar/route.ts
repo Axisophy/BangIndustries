@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const wavelength = searchParams.get('wavelength') || '171';
   const date = searchParams.get('date') || '2024-05-10T18:00:00Z';
-  const sourceId = searchParams.get('sourceId') || '10';
+  const _sourceId = searchParams.get('sourceId') || '10';
   const size = searchParams.get('size') || '1024';
 
   // Build the layer string for AIA
