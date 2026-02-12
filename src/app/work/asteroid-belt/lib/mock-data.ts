@@ -198,18 +198,15 @@ export function generateMockAsteroids(count: number): Asteroid[] {
  * Load asteroid data from JSON file or generate mock data
  */
 export async function loadAsteroidData(count: number = 100000): Promise<AsteroidData> {
-  try {
-    const response = await fetch('/data/asteroid-belt.json');
-    if (response.ok) {
-      const data: AsteroidData = await response.json();
-      return data;
-    }
-  } catch {
-    // File doesn't exist or failed to load - use mock data
-  }
+  console.log('[Asteroid] loadAsteroidData called with count:', count);
+
+  // Skip JSON fetch attempt - always use mock data for now
+  // The fetch can hang on some servers if the file doesn't exist
 
   // Generate mock data
+  console.log('[Asteroid] Generating', count, 'asteroids...');
   const asteroids = generateMockAsteroids(count);
+  console.log('[Asteroid] Generated', asteroids.length, 'asteroids');
 
   // Convert planets to the expected format
   const planets: Record<string, { a: number; x: number; y: number }> = {};
@@ -473,6 +470,7 @@ export function computeDiscoveryPositions(asteroids: Asteroid[]): Float32Array {
  * Prepare typed arrays for WebGL buffers - all 5 view positions
  */
 export function prepareAsteroidBuffers(asteroids: Asteroid[]) {
+  console.log('[Asteroid] prepareAsteroidBuffers called with', asteroids.length, 'asteroids');
   const count = asteroids.length;
 
   // Per-asteroid attributes
@@ -501,10 +499,15 @@ export function prepareAsteroidBuffers(asteroids: Asteroid[]) {
   }
 
   // Compute positions for all 5 views
+  console.log('[Asteroid] Computing histogram positions...');
   const histogramPositions = computeHistogramPositions(asteroids);
+  console.log('[Asteroid] Computing family positions...');
   const familyPositions = computeFamilyPositions(asteroids);
+  console.log('[Asteroid] Computing danger positions...');
   const dangerPositions = computeDangerPositions(asteroids);
+  console.log('[Asteroid] Computing discovery positions...');
   const discoveryPositions = computeDiscoveryPositions(asteroids);
+  console.log('[Asteroid] All positions computed');
 
   return {
     // Position buffers for each view

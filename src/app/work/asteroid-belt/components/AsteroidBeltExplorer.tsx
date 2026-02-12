@@ -189,18 +189,23 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
     }
     glRef.current = gl;
 
+    console.log('[Asteroid] Creating shader programs...');
     const asteroidProgram = createProgram(gl, vertexShaderSource, fragmentShaderSource);
     const orbitProgram = createProgram(gl, orbitVertexShaderSource, orbitFragmentShaderSource);
 
     if (!asteroidProgram || !orbitProgram) {
-      console.error('Failed to create shader programs');
+      console.error('[Asteroid] Failed to create shader programs');
+      setIsLoading(false); // Don't leave it stuck on loading
       return;
     }
+    console.log('[Asteroid] Shader programs created successfully');
 
     programRef.current = asteroidProgram;
     orbitProgramRef.current = orbitProgram;
 
+    console.log('[Asteroid] Loading asteroid data...');
     loadAsteroidData(100000).then((data) => {
+      console.log('[Asteroid] Data loaded, preparing buffers...');
       const buffers = prepareAsteroidBuffers(data.asteroids);
       asteroidCountRef.current = buffers.count;
 
@@ -273,8 +278,12 @@ export default function AsteroidBeltExplorer({ className = '' }: AsteroidBeltExp
 
       (gl as WebGL2RenderingContext & { orbitVAOs: typeof orbitVAOs }).orbitVAOs = orbitVAOs;
 
+      console.log('[Asteroid] All buffers created, setting isLoading to false');
       setIsLoading(false);
       setTimeout(() => setHasEntered(true), 100);
+    }).catch((err) => {
+      console.error('[Asteroid] Error loading data:', err);
+      setIsLoading(false);
     });
 
     const handleResize = () => {
