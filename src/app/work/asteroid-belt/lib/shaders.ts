@@ -12,14 +12,32 @@ uniform vec2 u_pan;
 uniform float u_zoom;
 uniform vec2 u_resolution;
 uniform float u_pointScale;
+uniform float u_time;
+uniform float u_orbitalSpeed;
 
 out float v_semiMajorAxis;
 out float v_orbitClass;
 out float v_alpha;
 
 void main() {
+    // Orbital motion in spatial view (Kepler's 3rd law: angular speed proportional to a^(-3/2))
+    // Only applies when not in histogram view
+    float angularSpeed = pow(a_semiMajorAxis, -1.5) * u_orbitalSpeed * u_time;
+    float cosR = cos(angularSpeed);
+    float sinR = sin(angularSpeed);
+
+    // Rotate spatial position around origin (Sun)
+    vec2 rotatedSpatial = vec2(
+        a_spatialPos.x * cosR - a_spatialPos.y * sinR,
+        a_spatialPos.x * sinR + a_spatialPos.y * cosR
+    );
+
+    // Blend between rotated spatial and static spatial based on transition
+    // (fade out rotation as we approach histogram view)
+    vec2 spatialPos = mix(rotatedSpatial, a_spatialPos, u_transition);
+
     // Interpolate position between spatial and histogram views
-    vec2 pos = mix(a_spatialPos, a_histogramPos, u_transition);
+    vec2 pos = mix(spatialPos, a_histogramPos, u_transition);
 
     // Apply pan and zoom
     pos = (pos + u_pan) * u_zoom;
