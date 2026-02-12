@@ -99,6 +99,19 @@ export default function Home() {
           </p>
         </Link>
       </section>
+
+      {/* Peeling Back the Sun */}
+      <section className='px-4 md:px-8 lg:px-12 pb-12 md:pb-16 lg:pb-20'>
+        <Link href='/work/solar-wavelength' className='block group'>
+          <div className='w-full aspect-video bg-black' />
+          <h2 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mt-8 group-hover:text-[var(--color-blue)] transition-colors'>
+            Peeling Back the Sun
+          </h2>
+          <p className='text-lg md:text-xl lg:text-2xl font-normal text-white/70 mt-4'>
+            The same star, seen in ten different lights
+          </p>
+        </Link>
+      </section>
     </main>
   );
 }
